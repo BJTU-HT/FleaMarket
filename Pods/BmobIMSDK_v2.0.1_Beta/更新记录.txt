@@ -1,0 +1,8 @@
+v2.0.1_Beta版本
+1.增加BmobIMFileMessage,BmobIMLocationMessage
+2.修改BmobIMImageMessage跟BmobIMAudioMessage集成自BmobIMFileMessage
+3.修改BmobIMMessage的msgType属性为字符串类型，支持用户自定义消息类型，数据库方面SDK已做兼容 
+v2.0.0_Beta版本
+1.用全新的架构来设计IMSDK，通过tcp协议进行通信，支持单聊（发送文本消息，图片，声音文件）
+2.自动发送推送，当用户断开连接后，如果用户允许推送了（已设置好推送配置等），可以发送推送给用户
+3.SDK内部已实现自动拉取消息，不用开发者自己设定定时器去获取，保证消息抵达率

@@ -1,0 +1,5 @@
+pod 'BmobSDK'
+pod 'SDWebImage', '~>3.7.4'
+pod 'Masonry', '~>0.6.4'
+pod 'UITableView+FDTemplateLayoutCell','~>1.4'
+pod 'AFNetworking','~>3.0.4'

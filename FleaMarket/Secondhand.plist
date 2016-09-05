@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>userID</key>
+		<string>10001</string>
+		<key>userName</key>
+		<string>仝磊鸣</string>
+		<key>userIconImage</key>
+		<string>Default.png</string>
+		<key>sex</key>
+		<string>male</string>
+		<key>productID</key>
+		<string>10001</string>
+		<key>productName</key>
+		<string>里程碑21奥山的房价高了打发寂寞的法人两三百啦啦啦啦啦了啦啦啦啦啦啦啦啦啦啦啦啦啦米爱适配卡萨丁；</string>
+		<key>school</key>
+		<string>北京交通大学</string>
+		<key>nowPrice</key>
+		<integer>1000</integer>
+		<key>originalPrice</key>
+		<integer>3000</integer>
+		<key>pictureArray</key>
+		<array>
+			<string>phone3.jpg</string>
+			<string>phone2.jpg</string>
+			<string>phone1.jpg</string>
+		</array>
+		<key>skimTimes</key>
+		<integer>0</integer>
+		<key>praiseTimes</key>
+		<integer>0</integer>
+		<key>location</key>
+		<string>北京旗胜家园</string>
+		<key>publishTime</key>
+		<string>2016.04.04</string>
+	</dict>
+	<dict>
+		<key>userID</key>
+		<string>10002</string>
+		<key>userName</key>
+		<string>候一鸣</string>
+		<key>userIconImage</key>
+		<string>Default.png</string>
+		<key>sex</key>
+		<string>male</string>
+		<key>productID</key>
+		<string>10002</string>
+		<key>productName</key>
+		<string>mac pro, 拉萨的健康阿克苏大妈上面的阿克苏离开的爱跨世纪的空间按跨省你打上刊登</string>
+		<key>school</key>
+		<string>北京交通大学</string>
+		<key>nowPrice</key>
+		<integer>10000</integer>
+		<key>originalPrice</key>
+		<string>14000</string>
+		<key>pictureArray</key>
+		<array>
+			<string>macpro1.jpg</string>
+			<string>macpro2.jpg</string>
+		</array>
+		<key>skimTimes</key>
+		<integer>0</integer>
+		<key>praiseTimes</key>
+		<integer>0</integer>
+		<key>location</key>
+		<string>旗胜家园</string>
+		<key>publishTime</key>
+		<string>2016.04.05</string>
+	</dict>
+</array>
+</plist>

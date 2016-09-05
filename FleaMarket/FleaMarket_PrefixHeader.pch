@@ -1,0 +1,71 @@
+//
+//  FleaMarket_PrefixHeader.pch
+//  FleaMarket
+//
+//  Created by Hou on 4/14/16.
+//  Copyright © 2016 H-T. All rights reserved.
+//
+
+#ifndef FleaMarket_PrefixHeader_pch
+#define FleaMarket_PrefixHeader_pch
+
+//#define screenWidthPCH self.view.bounds.size.width
+#define screenWidthPCH [UIScreen mainScreen].bounds.size.width
+#define screenHeightPCH [UIScreen mainScreen].bounds.size.height
+#define navgationBarHeightPCH self.navigationController.navigationBar.frame.size.height
+#define statusBarHeightPCH [UIApplication sharedApplication].statusBarFrame.size.height
+#define navStatusBarHeightPCH navgationBarHeightPCH + statusBarHeightPCH
+
+#define grayLineHeightPCH 0.5
+//设置常用颜色
+#define orangColorPCH [UIColor colorWithRed:235/255.0 green:147/255.0 blue:33/255 alpha:1.0]
+#define lightGrayColorPCH [UIColor colorWithRed:245/255.0 green:245/255.0 blue:245/255.0 alpha:1]
+#define grayColorPCH [UIColor colorWithRed:220/255.0 green:220/255.0 blue:220/255.0 alpha:1]
+#define navajoWhitePCH [UIColor colorWithRed:255.0/255.0 green:222.0/255.0 blue:173.0/255.0 alpha:1]
+#define ghostWhitePCH [UIColor colorWithRed:248.0/255.0 green:248.0/255.0 blue:255.0/255.0 alpha:1]
+#define whiteSmokePCH [UIColor colorWithRed:245.0/255.0 green:245.0/255.0 blue:245.0/255.0 alpha:1]
+#define defaultViewBackgroundColorPCH [UIColor colorWithRed:241.0/255.0 green:242.0/255.0 blue:246.0/255.0 alpha: 1.0]
+
+//常用字号宏定义
+#define FontSize12 [UIFont systemFontOfSize: 12.0]
+#define FontSize14 [UIFont systemFontOfSize: 14.0]
+#define FontSize16 [UIFont systemFontOfSize: 16.0]
+#define FontSize18 [UIFont systemFontOfSize: 18.0]
+#define FontSize20 [UIFont systemFontOfSize: 20.0]
+#define FontSize22 [UIFont systemFontOfSize: 22.0]
+#define FontSize24 [UIFont systemFontOfSize: 24.0]
+#define FontSize28 [UIFont systemFontOfSize: 28.0]
+#define FontSize30 [UIFont systemFontOfSize: 30.0]
+#define FontSize32 [UIFont systemFontOfSize: 32.0]
+#define FontSize48 [UIFont systemFontOfSize: 48.0]
+
+
+
+//常用错误信息宏定义
+#define FIND_CUR_USER_INFO_FAILED  @"查询当前用户信息失败"
+#define CUR_USER_HAS_NO_INFO_IN_SEARVER @"当前用户服务器无响应信息"
+#define THIS_MOBILENUMBER_HAS_BEEN_REGISTED @"该手机号已被注册"
+#define GET_USER_DATA_FROM_SERVER_FAILED @"从服务器获取用户信息失败"
+#define SEND_ADD_FRIEND_REQUEST_FAILED @"发送添加好友请求失败"
+#define SEARCH_FRIEND_LIST_FAILED @"查询好友列表失败"
+#define REQUEST_INVITED_MESSAGE_FAILED @"请求好友添加通知信息失败"
+#define NO_MORE_HISTORY_RECORDS @"没有更多历史聊天记录"
+#define NO_HISTORY_RECORDS @"没有历史记录"
+//常用错误信息宏定义 end
+
+
+//数据库表名相关宏定义----------------2016-05-13 16:18
+#define kInviteMessageTable      @"InviteMessage"
+#define kFriendTable             @"Friend"
+#define kNewMessagesNotifacation @"NewMessagesNotifacation"
+#define kNewMessageFromer        @"NewMessageFromer"
+//数据库表名相关宏定义 end------------
+
+//二手商品分类Array --------------- 仝磊鸣 2016-06-30
+#define SecondhandCategory      @[@"书籍", @"数码",@"自行车",@"衣服", @"鞋包", @"运动",@"其他"];
+#define SecondhandCategoryDisplay      @[@"全部", @"书籍", @"数码",@"自行车",@"衣服", @"鞋包", @"运动",@"其他"];
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+
+#endif /* FleaMarket_PrefixHeader_pch */
