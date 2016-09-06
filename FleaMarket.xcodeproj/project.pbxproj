@@ -68,8 +68,6 @@
 		965FB2451D7E6A3E00769DB9 /* bookPubUpLoadInfoDAO.m in Sources */ = {isa = PBXBuildFile; fileRef = 965FB23D1D7E6A3E00769DB9 /* bookPubUpLoadInfoDAO.m */; };
 		965FB2461D7E6A3E00769DB9 /* findBooKInfoDAO.m in Sources */ = {isa = PBXBuildFile; fileRef = 965FB2401D7E6A3E00769DB9 /* findBooKInfoDAO.m */; };
 		965FB2471D7E6A3E00769DB9 /* publicSearchDAO.m in Sources */ = {isa = PBXBuildFile; fileRef = 965FB2431D7E6A3E00769DB9 /* publicSearchDAO.m */; };
-		965FB24C1D7E6B0800769DB9 /* HomePageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 965FB2491D7E6B0800769DB9 /* HomePageVC.m */; };
-		965FB24D1D7E6B0800769DB9 /* firstPageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 965FB24B1D7E6B0800769DB9 /* firstPageVC.m */; };
 		9666EDFF1CE9969F00F9397E /* DetailedAddContactsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9666EDFE1CE9969F00F9397E /* DetailedAddContactsVC.m */; };
 		9666EE061CE9C05D00F9397E /* mail.PNG in Resources */ = {isa = PBXBuildFile; fileRef = 9666EE051CE9C05D00F9397E /* mail.PNG */; };
 		9666EE0A1CE9C2BE00F9397E /* ContactsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9666EE091CE9C2BE00F9397E /* ContactsTableViewCell.m */; };
@@ -411,10 +409,6 @@
 		965FB2421D7E6A3E00769DB9 /* publicSearchDAO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = publicSearchDAO.h; sourceTree = "<group>"; };
 		965FB2431D7E6A3E00769DB9 /* publicSearchDAO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = publicSearchDAO.m; sourceTree = "<group>"; };
 		965FB2441D7E6A3E00769DB9 /* publicSearchDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = publicSearchDelegate.h; sourceTree = "<group>"; };
-		965FB2481D7E6B0800769DB9 /* HomePageVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomePageVC.h; sourceTree = "<group>"; };
-		965FB2491D7E6B0800769DB9 /* HomePageVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomePageVC.m; sourceTree = "<group>"; };
-		965FB24A1D7E6B0800769DB9 /* firstPageVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = firstPageVC.h; sourceTree = "<group>"; };
-		965FB24B1D7E6B0800769DB9 /* firstPageVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = firstPageVC.m; sourceTree = "<group>"; };
 		9666EDFD1CE9969F00F9397E /* DetailedAddContactsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailedAddContactsVC.h; sourceTree = "<group>"; };
 		9666EDFE1CE9969F00F9397E /* DetailedAddContactsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailedAddContactsVC.m; sourceTree = "<group>"; };
 		9666EE031CE99DA600F9397E /* AddContactsVCDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddContactsVCDelegate.h; sourceTree = "<group>"; };
@@ -1101,10 +1095,6 @@
 		96AAA19A1CBF70B400DD7667 /* FIrstPageVC */ = {
 			isa = PBXGroup;
 			children = (
-				965FB2481D7E6B0800769DB9 /* HomePageVC.h */,
-				965FB2491D7E6B0800769DB9 /* HomePageVC.m */,
-				965FB24A1D7E6B0800769DB9 /* firstPageVC.h */,
-				965FB24B1D7E6B0800769DB9 /* firstPageVC.m */,
 				965FB2191D7E695600769DB9 /* BookPublish */,
 				965FB1D71D7E68D200769DB9 /* BookExchange */,
 				96B257C31CBF873400D6DC43 /* FIrstPagePictures */,
@@ -2161,7 +2151,6 @@
 				96B258631CBF88B900D6DC43 /* publicMethod.m in Sources */,
 				965FB1D61D7E68B500769DB9 /* presentLayerPublicMethod.m in Sources */,
 				E9B3B9891D2BB0F40085304D /* PlaceholderTextView.m in Sources */,
-				965FB24C1D7E6B0800769DB9 /* HomePageVC.m in Sources */,
 				96DA84031CE5C3DC0006BFD6 /* UserService.m in Sources */,
 				E9B3B9201D2BAC8C0085304D /* PreViewCell.m in Sources */,
 				E9B3B90A1D2BAB730085304D /* ItemCategoryViewController.m in Sources */,
@@ -2172,7 +2161,6 @@
 				E9CAD8EB1CBE87C200253817 /* SecondhandBL.m in Sources */,
 				E972073F1CBE815A00C3D5FC /* AppDelegate.m in Sources */,
 				E9B3B8FE1D2BAA320085304D /* ChooseLocationView.m in Sources */,
-				965FB24D1D7E6B0800769DB9 /* firstPageVC.m in Sources */,
 				E9B3B9391D2BAD720085304D /* PhotoCollectionViewFlow.m in Sources */,
 				E9B3B91D1D2BAC6D0085304D /* PreViewController.m in Sources */,
 				E9B3B96C1D2BAE7B0085304D /* DropdownMenu.m in Sources */,
