@@ -39,7 +39,9 @@
 #define FontSize32 [UIFont systemFontOfSize: 32.0]
 #define FontSize48 [UIFont systemFontOfSize: 48.0]
 
-
+//常用cell高度
+#define tableViewCellHeight32 32
+#define tableViewCellHeight40 40
 
 //常用错误信息宏定义
 #define FIND_CUR_USER_INFO_FAILED  @"查询当前用户信息失败"
@@ -67,5 +69,9 @@
 // Include any system framework and library headers here that should be included in all compilation units.
 // You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
 
+//书籍分页查询时的偏移量------------ 2016-08-03 17:03
+#define pageOffset 10
+
+//书籍分页查询时的偏移量------------ end
 
 #endif /* FleaMarket_PrefixHeader_pch */
