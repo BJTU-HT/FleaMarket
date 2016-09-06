@@ -57,7 +57,7 @@ UIImageView *imageViewHeadImageSquare; //圆形裁剪之前的头像
 static UITextField *textFieldUserName;
 static UITextField *textFieldPersonalSign;
 static UILabel *labelGender;
-UILabel *labelCity;
+static UILabel *labelCity;
 
 //用于添加动画
 UIView *_superView;
@@ -82,6 +82,7 @@ BOOL headImageOrBackgroundImageFlag; // 0代表设置头像 1代表设置背景
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyboardWillDisappear:) name:UIKeyboardWillHideNotification object:nil];
     // Do any additional setup after loading the view.
     [self cacheAndDownloadPersonalInfoModifyPersonalPage];
+    [self initBasicTextField];
 }
 
 
@@ -135,6 +136,12 @@ BOOL headImageOrBackgroundImageFlag; // 0代表设置头像 1代表设置背景
     if(cell == nil){
         cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
         //NSLog(@"创建cell中......");
+    }else{
+        //删除cell的所有子视图
+        while ([cell.contentView.subviews lastObject] != nil)
+        {
+            [(UIView*)[cell.contentView.subviews lastObject] removeFromSuperview];
+        }
     }
     if(indexPath.row == 0)
     {
@@ -152,20 +159,32 @@ BOOL headImageOrBackgroundImageFlag; // 0代表设置头像 1代表设置背景
         label.frame = CGRectMake(label_x_offset, label_y_offset, labelWidth, labelHeight);
         switch (indexPath.row) {
             case 1:
-                label.text = @"昵称";
+                if(!label.text)
+                    label.text = @"昵称";
                 label.font =FontSize14;
+                self.labelTagName = label;
+                [cell addSubview:self.labelTagName];
                 break;
             case 2:
-                label.text = @"性别";
+                if(!label.text)
+                    label.text = @"性别";
                 label.font =FontSize14;
+                self.labelTagGender = label;
+                [cell addSubview:self.labelTagGender];
                 break;
             case 3:
-                label.text = @"常住地";
+                if(!label.text)
+                    label.text = @"常住地";
                 label.font =FontSize14;
+                self.labelTagCity = label;
+                [cell addSubview: self.labelTagCity];
                 break;
             case 4:
-                label.text = @"签名";
+                if(!label.text)
+                    label.text = @"签名";
                 label.font =FontSize14;
+                self.labelTagPersonalName = label;
+                [cell addSubview:self.labelTagPersonalName];
                 break;
             default:
                 break;
@@ -178,26 +197,21 @@ BOOL headImageOrBackgroundImageFlag; // 0代表设置头像 1代表设置背景
         float textField_y_offset = (screenHeightMP * HEIGHT_ROW_PER - textField_Height)/2;
         if(indexPath.row == 1)
         {
-            textFieldUserName = [[UITextField alloc] init];
             textFieldUserName.delegate = self;
             textFieldUserName.frame = CGRectMake(textField_x_offset, textField_y_offset, textField_Width, textField_Height);
             textFieldUserName.textColor = orangColorPCH;
             textFieldUserName.font = FontSize14;
-            textFieldUserName.text = @"书香人家用户";
             [cell addSubview:textFieldUserName];
         }
         else if(indexPath.row == 4){
-            textFieldPersonalSign = [[UITextField alloc] init];
             textFieldPersonalSign.delegate = self;
             textFieldPersonalSign.frame = CGRectMake(textField_x_offset, textField_y_offset, textField_Width, textField_Height);
             textFieldPersonalSign.textColor = orangColorPCH;
             textFieldPersonalSign.font = FontSize14;
-            textFieldPersonalSign.text = @"未设置";
             [cell addSubview:textFieldPersonalSign];
         }
         else if (indexPath.row == 2)
         {
-            labelGender = [[UILabel alloc] init];
             //frame 和 UITextfield相同
             labelGender.frame = CGRectMake(textField_x_offset, textField_y_offset, textField_Width, textField_Height);
             labelGender.userInteractionEnabled = YES;
@@ -205,29 +219,71 @@ BOOL headImageOrBackgroundImageFlag; // 0代表设置头像 1代表设置背景
             labelGender.tag = indexPath.row;
             labelGender.textColor = orangColorPCH;
             labelGender.font = FontSize14;
-            labelGender.text = @"保密";
             [labelGender addGestureRecognizer:labelTap];
             [cell addSubview:labelGender];
         }
         else if(indexPath.row == 3){
             
-            labelCity = [[UILabel alloc] init];
             //frame 和 UITextfield相同
             labelCity.frame = CGRectMake(textField_x_offset, textField_y_offset, textField_Width, textField_Height);
             labelCity.userInteractionEnabled = YES;
             UITapGestureRecognizer *labelTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(labelGenderAddrCilcked:)];
             labelCity.tag = indexPath.row;
-            labelCity.text = recCityName;
             labelCity.textColor = orangColorPCH;
             labelCity.font = FontSize14;
-            labelCity.text = @"未设置";
             [labelCity addGestureRecognizer:labelTap];
             [cell addSubview:labelCity];
         }
-        [cell addSubview:label];
     }
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
+}
+
+-(void)initBasicTextField{
+    if(!textFieldUserName){
+        textFieldUserName = [[UITextField alloc] init];
+        textFieldUserName.text = @"书香人家用户";
+    }
+    if(!textFieldPersonalSign){
+        textFieldPersonalSign = [[UITextField alloc] init];
+        textFieldPersonalSign.text = @"未设置1";
+    }
+    if(!labelCity){
+        labelCity = [[UILabel alloc] init];
+        labelCity.text = @"未设置1";
+    }
+    if(!labelGender){
+        labelGender = [[UILabel alloc] init];
+        labelGender.text = @"保密";
+    }
+}
+
+-(UILabel *)labelTagCity{
+    if(!_labelTagCity){
+        _labelTagCity = [[UILabel alloc] init];
+    }
+    return _labelTagCity;
+}
+
+-(UILabel *)labelTagName{
+    if(!_labelTagName){
+        _labelTagName = [[UILabel alloc] init];
+    }
+    return _labelTagName;
+}
+
+-(UILabel *)labelTagGender{
+    if(!_labelTagGender){
+        _labelTagGender = [[UILabel alloc] init];
+    }
+    return _labelTagGender;
+}
+
+-(UILabel *)labelTagPersonalName{
+    if(!_labelTagPersonalName){
+        _labelTagPersonalName = [[UILabel alloc] init];
+    }
+    return _labelTagPersonalName;
 }
 
 //点击性别，常住地响应方法

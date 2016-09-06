@@ -16,6 +16,7 @@
 #import <BmobSDK/BmobObject.h>
 #import "CreateAndSearchPlist.h"
 #import "LogInBL.h"
+#import "mySellVC.h"
 
 #define loginPartOccupyScreenPercent 0.15
 //第一个section的header view 头像位置所需宏定义
@@ -150,7 +151,7 @@ UIImageView *headImage;
 {
     cellMutableArray = [[NSMutableArray alloc] init];
     cellMutableArrayImage = [[NSMutableArray alloc] init];
-    NSArray *arrayTemp = [[NSArray alloc] initWithObjects: @"我的发布",@"我的售出", nil];
+    NSArray *arrayTemp = [[NSArray alloc] initWithObjects: @"在售商品",@"我的售出", nil];
     NSArray *arrayTemp1 = [[NSArray alloc] initWithObjects: @"我的求购",@"已买到的", nil];
     NSArray *arrayTemp2 = [[NSArray alloc] initWithObjects: @"我的粉丝", @"我的记事本", nil];
     NSArray *arrayTemp3 = [[NSArray alloc] initWithObjects:@"我的关注",@"意向购买", nil];
@@ -251,8 +252,12 @@ UIImageView *headImage;
         switch(indexPath.section){
                 //我的帖子，我的收藏
             case 1:
-                if(indexPath.row == 1)
+                if(indexPath.row == 0)
                 {
+                    mySellVC *mySell = [[mySellVC alloc] init];
+                    self.hidesBottomBarWhenPushed = YES;
+                    [self.navigationController pushViewController:mySell animated:NO];
+                    self.hidesBottomBarWhenPushed = NO;
                 }
                 else
                 {

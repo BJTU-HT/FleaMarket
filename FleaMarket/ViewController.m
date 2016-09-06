@@ -12,6 +12,8 @@
 #import "chatVC.h"
 #import "myVC.h"
 #import "HomePageVC.h"
+#import "SecondhandViewController.h"
+#import "BookMainPageVC.h"
 
 #define TABBARITEM_PIC_OFFSET_TOP 5
 #define TABBARITEM_PIC_OFFSET_BOTTOM 5
@@ -29,11 +31,16 @@
     tabBarController.delegate = self;
     
     //HomePageVC *homeVC = [[HomePageVC alloc] init];
-    firstPageVC *firstVC = [[firstPageVC alloc] init];
-    UINavigationController *firstPageNav = [[UINavigationController alloc] initWithRootViewController: firstVC];
+    //firstPageVC *firstVC = [[firstPageVC alloc] init];
+    SecondhandViewController *secondHandVC = [[SecondhandViewController alloc] init];
+    UINavigationController *firstPageNav = [[UINavigationController alloc] initWithRootViewController: secondHandVC];
     firstPageNav.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"首页" image:[UIImage imageNamed:@"ic_tabbar_dicovery@2x.png"] tag:0];
-    //firstPageNav.tabBarItem.imageInsets = UIEdgeInsetsMake(TABBARITEM_PIC_OFFSET_TOP, TABBARITEM_PIC_OFFSET_LEFT, TABBARITEM_PIC_OFFSET_BOTTOM, TABBARITEM_PIC_OFFSET_RIGHT);
     firstPageNav.navigationBarHidden = YES;
+    
+    BookMainPageVC *bookMain = [[BookMainPageVC alloc] init];
+    UINavigationController *bookMainNav = [[UINavigationController alloc] initWithRootViewController: bookMain];
+    bookMainNav.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"书籍" image:[UIImage imageNamed:@"ic_tabbar_dicovery@2x.png"] tag:0];
+    bookMainNav.navigationBarHidden = YES;
     
     publishVC *pubVC = [[publishVC alloc] init];
     UINavigationController *pubPageNav = [[UINavigationController alloc] initWithRootViewController:pubVC];
@@ -52,7 +59,7 @@
     myNav.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"我的" image:[UIImage imageNamed:@"ic_tabbar_mine@2x.png"] tag:3];
     //myNav.tabBarItem.imageInsets = UIEdgeInsetsMake(0, 0, 0, 0);
     myNav.navigationBarHidden = YES;
-    tabBarController.viewControllers = [NSArray arrayWithObjects:firstPageNav, pubPageNav, chatNav, myNav,nil];
+    tabBarController.viewControllers = [NSArray arrayWithObjects:firstPageNav, bookMainNav, pubPageNav, chatNav, myNav,nil];
     self.topTabBarController = tabBarController;
     [self.view addSubview:tabBarController.view];
     self.view.backgroundColor = [UIColor whiteColor];

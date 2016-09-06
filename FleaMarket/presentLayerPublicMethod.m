@@ -79,24 +79,13 @@
     [UIView animateWithDuration:0.5  animations:^{
         label.frame = CGRectMake(0, 0, screenWidthPCH, 64);
     } completion:^(BOOL finished) {
-        [UIView animateWithDuration:0.5 delay:2.0 options:UIViewAnimationOptionLayoutSubviews animations:^{
+        [UIView animateWithDuration:0.5 delay:1.0 options:UIViewAnimationOptionLayoutSubviews animations:^{
             label.frame = CGRectMake(0, -64, screenWidthPCH, 64);
         } completion:^(BOOL finished) {
             [label removeFromSuperview];
         }];
 
     }];
-//    [UIView animateWithDuration:0.5 animations:^{
-//        label.frame = CGRectMake(0, 0, screenWidthPCH, 64);
-//    } completion:^(BOOL finished) {
-//        //弹出后停留两秒
-//        [UIView setAnimationDuration:2.0];
-//        [UIView animateWithDuration:3.0 animations:^{
-//            label.frame = CGRectMake(0, -64, screenWidthPCH, 64);
-//        } completion:^(BOOL finished) {
-//            [label removeFromSuperview];
-//        }];
-//    }];
 }
 #pragma 验证码发送后弹出动画end
 

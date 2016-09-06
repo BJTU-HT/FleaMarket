@@ -8,6 +8,8 @@
 
 #import "firstPageVC.h"
 #import "SecondhandViewController.h"
+#import "BookPublishVC.h"
+#import "BookMainPageVC.h"
 
 @interface firstPageVC ()
 
@@ -56,6 +58,13 @@ UILabel *refreshLabel;
     [scrollViewDisCovery addSubview:refreshLabel];
 }
 
+-(void)viewWillAppear:(BOOL)animated{
+    self.navigationController.navigationBarHidden = YES;
+}
+
+-(void)viewDidDisappear:(BOOL)animated{
+    self.navigationController.navigationBarHidden = NO;
+}
 -(void)drawDis
 {
     //搜索框上方图片相应参数
@@ -466,11 +475,11 @@ UILabel *refreshLabel;
             break;
         case 1:
             NSLog(@"2");
-            
+            [self firstVCJumpToBookExchange];
             break;
         case 2:
             NSLog(@"3");
-            
+            [self firstVCJumpToBookDisplay];
             break;
         case 3:
             NSLog(@"3");
@@ -496,6 +505,7 @@ UILabel *refreshLabel;
     }
 }
 
+
 //点击二手市场的界面跳转函数
 -(void)firstVCJumpToSecondHandVC
 {
@@ -505,6 +515,20 @@ UILabel *refreshLabel;
     self.hidesBottomBarWhenPushed = NO;
 }
 
+//点击书籍交流跳转
+-(void)firstVCJumpToBookExchange{
+    self.hidesBottomBarWhenPushed = YES;
+    BookPublishVC *bookPub = [[BookPublishVC alloc] init];
+    [self.navigationController pushViewController:bookPub animated:NO];
+    self.hidesBottomBarWhenPushed = NO;
+}
+//点击进入书籍展示页面
+-(void)firstVCJumpToBookDisplay{
+    self.hidesBottomBarWhenPushed = YES;
+    BookMainPageVC *bookMainPage = [[BookMainPageVC alloc] init];
+    [self.navigationController pushViewController:bookMainPage animated:NO];
+    self.hidesBottomBarWhenPushed = NO;
+}
 // 检测滑动距离
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {

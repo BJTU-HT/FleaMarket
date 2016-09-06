@@ -16,4 +16,8 @@
 @property (nonatomic, retain) UIAlertController *sheetAlert;
 @property (nonatomic, retain) UILabel *labelAddr;
 @property (weak, nonatomic) id<passValueForVCDelegate> delegateVC;
+@property (strong, nonatomic) UILabel *labelTagName;
+@property (strong, nonatomic) UILabel *labelTagGender;
+@property (strong, nonatomic) UILabel *labelTagCity;
+@property (strong, nonatomic) UILabel *labelTagPersonalName;
 @end
