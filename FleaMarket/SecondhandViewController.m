@@ -420,6 +420,7 @@ static NSInteger margin = 10;
     //201606181022 modify by hou from presentViewController to pushViewController
     self.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:detail animated:YES];
+    self.hidesBottomBarWhenPushed = NO;
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
 }
 
