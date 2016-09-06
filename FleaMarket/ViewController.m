@@ -7,7 +7,6 @@
 //
 
 #import "ViewController.h"
-#import "firstPageVC.h"
 #import "publishVC.h"
 #import "chatVC.h"
 #import "myVC.h"
