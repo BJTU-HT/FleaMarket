@@ -11,6 +11,7 @@
 #import "SecondhandMessageVOGroup.h"
 #import "SecondhandMessageVO.h"
 #import "Help.h"
+#import "AFNetworking.h"
 
 
 @implementation SecondhandMessageDAO
@@ -114,6 +115,52 @@ static SecondhandMessageDAO *sharedManager = nil;
         if (isSuccessful) {
             NSLog(@"");
             [self.delegate createMessageFinished:model];
+            
+            // 留言成功后进行推送
+            
+            // audience象字典
+            NSMutableDictionary *audienceDic = [[NSMutableDictionary alloc] init];
+            [audienceDic setObject:@[model.toUserID] forKey:@"alias"];
+            // notification字典
+            NSMutableDictionary *notificationDic = [[NSMutableDictionary alloc] init];
+            [notificationDic setObject:model.content forKey:@"alert"];
+            // ios设置字典
+            NSMutableDictionary *iosDic = [[NSMutableDictionary alloc] init];
+            [iosDic setObject:@"sound.caf" forKey:@"sound"];
+            [iosDic setObject:@"+1" forKey:@"badge"];
+            [iosDic setObject:[[NSMutableDictionary alloc] initWithObjectsAndKeys:@"ios-key1", @"ios-value1", nil] forKey:@"extras"];
+            [notificationDic setObject:iosDic forKey:@"ios"];
+            // options字典
+            NSMutableDictionary *optionsDic = [[NSMutableDictionary alloc] init];
+            [optionsDic setObject:@"60" forKey:@"time_to_live"];
+            [optionsDic setObject:@"false" forKey:@"apns_production"];
+            
+            // 汇总
+            NSMutableDictionary *jsonDic = [[NSMutableDictionary alloc] init];
+            [jsonDic setObject:@"ios" forKey:@"platform"];
+            [jsonDic setObject:audienceDic forKey:@"audience"];
+            [jsonDic setObject:notificationDic forKey:@"notification"];
+            [jsonDic setObject:optionsDic forKey:@"options"];
+            
+            // 推送
+            NSError *parseError = nil;
+            NSData *jsonData = [NSJSONSerialization dataWithJSONObject:jsonDic options:NSJSONWritingPrettyPrinted error:&parseError];
+            //NSLog(@"%@", [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding]);
+            
+            NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:@"https://api.jpush.cn/v3/push"]];
+            [request setValue:@"Basic NjU1MWQyNzFhNTY3YTM5NjRmYzJiYjQzOmNhNTBmZjFhODRhMDU0Njk3NDY1ZDM2NA==" forHTTPHeaderField:@"Authorization"];
+            [request setHTTPMethod:@"POST"];
+            [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+            [request setHTTPBody:jsonData];
+            
+            NSURLSession *session = [NSURLSession sharedSession];
+            NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+                NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
+                NSLog(@"%@",dict);
+            }];
+            
+            [task resume];
+            
         } else if (error) {
             //
         } else {

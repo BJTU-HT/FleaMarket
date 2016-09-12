@@ -12,6 +12,8 @@
 #import <BmobSDK/Bmob.h>
 #import <AdSupport/AdSupport.h>
 #import "UserService.h"
+#import "JPUSHService.h"
+
 
 @interface AppDelegate ()<BmobIMDelegate>{
 
@@ -75,27 +77,27 @@
     //Required
     if ([[UIDevice currentDevice].systemVersion floatValue] >= 8.0) {
         //可以添加自定义categories
-//        [JPUSHService registerForRemoteNotificationTypes:(UIUserNotificationTypeBadge |
-//                                                          UIUserNotificationTypeSound |
-//                                                          UIUserNotificationTypeAlert)
-//                                              categories:nil];
+        [JPUSHService registerForRemoteNotificationTypes:(UIUserNotificationTypeBadge |
+                                                          UIUserNotificationTypeSound |
+                                                          UIUserNotificationTypeAlert)
+                                              categories:nil];
     } else {
         //categories 必须为nil
-//        [JPUSHService registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge |
-//                                                          UIRemoteNotificationTypeSound |
-//                                                          UIRemoteNotificationTypeAlert)
-//                                              categories:nil];
+        [JPUSHService registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge |
+                                                          UIRemoteNotificationTypeSound |
+                                                          UIRemoteNotificationTypeAlert)
+                                              categories:nil];
     }
     //Required
     // 如需继续使用pushConfig.plist文件声明appKey等配置内容，请依旧使用[JPUSHService setupWithOption:launchOptions]方式初始化。
-//    [JPUSHService setupWithOption:launchOptions
-//                           appKey:appKey
-//                          channel:channel
-//                 apsForProduction:isProduction
-//            advertisingIdentifier:advertisingId];
-//    
+    [JPUSHService setupWithOption:launchOptions
+                           appKey:appKey
+                          channel:channel
+                 apsForProduction:isProduction
+            advertisingIdentifier:advertisingId];
+    
     // 设置当前用户的别名
-//    [JPUSHService setAlias:@"tongleiming" callbackSelector:@selector(tagsAliasCallback:tags:alias:) object:self];
+    [JPUSHService setAlias:@"tongleiming" callbackSelector:@selector(tagsAliasCallback:tags:alias:) object:self];
     
     return YES;
 }
@@ -135,7 +137,7 @@
     NSLog(@"DeviceToken: %@", deviceToken);
     
     /// Required - 注册 DeviceToken
-    //[JPUSHService registerDeviceToken:deviceToken];
+    [JPUSHService registerDeviceToken:deviceToken];
     
     // 注册bmob
     //注册成功后上传Token至服务器
@@ -154,18 +156,14 @@
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo{
     // 处理推送消息
-    NSLog(@"userinfo:%@",userInfo);
-    
-    NSLog(@"收到推送消息:%@",[[userInfo objectForKey:@"aps"] objectForKey:@"alert"]);
-    
-    // Required,For systems with less than or equal to iOS6
-//    [JPUSHService handleRemoteNotification:userInfo];
+    [JPUSHService handleRemoteNotification:userInfo];
+    NSLog(@"didReceiveRemoteNotification fetchCompletionHandler:%@", userInfo);
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
     NSLog(@"didReceiveRemoteNotification fetchCompletionHandler:%@", userInfo);
     // IOS 7 Support Required
-//    [JPUSHService handleRemoteNotification:userInfo];
+    [JPUSHService handleRemoteNotification:userInfo];
     completionHandler(UIBackgroundFetchResultNewData);
 }
 

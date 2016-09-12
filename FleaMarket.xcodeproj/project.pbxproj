@@ -183,6 +183,7 @@
 		E91BAF551CBFF25B00CCF9A0 /* MessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E91BAF541CBFF25B00CCF9A0 /* MessageCell.m */; };
 		E92F4C9B1D41EE4600E1DD92 /* UserMO+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = E92F4C981D41EE4600E1DD92 /* UserMO+CoreDataProperties.m */; };
 		E92F4C9C1D41EE4600E1DD92 /* UserMO.m in Sources */ = {isa = PBXBuildFile; fileRef = E92F4C9A1D41EE4600E1DD92 /* UserMO.m */; };
+		E94E81811D85560200BC6129 /* jpush-ios-2.1.8.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E94E817F1D85560200BC6129 /* jpush-ios-2.1.8.a */; };
 		E95634041CC52ABF001EE938 /* TonglmTest.m in Sources */ = {isa = PBXBuildFile; fileRef = E95634031CC52ABF001EE938 /* TonglmTest.m */; };
 		E972073C1CBE815900C3D5FC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E972073B1CBE815900C3D5FC /* main.m */; };
 		E972073F1CBE815A00C3D5FC /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E972073E1CBE815A00C3D5FC /* AppDelegate.m */; };
@@ -566,8 +567,6 @@
 		96F7A2DF1CCF3B070039084F /* CreateAndSearchPlist.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateAndSearchPlist.m; sourceTree = "<group>"; };
 		96FE27051D38BE7C00DA9FBA /* icon_back2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_back2@2x.png"; sourceTree = "<group>"; };
 		E90D38D41D5EB81600910833 /* PushConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = PushConfig.plist; sourceTree = "<group>"; };
-		E90D38D71D5EBBC100910833 /* jpush-ios-2.1.8.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "jpush-ios-2.1.8.a"; sourceTree = "<group>"; };
-		E90D38D81D5EBBC100910833 /* JPUSHService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JPUSHService.h; sourceTree = "<group>"; };
 		E90D38DB1D60519100910833 /* RecentCommentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecentCommentViewController.h; sourceTree = "<group>"; };
 		E90D38DC1D60519100910833 /* RecentCommentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecentCommentViewController.m; sourceTree = "<group>"; };
 		E912D8991D4264220057453A /* UserInfoSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfoSingleton.h; sourceTree = "<group>"; };
@@ -580,6 +579,8 @@
 		E92F4C981D41EE4600E1DD92 /* UserMO+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UserMO+CoreDataProperties.m"; sourceTree = "<group>"; };
 		E92F4C991D41EE4600E1DD92 /* UserMO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserMO.h; sourceTree = "<group>"; };
 		E92F4C9A1D41EE4600E1DD92 /* UserMO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserMO.m; sourceTree = "<group>"; };
+		E94E817F1D85560200BC6129 /* jpush-ios-2.1.8.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "jpush-ios-2.1.8.a"; sourceTree = "<group>"; };
+		E94E81801D85560200BC6129 /* JPUSHService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JPUSHService.h; sourceTree = "<group>"; };
 		E95634021CC52ABF001EE938 /* TonglmTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TonglmTest.h; sourceTree = "<group>"; };
 		E95634031CC52ABF001EE938 /* TonglmTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TonglmTest.m; sourceTree = "<group>"; };
 		E97207371CBE815900C3D5FC /* FleaMarket.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FleaMarket.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -743,6 +744,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E94E81811D85560200BC6129 /* jpush-ios-2.1.8.a in Frameworks */,
 				96BE93401CE42B670078D8A9 /* BmobIMSDK.framework in Frameworks */,
 				62D6BE7CF62A97D0D14D332B /* libPods.a in Frameworks */,
 			);
@@ -1338,8 +1340,7 @@
 		E90D38D61D5EBBC100910833 /* lib */ = {
 			isa = PBXGroup;
 			children = (
-				E90D38D71D5EBBC100910833 /* jpush-ios-2.1.8.a */,
-				E90D38D81D5EBBC100910833 /* JPUSHService.h */,
+				E94E817E1D8555EB00BC6129 /* JPush */,
 			);
 			name = lib;
 			path = "../../Downloads/JPush-iOS-SDK-2.1.8/lib";
@@ -1365,6 +1366,16 @@
 				E912D89A1D4264220057453A /* UserInfoSingleton.m */,
 			);
 			name = UserInfoCoreData;
+			sourceTree = "<group>";
+		};
+		E94E817E1D8555EB00BC6129 /* JPush */ = {
+			isa = PBXGroup;
+			children = (
+				E94E817F1D85560200BC6129 /* jpush-ios-2.1.8.a */,
+				E94E81801D85560200BC6129 /* JPUSHService.h */,
+			);
+			name = JPush;
+			path = ../../../develop/FleaMarket;
 			sourceTree = "<group>";
 		};
 		E972072E1CBE815900C3D5FC = {
@@ -1850,7 +1861,7 @@
 				TargetAttributes = {
 					E97207361CBE815900C3D5FC = {
 						CreatedOnToolsVersion = 7.3;
-						DevelopmentTeam = 6D3HD54M6P;
+						DevelopmentTeam = NE8VK2242L;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -2379,7 +2390,10 @@
 				INFOPLIST_FILE = FleaMarket/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = "$(SRCROOT)/{lib}";
+				LIBRARY_SEARCH_PATHS = (
+					"$(SRCROOT)/{lib}",
+					"$(PROJECT_DIR)",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.ht.fleamarket;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -2402,7 +2416,10 @@
 				INFOPLIST_FILE = FleaMarket/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = "$(SRCROOT)/{lib}";
+				LIBRARY_SEARCH_PATHS = (
+					"$(SRCROOT)/{lib}",
+					"$(PROJECT_DIR)",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.ht.fleamarket;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
