@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "UserInfoSingleton.h"
+#import "JPUSHService.h"
 
 @interface UserInfoSingleton ()
 
@@ -77,6 +78,22 @@ static UserInfoSingleton *sharedManager = nil;
     NSLog(@"%@", self.userMO);
     
     [self.appDelegate saveContext];
+    
+    // 登陆成功极光推送注册别名
+    [JPUSHService setTags:nil alias:userInfo[@"userID"] callbackSelector:@selector(tagsAliasCallback:tags:alias:) object:self];
 }
+
+- (void)tagsAliasCallback:(int)iResCode
+                     tags:(NSSet *)tags
+                    alias:(NSString *)alias
+{
+    NSLog(@"rescode: %d, \ntags: %@, \nalias: %@\n", iResCode, tags , alias);
+    if (iResCode == 0) {
+        NSLog(@"注册别名成功!");
+    } else {
+        NSLog(@"注册别名失败!");
+    }
+}
+
 
 @end
