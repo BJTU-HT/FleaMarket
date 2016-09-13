@@ -14,10 +14,16 @@
 		963D85D91CE0259500ED37B4 /* contactsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 963D85D81CE0259500ED37B4 /* contactsVC.m */; };
 		963D85DD1CE033CC00ED37B4 /* addContactsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 963D85DC1CE033CC00ED37B4 /* addContactsVC.m */; };
 		963D85DF1CE0376500ED37B4 /* ic_nav_back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 963D85DE1CE0376500ED37B4 /* ic_nav_back@2x.png */; };
+		9644D9351D87946300021996 /* myConcernedTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9644D9341D87946300021996 /* myConcernedTableViewCell.m */; };
+		9644D93B1D87E3A200021996 /* AboutUsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9644D93A1D87E3A200021996 /* AboutUsVC.m */; };
 		96450C2A1D0FD9530008182D /* weChatView.m in Sources */ = {isa = PBXBuildFile; fileRef = 96450C291D0FD9530008182D /* weChatView.m */; };
 		96450C301D0FFB410008182D /* TextWeChatTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 96450C2F1D0FFB410008182D /* TextWeChatTableViewCell.m */; };
 		96450C321D1010FA0008182D /* first.png in Resources */ = {isa = PBXBuildFile; fileRef = 96450C311D1010FA0008182D /* first.png */; };
 		96450C341D1011000008182D /* me.png in Resources */ = {isa = PBXBuildFile; fileRef = 96450C331D1011000008182D /* me.png */; };
+		965204611D864371003BE369 /* myConcernedVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 965204601D864371003BE369 /* myConcernedVC.m */; };
+		9652E7BE1D8653E9008C54A0 /* myConcernedDAO.m in Sources */ = {isa = PBXBuildFile; fileRef = 9652E7BD1D8653E9008C54A0 /* myConcernedDAO.m */; };
+		9652E7C21D865633008C54A0 /* myConcernedBL.m in Sources */ = {isa = PBXBuildFile; fileRef = 9652E7C11D865633008C54A0 /* myConcernedBL.m */; };
+		9652E7C61D869DFE008C54A0 /* myConcernedView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9652E7C51D869DFE008C54A0 /* myConcernedView.m */; };
 		965FB1B61D7E68A700769DB9 /* SoldView.m in Sources */ = {isa = PBXBuildFile; fileRef = 965FB1A91D7E68A700769DB9 /* SoldView.m */; };
 		965FB1B71D7E68A700769DB9 /* mySellAndBorrowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 965FB1AB1D7E68A700769DB9 /* mySellAndBorrowView.m */; };
 		965FB1B81D7E68A700769DB9 /* mySellTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 965FB1AD1D7E68A700769DB9 /* mySellTableViewCell.m */; };
@@ -68,6 +74,8 @@
 		965FB2451D7E6A3E00769DB9 /* bookPubUpLoadInfoDAO.m in Sources */ = {isa = PBXBuildFile; fileRef = 965FB23D1D7E6A3E00769DB9 /* bookPubUpLoadInfoDAO.m */; };
 		965FB2461D7E6A3E00769DB9 /* findBooKInfoDAO.m in Sources */ = {isa = PBXBuildFile; fileRef = 965FB2401D7E6A3E00769DB9 /* findBooKInfoDAO.m */; };
 		965FB2471D7E6A3E00769DB9 /* publicSearchDAO.m in Sources */ = {isa = PBXBuildFile; fileRef = 965FB2431D7E6A3E00769DB9 /* publicSearchDAO.m */; };
+		965FB2501D7ED8EE00769DB9 /* concernDAO.m in Sources */ = {isa = PBXBuildFile; fileRef = 965FB24F1D7ED8EE00769DB9 /* concernDAO.m */; };
+		965FB2541D7EE52100769DB9 /* concernBL.m in Sources */ = {isa = PBXBuildFile; fileRef = 965FB2531D7EE52100769DB9 /* concernBL.m */; };
 		9666EDFF1CE9969F00F9397E /* DetailedAddContactsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9666EDFE1CE9969F00F9397E /* DetailedAddContactsVC.m */; };
 		9666EE061CE9C05D00F9397E /* mail.PNG in Resources */ = {isa = PBXBuildFile; fileRef = 9666EE051CE9C05D00F9397E /* mail.PNG */; };
 		9666EE0A1CE9C2BE00F9397E /* ContactsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9666EE091CE9C2BE00F9397E /* ContactsTableViewCell.m */; };
@@ -303,12 +311,26 @@
 		963D85DB1CE033CC00ED37B4 /* addContactsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = addContactsVC.h; sourceTree = "<group>"; };
 		963D85DC1CE033CC00ED37B4 /* addContactsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = addContactsVC.m; sourceTree = "<group>"; };
 		963D85DE1CE0376500ED37B4 /* ic_nav_back@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_nav_back@2x.png"; sourceTree = "<group>"; };
+		9644D9331D87946300021996 /* myConcernedTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = myConcernedTableViewCell.h; sourceTree = "<group>"; };
+		9644D9341D87946300021996 /* myConcernedTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = myConcernedTableViewCell.m; sourceTree = "<group>"; };
+		9644D9391D87E3A200021996 /* AboutUsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutUsVC.h; sourceTree = "<group>"; };
+		9644D93A1D87E3A200021996 /* AboutUsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutUsVC.m; sourceTree = "<group>"; };
 		96450C281D0FD9530008182D /* weChatView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = weChatView.h; sourceTree = "<group>"; };
 		96450C291D0FD9530008182D /* weChatView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = weChatView.m; sourceTree = "<group>"; };
 		96450C2E1D0FFB410008182D /* TextWeChatTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextWeChatTableViewCell.h; sourceTree = "<group>"; };
 		96450C2F1D0FFB410008182D /* TextWeChatTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextWeChatTableViewCell.m; sourceTree = "<group>"; };
 		96450C311D1010FA0008182D /* first.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = first.png; sourceTree = "<group>"; };
 		96450C331D1011000008182D /* me.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = me.png; sourceTree = "<group>"; };
+		9652045F1D864371003BE369 /* myConcernedVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = myConcernedVC.h; sourceTree = "<group>"; };
+		965204601D864371003BE369 /* myConcernedVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = myConcernedVC.m; sourceTree = "<group>"; };
+		9652E7BC1D8653E9008C54A0 /* myConcernedDAO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = myConcernedDAO.h; sourceTree = "<group>"; };
+		9652E7BD1D8653E9008C54A0 /* myConcernedDAO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = myConcernedDAO.m; sourceTree = "<group>"; };
+		9652E7BF1D865505008C54A0 /* myConcernedDAODelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = myConcernedDAODelegate.h; sourceTree = "<group>"; };
+		9652E7C01D865633008C54A0 /* myConcernedBL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = myConcernedBL.h; sourceTree = "<group>"; };
+		9652E7C11D865633008C54A0 /* myConcernedBL.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = myConcernedBL.m; sourceTree = "<group>"; };
+		9652E7C31D865737008C54A0 /* myConcernedBLDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = myConcernedBLDelegate.h; sourceTree = "<group>"; };
+		9652E7C41D869DFE008C54A0 /* myConcernedView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = myConcernedView.h; sourceTree = "<group>"; };
+		9652E7C51D869DFE008C54A0 /* myConcernedView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = myConcernedView.m; sourceTree = "<group>"; };
 		965FB1A81D7E68A700769DB9 /* SoldView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoldView.h; sourceTree = "<group>"; };
 		965FB1A91D7E68A700769DB9 /* SoldView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SoldView.m; sourceTree = "<group>"; };
 		965FB1AA1D7E68A700769DB9 /* mySellAndBorrowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mySellAndBorrowView.h; sourceTree = "<group>"; };
@@ -409,6 +431,12 @@
 		965FB2421D7E6A3E00769DB9 /* publicSearchDAO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = publicSearchDAO.h; sourceTree = "<group>"; };
 		965FB2431D7E6A3E00769DB9 /* publicSearchDAO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = publicSearchDAO.m; sourceTree = "<group>"; };
 		965FB2441D7E6A3E00769DB9 /* publicSearchDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = publicSearchDelegate.h; sourceTree = "<group>"; };
+		965FB24E1D7ED8EE00769DB9 /* concernDAO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = concernDAO.h; sourceTree = "<group>"; };
+		965FB24F1D7ED8EE00769DB9 /* concernDAO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = concernDAO.m; sourceTree = "<group>"; };
+		965FB2511D7ED90A00769DB9 /* concernDAODelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = concernDAODelegate.h; sourceTree = "<group>"; };
+		965FB2521D7EE52100769DB9 /* concernBL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = concernBL.h; sourceTree = "<group>"; };
+		965FB2531D7EE52100769DB9 /* concernBL.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = concernBL.m; sourceTree = "<group>"; };
+		965FB2551D7EE64600769DB9 /* concernBLDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = concernBLDelegate.h; sourceTree = "<group>"; };
 		9666EDFD1CE9969F00F9397E /* DetailedAddContactsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailedAddContactsVC.h; sourceTree = "<group>"; };
 		9666EDFE1CE9969F00F9397E /* DetailedAddContactsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailedAddContactsVC.m; sourceTree = "<group>"; };
 		9666EE031CE99DA600F9397E /* AddContactsVCDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddContactsVCDelegate.h; sourceTree = "<group>"; };
@@ -929,6 +957,9 @@
 				965FB2251D7E69B100769DB9 /* mySellBL.h */,
 				965FB2261D7E69B100769DB9 /* mySellBL.m */,
 				965FB2271D7E69B100769DB9 /* mySellBLDelegate.h */,
+				9652E7C01D865633008C54A0 /* myConcernedBL.h */,
+				9652E7C11D865633008C54A0 /* myConcernedBL.m */,
+				9652E7C31D865737008C54A0 /* myConcernedBLDelegate.h */,
 			);
 			name = MyBL;
 			sourceTree = "<group>";
@@ -945,6 +976,9 @@
 				965FB2301D7E69E100769DB9 /* publicSearchBL.h */,
 				965FB2311D7E69E100769DB9 /* publicSearchBL.m */,
 				965FB2321D7E69E100769DB9 /* publicSearchBLDelegate.h */,
+				965FB2521D7EE52100769DB9 /* concernBL.h */,
+				965FB2531D7EE52100769DB9 /* concernBL.m */,
+				965FB2551D7EE64600769DB9 /* concernBLDelegate.h */,
 			);
 			name = PublishBL;
 			sourceTree = "<group>";
@@ -955,6 +989,9 @@
 				965FB2371D7E6A2800769DB9 /* mySellDAO.h */,
 				965FB2381D7E6A2800769DB9 /* mySellDAO.m */,
 				965FB2391D7E6A2800769DB9 /* mySellDAODelegate.h */,
+				9652E7BC1D8653E9008C54A0 /* myConcernedDAO.h */,
+				9652E7BD1D8653E9008C54A0 /* myConcernedDAO.m */,
+				9652E7BF1D865505008C54A0 /* myConcernedDAODelegate.h */,
 			);
 			name = MyDAO;
 			sourceTree = "<group>";
@@ -971,6 +1008,9 @@
 				965FB2421D7E6A3E00769DB9 /* publicSearchDAO.h */,
 				965FB2431D7E6A3E00769DB9 /* publicSearchDAO.m */,
 				965FB2441D7E6A3E00769DB9 /* publicSearchDelegate.h */,
+				965FB24E1D7ED8EE00769DB9 /* concernDAO.h */,
+				965FB24F1D7ED8EE00769DB9 /* concernDAO.m */,
+				965FB2511D7ED90A00769DB9 /* concernDAODelegate.h */,
 			);
 			name = PublishDAO;
 			sourceTree = "<group>";
@@ -1169,6 +1209,14 @@
 				965FB1CE1D7E68B500769DB9 /* presentLayerPublicMethod.m */,
 				965FB1A71D7E689600769DB9 /* concrete */,
 				96B2582F1CBF876F00D6DC43 /* MyVCPictures */,
+				9652045F1D864371003BE369 /* myConcernedVC.h */,
+				965204601D864371003BE369 /* myConcernedVC.m */,
+				9652E7C41D869DFE008C54A0 /* myConcernedView.h */,
+				9652E7C51D869DFE008C54A0 /* myConcernedView.m */,
+				9644D9331D87946300021996 /* myConcernedTableViewCell.h */,
+				9644D9341D87946300021996 /* myConcernedTableViewCell.m */,
+				9644D9391D87E3A200021996 /* AboutUsVC.h */,
+				9644D93A1D87E3A200021996 /* AboutUsVC.m */,
 			);
 			name = MyVC;
 			sourceTree = "<group>";
@@ -1850,7 +1898,7 @@
 				TargetAttributes = {
 					E97207361CBE815900C3D5FC = {
 						CreatedOnToolsVersion = 7.3;
-						DevelopmentTeam = 6D3HD54M6P;
+						DevelopmentTeam = NE8VK2242L;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -2087,10 +2135,12 @@
 				965FB2221D7E696300769DB9 /* CategoryView.m in Sources */,
 				E9B3B8F81D2BAA090085304D /* UploadImageCell.m in Sources */,
 				E9CAD9081CBE884700253817 /* UserVO.m in Sources */,
+				9652E7C61D869DFE008C54A0 /* myConcernedView.m in Sources */,
 				E9B3B9371D2BAD720085304D /* ImagePickerCollectionViewCell.m in Sources */,
 				965FB1CF1D7E68B500769DB9 /* cityListVC.m in Sources */,
 				965FB1F41D7E692E00769DB9 /* BookMainPageVC.m in Sources */,
 				E91BAF551CBFF25B00CCF9A0 /* MessageCell.m in Sources */,
+				9652E7BE1D8653E9008C54A0 /* myConcernedDAO.m in Sources */,
 				96738F881CC47B0D00CD5E4D /* RegistDAO.m in Sources */,
 				965FB1D21D7E68B500769DB9 /* myVC.m in Sources */,
 				96B258521CBF879E00D6DC43 /* chatVC.m in Sources */,
@@ -2109,6 +2159,7 @@
 				E9CAD8F71CBE87ED00253817 /* SecondhandMessageVO.m in Sources */,
 				E9B3B9481D2BAD980085304D /* YBImgPickerTableViewCell.m in Sources */,
 				9676FF3A1CE95CA9006B2189 /* AddContactsBL.m in Sources */,
+				9652E7C21D865633008C54A0 /* myConcernedBL.m in Sources */,
 				96DA83FD1CE5C2FE0006BFD6 /* BmobIMUserInfo+BmobUser.m in Sources */,
 				E9CAD8F81CBE87ED00253817 /* SecondhandMessageVOGroup.m in Sources */,
 				E9CAD9071CBE884700253817 /* UserDAO.m in Sources */,
@@ -2174,8 +2225,10 @@
 				965FB1D41D7E68B500769DB9 /* registViewController.m in Sources */,
 				96F5546F1CCA101800DDE7A1 /* logInDAO.m in Sources */,
 				965FB2091D7E693B00769DB9 /* bookSecondPageBottomView.m in Sources */,
+				9644D93B1D87E3A200021996 /* AboutUsVC.m in Sources */,
 				965FB1B81D7E68A700769DB9 /* mySellTableViewCell.m in Sources */,
 				E9CAD8D71CBE877200253817 /* MenuCell.m in Sources */,
+				965FB2501D7ED8EE00769DB9 /* concernDAO.m in Sources */,
 				96450C301D0FFB410008182D /* TextWeChatTableViewCell.m in Sources */,
 				965FB1EE1D7E692E00769DB9 /* bookDisplayCellView.m in Sources */,
 				E9B3B9231D2BACAA0085304D /* ShowIMGModel.m in Sources */,
@@ -2191,6 +2244,7 @@
 				965FB2281D7E69B100769DB9 /* mySellBL.m in Sources */,
 				E9B3B9731D2BAE9E0085304D /* SearchViewController.m in Sources */,
 				E9B3B93A1D2BAD720085304D /* ThumbnailCollectionViewCell.m in Sources */,
+				965FB2541D7EE52100769DB9 /* concernBL.m in Sources */,
 				E9B3B9141D2BABF50085304D /* RYNumberKeyboard.m in Sources */,
 				965FB2351D7E69E100769DB9 /* publicSearchBL.m in Sources */,
 				E9B3B94C1D2BAD980085304D /* AssetCollectionCell.m in Sources */,
@@ -2199,6 +2253,7 @@
 				E91BAF521CBFE8CD00CCF9A0 /* MessageFrameModel.m in Sources */,
 				E9CAD8D61CBE877200253817 /* MenuButton.m in Sources */,
 				E95634041CC52ABF001EE938 /* TonglmTest.m in Sources */,
+				965204611D864371003BE369 /* myConcernedVC.m in Sources */,
 				965FB1BA1D7E68A700769DB9 /* pullRefreshView.m in Sources */,
 				E90D38DD1D60519100910833 /* RecentCommentViewController.m in Sources */,
 				965FB1F11D7E692E00769DB9 /* bookUserInfoView.m in Sources */,
@@ -2224,6 +2279,7 @@
 				965FB1B71D7E68A700769DB9 /* mySellAndBorrowView.m in Sources */,
 				E9CAD8E61CBE87AB00253817 /* SecondhandVO.m in Sources */,
 				96C6617C1CEAE95C00C681BF /* DetailChatVC.m in Sources */,
+				9644D9351D87946300021996 /* myConcernedTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

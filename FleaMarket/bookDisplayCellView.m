@@ -31,12 +31,12 @@
             _bookAuthorLabel.numberOfLines = 0;
             [self addSubview:_bookAuthorLabel];
             _bookAuthorLabel.font = FontSize14;
-            _bookAuthorLabel.textColor = grayColorPCH;
+            _bookAuthorLabel.textColor = [UIColor grayColor];
         }
         if(!_oriPriceLabel){
             _oriPriceLabel = [[UILabel alloc] init];
             _oriPriceLabel.font = FontSize14;
-            _oriPriceLabel.textColor = grayColorPCH;
+            _oriPriceLabel.textColor = [UIColor grayColor];
             _oriPriceLabel.textAlignment = NSTextAlignmentCenter;
             [self addSubview: _oriPriceLabel];
             
@@ -51,19 +51,19 @@
             _remarkLabel = [[UILabel alloc] init];
             [self addSubview: _remarkLabel];
             _remarkLabel.font = FontSize14;
-            _remarkLabel.textColor = grayColorPCH;
+            _remarkLabel.textColor = [UIColor grayColor];
         }
         if(!_depreciateLabel){
             _depreciateLabel = [[UILabel alloc] init];
             [self addSubview: _depreciateLabel];
             _depreciateLabel.font =FontSize14;
-            _depreciateLabel.textColor = grayColorPCH;
+            _depreciateLabel.textColor = [UIColor grayColor];
             _depreciateLabel.textAlignment = NSTextAlignmentRight;
         }
         if(!_viewLine1){
             _viewLine1 = [[UIView alloc] init];
             [self addSubview:_viewLine1];
-            _viewLine1.backgroundColor = grayColorPCH;
+            _viewLine1.backgroundColor = [UIColor grayColor];
         }
     }
     return self;
@@ -118,7 +118,7 @@
     
     float originalPrice_x = sellPrice_x + sellPriceWidth;
     float originalPrice_y = sellPrice_y;
-    float originalPriceWidth = screenWidthPCH * 0.15;
+    float originalPriceWidth = screenWidthPCH * 0.10;
     float originalPriceHeight = sellLabelHeight;
     NSString *str = @"¥";
     _oriPriceLabel.text = [str stringByAppendingString:[mudic objectForKey:@"originalPrice"]];

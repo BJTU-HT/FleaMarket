@@ -222,6 +222,8 @@ static findBooKInfoDAO *sharedManager;
         [mudic setObject:[obj objectForKey:@"school"] forKey:@"school"];
     if([obj objectForKey:@"visitorURLArr"])
         [mudic setObject:[obj objectForKey:@"visitorURLArr"] forKey:@"visitorURLArr"];
+    if([obj objectForKey:@"ownerObjectId"])
+        [mudic setObject:[obj objectForKey:@"ownerObjectId"] forKey:@"ownerObjectId"];
     //if([obj.objectId != nil){
         [mudic setObject: obj.objectId forKey:@"objectId"];
     //}

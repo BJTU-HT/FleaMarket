@@ -452,6 +452,7 @@ static NSInteger margin = 10;
     [self.refresh endRefresh];
     [self.activityIndicatorView stopAnimating];
 }
+
 - (void)findSecondhandFailed:(NSError *)error
 {
     NSLog(@"过滤查询失败!");

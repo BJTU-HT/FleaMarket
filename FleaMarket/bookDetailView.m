@@ -8,6 +8,8 @@
 
 #import "bookDetailView.h"
 #import <SDWebImage/UIImageView+WebCache.h>
+#import <BmobSDK/BmobUser.h>
+#import "presentLayerPublicMethod.h"
 
 @implementation bookDetailView
 NSIndexPath *indexPathGlobal;
@@ -51,8 +53,8 @@ float widthDeatail;
                 _labelS1 = [[UILabel alloc] init];
                 [self addSubview: _labelS1];
                 _labelS1.font = FontSize12;
+                _labelS1.textColor = [UIColor grayColor];
             }
-            
         }else if(indexPath.section == 2){
             if(!_viewLineS2){
                 _viewLineS2 = [[UIView alloc] init];
@@ -87,6 +89,8 @@ float widthDeatail;
 }
 
 -(CGFloat)layoutSubviews:(NSIndexPath *)indexPath data:(NSMutableDictionary *)mudic{
+    _recMudicBD = [[NSMutableDictionary alloc] init];
+    _recMudicBD = mudic;
     if(indexPathGlobal.section == 0){
        return [self layoutS0View:mudic];
     }else if(indexPathGlobal.section == 1){
@@ -112,7 +116,7 @@ float widthDeatail;
     float labelS1_x = 10;
     float labelS1_y = 0;
     float labelS1Width = screenWidthPCH - 2 * labelS1_x;
-    NSString *strDefault = @"备注:";
+    NSString *strDefault = @"备注: ";
     NSString *str = [strDefault stringByAppendingString: [mudic objectForKey:@"remark"]];
     _labelS1.text = str;
     CGSize titleSizeLabelS1 = [_labelS1.text boundingRectWithSize:CGSizeMake(labelS1Width, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:12]} context:nil].size;
@@ -141,6 +145,7 @@ float widthDeatail;
     }
     return 0;
 }
+
 -(CGFloat)layoutS2View:(NSIndexPath *)indexPath data:(NSMutableDictionary *)mudic{
     float margin = 0.0;
     float marginVertial = 10.0;
@@ -191,6 +196,7 @@ float widthDeatail;
     float bookUserNameHeight = 0.4 * heightDetail;
     _userNameS0.frame = CGRectMake(bookUserName_x, margin, bookUserNameWidth, bookUserNameHeight);
     _userNameS0.text = [mudic objectForKey:@"userName"];
+    _nameStr = _userNameS0.text;
     
     float bookPubTime_y = bookUserNameHeight + margin;
     float bookPubTimeHeight = bookUserNameHeight;
@@ -205,9 +211,90 @@ float widthDeatail;
     _btnConcernS0.frame = CGRectMake(schoolLabel_x, schoolLabel_y, schoolLabelWidth, schoolLabelHeight);
     [_btnConcernS0 setTitle:@"加关注" forState: UIControlStateNormal];
     _btnConcernS0.titleLabel.font =FontSize12;
-    
+    [_btnConcernS0 addTarget:self action:@selector(btnConcernClicked:) forControlEvents:UIControlEventTouchDown];
+    BmobUser *curUser = [BmobUser getCurrentUser];
+    if([curUser.objectId isEqualToString:[mudic objectForKey:@"ownerObjectId"]]){
+        [_btnConcernS0 setTitle:@"已关注" forState: UIControlStateNormal];
+        [_btnConcernS0 setBackgroundColor:[UIColor clearColor]];
+        [_btnConcernS0 setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+    }else{
+        [self requestConcernedDataFromServer:curUser.objectId];
+    }
     return 0;
 }
+
+//从用户表获取关注的人
+-(void)requestConcernedDataFromServer:(NSString *)objectId{
+    concernBL *conBL = [concernBL sharedManager];
+    conBL.delegate = self;
+    [conBL requestConcernedDataBL:objectId];
+}
+
+-(void)btnConcernClicked:(UIButton *)sender{
+    BmobUser *curUser = [BmobUser getCurrentUser];
+    NSMutableDictionary *mudic = [[NSMutableDictionary alloc] init];
+    NSMutableArray *muArr = [[NSMutableArray alloc] init];
+    if([_recMudicBD objectForKey:@"concernedArr"]){
+        muArr = [_recMudicBD objectForKey:@"concernedArr"];
+    }
+    if([_recMudicBD objectForKey:@"ownerObjectId"]){
+        [mudic setObject:[_recMudicBD objectForKey:@"ownerObjectId"] forKey:@"concernedObjectId"];
+    }
+    if(curUser.objectId)
+        [mudic setObject:curUser.objectId forKey:@"currentUserObjectId"];
+    if([_recMudicBD objectForKey:@"exchangeCategory"])
+    [mudic setObject:[_recMudicBD objectForKey:@"exchangeCategory"] forKey:@"exchangeCategory"];
+    concernBL *conBL = [concernBL sharedManager];
+    conBL.delegate = self;
+    [conBL updateConcernedDataBL:mudic];
+}
+
+-(void)concernedUserUploadFailedBL:(NSError *)error{
+    UIAlertController *alertCon = [UIAlertController alertControllerWithTitle:@"提示信息" message:@"服务器连接失败..." preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *action = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleCancel handler:nil];
+    [alertCon addAction:action];
+    [self.window.rootViewController presentViewController:alertCon animated:YES completion:nil];
+}
+
+-(void)concernedUserUploadFinishedBL:(BOOL)value{
+    if(value){
+        [_btnConcernS0 setTitle:@"已关注" forState: UIControlStateNormal];
+        [_btnConcernS0 setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+        [_btnConcernS0 setBackgroundColor:[UIColor clearColor]];
+    }
+}
+
+#pragma 从用户表获取关注的数据代理函数 begin
+-(void)concernedDataRequestFinishedBL:(NSArray *)arr{
+    NSString *ownerObjectId = [_recMudicBD objectForKey:@"ownerObjectId"];
+    BOOL concernTag;
+
+    if(![arr isEqual:@""]){
+        if(arr){
+            for(int i = 0; i < arr.count; i++){
+                NSMutableDictionary *mudic = [arr objectAtIndex:i];
+                if([[mudic objectForKey:@"objectId"] isEqualToString:ownerObjectId]){
+                    concernTag = 1;
+                    break;
+                }
+            }
+        }
+        if(concernTag){
+            [_btnConcernS0 setTitle:@"已关注" forState: UIControlStateNormal];
+            [_btnConcernS0 setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+            [_btnConcernS0 setBackgroundColor:[UIColor clearColor]];
+        }
+    }
+}
+
+-(void)concernedDataRequestFailedBL:(NSError *)error{
+    //[presentLayerPublicMethod new_notifyView:self.navigationController notifyContent:@"未能添加关注"];
+}
+-(void)cocnernedDataRequestNODataBL:(BOOL)value{
+    NSLog(@"Concerned no data");
+}
+
+#pragma 从用户表获取关注的数据代理函数 end
 /*
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.

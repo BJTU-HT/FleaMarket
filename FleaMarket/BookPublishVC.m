@@ -24,6 +24,7 @@ NSInteger fourBtnTag;
 
 -(void)viewDidLoad {
     [super viewDidLoad];
+    self.title = @"书籍发布";
     //用于标记在哪个按钮状态下，上方四个按钮，默认在出售按钮下 一次 0 1 2 3
     fourBtnTag = 0;
     clickBtnHeight = 0.06 * screenHeightPCH;
@@ -137,6 +138,8 @@ NSInteger fourBtnTag;
 -(NSMutableDictionary *)pubMutableDic{
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
     BmobUser *curUser = [BmobUser getCurrentUser];
+    //添加上传用户的objectId
+    [dic setObject:curUser.objectId forKey:@"ownerObjectId"];
     [dic setObject:curUser.username forKey:@"userName"];
     [dic setObject:_pubView.bookName.text forKey:@"bookName"];
     [dic setObject:_pubView.author.text forKey:@"author"];
@@ -304,7 +307,7 @@ NSInteger fourBtnTag;
     }
 }
 
-#pragma mark - UIGestureRecognizerDelegate 解决手势解惑tableviewcell点击事件问题
+#pragma mark - UIGestureRecognizerDelegate 解决手势截获tableviewcell点击事件问题
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
 {
     // 输出点击的view的类名

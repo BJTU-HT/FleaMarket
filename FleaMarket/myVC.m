@@ -17,6 +17,8 @@
 #import "CreateAndSearchPlist.h"
 #import "LogInBL.h"
 #import "mySellVC.h"
+#import "SDImageCache.h"
+#import "AboutUsVC.h"
 
 #define loginPartOccupyScreenPercent 0.15
 //第一个section的header view 头像位置所需宏定义
@@ -151,24 +153,78 @@ UIImageView *headImage;
 {
     cellMutableArray = [[NSMutableArray alloc] init];
     cellMutableArrayImage = [[NSMutableArray alloc] init];
-    NSArray *arrayTemp = [[NSArray alloc] initWithObjects: @"在售商品",@"我的售出", nil];
-    NSArray *arrayTemp1 = [[NSArray alloc] initWithObjects: @"我的求购",@"已买到的", nil];
-    NSArray *arrayTemp2 = [[NSArray alloc] initWithObjects: @"我的粉丝", @"我的记事本", nil];
-    NSArray *arrayTemp3 = [[NSArray alloc] initWithObjects:@"我的关注",@"意向购买", nil];
+//    NSArray *arrayTemp = [[NSArray alloc] initWithObjects: @"我的出售",@"我的求购", nil];
+//    NSArray *arrayTemp1 = [[NSArray alloc] initWithObjects: @"我的关注",@"我的记事本", nil];
+//    NSArray *arrayTemp2 = [[NSArray alloc] initWithObjects: @"清空缓存", @"关于我们", nil];
+//    NSArray *arrayTemp3 = [[NSArray alloc] initWithObjects:@"退出登录", nil];
+
+    NSArray *arrayTemp = [[NSArray alloc] initWithObjects: @"我的出售",@"我的关注", nil];
+    NSArray *arrayTemp1 = [[NSArray alloc] initWithObjects: @"清空缓存",@"关于我们", nil];
+    NSArray *arrayTemp2 = [[NSArray alloc] initWithObjects: @"退出登录", nil];
+    //NSArray *arrayTemp3 = [[NSArray alloc] initWithObjects:@"退出登录", nil];
     
     NSArray *arrayImg = [[NSArray alloc] initWithObjects:[UIImage imageNamed:@"ic_mine_wengweng@2x.png"],[UIImage imageNamed:@"ic_mine_want@2x.png"], nil];
     NSArray *arrayImg1 = [[NSArray alloc] initWithObjects:[UIImage imageNamed:@"ic_mine_note@2x.png"],[UIImage imageNamed:@"ic_mine_order@2x.png"], nil];
     NSArray *arrayImg2 = [[NSArray alloc] initWithObjects:[UIImage imageNamed:@"ic_mine_coupon@2x.png"],[UIImage imageNamed:@"ic_mine_comment@2x.png"], nil];
-    NSArray *arrayImg3 = [[NSArray alloc] initWithObjects:[UIImage imageNamed:@"ic_mine_qa@2x.png"],[UIImage imageNamed:@"ic_mine_activity@2x.png"], nil];
+    //NSArray *arrayImg3 = [[NSArray alloc] initWithObjects:[UIImage imageNamed:@"ic_mine_qa@2x.png"],[UIImage imageNamed:@"ic_mine_activity@2x.png"], nil];
     [cellMutableArray addObject:arrayTemp];
     [cellMutableArray addObject:arrayTemp1];
     [cellMutableArray addObject:arrayTemp2];
-    [cellMutableArray addObject:arrayTemp3];
+    //[cellMutableArray addObject:arrayTemp3];
     [cellMutableArrayImage addObject:arrayImg];
     [cellMutableArrayImage addObject:arrayImg1];
     [cellMutableArrayImage addObject:arrayImg2];
-    [cellMutableArrayImage addObject:arrayImg3];
+    //[cellMutableArrayImage addObject:arrayImg3];
 }
+
+#pragma 获取缓存大小，清理缓存-------------
+-(NSString *)getImageCacheAndDisk{
+    float tmpSize = [[SDImageCache sharedImageCache] getSize];
+    NSString *tmpSizeStr = [NSString stringWithFormat:@"%.2fMB", tmpSize/1024.0/1024.0];
+    return tmpSizeStr;
+}
+
+-(void)cleanCacheAndDisk{
+    [[SDImageCache sharedImageCache] clearDisk];
+    [[SDImageCache sharedImageCache] clearMemory];
+}
+#pragma 获取缓存大小，清理缓存-end---------
+
+#pragma 弹出清理内存提示框并执行操作---------
+-(void)popAlertViewForClearCache{
+    UIAlertController *alertConLogOut = [UIAlertController alertControllerWithTitle:@"清理缓存" message:@"缓存可以让浏览更流畅哦，确定要清理吗？" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *alertConfirm = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [self cleanCacheAndDisk];
+        [myTableView reloadData];
+    }];
+    UIAlertAction *alertCancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
+    [alertConLogOut addAction:alertConfirm];
+    [alertConLogOut addAction:alertCancel];
+    [self.view.window.rootViewController presentViewController:alertConLogOut animated:NO completion:nil];
+}
+#pragma 弹出清理内存提示框并执行操作-end------
+
+#pragma 退出登录模块 begin
+//退出登录，
+-(void)logOutCellClicked
+{
+    UIAlertController *alertConLogOut = [UIAlertController alertControllerWithTitle:nil message:@"确认退出登录吗" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *alertConfirm = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        NSUserDefaults *defaultLogOut = [NSUserDefaults standardUserDefaults];
+        [defaultLogOut setObject:nil forKey:@"userName"];
+        [defaultLogOut synchronize];
+        [BmobUser logout];
+        myVC *myView = [[myVC alloc] init];
+        [self.navigationController pushViewController:myView animated:NO];
+    }];
+    UIAlertAction *alertCancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
+    [alertConLogOut addAction:alertConfirm];
+    [alertConLogOut addAction:alertCancel];
+    [self.view.window.rootViewController presentViewController:alertConLogOut animated:NO completion:nil];
+}
+
+#pragma 退出登录模块 end
+
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return 5;
@@ -218,7 +274,11 @@ UIImageView *headImage;
     static NSString *cellIdentifier=@"UITableViewCellIdentifierKey1";
     UITableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     if(cell == nil){
-        cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+        if(indexPath.section == 3){
+            cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+        }else{
+            cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellIdentifier];
+        }
         //NSLog(@"创建cell中......");
     }
     
@@ -231,6 +291,9 @@ UIImageView *headImage;
             cell.textLabel.text = [array objectAtIndex:indexPath.row];
             cell.textLabel.font = [UIFont systemFontOfSize:14];
             cell.imageView.image = [arrayImg objectAtIndex:indexPath.row];
+            if(indexPath.section == 2 && indexPath.row == 0){
+                cell.detailTextLabel.text = [self getImageCacheAndDisk];
+            }
         }
     }
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
@@ -261,18 +324,25 @@ UIImageView *headImage;
                 }
                 else
                 {
+                    myConcernedVC *myConcern = [[myConcernedVC alloc] init];
+                    self.hidesBottomBarWhenPushed = YES;
+                    [self.navigationController pushViewController:myConcern animated: NO];
                 }
                 break;
                 //我的记事本，我的订单
             case 2:
-                if(indexPath.row == 0)
-                {
+                if(indexPath.row == 0){
+                    [self popAlertViewForClearCache];
+                }else if(indexPath.row == 1){
+                    AboutUsVC *aboutVC = [[AboutUsVC alloc] init];
+                    self.hidesBottomBarWhenPushed = YES;
+                    [self.navigationController pushViewController:aboutVC animated:NO];
                 }
                 break;
                 //我的轨迹
-            case 5:
-                if(indexPath.row == 0)
-                {
+            case 3:
+                if(indexPath.row == 0){
+                    [self logOutCellClicked];
                 }
                 break;
         }

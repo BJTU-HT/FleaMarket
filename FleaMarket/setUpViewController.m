@@ -97,8 +97,8 @@ NSString *userName;
     [alertConLogOut addAction:alertCancel];
     [self.view.window.rootViewController presentViewController:alertConLogOut animated:NO completion:nil];
 }
-
 #pragma 弹出清理内存提示框并执行操作-end------
+
 #pragma 实现tableView代理方法
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -148,11 +148,13 @@ NSString *userName;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
+
 -(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
     UIView *v = [[UIView alloc] initWithFrame:CGRectMake(0, 0, screenWidthPCH, screenHeightPCH * 0.04)];
     v.backgroundColor = ghostWhitePCH;
     return v;
 }
+
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
     if(section == 3){

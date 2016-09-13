@@ -29,14 +29,14 @@
             [self addSubview: _pubTimeLabel];
             _pubTimeLabel.textAlignment = NSTextAlignmentLeft;
             _pubTimeLabel.font = FontSize12;
-            _pubTimeLabel.textColor = grayColorPCH;
+            _pubTimeLabel.textColor = [UIColor grayColor];
         }
         if(!_bookSchoolLabel){
             _bookSchoolLabel = [[UILabel alloc] init];
             [self addSubview: _bookSchoolLabel];
             _bookSchoolLabel.textAlignment = NSTextAlignmentRight;
             _bookSchoolLabel.font = FontSize12;
-            _bookSchoolLabel.textColor = grayColorPCH;
+            _bookSchoolLabel.textColor = [UIColor grayColor];
         }
     }
     return self;
