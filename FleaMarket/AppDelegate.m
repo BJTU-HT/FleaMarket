@@ -158,9 +158,11 @@
     // 处理推送消息
     [JPUSHService handleRemoteNotification:userInfo];
     NSLog(@"didReceiveRemoteNotification fetchCompletionHandler:%@", userInfo);
-    NSString *content = [[userInfo objectForKey:@"aps"] objectForKey:@"alert"];
-    UIAlertController *ac = [UIAlertController alertControllerWithTitle:@"收到留言" message:content preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction *aa = [UIAlertAction actionWithTitle:@"OKay" style:UIAlertActionStyleDefault handler:nil];
+    //NSString *content = [[userInfo objectForKey:@"aps"] objectForKey:@"alert"];
+    UIAlertController *ac = [UIAlertController alertControllerWithTitle:@"收到留言" message:nil preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
+    UIAlertAction *aa = [UIAlertAction actionWithTitle:@"查看" style:UIAlertActionStyleDefault handler:nil];
+    [ac addAction:cancel];
     [ac addAction:aa];
     dispatch_async(dispatch_get_main_queue(), ^{
         [application.keyWindow.rootViewController presentViewController:ac animated:YES completion:nil];
@@ -172,9 +174,11 @@
     // IOS 7 Support Required
     [JPUSHService handleRemoteNotification:userInfo];
     completionHandler(UIBackgroundFetchResultNewData);
-    NSString *content = [[userInfo objectForKey:@"aps"] objectForKey:@"alert"];
-    UIAlertController *ac = [UIAlertController alertControllerWithTitle:@"收到留言" message:content preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction *aa = [UIAlertAction actionWithTitle:@"OKay" style:UIAlertActionStyleDefault handler:nil];
+    //NSString *content = [[userInfo objectForKey:@"aps"] objectForKey:@"alert"];
+    UIAlertController *ac = [UIAlertController alertControllerWithTitle:@"收到留言" message:nil preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
+    UIAlertAction *aa = [UIAlertAction actionWithTitle:@"查看" style:UIAlertActionStyleDefault handler:nil];
+    [ac addAction:cancel];
     [ac addAction:aa];
     dispatch_async(dispatch_get_main_queue(), ^{
         [application.keyWindow.rootViewController presentViewController:ac animated:YES completion:nil];
