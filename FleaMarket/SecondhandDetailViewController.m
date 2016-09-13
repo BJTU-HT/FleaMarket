@@ -180,7 +180,7 @@ static NSString *IDD_MESSAGE = @"DD";
     
     // 名字
     UILabel *nameLabel = [[UILabel alloc] init];
-    nameLabel.font = HTNameFont;
+    nameLabel.font = FontSize14;
     self.nameLabel = nameLabel;
     
     // 性别
@@ -189,32 +189,34 @@ static NSString *IDD_MESSAGE = @"DD";
     
     // 发布日期
     UILabel *publishTimeLabel = [[UILabel alloc] init];
-    publishTimeLabel.font = HTNameFont;
+    publishTimeLabel.font = FontSize12;
+    [publishTimeLabel setTextColor:darkGrayColorPCH];
     self.publishTimeLabel = publishTimeLabel;
     
     // 学校
     UILabel *schoolLabel = [[UILabel alloc] init];
-    schoolLabel.font = HTNameFont;
+    schoolLabel.font = FontSize14;
     self.schoolLabel = schoolLabel;
     
     // 现在价格
     UILabel *nowPriceLabel = [[UILabel alloc] init];
-    nowPriceLabel.font = HTTextFont;
+    nowPriceLabel.font = FontSize14;
     self.nowPriceLabel = nowPriceLabel;
     
     // 原始价格
     UILabel *originalPriceLabel = [[UILabel alloc] init];
-    originalPriceLabel.font = HTTextFontLess;
+    originalPriceLabel.font = FontSize12;
     self.originalPriceLabel = originalPriceLabel;
+    
     
     // 描述
     UILabel *descriptionLabel = [[UILabel alloc] init];
-    descriptionLabel.font = HTTextFont;
+    descriptionLabel.font = FontSize14;
     self.descriptionLabel = descriptionLabel;
     
     // 地址
     UILabel *locationLabel = [[UILabel alloc] init];
-    locationLabel.font = HTTextFont;
+    locationLabel.font = FontSize14;
     self.locationLabel = locationLabel;
     
     // 创建BL
@@ -295,7 +297,7 @@ static NSString *IDD_MESSAGE = @"DD";
     // 姓名
     CGFloat nameY = iconY;
     CGFloat nameX = CGRectGetMaxX(self.iconImageView.frame) + margin;
-    NSDictionary *nameAttrs = @{NSFontAttributeName : HTNameFont};
+    NSDictionary *nameAttrs = @{NSFontAttributeName : FontSize14};
     CGSize nameSize = [self.model.userName sizeWithAttributes:nameAttrs];
     self.nameLabel.frame = (CGRect){{nameX, nameY}, nameSize};
     [self.infoView addSubview:self.nameLabel];
@@ -308,7 +310,7 @@ static NSString *IDD_MESSAGE = @"DD";
     [self.infoView addSubview:self.sexImageView];
     
     // 发布时间
-    NSDictionary *publishAttrs = @{NSFontAttributeName : HTNameFont};
+    NSDictionary *publishAttrs = @{NSFontAttributeName : FontSize12};
     CGSize publishSize = [self.model.publishTime sizeWithAttributes:publishAttrs];
     CGFloat publishY = CGRectGetMaxY(self.iconImageView.frame) - publishSize.height;
     CGFloat publishX = CGRectGetMaxX(self.iconImageView.frame) + margin;
@@ -316,7 +318,7 @@ static NSString *IDD_MESSAGE = @"DD";
     [self.infoView addSubview:self.publishTimeLabel];
     
     // 学校
-    NSDictionary *schoolAttrs = @{NSFontAttributeName : HTNameFont};
+    NSDictionary *schoolAttrs = @{NSFontAttributeName : FontSize14};
     CGSize schoolSize = [self.model.school sizeWithAttributes:schoolAttrs];
     CGFloat schoolY = iconY + iconWH/2.0f - schoolSize.height/2.0f;
     CGFloat schoolX = winSize.width - schoolSize.width - margin;
@@ -326,17 +328,23 @@ static NSString *IDD_MESSAGE = @"DD";
     // 现在价格
     CGFloat nowPriceX = margin;
     CGFloat nowPriceY = CGRectGetMaxY(self.iconImageView.frame) + margin/2.0f;
-    NSDictionary *nowPriceAttr = @{NSFontAttributeName : HTTextFont};
+    NSDictionary *nowPriceAttr = @{NSFontAttributeName : FontSize14};
     CGSize nowPriceSize = [[NSString stringWithFormat:@"￥%.1f", self.model.nowPrice] sizeWithAttributes:nowPriceAttr];
     self.nowPriceLabel.frame = (CGRect){{nowPriceX, nowPriceY}, nowPriceSize};
+    self.nowPriceLabel.textAlignment = NSTextAlignmentCenter;
+    //self.nowPriceLabel.backgroundColor = [UIColor yellowColor];
+    [self.nowPriceLabel setTextColor:[UIColor redColor]];
     [self.infoView addSubview:self.nowPriceLabel];
     
     // 原始价格
-    NSDictionary *originalPriceAttr = @{NSFontAttributeName : HTTextFontLess};
+    NSDictionary *originalPriceAttr = @{NSFontAttributeName : FontSize12};
     CGSize originalPriceSize = [[NSString stringWithFormat:@"￥%.1f", self.model.originalPrice] sizeWithAttributes:originalPriceAttr];
     CGFloat originalPriceX = CGRectGetMaxX(self.nowPriceLabel.frame);
     CGFloat originalPriceY = CGRectGetMaxY(self.nowPriceLabel.frame) - originalPriceSize.height;
     self.originalPriceLabel.frame = (CGRect){{originalPriceX, originalPriceY}, originalPriceSize};
+    self.originalPriceLabel.textAlignment = NSTextAlignmentCenter;
+    //self.originalPriceLabel.backgroundColor = [UIColor redColor];
+    [self.originalPriceLabel setTextColor:darkGrayColorPCH];
     [self.infoView addSubview:self.originalPriceLabel];
     
     // 描述
@@ -366,7 +374,7 @@ static NSString *IDD_MESSAGE = @"DD";
     //地址
     CGFloat locationX = margin;
     CGFloat locationY = CGRectGetMaxY(bar.frame) + margin/2.0f;
-    NSDictionary *locationAttr = @{NSFontAttributeName : HTTextFont};
+    NSDictionary *locationAttr = @{NSFontAttributeName : FontSize14};
     CGSize locationSize = [self.model.location sizeWithAttributes:locationAttr];
     self.locationLabel.frame = (CGRect){{locationX, locationY}, locationSize};
     [self.infoView addSubview:self.locationLabel];
@@ -682,10 +690,19 @@ static NSString *IDD_MESSAGE = @"DD";
     self.sexImageView.image = [UIImage imageNamed:model.sex];
     self.publishTimeLabel.text = model.publishTime;
     self.schoolLabel.text = model.school;
-    self.nowPriceLabel.text = [NSString stringWithFormat:@"￥%.1f", model.nowPrice];
-    self.originalPriceLabel.text = [NSString stringWithFormat:@"￥%.1f", model.originalPrice];
+    self.nowPriceLabel.text = [NSString stringWithFormat:@"￥%d", (int)model.nowPrice];
+    
+    //self.originalPriceLabel.text = [NSString stringWithFormat:@"￥%d", (int)model.originalPrice];
     self.descriptionLabel.text = model.productDescription;
     self.locationLabel.text = model.location;
+    
+    // 原始价格
+    NSString *oldPrice = [NSString stringWithFormat:@"￥%d", (int)model.originalPrice];
+    NSUInteger length = [oldPrice length];
+    NSMutableAttributedString *attri = [[NSMutableAttributedString alloc] initWithString:oldPrice];
+    [attri addAttribute:NSStrikethroughStyleAttributeName value:@(NSUnderlinePatternSolid | NSUnderlineStyleSingle) range:NSMakeRange(0, length)];
+    [attri addAttribute:NSStrikethroughColorAttributeName value:darkGrayColorPCH range:NSMakeRange(0, length)];
+    [self.originalPriceLabel setAttributedText:attri];
 }
 
 #pragma mark ---------- action --------------

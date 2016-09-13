@@ -184,6 +184,7 @@
 		E92F4C9B1D41EE4600E1DD92 /* UserMO+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = E92F4C981D41EE4600E1DD92 /* UserMO+CoreDataProperties.m */; };
 		E92F4C9C1D41EE4600E1DD92 /* UserMO.m in Sources */ = {isa = PBXBuildFile; fileRef = E92F4C9A1D41EE4600E1DD92 /* UserMO.m */; };
 		E94E81811D85560200BC6129 /* jpush-ios-2.1.8.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E94E817F1D85560200BC6129 /* jpush-ios-2.1.8.a */; };
+		E94FE8DD1D87E91C0076F100 /* arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = E94FE8DC1D87E91C0076F100 /* arrow.png */; };
 		E95634041CC52ABF001EE938 /* TonglmTest.m in Sources */ = {isa = PBXBuildFile; fileRef = E95634031CC52ABF001EE938 /* TonglmTest.m */; };
 		E972073C1CBE815900C3D5FC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E972073B1CBE815900C3D5FC /* main.m */; };
 		E972073F1CBE815A00C3D5FC /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E972073E1CBE815A00C3D5FC /* AppDelegate.m */; };
@@ -581,6 +582,7 @@
 		E92F4C9A1D41EE4600E1DD92 /* UserMO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserMO.m; sourceTree = "<group>"; };
 		E94E817F1D85560200BC6129 /* jpush-ios-2.1.8.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "jpush-ios-2.1.8.a"; sourceTree = "<group>"; };
 		E94E81801D85560200BC6129 /* JPUSHService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JPUSHService.h; sourceTree = "<group>"; };
+		E94FE8DC1D87E91C0076F100 /* arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrow.png; sourceTree = "<group>"; };
 		E95634021CC52ABF001EE938 /* TonglmTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TonglmTest.h; sourceTree = "<group>"; };
 		E95634031CC52ABF001EE938 /* TonglmTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TonglmTest.m; sourceTree = "<group>"; };
 		E97207371CBE815900C3D5FC /* FleaMarket.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FleaMarket.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1378,6 +1380,15 @@
 			path = ../../../develop/FleaMarket;
 			sourceTree = "<group>";
 		};
+		E94FE8DB1D87E5080076F100 /* view */ = {
+			isa = PBXGroup;
+			children = (
+				E9CAD8D21CBE877200253817 /* SecondhandTitleView.h */,
+				E9CAD8D31CBE877200253817 /* SecondhandTitleView.m */,
+			);
+			name = view;
+			sourceTree = "<group>";
+		};
 		E972072E1CBE815900C3D5FC = {
 			isa = PBXGroup;
 			children = (
@@ -1680,6 +1691,7 @@
 		E9CAD8C71CBE874900253817 /* Secondhand */ = {
 			isa = PBXGroup;
 			children = (
+				E94FE8DB1D87E5080076F100 /* view */,
 				E9B3B9601D2BAE5F0085304D /* LocationVC */,
 				E9B3B95F1D2BAE520085304D /* MenuScrollView */,
 				E9B3B95E1D2BAE4A0085304D /* SearchVC */,
@@ -1695,8 +1707,6 @@
 				E9CAD8CF1CBE877200253817 /* SecondhandDetailViewController.m */,
 				E9CAD8D01CBE877200253817 /* SecondhandFrameModel.h */,
 				E9CAD8D11CBE877200253817 /* SecondhandFrameModel.m */,
-				E9CAD8D21CBE877200253817 /* SecondhandTitleView.h */,
-				E9CAD8D31CBE877200253817 /* SecondhandTitleView.m */,
 				E9CAD8D41CBE877200253817 /* SecondhandViewController.h */,
 				E9CAD8D51CBE877200253817 /* SecondhandViewController.m */,
 				E91BAF501CBFE8CD00CCF9A0 /* MessageFrameModel.h */,
@@ -1781,6 +1791,7 @@
 		E9CAD90B1CBE8BA300253817 /* pic */ = {
 			isa = PBXGroup;
 			children = (
+				E94FE8DC1D87E91C0076F100 /* arrow.png */,
 				E9CAD9141CBE8C0F00253817 /* macpro1.jpg */,
 				E9CAD9161CBE8C1400253817 /* macpro2.jpg */,
 				E9CAD9121CBE8BED00253817 /* Default.png */,
@@ -2014,6 +2025,7 @@
 				96B2584F1CBF878200D6DC43 /* ic_mine_wengweng@2x.png in Resources */,
 				965FB1BC1D7E68A700769DB9 /* blueArrow@2x.png in Resources */,
 				96B2580D1CBF875100D6DC43 /* ic_topbar_setting_orange@2x.png in Resources */,
+				E94FE8DD1D87E91C0076F100 /* arrow.png in Resources */,
 				96B258441CBF878200D6DC43 /* weibo.JPG in Resources */,
 				E9B3B9521D2BADA50085304D /* isChoosenY@2x.png in Resources */,
 				96B257FA1CBF875100D6DC43 /* 007.jpg in Resources */,
