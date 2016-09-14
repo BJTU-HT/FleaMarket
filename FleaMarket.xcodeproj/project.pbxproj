@@ -245,6 +245,7 @@
 		E9B3B9851D2BAFCD0085304D /* CommentFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = E9B3B9831D2BAFCD0085304D /* CommentFooterView.m */; };
 		E9B3B9891D2BB0F40085304D /* PlaceholderTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = E9B3B9881D2BB0F40085304D /* PlaceholderTextView.m */; };
 		E9BB8A871D5ABF6F005B90F0 /* NormalCollectionViewFlow.m in Sources */ = {isa = PBXBuildFile; fileRef = E9BB8A861D5ABF6F005B90F0 /* NormalCollectionViewFlow.m */; };
+		E9C885591D894522004C0194 /* SecondhandDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E9C885581D894522004C0194 /* SecondhandDetailVC.m */; };
 		E9CAD8D61CBE877200253817 /* MenuButton.m in Sources */ = {isa = PBXBuildFile; fileRef = E9CAD8C91CBE877200253817 /* MenuButton.m */; };
 		E9CAD8D71CBE877200253817 /* MenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E9CAD8CB1CBE877200253817 /* MenuCell.m */; };
 		E9CAD8D81CBE877200253817 /* SecondhandCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E9CAD8CD1CBE877200253817 /* SecondhandCell.m */; };
@@ -691,6 +692,8 @@
 		E9B3B9881D2BB0F40085304D /* PlaceholderTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlaceholderTextView.m; sourceTree = "<group>"; };
 		E9BB8A851D5ABF6F005B90F0 /* NormalCollectionViewFlow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NormalCollectionViewFlow.h; sourceTree = "<group>"; };
 		E9BB8A861D5ABF6F005B90F0 /* NormalCollectionViewFlow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NormalCollectionViewFlow.m; sourceTree = "<group>"; };
+		E9C885571D894522004C0194 /* SecondhandDetailVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SecondhandDetailVC.h; sourceTree = "<group>"; };
+		E9C885581D894522004C0194 /* SecondhandDetailVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SecondhandDetailVC.m; sourceTree = "<group>"; };
 		E9CAD8C81CBE877200253817 /* MenuButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuButton.h; sourceTree = "<group>"; };
 		E9CAD8C91CBE877200253817 /* MenuButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuButton.m; sourceTree = "<group>"; };
 		E9CAD8CA1CBE877200253817 /* MenuCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuCell.h; sourceTree = "<group>"; };
@@ -1720,6 +1723,8 @@
 				E9B3B97C1D2BAED90085304D /* search1.png */,
 				E9B3B97D1D2BAED90085304D /* search.png */,
 				E9B3B97E1D2BAED90085304D /* expandableImage@2x.png */,
+				E9C885571D894522004C0194 /* SecondhandDetailVC.h */,
+				E9C885581D894522004C0194 /* SecondhandDetailVC.m */,
 			);
 			name = Secondhand;
 			sourceTree = "<group>";
@@ -2156,6 +2161,7 @@
 				965FB1D51D7E68B500769DB9 /* setUpViewController.m in Sources */,
 				9666EDFF1CE9969F00F9397E /* DetailedAddContactsVC.m in Sources */,
 				E9B3B9701D2BAE900085304D /* MenuScrollView.m in Sources */,
+				E9C885591D894522004C0194 /* SecondhandDetailVC.m in Sources */,
 				965FB2041D7E693B00769DB9 /* bookDetailView.m in Sources */,
 				E9B3B9131D2BABF50085304D /* UITextField+RYNumberKeyboard.m in Sources */,
 				96D2647A1CEC2DBC00A945FD /* BmobIMMessage+SubClass.m in Sources */,
