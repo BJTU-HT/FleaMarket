@@ -9,9 +9,14 @@
 #import <UIKit/UIKit.h>
 #import "bookDisplayCellView.h"
 #import <SDWebImage/UIImageView+WebCache.h>
+#import "concernBLDelegate.h"
+#import "concernBL.h"
+#import <BmobSDK/BmobUser.h>
 
-@interface bookDetailView : UIView<UIScrollViewDelegate>
+@interface bookDetailView : UIView<UIScrollViewDelegate, concernBLDelegate>
 
+@property(nonatomic, weak) id<concernBLDelegate> delegate;
+@property(nonatomic, strong) NSMutableDictionary *recMudicBD;
 #pragma section 0 property begin
 @property(nonatomic, strong) UIView *viewS0;
 @property(nonatomic, strong) UIImageView *headImageViewS0;
@@ -35,6 +40,8 @@
 @property(nonatomic, strong) UIView *viewLineS3;
 @property(nonatomic, strong) UILabel *labelS3;
 #pragma section 3 property end
+
+@property(strong, nonatomic) NSString *nameStr;
 
 -(instancetype)initWithFrame:(CGRect)frame index:(NSIndexPath *)indexPath;
 -(CGFloat)layoutSubviews:(NSIndexPath *)indexPath data:(NSMutableDictionary *)mudic;

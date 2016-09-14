@@ -18,12 +18,12 @@
 @implementation mySellVC
 float cellHeightSell;
 
-- (void)viewDidLoad {
+-(void)viewDidLoad {
     [super viewDidLoad];
     cellHeightSell = 150.0f;
     BmobUser *curUser = [BmobUser getCurrentUser];
     [self getSellInfoData:curUser.username];
-    
+    self.title = @"我的在售商品";
     // Do any additional setup after loading the view.
 }
 

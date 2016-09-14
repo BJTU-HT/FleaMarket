@@ -14,12 +14,15 @@
 #import <BmobSDK/BmobUser.h>
 #import "logInViewController.h"
 #import "DetailChatVC.h"
+#import "concernBLDelegate.h"
+#import "BookDetailTableViewCell.h"
 
-@interface bookDetailVC : UIViewController<UITableViewDelegate, UITableViewDataSource,bookMainToSecondDelegate, publicSearchBLDelegate, bookPassDicDelegate>
+@interface bookDetailVC : UIViewController<UITableViewDelegate, UITableViewDataSource,bookMainToSecondDelegate, publicSearchBLDelegate, bookPassDicDelegate, concernBLDelegate>
 
 @property(nonatomic, strong) UITableView *tableViewBookDetail;
 @property(nonatomic, strong) NSMutableDictionary *mudic;
 @property(nonatomic, weak) id<bookPassDicDelegate> delegateSecToLM;
 @property(nonatomic, strong) bookSecondPageBottomView *bSPBView;
 @property(nonatomic, strong) NSString *bookUserObjectId;
+@property(nonatomic, strong) BookDetailTableViewCell *bookDetailCell;
 @end

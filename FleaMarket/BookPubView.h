@@ -37,4 +37,5 @@
 @property(nonatomic, strong) UIButton *ISBNClickBtn;
 @property(nonatomic, strong) UIView *viewLineOrange;
 @property(nonatomic, strong) NSString *fieldStr;
+
 @end

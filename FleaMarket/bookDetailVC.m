@@ -7,11 +7,11 @@
 //
 
 #import "bookDetailVC.h"
-#import "BookDetailTableViewCell.h"
 #import <BmobSDK/BmobUser.h>
 #import "findBookInfoBL.h"
 #import "LeaveMessageVC.h"
 #import "SearchBookVC.h"
+#import "presentLayerPublicMethod.h"
 
 @interface bookDetailVC ()
 
@@ -30,6 +30,9 @@ float bottomViewHeightBD;
     //用于标记代理函数是否执行
     tagDelegate = 0;
     bottomViewHeightBD = 44.0f;
+    //BmobUser *curUser = [BmobUser getCurrentUser];
+    //从用户表获取关注的人
+    //[self requestConcernedDataFromServer:curUser.objectId];
     [self bookDetailRequestLeaveMessageFromServer:[mudic objectForKey:@"objectId"]];
     if(!_tableViewBookDetail){
         [self initTableView];
@@ -45,6 +48,7 @@ float bottomViewHeightBD;
     if(tagDelegate == 1)
         [_tableViewBookDetail reloadData];
 }
+
 -(void)passMudicValue:(NSMutableDictionary *)muDictionary{
     mudic = [[NSMutableDictionary alloc] init];
     mudic = muDictionary;
@@ -70,6 +74,14 @@ float bottomViewHeightBD;
     [_bSPBView.remarkBtnBS addTarget:self action:@selector(bSPBViewRemarkBtnClicked:) forControlEvents:UIControlEventTouchDown];
     [_bSPBView.wantedBtnBS addTarget:self action:@selector(wantBtnClicked:) forControlEvents:UIControlEventTouchDown];
 }
+
+//从用户表获取关注的人
+-(void)requestConcernedDataFromServer:(NSString *)objectId{
+    concernBL *conBL = [concernBL sharedManager];
+    conBL.delegate = self;
+    [conBL requestConcernedDataBL:objectId];
+}
+
 //响应wantBtn点击事件,用于跳转到聊天界面，首先检测是否登录 add by hou
 -(void)wantBtnClicked:(UIButton *)sender{
     BmobUser *currentUser = [BmobUser getCurrentUser];
@@ -167,11 +179,16 @@ float bottomViewHeightBD;
 }
 
 -(void)publicSearchFinishedNODataBL:(BOOL)val{
-    // do nothing when failed
+    if(val){
+        NSLog(@"无访客数据");
+    }
 }
 
 -(void)publicSearchFailedBL:(NSError *)error{
     // do nothing when failed
+    if(error){
+        NSLog(@"更新访客数据失败...");
+    }
 }
 
 -(void)returnLeaveMessageFinishedBL:(NSMutableArray *)muArrLM{
@@ -181,6 +198,36 @@ float bottomViewHeightBD;
     [_tableViewBookDetail reloadData];
 }
 #pragma publicSearchDelegate end
+
+#pragma 从用户表获取关注的数据代理函数 begin
+-(void)concernedDataRequestFinishedBL:(NSArray *)arr{
+    NSString *ownerObjectId = [mudic objectForKey:@"ownerObjectId"];
+    BOOL concernTag;
+    for(int i = 0; i < arr.count; i++){
+        NSString *str = [arr objectAtIndex:i];
+        if([str isEqualToString:ownerObjectId]){
+            concernTag = 1;
+            break;
+        }
+    }
+    if(concernTag){
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [_bookDetailCell.bookDetail.btnConcernS0 setTitle:@"已关注" forState: UIControlStateNormal];
+//            [detailView.btnConcernS0 setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+//            [detailView.btnConcernS0 setBackgroundColor:[UIColor clearColor]];
+        });
+    }
+}
+
+-(void)concernedDataRequestFailedBL:(NSError *)error{
+    [presentLayerPublicMethod new_notifyView:self.navigationController notifyContent:@"未能添加关注"];
+}
+-(void)cocnernedDataRequestNODataBL:(BOOL)value{
+    NSLog(@"Concerned no data");
+}
+
+#pragma 从用户表获取关注的数据代理函数 end
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -190,23 +237,23 @@ float bottomViewHeightBD;
                                       cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     //解决cell重用问题，采用删除cell子视图
     NSString *cellId = [NSString stringWithFormat:@"cell%ld%ld", indexPath.section,indexPath.row];
-    BookDetailTableViewCell *cell1 = [tableView dequeueReusableCellWithIdentifier: cellId];
-    if(cell1 == nil) {
-        cell1 = [[BookDetailTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier: cellId];
+    _bookDetailCell = [tableView dequeueReusableCellWithIdentifier: cellId];
+    if(_bookDetailCell == nil) {
+        _bookDetailCell = [[BookDetailTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier: cellId];
     }else{
         //删除cell的所有子视图
-        while ([cell1.contentView.subviews lastObject] != nil)
+        while ([_bookDetailCell.contentView.subviews lastObject] != nil)
         {
-            [(UIView*)[cell1.contentView.subviews lastObject] removeFromSuperview];
+            [(UIView*)[_bookDetailCell.contentView.subviews lastObject] removeFromSuperview];
         }
     }
-    cell1.selectionStyle = UITableViewCellSelectionStyleNone;
+    _bookDetailCell.selectionStyle = UITableViewCellSelectionStyleNone;
     NSString *strRow = [NSString stringWithFormat:@"%ld%ld",(long)indexPath.section, (long)indexPath.row];
     CGRect cell1Frame = CGRectMake(0, 0, screenWidthPCH, [[heightDic objectForKey:strRow] integerValue]);
     NSLog(@"row -- %ld", indexPath.row);
 
-    [cell1 configCellBook:cell1Frame index:indexPath data:mudic];
-    return cell1;
+    [_bookDetailCell configCellBook:cell1Frame index:indexPath data:mudic];
+    return _bookDetailCell;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{

@@ -71,6 +71,7 @@ static bookPubUpLoadInfoDAO *sharedManager = nil;
     }else if([tableName isEqualToString:@"borrow"]){
         [obj setObject:[dic objectForKey:@"lostPay"] forKey:@"borrowPrice"];
     }
+    [obj setObject:[dic objectForKey:@"ownerObjectId"] forKey:@"ownerObjectId"];
     [obj setObject:[dic objectForKey:@"userName"] forKey:@"userName"];
     [obj setObject:[dic objectForKey:@"bookName"] forKey:@"bookName"];
     [obj setObject:[dic objectForKey:@"author"] forKey:@"author"];

@@ -19,6 +19,8 @@ float height;
         _timeLabel.layer.masksToBounds = YES;
         _timeLabel.layer.cornerRadius = 3.0;
         _timeLabel.textColor = [UIColor whiteColor];
+        _timeLabel.font = FontSize12;
+        _timeLabel.textAlignment = NSTextAlignmentCenter;
     }
     return _timeLabel;
 }

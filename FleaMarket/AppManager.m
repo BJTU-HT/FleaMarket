@@ -32,12 +32,12 @@
 }
 
 -(NSDateFormatter *)dateFormatterSimplify{
-    if (!_dateFormatter) {
-        _dateFormatter = [[NSDateFormatter alloc] init];
-        [_dateFormatter setTimeZone:[NSTimeZone timeZoneWithName:@"Asia/Shanghai"]];
-        [_dateFormatter setDateFormat:@"yy/MM/dd"];
+    if (!_dateFormatterSimplify) {
+        _dateFormatterSimplify = [[NSDateFormatter alloc] init];
+        [_dateFormatterSimplify setTimeZone:[NSTimeZone timeZoneWithName:@"Asia/Shanghai"]];
+        [_dateFormatterSimplify setDateFormat:@"yy/MM/dd"];
     }
     
-    return _dateFormatter;
+    return _dateFormatterSimplify;
 }
 @end

@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "passValueForVCDelegate.h"
 #import "LogInAndRegistLogicDelegate.h"
+#import "myConcernedVC.h"
 
 @interface myVC : UIViewController<UITableViewDelegate, UITableViewDataSource, passValueForVCDelegate,LogInAndRegistLogicDelegate>
 {
