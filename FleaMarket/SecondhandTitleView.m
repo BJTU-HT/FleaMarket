@@ -43,13 +43,13 @@ CGFloat margin = 10.0f;
         
         // 地址描述label
         UILabel *locationLabel = [[UILabel alloc] init];
-        locationLabel.font = FontSize18;
+        locationLabel.font = FontSize20;
         [self addSubview:locationLabel];
         self.locationLabel = locationLabel;
         
         // 箭头图标
         UIImageView *arrowImageView = [[UIImageView alloc] init];
-        arrowImageView.image = [UIImage imageNamed:@"expandableImage@2x.png"];
+        arrowImageView.image = [UIImage imageNamed:@"arrow.png"];
         [self addSubview:arrowImageView];
         self.arrowImageView = arrowImageView;
         
@@ -95,8 +95,8 @@ CGFloat margin = 10.0f;
     self.locationLabel.frame = CGRectMake(locationLabelX, locationLabelY, locationLabelW, locationLabelH);
     
     // 箭头
-    CGFloat margin = 6;
-    CGFloat arrowHeight = self.frame.size.height / 2.0f - margin;
+    CGFloat margin = 3;
+    CGFloat arrowHeight = self.frame.size.height / 2.0f;
     CGFloat arrowWidth = arrowHeight;
     CGFloat arrowX = self.frame.size.width / 2.0f - arrowWidth / 2.0f;
     CGFloat arrowY = CGRectGetMaxY(self.locationLabel.frame) + margin;
@@ -108,7 +108,7 @@ CGFloat margin = 10.0f;
     NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
     paragraphStyle.alignment = NSTextAlignmentCenter;
     
-    NSMutableAttributedString *attributeString = [[NSMutableAttributedString alloc] initWithString:locationName];
+    NSMutableAttributedString *attributeString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@", locationName]];
     [attributeString addAttributes:@{NSForegroundColorAttributeName:[UIColor blackColor],
                                      NSFontAttributeName:FontSize18,
                                      NSParagraphStyleAttributeName:paragraphStyle}

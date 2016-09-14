@@ -65,7 +65,7 @@
         
         // 名字
         UILabel *nameLabel = [[UILabel alloc] init];
-        nameLabel.font = HTNameFont;   // 调整
+        nameLabel.font = FontSize14;   // 调整
         [self.contentView addSubview:nameLabel];
         self.nameLabel = nameLabel;
         
@@ -76,19 +76,20 @@
         
         // 发布时间
         UILabel *publishTimeLabel = [[UILabel alloc] init];
-        publishTimeLabel.font = HTNameFont;
+        publishTimeLabel.font = FontSize12;
+        [publishTimeLabel setTextColor:darkGrayColorPCH];
         [self.contentView addSubview:publishTimeLabel];
         self.publishTimeLabel = publishTimeLabel;
         
         // 学校
         UILabel *schoolLabel = [[UILabel alloc] init];
-        schoolLabel.font = HTNameFont;
+        schoolLabel.font = FontSize14;
         [self.contentView addSubview:schoolLabel];
         self.schoolLabel = schoolLabel;
         
         // 描述
         UILabel *descriptionLabel = [[UILabel alloc] init];
-        descriptionLabel.font = HTTextFont;
+        descriptionLabel.font = FontSize12;
         descriptionLabel.numberOfLines = 2;
         [self.contentView addSubview:descriptionLabel];
         self.descriptionLabel = descriptionLabel;
@@ -118,13 +119,16 @@
         
         // 地址
         UILabel *locationLabel = [[UILabel alloc] init];
-        locationLabel.font = HTTextFont;
+        locationLabel.font = FontSize14;
         [self.contentView addSubview:locationLabel];
         self.locationLabel = locationLabel;
         
         // 价格
         UILabel *priceLabel = [[UILabel alloc] init];
-        priceLabel.font = HTTextFont;
+        [priceLabel setTextColor:[UIColor redColor]];
+        priceLabel.backgroundColor = lightGrayColorPCH;
+        priceLabel.font = FontSize14;
+        priceLabel.textAlignment = NSTextAlignmentCenter;
         [self.contentView addSubview:priceLabel];
         self.priceLabel = priceLabel;
         
@@ -170,7 +174,7 @@
     [_iconImageView sd_setImageWithURL:[NSURL URLWithString:model.userIconImage]];
     //[_iconImageView sd_setImageWithURL:];
     _nameLabel.text = model.userName;
-    _priceLabel.text = [NSString stringWithFormat:@"￥%.1f", model.nowPrice];
+    _priceLabel.text = [NSString stringWithFormat:@"￥%d", (int)model.nowPrice];
     _descriptionLabel.text = model.productName;
     
     _locationLabel.text = model.school;

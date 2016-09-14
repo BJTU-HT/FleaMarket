@@ -51,7 +51,7 @@
         // 姓名
         CGFloat nameY = iconY;
         CGFloat nameX = CGRectGetMaxX(self.iconFrame) + margin;
-        NSDictionary *nameAttrs = @{NSFontAttributeName : HTNameFont};
+        NSDictionary *nameAttrs = @{NSFontAttributeName : FontSize14};
         CGSize nameSize = [self.model.userName sizeWithAttributes:nameAttrs];
         self.nameFrame = (CGRect){{nameX, nameY}, nameSize};
         
@@ -62,14 +62,14 @@
         self.sexFrame = CGRectMake(sexX, sexY, sexWH, sexWH);
         
         // 发布时间
-        NSDictionary *publishAttrs = @{NSFontAttributeName : HTNameFont};
+        NSDictionary *publishAttrs = @{NSFontAttributeName : FontSize12};
         CGSize publishSize = [self.model.publishTime sizeWithAttributes:publishAttrs];
         CGFloat publishY = CGRectGetMaxY(self.iconFrame) - publishSize.height;
         CGFloat publishX = CGRectGetMaxX(self.iconFrame) + margin;
         self.publishTimeFrame = (CGRect){{publishX, publishY}, publishSize};
         
         // 学校
-        NSDictionary *schoolAttrs = @{NSFontAttributeName : HTNameFont};
+        NSDictionary *schoolAttrs = @{NSFontAttributeName : FontSize14};
         CGSize schoolSize = [self.model.school sizeWithAttributes:schoolAttrs];
         CGFloat schoolY = iconY + iconWH/2.0f - schoolSize.height/2.0f;
         CGFloat schoolX = winSize.width - schoolSize.width - margin;
@@ -108,12 +108,12 @@
         // 地址
         CGFloat locationX = iconX;
         CGFloat locationY = CGRectGetMaxY(self.partLineFrame) + margin;
-        NSDictionary *locationAttrs = @{NSFontAttributeName : HTTextFont};
+        NSDictionary *locationAttrs = @{NSFontAttributeName : FontSize14};
         CGSize locationSize = [self.model.school sizeWithAttributes:locationAttrs];
         self.locationFrame = (CGRect){{locationX, locationY}, locationSize};
         
         // 价格
-        NSDictionary *priceAttrs = @{NSFontAttributeName : HTTextFont};
+        NSDictionary *priceAttrs = @{NSFontAttributeName : FontSize14};
         CGSize priceSize = [[NSString stringWithFormat:@"￥%.1f", self.model.nowPrice] sizeWithAttributes:priceAttrs];
         CGFloat priceY = CGRectGetMaxY(self.partLineFrame) + margin;
         CGFloat priceX = winSize.width - priceSize.width - margin;
