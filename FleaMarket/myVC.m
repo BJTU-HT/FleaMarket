@@ -227,7 +227,7 @@ UIImageView *headImage;
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 5;
+    return 4;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -235,6 +235,8 @@ UIImageView *headImage;
     if(section == 0)
     {
         return 0;
+    }else if(section == 3){
+        return 1;
     }
     return 2;
 }
@@ -327,6 +329,7 @@ UIImageView *headImage;
                     myConcernedVC *myConcern = [[myConcernedVC alloc] init];
                     self.hidesBottomBarWhenPushed = YES;
                     [self.navigationController pushViewController:myConcern animated: NO];
+                    self.hidesBottomBarWhenPushed = NO;
                 }
                 break;
                 //我的记事本，我的订单
@@ -337,6 +340,7 @@ UIImageView *headImage;
                     AboutUsVC *aboutVC = [[AboutUsVC alloc] init];
                     self.hidesBottomBarWhenPushed = YES;
                     [self.navigationController pushViewController:aboutVC animated:NO];
+                    self.hidesBottomBarWhenPushed = NO;
                 }
                 break;
                 //我的轨迹

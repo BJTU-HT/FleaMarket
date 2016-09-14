@@ -191,7 +191,6 @@
 		E91BAF551CBFF25B00CCF9A0 /* MessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E91BAF541CBFF25B00CCF9A0 /* MessageCell.m */; };
 		E92F4C9B1D41EE4600E1DD92 /* UserMO+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = E92F4C981D41EE4600E1DD92 /* UserMO+CoreDataProperties.m */; };
 		E92F4C9C1D41EE4600E1DD92 /* UserMO.m in Sources */ = {isa = PBXBuildFile; fileRef = E92F4C9A1D41EE4600E1DD92 /* UserMO.m */; };
-		E94E81811D85560200BC6129 /* jpush-ios-2.1.8.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E94E817F1D85560200BC6129 /* jpush-ios-2.1.8.a */; };
 		E95634041CC52ABF001EE938 /* TonglmTest.m in Sources */ = {isa = PBXBuildFile; fileRef = E95634031CC52ABF001EE938 /* TonglmTest.m */; };
 		E972073C1CBE815900C3D5FC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E972073B1CBE815900C3D5FC /* main.m */; };
 		E972073F1CBE815A00C3D5FC /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E972073E1CBE815A00C3D5FC /* AppDelegate.m */; };
@@ -772,7 +771,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E94E81811D85560200BC6129 /* jpush-ios-2.1.8.a in Frameworks */,
 				96BE93401CE42B670078D8A9 /* BmobIMSDK.framework in Frameworks */,
 				62D6BE7CF62A97D0D14D332B /* libPods.a in Frameworks */,
 			);
