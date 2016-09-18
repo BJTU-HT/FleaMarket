@@ -7,9 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SecondhandVO.h"
 
 @interface SecondhandDetailVC : UIViewController
 
 @property (nonatomic, strong) UITableView *tableView;
+
+@property (nonatomic, strong) SecondhandVO *model;
 
 @end

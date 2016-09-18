@@ -18,4 +18,8 @@
 #define CommentReadSkip 5    // 每次读取评论跳跃
 #define MaxVisitorURLsKeep 10   // 保留最多10个来访者的头像
 
+// 4.屏幕大小尺寸
+#define screen_width [UIScreen mainScreen].bounds.size.width
+#define screen_height [UIScreen mainScreen].bounds.size.height
+
 #endif /* Help_h */

@@ -15,6 +15,7 @@
 #import "MenuCell.h"
 #import "SecondhandTitleView.h"
 #import "SecondhandDetailViewController.h"
+#import "SecondhandDetailVC.h"
 //#import "FCXRefreshFooterView.h"
 //#import "FCXRefreshHeaderView.h"
 //#import "UIScrollView+FCXRefresh.h"
@@ -413,14 +414,21 @@ static NSInteger margin = 10;
             [self.bl newVisitor:userMO.head_image_url secondhand:model];
         }
     }
-    
+
+    /*
     SecondhandDetailViewController *detail = [[SecondhandDetailViewController alloc] init];
     detail.model = model;
-    //NSLog(@"%ld", indexPath.row);
-    //201606181022 modify by hou from presentViewController to pushViewController
     self.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:detail animated:YES];
     self.hidesBottomBarWhenPushed = NO;
+     */
+    
+    SecondhandDetailVC *detail = [[SecondhandDetailVC alloc] init];
+    detail.model = model;
+    self.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:detail animated:YES];
+    self.hidesBottomBarWhenPushed = NO;
+    
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
 }
 
