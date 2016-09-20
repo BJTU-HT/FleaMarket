@@ -13,8 +13,10 @@
 #import "PublishDetailVC.h"
 #import "CollectionDataModel.h"
 #import "ImagePickerVC.h"
+#import "PublishSecondhandVC.h"
+#import "UploadImageModel.h"
 
-@interface publishVC () <RXRotateButtonOverlayViewDelegate>
+@interface publishVC () <RXRotateButtonOverlayViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 
 @property (nonatomic, strong) RXRotateButtonOverlayView *overlayView;
 
@@ -131,94 +133,23 @@
 }
 
 
-/*
-- (void)getTableDate {
-    
-    void (^assetsGroupsEnumerationBlock)(ALAssetsGroup *, BOOL *) = ^(ALAssetsGroup *assetsGroup, BOOL *stop) {
-        if(assetsGroup) {
-            [assetsGroup setAssetsFilter:[ALAssetsFilter allPhotos]];
-            NSMutableArray * isChoosenArray = [[NSMutableArray alloc]init];
-            if(assetsGroup.numberOfAssets > 0) {
-                [self.tableData addObject:assetsGroup];
-                for (int i = 0; i<assetsGroup.numberOfAssets; i++) {
-                    [isChoosenArray addObject:[NSNumber numberWithBool:NO]];
-                }
-                //[self.isChoosenDic setObject:isChoosenArray forKey:[assetsGroup valueForProperty:ALAssetsGroupPropertyName]];
-                //[self setTableViewHeight];
-            }
-            NSLog(@"block is called!");
-        }
-        //[myTableView reloadData];
-        [self getCollectionData:0];
-        //[myTableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:YES scrollPosition:UITableViewScrollPositionMiddle];
-    };
-    
-    void (^assetsGroupsFailureBlock)(NSError *) = ^(NSError *error) {
-        NSLog(@"Error: %@", [error localizedDescription]);
-    };
-    
-    // Enumerate Camera Roll
-    [self.assetsLibrary enumerateGroupsWithTypes:ALAssetsGroupSavedPhotos usingBlock:assetsGroupsEnumerationBlock failureBlock:assetsGroupsFailureBlock];
-    
-    // Photo Stream
-    [self.assetsLibrary enumerateGroupsWithTypes:ALAssetsGroupPhotoStream usingBlock:assetsGroupsEnumerationBlock failureBlock:assetsGroupsFailureBlock];
-    
-    // Album
-    [self.assetsLibrary enumerateGroupsWithTypes:ALAssetsGroupAlbum usingBlock:assetsGroupsEnumerationBlock failureBlock:assetsGroupsFailureBlock];
-    
-    // Event
-    [self.assetsLibrary enumerateGroupsWithTypes:ALAssetsGroupEvent usingBlock:assetsGroupsEnumerationBlock failureBlock:assetsGroupsFailureBlock];
-    
-    // Faces
-    [self.assetsLibrary enumerateGroupsWithTypes:ALAssetsGroupFaces usingBlock:assetsGroupsEnumerationBlock failureBlock:assetsGroupsFailureBlock];
-    
-}
- */
-
-/*
-- (void)getCollectionData:(NSInteger)tag {
-    if (self.collectionData.count) {
-        [self.collectionData removeAllObjects];
-    }
-    
-    CollectionDataModel *dataModel = [[CollectionDataModel alloc] init];
-    dataModel.img = [UIImage imageNamed:@"takePicture.png"];
-    [self.collectionData addObject:dataModel];
-    if (self.tableData.count) {
-        self.group = [self.tableData objectAtIndex:tag];
-        [self.group enumerateAssetsUsingBlock:^(ALAsset *result, NSUInteger index, BOOL *stop) {
-            if (result) {
-                NSString *type=[result valueForProperty:ALAssetPropertyType];
-                if ([type isEqualToString:ALAssetTypePhoto]) {
-                    CollectionDataModel *dataModel = [[CollectionDataModel alloc] init];
-                    dataModel.img = [UIImage imageWithCGImage:[result aspectRatioThumbnail]];
-                    dataModel.selected = NO;
-                    [self.collectionData addObject:dataModel];
-                    //[self.originImgData addObject:result];
-                }
-                //[self.myCollectionView reloadData];
-            }
-        }];
-    }
-}
-*/
-
 #pragma mark **************** RXRotateButtonOverlayViewDelegate *******************
 - (void)didSelected:(NSUInteger)index
 {
     NSLog(@"clicked %zd btn", index);
     UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
+    
     if (index == 0) {
         // 0 就是选择相机拍照
         if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
             imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
-            PublishDetailVC *publishDetailVC = [[PublishDetailVC alloc] init];
-            imagePicker.delegate = publishDetailVC;
+            //PublishDetailVC *publishDetailVC = [[PublishDetailVC alloc] init];
+            //PublishSecondhandVC *publishDetailVC = [[PublishSecondhandVC alloc] init];
+            imagePicker.delegate = self;
+            imagePicker.showsCameraControls = YES;
             
             // 以模态的形式显示UIImagePickerController对象
-            [self presentViewController:imagePicker animated:YES completion:^{
-                [self.navigationController pushViewController:publishDetailVC animated:YES];
-            }];
+            [self presentViewController:imagePicker animated:YES completion:nil];
         }
         
     } else {
@@ -229,6 +160,35 @@
         imgPickVC.collectionData = [[NSMutableArray alloc] initWithArray:_collectionData];
         imgPickVC.hidesBottomBarWhenPushed = YES;     // 隐藏Bottom的Bar
         [self.navigationController pushViewController:imgPickVC animated:YES];
+    }
+    
+}
+
+#pragma mark --------------- UIImagePickerControllerDelegate ---------------
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info
+{
+    UIImage *image = [[UIImage alloc] init];
+    image = [info objectForKey:UIImagePickerControllerOriginalImage];
+    
+    if (image) {
+        // 保存图片到相册中
+        if (picker.sourceType == UIImagePickerControllerSourceTypeCamera) {
+            UIImageWriteToSavedPhotosAlbum(image, self, nil, NULL);
+        }
+        
+        NSMutableArray *choosedImageArray = [[NSMutableArray alloc] init];
+        UploadImageModel *uploadModel = [[UploadImageModel alloc] init];
+        uploadModel.img = image;
+        uploadModel.isUploaded = NO;
+        [choosedImageArray addObject:uploadModel];
+        
+        [picker dismissViewControllerAnimated:NO completion:^{
+            //[self.myCollectionView reloadData];
+            PublishSecondhandVC *publishDetailVC = [[PublishSecondhandVC alloc] init];
+            publishDetailVC.selectedImgArray = choosedImageArray;
+            [self.navigationController pushViewController:publishDetailVC animated:YES];
+        }];
     }
 }
 
@@ -241,7 +201,9 @@
     if (_overlayView == nil) {
         _overlayView = [[RXRotateButtonOverlayView alloc] init];
         [_overlayView setTitles:@[@"拍照", @"相册"]];
+        //[_overlayView setTitles:@[@"相册"]];
         [_overlayView setTitleImages:@[@"ic_mine_want@2x.png", @"ic_mine_order@2x.png"]];
+        //[_overlayView setTitleImages:@[@"ic_mine_order@2x.png"]];
         [_overlayView setDelegate:self];
         [_overlayView setFrame:self.view.bounds];
     }

@@ -68,6 +68,7 @@
 #define SecondhandCategory      @[@"书籍", @"数码",@"自行车",@"衣服", @"鞋包", @"运动",@"其他"];
 #define SecondhandCategoryDisplay      @[@"全部", @"书籍", @"数码",@"自行车",@"衣服", @"鞋包", @"运动",@"其他"];
 #define MaxVisitorURLsKeep      10       // 来访人最多展示10个头像
+#define Margin                  10
 // Include any system framework and library headers here that should be included in all compilation units.
 // You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
 

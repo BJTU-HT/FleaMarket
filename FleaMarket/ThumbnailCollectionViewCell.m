@@ -23,6 +23,7 @@
     // Initialization code
 }
 
+/*
 - (void)setAsset:(PHAsset *)asset
 {
     PHImageRequestOptions *options = [[PHImageRequestOptions alloc] init];
@@ -41,6 +42,24 @@
     if (contentImg) {
         _contentImg = contentImg;
         self.seletedImgView.image = _contentImg;
+    }
+}
+*/
+
+- (void)setModel:(CollectionDataModel *)model
+{
+    if (model.asset) {
+        PHAsset *asset = model.asset;
+        
+        PHImageRequestOptions *options = [[PHImageRequestOptions alloc] init];
+        options.synchronous = YES;
+        CGSize size = CGSizeMake(asset.pixelWidth/20, asset.pixelHeight/20);
+        [[PHImageManager defaultManager] requestImageForAsset:asset targetSize:size contentMode:PHImageContentModeAspectFit options:options resultHandler:^(UIImage * _Nullable result, NSDictionary * _Nullable info) {
+            self.seletedImgView.image = result;
+        }];
+
+    } else if (model.img) {
+        self.seletedImgView.image = model.img;
     }
 }
 

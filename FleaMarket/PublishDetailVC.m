@@ -355,7 +355,43 @@
 }
 
 #pragma mark ------------------- AddMoreImgDelegate --------------------
+
+- (void)addMoreImg:(NSMutableArray *)selectedArray
+{
+    if ([selectedArray count] == 0) {
+        return;
+    }
+    
+    for (NSInteger idx = 0; idx < selectedArray.count; idx++) {
+        CollectionDataModel *model = selectedArray[idx];
+        UploadImageModel *uploadModel = [[UploadImageModel alloc] init];
+        
+        if (model.asset) {
+            // 获取照片资源
+            PHImageManager *imageManager = [PHImageManager defaultManager];
+            PHImageRequestOptions *options = [[PHImageRequestOptions alloc] init];
+            options.synchronous = YES;
+            [imageManager requestImageForAsset:model.asset
+                                    targetSize:PHImageManagerMaximumSize
+                                   contentMode:PHImageContentModeDefault
+                                       options:options
+                                 resultHandler:^(UIImage *result, NSDictionary *info) {
+                                     uploadModel.img = result;
+                                     uploadModel.isUploaded = NO;
+                                     [self.selectedImgArray addObject:uploadModel];
+            }];
+        } else if (model.img) {
+            uploadModel.img = model.img;
+            uploadModel.isUploaded = NO;
+            [self.selectedImgArray addObject:uploadModel];
+        }
+    }
+    
+    [self.uploadImagesCollectionView reloadData];
+}
+
 // 选中增加更多图片的按钮时，当选了更多的图片时，更新当前的collectionData
+/*
 - (void)addMoreImg:(NSMutableArray *)collectionData
 {
     // 如果参数collectionData和当前的collectionData的数目一致，那么是从ImagePickerVC返回的
@@ -393,8 +429,8 @@
         }
     }
     [self.uploadImagesCollectionView reloadData];
-    
 }
+*/
 
 #pragma mark ------------------- collectionView delegate --------------------
 

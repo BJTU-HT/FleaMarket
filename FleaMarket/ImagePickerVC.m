@@ -16,6 +16,7 @@
 #import "SelectedPhotoCollectionViewLayout.h"
 #import "CollectionDataModel.h"
 #import "PublishDetailVC.h"
+#import "PublishSecondhandVC.h"
 #import "UploadImageModel.h"
 #import "NormalCollectionViewFlow.h"
 
@@ -124,7 +125,7 @@ const NSInteger photoCounts = 9;
     CGFloat btnW = 60;
     CGFloat btnX = WIDTH_PIC - 70;
     CGFloat btnY = toolBarBGView.frame.size.height / 2.0f - btnH / 2.0f;
-    self.toolBarRightBtn = [self createBtnWithTitle:@"确定" andBackIMG:nil andTitleColor:[UIColor whiteColor] andSelectedTitleColor:[UIColor colorWithRed:0.84 green:0.84 blue:0.84 alpha:1] andTarget:@selector(toolBarightBtnClick) andFram:CGRectMake(btnX, btnY, btnW, btnH)];
+    self.toolBarRightBtn = [self createBtnWithTitle:@"确定" andBackIMG:nil andTitleColor:[UIColor whiteColor] andSelectedTitleColor:[UIColor colorWithRed:0.84 green:0.84 blue:0.84 alpha:1] andTarget:@selector(toolBarRightBtnClick) andFram:CGRectMake(btnX, btnY, btnW, btnH)];
     self.toolBarRightBtn.layer.cornerRadius     = 3;
     self.toolBarRightBtn.layer.masksToBounds    = YES;
     self.toolBarRightBtn.titleLabel.font = [UIFont systemFontOfSize:13];
@@ -260,6 +261,7 @@ const NSInteger photoCounts = 9;
      */
 }
 
+/*
 - (NSMutableArray *)test
 {
     // 传递回去的当前相册集的collectionData
@@ -287,16 +289,19 @@ const NSInteger photoCounts = 9;
     
     return collectionData1;
 }
+ */
 
 // 提交选择的图片
-- (void)toolBarightBtnClick
+- (void)toolBarRightBtnClick
 {
     if (self.delegate) {
-        [self.delegate addMoreImg:self.collectionData];
+        //[self.delegate addMoreImg:self.collectionData];
+        [self.delegate addMoreImg:self.selectedArray];
         [self.navigationController popViewControllerAnimated:YES];
     } else {
         // 获取选中的图片
         NSMutableArray *choosedImageArray = [[NSMutableArray alloc] init];
+        /*
         for (int i = 1; i < self.collectionData.count; i++) {                // 从1开始，因为第0张是个拍照图标
             CollectionDataModel *model = self.collectionData[i];
             if (model.selected == YES) {
@@ -316,11 +321,39 @@ const NSInteger photoCounts = 9;
                 }];
             }
         }
+         */
+        for (NSInteger idx = 0; idx < self.selectedArray.count; idx++) {
+            CollectionDataModel *model = self.selectedArray[idx];
+            UploadImageModel *uploadModel = [[UploadImageModel alloc] init];
+            if (model.asset) {
+                // 获取照片资源
+                PHImageManager *imageManager = [PHImageManager defaultManager];
+                PHImageRequestOptions *options = [[PHImageRequestOptions alloc] init];
+                options.synchronous = YES;
+                [imageManager requestImageForAsset:model.asset
+                                        targetSize:PHImageManagerMaximumSize
+                                       contentMode:PHImageContentModeDefault
+                                           options:options
+                                     resultHandler:^(UIImage *result, NSDictionary *info) {
+                                         uploadModel.img = result;
+                                         uploadModel.isUploaded = NO;
+                                         [choosedImageArray addObject:uploadModel];
+                }];
+            } else if (model.img) {
+                uploadModel.img = model.img;
+                uploadModel.isUploaded = NO;
+                [choosedImageArray addObject:uploadModel];
+            }
+        }
         
+        /*
         PublishDetailVC *publishDetailVC = [[PublishDetailVC alloc] init];
         publishDetailVC.selectedImgArray = choosedImageArray;
-        //publishDetailVC.tableData = self.tableData;
-        //publishDetailVC.collectionData = self.collectionData;
+        publishDetailVC.delegate = self;
+         */
+        
+        PublishSecondhandVC *publishDetailVC = [[PublishSecondhandVC alloc] init];
+        publishDetailVC.selectedImgArray = choosedImageArray;
         publishDetailVC.delegate = self;
         
         [self.navigationController pushViewController:publishDetailVC animated:YES];
@@ -382,7 +415,7 @@ const NSInteger photoCounts = 9;
         __weak ImagePickerVC *weakSelf = self;
         cell.selectedBlock = ^(BOOL select){
             if (select) {
-                [weakSelf.selectedArray addObject:asset];
+                [weakSelf.selectedArray addObject:data];
                 
                 // 对应的collectionData的selected设置为true
                 for (int i = 1; i < weakSelf.collectionData.count; i++) {
@@ -397,7 +430,7 @@ const NSInteger photoCounts = 9;
                 [weakSelf.thumbnailCollectionView reloadData];
                 [weakSelf.thumbnailCollectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForRow:weakSelf.selectedArray.count-1 inSection:0] atScrollPosition:UICollectionViewScrollPositionRight animated:NO];
             } else {
-                [weakSelf.selectedArray removeObject:asset];
+                [weakSelf.selectedArray removeObject:data];
                 
                 for (int i = 1; i < weakSelf.collectionData.count; i++) {
                     CollectionDataModel *model = weakSelf.collectionData[i];
@@ -440,35 +473,23 @@ const NSInteger photoCounts = 9;
             }
         }
         
-        /*
-        if (indexPath.item != 0) {
-            cell.isChoosenBtnHidden = NO;
-            
-            CollectionDataModel *model = [self.collectionData objectAtIndex:indexPath.item];
-            if (model.selected) {
-                cell.isChoosenBtnSelected = YES;
-            } else {
-                cell.isChoosenBtnSelected = NO;
-            }
-        } else {
-            // 第一张图片是个拍照
-            cell.isChoosenBtnHidden = YES;
-            cell.contentImg = data.img;
-        }
-         */
-        
         return cell;
+        
     } else if (collectionView == self.thumbnailCollectionView) {
         ThumbnailCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"thumbnailcollectioncell" forIndexPath:indexPath];
         __weak ImagePickerVC *weakSelf = self;
         __weak ThumbnailCollectionViewCell *weakCell = cell;
-        PHAsset *asset = [self.selectedArray objectAtIndex:indexPath.item];
-        cell.asset = asset;
+        CollectionDataModel *data = [self.selectedArray objectAtIndex:indexPath.item];
+        //PHAsset *asset = [self.selectedArray objectAtIndex:indexPath.item];
+        cell.model = data;
+        
         cell.dropSelectedBlock = ^(void) {
-            PHAsset *asset = weakCell.asset;
-            [weakSelf.selectedArray removeObject:asset];
+            //PHAsset *asset = weakCell.asset;
+            CollectionDataModel *data = weakCell.model;
+            [weakSelf.selectedArray removeObject:data];
             
             // 将collectionData中对应图片的selected设置为NO
+            /*
             for (int i = 1; i < self.collectionData.count; i++) {
                 CollectionDataModel *data = self.collectionData[i];
                 if (asset == data.asset) {
@@ -476,10 +497,25 @@ const NSInteger photoCounts = 9;
                     break;
                 }
             }
+             */
+            data.selected = NO;
             [weakSelf.myCollectionView reloadData];
             [weakSelf.thumbnailCollectionView reloadData];
         };
+        
+        if (weakSelf.selectedArray.count) {
+            weakSelf.toolBarRightBtn.selected = NO;
+            weakSelf.toolBarLeftBtn.selected = NO;
+            [weakSelf.toolBarRightBtn setTitle:[NSString stringWithFormat:@"确定(%lu)",(unsigned long)self.selectedArray.count] forState:UIControlStateNormal];
+            weakSelf.toolBarRightBtn.backgroundColor = [UIColor colorWithRed:225/255.0 green:33/255.0 blue:64/255.0 alpha:1];
+        } else {
+            weakSelf.toolBarRightBtn.selected = YES;
+            weakSelf.toolBarLeftBtn.selected = YES;
+            self.toolBarRightBtn.backgroundColor = [UIColor colorWithRed:0.91 green:0.93 blue:0.94 alpha:1];
+        }
+
         return cell;
+        
     } else {
         return nil;
     }
@@ -575,6 +611,7 @@ const NSInteger photoCounts = 9;
 {
     UIImage *image = [[UIImage alloc] init];
     image = [info objectForKey:UIImagePickerControllerOriginalImage];
+    
     if (image) {
         // 保存图片到相册中
         if (picker.sourceType == UIImagePickerControllerSourceTypeCamera) {
@@ -582,8 +619,14 @@ const NSInteger photoCounts = 9;
             [self.choosenImgArray setObject:[self fixOrientation:image] forKey:@"camare"];
         }
         
+        CollectionDataModel *data = [[CollectionDataModel alloc] init];
+        data.img = image;
+        data.selected = YES;
+        [self.selectedArray addObject:data];
+        
         [picker dismissViewControllerAnimated:NO completion:^{
-            //[self save];
+            //[self.myCollectionView reloadData];
+            [self.thumbnailCollectionView reloadData];
         }];
     }
 }

@@ -192,6 +192,11 @@
 		E92F4C9B1D41EE4600E1DD92 /* UserMO+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = E92F4C981D41EE4600E1DD92 /* UserMO+CoreDataProperties.m */; };
 		E92F4C9C1D41EE4600E1DD92 /* UserMO.m in Sources */ = {isa = PBXBuildFile; fileRef = E92F4C9A1D41EE4600E1DD92 /* UserMO.m */; };
 		E95634041CC52ABF001EE938 /* TonglmTest.m in Sources */ = {isa = PBXBuildFile; fileRef = E95634031CC52ABF001EE938 /* TonglmTest.m */; };
+		E9621F1A1D8F74E5001CE5E9 /* PublishSecondhandVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E9621F191D8F74E5001CE5E9 /* PublishSecondhandVC.m */; };
+		E9621F1E1D8F7EDE001CE5E9 /* PublishPart1Cell.m in Sources */ = {isa = PBXBuildFile; fileRef = E9621F1D1D8F7EDE001CE5E9 /* PublishPart1Cell.m */; };
+		E9621F211D8FDE85001CE5E9 /* NewPriceView.m in Sources */ = {isa = PBXBuildFile; fileRef = E9621F201D8FDE85001CE5E9 /* NewPriceView.m */; };
+		E9621F241D8FE3BA001CE5E9 /* OldPriceView.m in Sources */ = {isa = PBXBuildFile; fileRef = E9621F231D8FE3BA001CE5E9 /* OldPriceView.m */; };
+		E9621F271D901754001CE5E9 /* CategoryChooseView.m in Sources */ = {isa = PBXBuildFile; fileRef = E9621F261D901753001CE5E9 /* CategoryChooseView.m */; };
 		E972073C1CBE815900C3D5FC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E972073B1CBE815900C3D5FC /* main.m */; };
 		E972073F1CBE815A00C3D5FC /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E972073E1CBE815A00C3D5FC /* AppDelegate.m */; };
 		E97207421CBE815A00C3D5FC /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E97207411CBE815A00C3D5FC /* ViewController.m */; };
@@ -621,6 +626,16 @@
 		E94FE8DC1D87E91C0076F100 /* arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrow.png; sourceTree = "<group>"; };
 		E95634021CC52ABF001EE938 /* TonglmTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TonglmTest.h; sourceTree = "<group>"; };
 		E95634031CC52ABF001EE938 /* TonglmTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TonglmTest.m; sourceTree = "<group>"; };
+		E9621F181D8F74E5001CE5E9 /* PublishSecondhandVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PublishSecondhandVC.h; sourceTree = "<group>"; };
+		E9621F191D8F74E5001CE5E9 /* PublishSecondhandVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PublishSecondhandVC.m; sourceTree = "<group>"; };
+		E9621F1C1D8F7EDE001CE5E9 /* PublishPart1Cell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PublishPart1Cell.h; sourceTree = "<group>"; };
+		E9621F1D1D8F7EDE001CE5E9 /* PublishPart1Cell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PublishPart1Cell.m; sourceTree = "<group>"; };
+		E9621F1F1D8FDE85001CE5E9 /* NewPriceView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewPriceView.h; sourceTree = "<group>"; };
+		E9621F201D8FDE85001CE5E9 /* NewPriceView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewPriceView.m; sourceTree = "<group>"; };
+		E9621F221D8FE3BA001CE5E9 /* OldPriceView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OldPriceView.h; sourceTree = "<group>"; };
+		E9621F231D8FE3BA001CE5E9 /* OldPriceView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OldPriceView.m; sourceTree = "<group>"; };
+		E9621F251D901753001CE5E9 /* CategoryChooseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoryChooseView.h; sourceTree = "<group>"; };
+		E9621F261D901753001CE5E9 /* CategoryChooseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoryChooseView.m; sourceTree = "<group>"; };
 		E97207371CBE815900C3D5FC /* FleaMarket.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FleaMarket.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E972073B1CBE815900C3D5FC /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		E972073D1CBE815900C3D5FC /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -1181,9 +1196,10 @@
 		96B257BD1CBF83DA00D6DC43 /* PublishVC */ = {
 			isa = PBXGroup;
 			children = (
+				E9621F281D90DFEF001CE5E9 /* model */,
+				E9621F171D8F74B6001CE5E9 /* PublishSecondhandVC */,
 				E9B3B9531D2BADE00085304D /* RXRotateButtonOverlayView */,
 				E9B3B9161D2BAC050085304D /* ChooseImage */,
-				E9B3B90B1D2BABB90085304D /* NumberKeyboard */,
 				E9B3B9071D2BAB470085304D /* ItemCategory */,
 				E9B3B9021D2BAAB80085304D /* UploadProgress */,
 				96B258531CBF87AB00D6DC43 /* publishVC.h */,
@@ -1468,6 +1484,46 @@
 				E9E9ADD61D8CF15B005D75C5 /* CommentFrameModel.m */,
 			);
 			name = view;
+			sourceTree = "<group>";
+		};
+		E9621F171D8F74B6001CE5E9 /* PublishSecondhandVC */ = {
+			isa = PBXGroup;
+			children = (
+				E9621F1B1D8F7DA1001CE5E9 /* view */,
+				E9621F181D8F74E5001CE5E9 /* PublishSecondhandVC.h */,
+				E9621F191D8F74E5001CE5E9 /* PublishSecondhandVC.m */,
+			);
+			name = PublishSecondhandVC;
+			sourceTree = "<group>";
+		};
+		E9621F1B1D8F7DA1001CE5E9 /* view */ = {
+			isa = PBXGroup;
+			children = (
+				E9621F1C1D8F7EDE001CE5E9 /* PublishPart1Cell.h */,
+				E9621F1D1D8F7EDE001CE5E9 /* PublishPart1Cell.m */,
+				E9621F1F1D8FDE85001CE5E9 /* NewPriceView.h */,
+				E9621F201D8FDE85001CE5E9 /* NewPriceView.m */,
+				E9621F221D8FE3BA001CE5E9 /* OldPriceView.h */,
+				E9621F231D8FE3BA001CE5E9 /* OldPriceView.m */,
+				E9621F251D901753001CE5E9 /* CategoryChooseView.h */,
+				E9621F261D901753001CE5E9 /* CategoryChooseView.m */,
+			);
+			name = view;
+			sourceTree = "<group>";
+		};
+		E9621F281D90DFEF001CE5E9 /* model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = model;
+			sourceTree = "<group>";
+		};
+		E9621F2C1D9119E9001CE5E9 /* util */ = {
+			isa = PBXGroup;
+			children = (
+				E9B3B90B1D2BABB90085304D /* NumberKeyboard */,
+			);
+			name = util;
 			sourceTree = "<group>";
 		};
 		E972072E1CBE815900C3D5FC = {
@@ -1757,6 +1813,7 @@
 		E9CAD8C61CBE870B00253817 /* PresentationLayer */ = {
 			isa = PBXGroup;
 			children = (
+				E9621F2C1D9119E9001CE5E9 /* util */,
 				96B257BF1CBF83F100D6DC43 /* MyVC */,
 				96B257BE1CBF83E600D6DC43 /* ChatVC */,
 				96B257BD1CBF83DA00D6DC43 /* PublishVC */,
@@ -2209,6 +2266,7 @@
 				E9B3B8F81D2BAA090085304D /* UploadImageCell.m in Sources */,
 				E9CAD9081CBE884700253817 /* UserVO.m in Sources */,
 				9652E7C61D869DFE008C54A0 /* myConcernedView.m in Sources */,
+				E9621F271D901754001CE5E9 /* CategoryChooseView.m in Sources */,
 				E9B3B9371D2BAD720085304D /* ImagePickerCollectionViewCell.m in Sources */,
 				965FB1CF1D7E68B500769DB9 /* cityListVC.m in Sources */,
 				965FB1F41D7E692E00769DB9 /* BookMainPageVC.m in Sources */,
@@ -2273,6 +2331,7 @@
 				E9CAD8D81CBE877200253817 /* SecondhandCell.m in Sources */,
 				9666EE161CE9E5AC00F9397E /* SysMessage.m in Sources */,
 				E9CAD8DA1CBE877200253817 /* SecondhandFrameModel.m in Sources */,
+				E9621F211D8FDE85001CE5E9 /* NewPriceView.m in Sources */,
 				E9B3B97B1D2BAEB50085304D /* ImageMenuScrollView.m in Sources */,
 				E97207421CBE815A00C3D5FC /* ViewController.m in Sources */,
 				E9B3B9061D2BAAF90085304D /* WLCircleProgressView.m in Sources */,
@@ -2280,6 +2339,7 @@
 				965FB1D61D7E68B500769DB9 /* presentLayerPublicMethod.m in Sources */,
 				E9B3B9891D2BB0F40085304D /* PlaceholderTextView.m in Sources */,
 				96DA84031CE5C3DC0006BFD6 /* UserService.m in Sources */,
+				E9621F1E1D8F7EDE001CE5E9 /* PublishPart1Cell.m in Sources */,
 				E9B3B9201D2BAC8C0085304D /* PreViewCell.m in Sources */,
 				E9B3B90A1D2BAB730085304D /* ItemCategoryViewController.m in Sources */,
 				968C6A5C1CF2AB0E008C4610 /* AppManager.m in Sources */,
@@ -2287,6 +2347,7 @@
 				E9B3B94A1D2BAD980085304D /* CollectionViewController.m in Sources */,
 				E9B3B94B1D2BAD980085304D /* CollectionTableViewCell.m in Sources */,
 				E9CAD8EB1CBE87C200253817 /* SecondhandBL.m in Sources */,
+				E9621F1A1D8F74E5001CE5E9 /* PublishSecondhandVC.m in Sources */,
 				E972073F1CBE815A00C3D5FC /* AppDelegate.m in Sources */,
 				E9B3B8FE1D2BAA320085304D /* ChooseLocationView.m in Sources */,
 				E9B3B9391D2BAD720085304D /* PhotoCollectionViewFlow.m in Sources */,
@@ -2308,6 +2369,7 @@
 				965FB2501D7ED8EE00769DB9 /* concernDAO.m in Sources */,
 				96450C301D0FFB410008182D /* TextWeChatTableViewCell.m in Sources */,
 				965FB1EE1D7E692E00769DB9 /* bookDisplayCellView.m in Sources */,
+				E9621F241D8FE3BA001CE5E9 /* OldPriceView.m in Sources */,
 				E9B3B9231D2BACAA0085304D /* ShowIMGModel.m in Sources */,
 				962E813F1CE05E97006E567B /* ContactsDAO.m in Sources */,
 				962E81441CE06C23006E567B /* ContactsBL.m in Sources */,

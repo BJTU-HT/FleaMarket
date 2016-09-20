@@ -42,6 +42,7 @@
      */
 }
 
+/*
 - (void)configWith:(PHAsset *)phasset
 {
     // 在资源的集合中获取第一个集合，并获取其中的图片
@@ -65,6 +66,22 @@
     [[PHImageManager defaultManager] requestImageForAsset:asset targetSize:PHImageManagerMaximumSize contentMode:PHImageContentModeAspectFit options:options resultHandler:^(UIImage * _Nullable result, NSDictionary * _Nullable info) {
         self.imageView.image = result;
     }];
+}
+ */
+
+- (void)setModel:(CollectionDataModel *)model
+{
+    PHAsset *asset = model.asset;
+    if (asset) {
+        PHImageRequestOptions *options = [[PHImageRequestOptions alloc] init];
+        options.synchronous = YES;
+        
+        [[PHImageManager defaultManager] requestImageForAsset:asset targetSize:PHImageManagerMaximumSize contentMode:PHImageContentModeAspectFit options:options resultHandler:^(UIImage * _Nullable result, NSDictionary * _Nullable info) {
+            self.imageView.image = result;
+        }];
+    } else if (model.img) {
+        self.imageView.image = model.img;
+    }
 }
 
 @end

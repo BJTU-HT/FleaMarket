@@ -8,13 +8,15 @@
 
 #import <UIKit/UIKit.h>
 #import <Photos/Photos.h>
+#import "CollectionDataModel.h"
 
 typedef void(^DropSelectdBlock)(void);
 
 @interface ThumbnailCollectionViewCell : UICollectionViewCell
 
-@property (nonatomic, strong) PHAsset *asset;
-@property (nonatomic, strong) UIImage *contentImg;
+//@property (nonatomic, strong) PHAsset *asset;
+//@property (nonatomic, strong) UIImage *contentImg;
 @property (nonatomic, strong) DropSelectdBlock dropSelectedBlock;
+@property (nonatomic, strong) CollectionDataModel *model;
 
 @end

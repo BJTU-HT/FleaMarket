@@ -12,7 +12,7 @@
 
 @protocol AddMoreImgDelegate
 
-- (void)addMoreImg:(NSMutableArray *)collectionData;
+- (void)addMoreImg:(NSMutableArray *)selectedArray;
 
 @end
 

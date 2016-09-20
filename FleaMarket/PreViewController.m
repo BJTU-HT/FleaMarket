@@ -14,7 +14,8 @@
 #import "SelectedPhotoCollectionViewLayout.h"
 #import "ThumbnailCollectionViewCell.h"
 #import "UploadImageModel.h"
-#import "PublishDetailVC.h"
+//#import "PublishDetailVC.h"
+#import "PublishSecondhandVC.h"
 
 #define WIDTH_PIC       self.view.frame.size.width
 #define HEIGHT_PIC      self.view.frame.size.height
@@ -135,7 +136,7 @@
     CGFloat btnW = 60;
     CGFloat btnX = WIDTH_PIC - 70;
     CGFloat btnY = self.toolBarBGView.frame.size.height / 2.0f - btnH / 2.0f;
-    self.toolBarRightBtn = [BackBtn createBtnWithFram:CGRectMake(btnX, btnY, btnW, btnH) WithTitle:@"确定" andSelectTitle:@"确定" andIMG:nil andSelectIMG:nil andTitleColor:[UIColor whiteColor] andSelectColor:[UIColor colorWithRed:0.84 green:0.84 blue:0.84 alpha:1] andTarget:self andAction:@selector(toolBarightBtnClick)];
+    self.toolBarRightBtn = [BackBtn createBtnWithFram:CGRectMake(btnX, btnY, btnW, btnH) WithTitle:@"确定" andSelectTitle:@"确定" andIMG:nil andSelectIMG:nil andTitleColor:[UIColor whiteColor] andSelectColor:[UIColor colorWithRed:0.84 green:0.84 blue:0.84 alpha:1] andTarget:self andAction:@selector(toolBarRightBtnClick)];
     
     self.toolBarRightBtn.layer.cornerRadius     = 3;
     self.toolBarRightBtn.layer.masksToBounds    = YES;
@@ -156,10 +157,11 @@
 #pragma mark ------------ action ---------------
 
 // 提交选择的图片
-- (void)toolBarightBtnClick
+- (void)toolBarRightBtnClick
 {
     if (self.moreImgdelegate) {
-        [self.moreImgdelegate addMoreImg:self.collectionData];
+        //[self.moreImgdelegate addMoreImg:self.collectionData];
+        [self.moreImgdelegate addMoreImg:self.selectedArray];
         long index= [[self.navigationController viewControllers] indexOfObject:self];
         [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:index-2] animated:YES];
     } else {
@@ -167,6 +169,7 @@
         // ...根据ImagePickerVC中的toolBarightBtnClick方法去写
         // 获取选中的图片
         NSMutableArray *choosedImageArray = [[NSMutableArray alloc] init];
+        /*
         for (int i = 0; i < self.collectionData.count; i++) {
             CollectionDataModel *model = self.collectionData[i];
             if (model.selected == YES) {
@@ -186,10 +189,39 @@
                                      }];
             }
         }
+        */
         
+        for (NSInteger idx = 0; idx < self.selectedArray.count; idx++) {
+            CollectionDataModel *model = self.selectedArray[idx];
+            UploadImageModel *uploadModel = [[UploadImageModel alloc] init];
+            if (model.asset) {
+                // 获取照片资源
+                PHImageManager *imageManager = [PHImageManager defaultManager];
+                PHImageRequestOptions *options = [[PHImageRequestOptions alloc] init];
+                options.synchronous = YES;
+                [imageManager requestImageForAsset:model.asset
+                                        targetSize:PHImageManagerMaximumSize
+                                       contentMode:PHImageContentModeDefault
+                                           options:options
+                                     resultHandler:^(UIImage *result, NSDictionary *info) {
+                                         uploadModel.img = result;
+                                         uploadModel.isUploaded = NO;
+                                         [choosedImageArray addObject:uploadModel];
+                                     }];
+            } else if (model.img) {
+                uploadModel.img = model.img;
+                uploadModel.isUploaded = NO;
+                [choosedImageArray addObject:uploadModel];
+            }
+        }
+        /*
         PublishDetailVC *publishDetailVC = [[PublishDetailVC alloc] init];
         publishDetailVC.selectedImgArray = choosedImageArray;
-        //publishDetailVC.collectionData = self.collectionData;
+        publishDetailVC.delegate = self;
+         */
+        
+        PublishSecondhandVC *publishDetailVC = [[PublishSecondhandVC alloc] init];
+        publishDetailVC.selectedImgArray = choosedImageArray;
         publishDetailVC.delegate = self;
         
         [self.navigationController pushViewController:publishDetailVC animated:YES];
@@ -211,8 +243,10 @@
         //PHAsset *img = model.img;
         PHAsset *asset = model.asset;
         //UIImage *img = self.collectionData[self.nowNum];
-        [self.selectedArray removeObject:asset];
+        //[self.selectedArray removeObject:asset];
+        [self.selectedArray removeObject:model];
         // 设置collectionData对应的selected为NO
+        /*
         for (int i = 0; i < self.collectionData.count; i++) {
             CollectionDataModel *model = self.collectionData[i];
             if (asset == model.asset) {
@@ -220,6 +254,8 @@
                 break;
             }
         }
+         */
+        model.selected = NO;
         
         // self.selectBlock(self.selectedArray,model,NO);
         [self.thumbnailCollectionView reloadData];
@@ -239,8 +275,10 @@
         CollectionDataModel *model = self.collectionData[self.nowNum];
         //UIImage *img = model.img;
         PHAsset *asset = model.asset;
-        [self.selectedArray addObject:asset];
+        //[self.selectedArray addObject:asset];
+        [self.selectedArray addObject:model];
         // 设置collectionData对应的selected为YES
+        /*
         for (int i = 0; i < self.collectionData.count; i++) {
             CollectionDataModel *model = self.collectionData[i];
             if (asset == model.asset) {
@@ -248,6 +286,8 @@
                 break;
             }
         }
+         */
+        model.selected = YES;
         
         self.toolBarRightBtn.selected = NO;
         
@@ -312,18 +352,23 @@
     if (collectionView == self.collectionView) {
         PreViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"preView" forIndexPath:indexPath];
         CollectionDataModel *model = self.collectionData[indexPath.row];
-        cell.asset = model.asset;
+        //cell.asset = model.asset;
+        cell.model = model;
         return cell;
     } else if (collectionView == self.thumbnailCollectionView) {
         ThumbnailCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"thumbnailcollectioncell" forIndexPath:indexPath];
         __weak PreViewController *weakSelf = self;
         __weak ThumbnailCollectionViewCell *weakCell = cell;
-        PHAsset *asset = [self.selectedArray objectAtIndex:indexPath.item];
-        cell.asset = asset;
+        //PHAsset *asset = [self.selectedArray objectAtIndex:indexPath.item];
+        CollectionDataModel *model = [self.selectedArray objectAtIndex:indexPath.item];
+        //cell.asset = asset;
+        cell.model = model;
         cell.dropSelectedBlock = ^(void) {
             //PHAsset *currentAsset = weakCell.asset;
-            [weakSelf.selectedArray removeObject:asset];
+            //[weakSelf.selectedArray removeObject:asset];
+            [weakSelf.selectedArray removeObject:model];
             
+            /*
             for (int i = 0; i < self.collectionData.count; i++) {
                 CollectionDataModel *data = self.collectionData[i];
                 if (asset == data.asset) {
@@ -331,6 +376,8 @@
                     break;
                 }
             }
+             */
+            model.selected = NO;
             
             // 更新按钮状态
             //[weakSelf.toolBarRightBtn setTitle:[NSString stringWithFormat:@"确定(%lu)",(unsigned long)weakSelf.selectedArray.count] forState:UIControlStateNormal];
@@ -339,9 +386,12 @@
             CollectionDataModel *model = self.collectionData[self.nowNum];
             //NSLog(@"nowNum is %@", model.img);
             //NSLog(@"cell tag is %@", weakCell.contentImg);
+            /*************************************************************/
+            /*
             if (weakCell.asset == model.asset) {
                 weakSelf.rightItemBtn.selected = NO;
             }
+             */
             
             // 更新collectionView
             [weakSelf.collectionView reloadData];

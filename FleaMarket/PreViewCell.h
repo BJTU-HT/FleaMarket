@@ -8,10 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import <Photos/Photos.h>
+#import "CollectionDataModel.h"
 
 @interface PreViewCell : UICollectionViewCell
 
-@property (nonatomic, strong) PHAsset *asset;
+//@property (nonatomic, strong) PHAsset *asset;
+
+@property (nonatomic, strong) CollectionDataModel *model;
 
 - (void)configWith:(PHAsset *)phasset;
 

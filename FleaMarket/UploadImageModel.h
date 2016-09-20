@@ -15,5 +15,6 @@
 @property (nonatomic, strong) PHAsset *asset;
 @property (nonatomic, strong) UIImage *img;
 @property (nonatomic, assign) BOOL isUploaded;
+@property (nonatomic, strong) NSString *url;
 
 @end
