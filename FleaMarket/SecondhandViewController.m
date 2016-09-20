@@ -174,6 +174,8 @@ static NSInteger margin = 10;
     [self.bl findSecondhand:nil];
     [self.activityIndicatorView startAnimating];
     self.currentCategory = 0;    // 0为所有商品
+    //默认为“全部大学” 2016-09-20
+    self.currentSchool = @"全部大学";
 }
 
 -(void)drawSection0:(CGRect)S0Frame{
@@ -261,6 +263,7 @@ static NSInteger margin = 10;
         BookMainPageVC *bookMain = [[BookMainPageVC alloc] init];
         [self.navigationController pushViewController:bookMain animated:NO];
     }else{
+        [filter setObject:self.currentSchool forKey:@"specifySchool"];
         [filter setObject:category forKey:@"main_category"];
         SecondCateDisplayVC *secCateVC = [[SecondCateDisplayVC alloc] init];
         self.delegate = secCateVC;
@@ -270,6 +273,7 @@ static NSInteger margin = 10;
         self.hidesBottomBarWhenPushed = NO;
     }
 }
+
 /*
  - (void)labelClick:(UITapGestureRecognizer *)recognizer
  {
@@ -281,11 +285,11 @@ static NSInteger margin = 10;
  */
 
 /*
- - (void)dealloc
+- (void)dealloc
  {
  [self.imageMenuScrollView removeObserver:self forKeyPath:@"contentOffset"];
  }
- */
+*/
 
 #pragma mark ------------------- action --------------------
 

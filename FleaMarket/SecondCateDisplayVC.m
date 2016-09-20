@@ -33,13 +33,112 @@
     // Do any additional setup after loading the view.
 }
 
--(void)viewWillAppear:(BOOL)animated{
+#pragma 添加导航栏显示
+-(void)viewWillAppear:(BOOL)animated
+{
     self.navigationController.navigationBarHidden = NO;
+    
+    // 添加刷新
+    __weak SecondCateDisplayVC *weakSelf = self;
+    self.refresh = [[WJRefresh alloc] init];
+    [self.refresh addHeardRefreshTo:self.tableViewCateDisplay heardBlock:^{
+        [weakSelf loadNewDataAction];
+    } footBlok:^{
+        [weakSelf loadMoreDateAction];
+    }];
 }
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    self.navigationController.navigationBarHidden = YES;
+    [self.refresh removeFromSuperview];
+    //[self.imageMenuScrollView removeObserver:self forKeyPath:@"contentOffset"];
+}
+
 -(void)passValueForVC:(NSDictionary *)dic{
     [self.filterDic addEntriesFromDictionary:dic];
     self.title = [self.filterDic objectForKey:@"main_category"];
+    self.currentSchool = [dic objectForKey:@"specifySchool"];
+    self.currentCate = [dic objectForKey:@"main_category"];
 }
+
+#pragma ---------------上拉刷新，下拉加载 begin ---------------------------------
+// 根据商品分类查询时的下拉刷新
+- (void)loadNewDataAction
+{
+    __weak SecondCateDisplayVC *weakSelf = self;
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        if ([weakSelf.currentCate isEqualToString:@"全部"]) {
+            NSLog(@"下拉刷新");
+            NSMutableDictionary *filterDic = [[NSMutableDictionary alloc] init];
+            
+            if (weakSelf.currentSchool) {
+                NSMutableArray *schoolArray = [[NSMutableArray alloc] init];
+                [schoolArray addObject:weakSelf.currentSchool];
+                [filterDic setObject:schoolArray forKey:@"school"];
+            }
+            
+            [weakSelf.bl findNewComming:filterDic];
+        } else {
+            // 过滤查询查询新结果
+            // 。。。
+            NSLog(@"根据商品分类过滤查询刷新...");
+            NSMutableDictionary *filterDic = [[NSMutableDictionary alloc] init];
+            
+            // 设置商品类别
+            //NSArray *temp = SecondhandCategoryDisplay;
+            NSString *category = weakSelf.currentCate;
+            [filterDic setObject:category forKey:@"main_category"];
+            
+            // 设置学校
+            if (weakSelf.currentSchool) {
+                NSMutableArray *schoolArray = [[NSMutableArray alloc] init];
+                [schoolArray addObject:weakSelf.currentSchool];
+                [filterDic setObject:schoolArray forKey:@"school"];
+            }
+            [weakSelf.bl findNewComming:filterDic];
+        }
+    });
+}
+
+// 上拉加载
+- (void)loadMoreDateAction
+{
+    __weak SecondCateDisplayVC *weakSelf = self;
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        if ([weakSelf.currentCate isEqualToString:@"全部"]) {
+            NSLog(@"上拉加载更多");
+            NSMutableDictionary *filterDic = [[NSMutableDictionary alloc] init];
+            if (weakSelf.currentSchool) {
+                NSMutableArray *schoolArray = [[NSMutableArray alloc] init];
+                [schoolArray addObject:weakSelf.currentSchool];
+                [filterDic setObject:schoolArray forKey:@"school"];
+            }
+            
+            [weakSelf.bl findSecondhand:filterDic];
+        } else {
+            // 过滤查询加载更多
+            // ...
+            NSLog(@"根据商品分类过滤查询加载更多...");
+            NSMutableDictionary *filterDic = [[NSMutableDictionary alloc] init];
+            
+            // 设置商品类别
+            //NSArray *temp = SecondhandCategoryDisplay;
+            NSString *category = weakSelf.currentCate;
+            [filterDic setObject:category forKey:@"main_category"];
+            
+            // 设置学校
+            if (weakSelf.currentSchool) {
+                NSMutableArray *schoolArray = [[NSMutableArray alloc] init];
+                [schoolArray addObject:weakSelf.currentSchool];
+                [filterDic setObject:schoolArray forKey:@"school"];
+            }
+            [weakSelf.bl findSecondhand:filterDic];
+        }
+    });
+}
+
+#pragma ---------------上拉刷新，下拉加载 end ---------------------------------
 
 #pragma delegate begin
 - (void)findSecondhandFinished:(NSMutableArray *)list
@@ -65,13 +164,40 @@
 //    self.tab.frame = CGRectMake(tabOrgin.x, tabOrgin.y, winSize.width, tabHeight);
 //    
 //    // 结束刷新
-//    [self.refresh endRefresh];
+    [self.refresh endRefresh];
     [self.activityIndicatorView stopAnimating];
 }
 
 - (void)findSecondhandFailed:(NSError *)error
 {
     NSLog(@"过滤查询失败!");
+}
+
+- (void)findNewCommingSecondhandFinished:(NSMutableArray *)list
+{
+    // 按时间排序从头插入
+    for (long i = list.count - 1; i >= 0 ; i--) {
+        [_dataArray insertObject:list[i] atIndex:0];
+    }
+    
+    if (list.count) {
+        _frameArray = [SecondhandFrameModel frameModelWithArray:_dataArray];
+        [self.tableViewCateDisplay reloadData];
+    }
+    
+    //[self.headerView endRefresh];
+    // 更新mainScroll的frame的高度
+    CGSize winSize = [UIScreen mainScreen].bounds.size;
+//    CGFloat height = self.imageMenuScrollView.frame.size.height + margin + self.tab.contentSize.height;
+//    self.mainScrollView.contentSize = CGSizeMake(0, height);
+    
+    // 更新tableView的frame
+    CGPoint tabOrgin = self.tableViewCateDisplay.frame.origin;
+    CGFloat tabHeight = self.tableViewCateDisplay.contentSize.height;
+    self.tableViewCateDisplay.frame = CGRectMake(tabOrgin.x, tabOrgin.y, winSize.width, tabHeight);
+    
+    // 结束刷新
+    [self.refresh endRefresh];
 }
 #pragma delegate end
 
@@ -86,7 +212,6 @@
     cell.frameModel = [_frameArray objectAtIndex:indexPath.row];
     return cell;
 }
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return self.dataArray.count;
@@ -119,6 +244,15 @@
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
 }
 
+//清除无数据的多余分割线
+-(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
+    UIView *v = [[UIView alloc] initWithFrame:CGRectMake(0, 0, screenWidthPCH, screenHeightPCH * 0.04)];
+    v.backgroundColor = grayColorPCH;
+    return v;
+}
+-(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+    return grayLineHeightPCH;
+}
 #pragma ----------------tableView delegate end-------------------------------------
 
 #pragma getter setter method begin
