@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		62D6BE7CF62A97D0D14D332B /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 60ED4BE590788561010372AD /* libPods.a */; };
 		9628FA8B1CD86FEB00484760 /* fit_ptr_icon_fg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9628FA8A1CD86FEB00484760 /* fit_ptr_icon_fg@2x.png */; };
+		962D4BDA1D8F90BB00D93484 /* firstPageSection0Btn.m in Sources */ = {isa = PBXBuildFile; fileRef = 962D4BD91D8F90BB00D93484 /* firstPageSection0Btn.m */; };
+		962D4BDD1D8F924F00D93484 /* SecondhandViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 962D4BDC1D8F924F00D93484 /* SecondhandViewController.m */; };
+		962D4BE01D8FEEEA00D93484 /* SecondCateDisplayVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 962D4BDF1D8FEEEA00D93484 /* SecondCateDisplayVC.m */; };
 		962E813F1CE05E97006E567B /* ContactsDAO.m in Sources */ = {isa = PBXBuildFile; fileRef = 962E813E1CE05E97006E567B /* ContactsDAO.m */; };
 		962E81441CE06C23006E567B /* ContactsBL.m in Sources */ = {isa = PBXBuildFile; fileRef = 962E81431CE06C23006E567B /* ContactsBL.m */; };
 		963D85D91CE0259500ED37B4 /* contactsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 963D85D81CE0259500ED37B4 /* contactsVC.m */; };
@@ -267,7 +270,6 @@
 		E9CAD8D91CBE877200253817 /* SecondhandDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9CAD8CF1CBE877200253817 /* SecondhandDetailViewController.m */; };
 		E9CAD8DA1CBE877200253817 /* SecondhandFrameModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E9CAD8D11CBE877200253817 /* SecondhandFrameModel.m */; };
 		E9CAD8DB1CBE877200253817 /* SecondhandTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = E9CAD8D31CBE877200253817 /* SecondhandTitleView.m */; };
-		E9CAD8DC1CBE877200253817 /* SecondhandViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9CAD8D51CBE877200253817 /* SecondhandViewController.m */; };
 		E9CAD8E41CBE87AB00253817 /* Secondhand.plist in Resources */ = {isa = PBXBuildFile; fileRef = E9CAD8DE1CBE87AB00253817 /* Secondhand.plist */; };
 		E9CAD8E51CBE87AB00253817 /* SecondhandDAO.m in Sources */ = {isa = PBXBuildFile; fileRef = E9CAD8E01CBE87AB00253817 /* SecondhandDAO.m */; };
 		E9CAD8E61CBE87AB00253817 /* SecondhandVO.m in Sources */ = {isa = PBXBuildFile; fileRef = E9CAD8E31CBE87AB00253817 /* SecondhandVO.m */; };
@@ -315,6 +317,12 @@
 		60ED4BE590788561010372AD /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		9068843F77BFF501555F7887 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		9628FA8A1CD86FEB00484760 /* fit_ptr_icon_fg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fit_ptr_icon_fg@2x.png"; sourceTree = "<group>"; };
+		962D4BD81D8F90BB00D93484 /* firstPageSection0Btn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = firstPageSection0Btn.h; sourceTree = "<group>"; };
+		962D4BD91D8F90BB00D93484 /* firstPageSection0Btn.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = firstPageSection0Btn.m; sourceTree = "<group>"; };
+		962D4BDB1D8F924F00D93484 /* SecondhandViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SecondhandViewController.h; sourceTree = "<group>"; };
+		962D4BDC1D8F924F00D93484 /* SecondhandViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SecondhandViewController.m; sourceTree = "<group>"; };
+		962D4BDE1D8FEEEA00D93484 /* SecondCateDisplayVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SecondCateDisplayVC.h; sourceTree = "<group>"; };
+		962D4BDF1D8FEEEA00D93484 /* SecondCateDisplayVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SecondCateDisplayVC.m; sourceTree = "<group>"; };
 		962E813D1CE05E97006E567B /* ContactsDAO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactsDAO.h; sourceTree = "<group>"; };
 		962E813E1CE05E97006E567B /* ContactsDAO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactsDAO.m; sourceTree = "<group>"; };
 		962E81401CE06051006E567B /* ChatDAODelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChatDAODelegate.h; sourceTree = "<group>"; };
@@ -760,8 +768,6 @@
 		E9CAD8D11CBE877200253817 /* SecondhandFrameModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SecondhandFrameModel.m; sourceTree = "<group>"; };
 		E9CAD8D21CBE877200253817 /* SecondhandTitleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SecondhandTitleView.h; sourceTree = "<group>"; };
 		E9CAD8D31CBE877200253817 /* SecondhandTitleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SecondhandTitleView.m; sourceTree = "<group>"; };
-		E9CAD8D41CBE877200253817 /* SecondhandViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SecondhandViewController.h; sourceTree = "<group>"; };
-		E9CAD8D51CBE877200253817 /* SecondhandViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SecondhandViewController.m; sourceTree = "<group>"; };
 		E9CAD8DE1CBE87AB00253817 /* Secondhand.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Secondhand.plist; sourceTree = "<group>"; };
 		E9CAD8DF1CBE87AB00253817 /* SecondhandDAO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SecondhandDAO.h; sourceTree = "<group>"; };
 		E9CAD8E01CBE87AB00253817 /* SecondhandDAO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SecondhandDAO.m; sourceTree = "<group>"; };
@@ -1844,8 +1850,8 @@
 				E9CAD8CD1CBE877200253817 /* SecondhandCell.m */,
 				E9CAD8D01CBE877200253817 /* SecondhandFrameModel.h */,
 				E9CAD8D11CBE877200253817 /* SecondhandFrameModel.m */,
-				E9CAD8D41CBE877200253817 /* SecondhandViewController.h */,
-				E9CAD8D51CBE877200253817 /* SecondhandViewController.m */,
+				962D4BDB1D8F924F00D93484 /* SecondhandViewController.h */,
+				962D4BDC1D8F924F00D93484 /* SecondhandViewController.m */,
 				E91BAF501CBFE8CD00CCF9A0 /* MessageFrameModel.h */,
 				E91BAF511CBFE8CD00CCF9A0 /* MessageFrameModel.m */,
 				E91BAF531CBFF25B00CCF9A0 /* MessageCell.h */,
@@ -1857,6 +1863,10 @@
 				E9B3B97C1D2BAED90085304D /* search1.png */,
 				E9B3B97D1D2BAED90085304D /* search.png */,
 				E9B3B97E1D2BAED90085304D /* expandableImage@2x.png */,
+				962D4BD81D8F90BB00D93484 /* firstPageSection0Btn.h */,
+				962D4BD91D8F90BB00D93484 /* firstPageSection0Btn.m */,
+				962D4BDE1D8FEEEA00D93484 /* SecondCateDisplayVC.h */,
+				962D4BDF1D8FEEEA00D93484 /* SecondCateDisplayVC.m */,
 			);
 			name = Secondhand;
 			sourceTree = "<group>";
@@ -2321,6 +2331,7 @@
 				965FB2041D7E693B00769DB9 /* bookDetailView.m in Sources */,
 				E9B3B9131D2BABF50085304D /* UITextField+RYNumberKeyboard.m in Sources */,
 				96D2647A1CEC2DBC00A945FD /* BmobIMMessage+SubClass.m in Sources */,
+				962D4BDA1D8F90BB00D93484 /* firstPageSection0Btn.m in Sources */,
 				9666EE0A1CE9C2BE00F9397E /* ContactsTableViewCell.m in Sources */,
 				E9B3B93C1D2BAD720085304D /* SelectedPhotoCollectionViewLayout.m in Sources */,
 				965FB2451D7E6A3E00769DB9 /* bookPubUpLoadInfoDAO.m in Sources */,
@@ -2354,6 +2365,7 @@
 				E9B3B91D1D2BAC6D0085304D /* PreViewController.m in Sources */,
 				E9B3B96C1D2BAE7B0085304D /* DropdownMenu.m in Sources */,
 				E9B3B93D1D2BAD720085304D /* CollectionDataModel.m in Sources */,
+				962D4BE01D8FEEEA00D93484 /* SecondCateDisplayVC.m in Sources */,
 				965FB1B91D7E68A700769DB9 /* mySellVC.m in Sources */,
 				9666EE101CE9E3B200F9397E /* FriendReqListTableViewCell.m in Sources */,
 				96C661791CEAAB3000C681BF /* DetailedAddContactsBL.m in Sources */,
@@ -2367,6 +2379,7 @@
 				965FB1B81D7E68A700769DB9 /* mySellTableViewCell.m in Sources */,
 				E9CAD8D71CBE877200253817 /* MenuCell.m in Sources */,
 				965FB2501D7ED8EE00769DB9 /* concernDAO.m in Sources */,
+				962D4BDD1D8F924F00D93484 /* SecondhandViewController.m in Sources */,
 				96450C301D0FFB410008182D /* TextWeChatTableViewCell.m in Sources */,
 				965FB1EE1D7E692E00769DB9 /* bookDisplayCellView.m in Sources */,
 				E9621F241D8FE3BA001CE5E9 /* OldPriceView.m in Sources */,
@@ -2397,7 +2410,6 @@
 				965FB1BA1D7E68A700769DB9 /* pullRefreshView.m in Sources */,
 				E90D38DD1D60519100910833 /* RecentCommentViewController.m in Sources */,
 				965FB1F11D7E692E00769DB9 /* bookUserInfoView.m in Sources */,
-				E9CAD8DC1CBE877200253817 /* SecondhandViewController.m in Sources */,
 				96C661801CEB0F7400C681BF /* ChatBottomView.m in Sources */,
 				965FB2231D7E696300769DB9 /* BookPublishVC.m in Sources */,
 				965FB2211D7E696300769DB9 /* BookPubView.m in Sources */,

@@ -116,8 +116,10 @@
     backBtn.backgroundColor = [UIColor darkGrayColor];
     backBtn.alpha = 0.8;
     [backBtn setImage:[UIImage imageNamed:@"back.png"] forState:UIControlStateNormal];
+    [backBtn addTarget:self action:@selector(backBtnClicked:) forControlEvents:UIControlEventTouchDown];
     [self.view addSubview:backBtn];
     self.backBtn = backBtn;
+    
     
     // 更多
     UIButton *moreBtn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -131,6 +133,9 @@
     self.moreBtn = moreBtn;
 }
 
+-(void)backBtnClicked:(UIButton *)sender{
+    [self.navigationController popViewControllerAnimated:NO];
+}
 - (void)initViews
 {
     // tableView
