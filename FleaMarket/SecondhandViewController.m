@@ -15,7 +15,6 @@
 #import "MenuCell.h"
 #import "SecondhandTitleView.h"
 #import "SecondhandDetailViewController.h"
-#import "SecondhandDetailVC.h"
 //#import "FCXRefreshFooterView.h"
 //#import "FCXRefreshHeaderView.h"
 //#import "UIScrollView+FCXRefresh.h"
@@ -25,6 +24,9 @@
 #import "WJRefresh.h"
 #import "ImageMenuScrollView.h"
 #import "UserInfoSingleton.h"
+#import "SecondhandDetailVC.h"
+#import "BookMainPageVC.h"
+#import "SecondCateDisplayVC.h"
 
 static NSString *IDD = @"AA";
 static NSString *IDD_MENU = @"BB";
@@ -136,20 +138,21 @@ static NSInteger margin = 10;
     [self.view addSubview:self.mainScrollView];
     
     // 创建菜单
-    CGFloat categoryW = winSize.width/5.0f;
-    CGFloat categoryH = categoryW * 1.5f;
-    CGFloat menuX = 0;
-    CGFloat menuY = 0;
-    CGFloat menuW = winSize.width;
-    CGFloat menuH = categoryH;
-    ImageMenuScrollView *imageMenuScrollView = [[ImageMenuScrollView alloc] initWithFrame:CGRectMake(menuX, menuY, menuW, menuH)];
-    imageMenuScrollView.delegate = self;
-    self.imageMenuScrollView = imageMenuScrollView;
-    [self.mainScrollView addSubview:self.imageMenuScrollView];
+//    CGFloat categoryW = winSize.width/5.0f;
+//    CGFloat categoryH = categoryW * 1.5f;
+//    CGFloat menuX = 0;
+//    CGFloat menuY = 0;
+//    CGFloat menuW = winSize.width;
+//    CGFloat menuH = categoryH;
+//    ImageMenuScrollView *imageMenuScrollView = [[ImageMenuScrollView alloc] initWithFrame:CGRectMake(menuX, menuY, menuW, menuH)];
+//    imageMenuScrollView.delegate = self;
+//    self.imageMenuScrollView = imageMenuScrollView;
+//    [self.mainScrollView addSubview:self.imageMenuScrollView];
     
     
     // 创建tableview
-    CGRect newBounds = CGRectMake(0, CGRectGetMaxY(self.imageMenuScrollView.frame) + margin, screenWidthPCH, screenHeightPCH - navigationBarH - statusBarH);
+//    CGRect newBounds = CGRectMake(0, CGRectGetMaxY(self.imageMenuScrollView.frame) + margin, screenWidthPCH, screenHeightPCH - navigationBarH - statusBarH);
+    CGRect newBounds = CGRectMake(0, 0, screenWidthPCH, screenHeightPCH - navigationBarH - statusBarH);
     UITableView *vi = [[UITableView alloc] initWithFrame:newBounds style:UITableViewStylePlain];
     vi.delegate = self;
     vi.dataSource = self;
@@ -173,6 +176,100 @@ static NSInteger margin = 10;
     self.currentCategory = 0;    // 0为所有商品
 }
 
+-(void)drawSection0:(CGRect)S0Frame{
+    self.viewS0 = [[UIView alloc] initWithFrame:S0Frame];
+    UIView *viewLine = [[UIView alloc] init];
+    viewLine.frame = CGRectMake(0, 204, screenWidthPCH, 5.0f);
+    viewLine.backgroundColor = grayColorPCH;
+    [self.viewS0 addSubview:viewLine];
+    float btnWidth = 48;
+    float btnHegiht = 72;
+    float marginHorizontal = (screenWidthPCH - 4 * btnWidth - 40) / 3.0;
+    float marginVertical = 20.0f;
+    float tagCount = 0;
+    for(int i = 0; i < 2; i++){
+        for(int j = 0; j < 4; j++){
+            float btn_x = j * (btnWidth + marginHorizontal) + 20;
+            float btn_y = i * (btnHegiht + marginVertical) + marginVertical;
+            firstPageSection0Btn *btn = [[firstPageSection0Btn alloc] initWithFrame:self.view.frame];
+            btn.frame = CGRectMake(btn_x, btn_y, btnWidth, btnHegiht);
+            btn.tag = tagCount++;
+            [btn addTarget:self action:@selector(btnClicked:) forControlEvents:UIControlEventTouchDown];
+            [self.viewS0 addSubview:btn];
+            switch (j) {
+                case 0:
+                    if(i == 0)
+                    {
+                        btn.labelS0.text = @"全部";
+                        btn.imageViewS0.image = [UIImage imageNamed:@"2@2x.png"];
+                    }
+                    else
+                    {
+                        btn.labelS0.text = @"衣服";
+                        btn.imageViewS0.image = [UIImage imageNamed:@"1@2x.png"];
+                    }
+                    break;
+                case 1:
+                    if(i == 0)
+                    {
+                        btn.labelS0.text = @"书籍";
+                        btn.imageViewS0.image = [UIImage imageNamed:@"3@2x.png"];
+                    }
+                    else
+                    {
+                        btn.labelS0.text = @"鞋包";
+                        btn.imageViewS0.image = [UIImage imageNamed:@"4@2x.png"];
+                    }
+                    break;
+                case 2:
+                    if(i == 0)
+                    {
+                        btn.labelS0.text = @"数码";
+                        btn.imageViewS0.image = [UIImage imageNamed:@"5@2x.png"];
+                    }
+                    else
+                    {
+                        btn.labelS0.text = @"运动";
+                        btn.imageViewS0.image = [UIImage imageNamed:@"6@2x.png"];
+                    }
+                    break;
+                case 3:
+                    if(i == 0)
+                    {
+                        btn.labelS0.text = @"自行车";
+                        btn.imageViewS0.image = [UIImage imageNamed:@"7@2x.png"];
+                    }
+                    else
+                    {
+                        btn.labelS0.text = @"其他";
+                        btn.imageViewS0.image = [UIImage imageNamed:@"8@2x.png"];
+                    }
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+    
+}
+
+-(void)btnClicked:(UIButton *)sender{
+    NSMutableDictionary *filter = [[NSMutableDictionary alloc] init];
+    NSArray *cate = SecondhandCategoryDisplay;
+    NSString *category = cate[sender.tag];
+    if(sender.tag == 1){
+        BookMainPageVC *bookMain = [[BookMainPageVC alloc] init];
+        [self.navigationController pushViewController:bookMain animated:NO];
+    }else{
+        [filter setObject:category forKey:@"main_category"];
+        SecondCateDisplayVC *secCateVC = [[SecondCateDisplayVC alloc] init];
+        self.delegate = secCateVC;
+        [self.delegate passValueForVC:filter];
+        self.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:secCateVC animated:NO];
+        self.hidesBottomBarWhenPushed = NO;
+    }
+}
 /*
  - (void)labelClick:(UITapGestureRecognizer *)recognizer
  {
@@ -325,7 +422,7 @@ static NSInteger margin = 10;
 
 #pragma mark ------------- SearchProductDelegate ----------------
 
-- (void)getSearchResult:(NSMutableArray *)list
+-(void)getSearchResult:(NSMutableArray *)list
 {
     self.dataArray = list;
     self.frameArray = [SecondhandFrameModel frameModelWithArray:self.dataArray];
@@ -341,6 +438,35 @@ static NSInteger margin = 10;
     return 1;
 }
 
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    
+    return 204.0f;
+}
+
+-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    if(section == 0){
+        CGRect S0Frame = CGRectMake(0, 0, screenWidthPCH, 204);
+        [self drawSection0:S0Frame];
+        return self.viewS0;
+    }
+    return nil;
+}
+
+//-(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+//    if(section == 0){
+//        return 10.0f;
+//    }
+//    return 10;
+//}
+//
+//-(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
+//    if(section == 0){
+//        UIView *viewS0Footer = [[UIView alloc] initWithFrame:CGRectMake(0, 0, screenWidthPCH, 10.0f)];
+//        viewS0Footer.backgroundColor = [UIColor lightGrayColor];
+//        return viewS0Footer;
+//    }
+//    return nil;
+//}
 /*
  - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
  {
@@ -414,13 +540,13 @@ static NSInteger margin = 10;
             [self.bl newVisitor:userMO.head_image_url secondhand:model];
         }
     }
-
+    
     /*
-    SecondhandDetailViewController *detail = [[SecondhandDetailViewController alloc] init];
-    detail.model = model;
-    self.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:detail animated:YES];
-    self.hidesBottomBarWhenPushed = NO;
+     SecondhandDetailViewController *detail = [[SecondhandDetailViewController alloc] init];
+     detail.model = model;
+     self.hidesBottomBarWhenPushed = YES;
+     [self.navigationController pushViewController:detail animated:YES];
+     self.hidesBottomBarWhenPushed = NO;
      */
     
     SecondhandDetailVC *detail = [[SecondhandDetailVC alloc] init];
@@ -605,7 +731,7 @@ static NSInteger margin = 10;
         _activityIndicatorView.center = self.view.center;
         [self.view addSubview:_activityIndicatorView];
     }
-    
+
     return _activityIndicatorView;
 }
 
