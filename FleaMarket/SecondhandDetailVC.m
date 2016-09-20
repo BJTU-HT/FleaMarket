@@ -79,6 +79,7 @@
     // 移除通知
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillChangeFrameNotification object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
+    [self.tableView removeObserver:self.refresh forKeyPath:@"contentOffset"];
 }
 
 - (void)viewDidLoad
@@ -133,9 +134,6 @@
     self.moreBtn = moreBtn;
 }
 
--(void)backBtnClicked:(UIButton *)sender{
-    [self.navigationController popViewControllerAnimated:NO];
-}
 - (void)initViews
 {
     // tableView
@@ -235,6 +233,10 @@
 }
 
 #pragma mark --- action ---
+
+-(void)backBtnClicked:(UIButton *)sender{
+    [self.navigationController popViewControllerAnimated:YES];
+}
 
 //响应wantBtn点击事件,用于跳转到聊天界面，首先检测是否登录 add by hou
 -(void)wantBtnClicked:(UIButton *)sender{
@@ -339,7 +341,7 @@
 #pragma mark --- ScrollViewDelegate ---
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    NSLog(@"%f", scrollView.contentOffset.y);
+    //NSLog(@"%f", scrollView.contentOffset.y);
     if (scrollView.contentOffset.y < 350) {
         self.navView.alpha = scrollView.contentOffset.y / 350.0;
     } else {

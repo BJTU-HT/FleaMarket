@@ -67,8 +67,6 @@ static NSInteger margin = 10;
 
 @implementation SecondhandViewController
 
-
-
 -(void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -138,20 +136,20 @@ static NSInteger margin = 10;
     [self.view addSubview:self.mainScrollView];
     
     // 创建菜单
-//    CGFloat categoryW = winSize.width/5.0f;
-//    CGFloat categoryH = categoryW * 1.5f;
-//    CGFloat menuX = 0;
-//    CGFloat menuY = 0;
-//    CGFloat menuW = winSize.width;
-//    CGFloat menuH = categoryH;
-//    ImageMenuScrollView *imageMenuScrollView = [[ImageMenuScrollView alloc] initWithFrame:CGRectMake(menuX, menuY, menuW, menuH)];
-//    imageMenuScrollView.delegate = self;
-//    self.imageMenuScrollView = imageMenuScrollView;
-//    [self.mainScrollView addSubview:self.imageMenuScrollView];
+    //    CGFloat categoryW = winSize.width/5.0f;
+    //    CGFloat categoryH = categoryW * 1.5f;
+    //    CGFloat menuX = 0;
+    //    CGFloat menuY = 0;
+    //    CGFloat menuW = winSize.width;
+    //    CGFloat menuH = categoryH;
+    //    ImageMenuScrollView *imageMenuScrollView = [[ImageMenuScrollView alloc] initWithFrame:CGRectMake(menuX, menuY, menuW, menuH)];
+    //    imageMenuScrollView.delegate = self;
+    //    self.imageMenuScrollView = imageMenuScrollView;
+    //    [self.mainScrollView addSubview:self.imageMenuScrollView];
     
     
     // 创建tableview
-//    CGRect newBounds = CGRectMake(0, CGRectGetMaxY(self.imageMenuScrollView.frame) + margin, screenWidthPCH, screenHeightPCH - navigationBarH - statusBarH);
+    //    CGRect newBounds = CGRectMake(0, CGRectGetMaxY(self.imageMenuScrollView.frame) + margin, screenWidthPCH, screenHeightPCH - navigationBarH - statusBarH);
     CGRect newBounds = CGRectMake(0, 0, screenWidthPCH, screenHeightPCH - navigationBarH - statusBarH);
     UITableView *vi = [[UITableView alloc] initWithFrame:newBounds style:UITableViewStylePlain];
     vi.delegate = self;
@@ -285,11 +283,11 @@ static NSInteger margin = 10;
  */
 
 /*
-- (void)dealloc
+ - (void)dealloc
  {
  [self.imageMenuScrollView removeObserver:self forKeyPath:@"contentOffset"];
  }
-*/
+ */
 
 #pragma mark ------------------- action --------------------
 
@@ -527,7 +525,7 @@ static NSInteger margin = 10;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{    
+{
     SecondhandFrameModel *frameModel = self.frameArray[indexPath.row];
     return frameModel.cellHeight;
 }
@@ -622,7 +620,6 @@ static NSInteger margin = 10;
     // 结束刷新
     [self.refresh endRefresh];
 }
-
 
 #pragma mark --------------------SecondhandCategoryDelegate----------------
 
@@ -735,7 +732,7 @@ static NSInteger margin = 10;
         _activityIndicatorView.center = self.view.center;
         [self.view addSubview:_activityIndicatorView];
     }
-
+    
     return _activityIndicatorView;
 }
 
