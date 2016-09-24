@@ -6,35 +6,48 @@
 	<dict>
 		<key>AFNetworking.xcscheme</key>
 		<dict>
-			<key>orderHint</key>
-			<integer>2</integer>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>MJExtension.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
 		</dict>
 		<key>Masonry.xcscheme</key>
 		<dict>
-			<key>orderHint</key>
-			<integer>3</integer>
+			<key>isShown</key>
+			<false/>
 		</dict>
 		<key>Pods.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>1</integer>
 		</dict>
 		<key>SDWebImage.xcscheme</key>
 		<dict>
-			<key>orderHint</key>
-			<integer>4</integer>
+			<key>isShown</key>
+			<false/>
 		</dict>
 		<key>UITableView+FDTemplateLayoutCell.xcscheme</key>
 		<dict>
-			<key>orderHint</key>
-			<integer>5</integer>
+			<key>isShown</key>
+			<false/>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>1469924FC52F60B0068FA24EEFCB3EFC</key>
+		<key>1F6D5BC39900891D7C8C67CF47F4BFB0</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>3DA16AC6BDCC529AF71ECA69005BE605</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>49D722AED0793E0D455B344985DCF6A1</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -44,22 +57,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>81AFEFBAD6D0317DD3D6E75F111281A3</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>928353533005A4198EBDA5B700D37B64</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>CABD665B4B5CC4174D555EB3425FBD81</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>CFE122428A0408C97BCE88E9CDDE0367</key>
+		<key>FD4DA5B7F954E53CDD518FFF4419A0C1</key>
 		<dict>
 			<key>primary</key>
 			<true/>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>700</key>
+	<array/>
+	<key>600</key>
+	<array>
+		<string>大球类</string>
+		<string>羽毛球/乒乓球</string>
+		<string>健身器材</string>
+	</array>
+	<key>500</key>
+	<array>
+		<string>普通自行车</string>
+		<string>山地自行车</string>
+		<string>公路自行车</string>
+		<string>小轮车</string>
+		<string>死飞车</string>
+		<string>折叠自行车</string>
+	</array>
+	<key>200</key>
+	<array>
+		<string>手机</string>
+		<string>相机/摄像机</string>
+		<string>MP3/MP4</string>
+		<string>移动硬盘</string>
+		<string>U盘</string>
+		<string>游戏机</string>
+	</array>
+	<key>0</key>
+	<array/>
+	<key>300</key>
+	<array>
+		<string>台式机</string>
+		<string>平板电脑</string>
+		<string>显示器</string>
+		<string>台式机配件</string>
+		<string>笔记本电脑</string>
+		<string>笔记本配件</string>
+	</array>
+	<key>400</key>
+	<array>
+		<string>女装</string>
+		<string>女鞋</string>
+		<string>男装</string>
+		<string>男鞋</string>
+	</array>
+</dict>
+</plist>

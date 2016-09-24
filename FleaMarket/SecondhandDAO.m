@@ -91,12 +91,16 @@ static SecondhandDAO *sharedManager = nil;
             [bquery whereKey:@"main_category" equalTo:value];
         }
         
+        if ([key isEqualToString:@"vice_category"]) {
+            NSArray *categoryArray = filterDic[key];
+            [bquery whereKey:@"vice_category" containedIn:[NSArray arrayWithArray:categoryArray]];
+        }
+        
+        
         // 按学校过滤
         if ([key isEqualToString:@"school"]) {
             NSArray *schoolArray = filterDic[key];
-            for (NSString *school in schoolArray) {
-                [bquery whereKey:@"school" equalTo:school];
-            }
+            [bquery whereKey:@"school" containedIn:[NSArray arrayWithArray:schoolArray]];
         }
     }
     
