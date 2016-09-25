@@ -33,6 +33,10 @@
     NSManagedObjectContext *moc = [self managedObjectContext];
     NSAssert(moc != nil, @"Unable to Create Managed Object Context");
     
+    // By 仝磊鸣, 设置全局的BarItemButton颜色
+    [[UINavigationBar appearance] setBarTintColor:[UIColor whiteColor]];
+    [[UINavigationBar appearance] setTintColor:orangColorPCH];
+    
     // Override point for customization after application launch.
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     self.window.backgroundColor = [UIColor whiteColor];

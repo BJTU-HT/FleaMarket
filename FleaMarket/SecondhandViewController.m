@@ -58,21 +58,12 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     self.navigationController.navigationBarHidden = NO;
-    
-    // 添加刷新
-    __weak SecondhandViewController *weakSelf = self;
-    self.refresh = [[WJRefresh alloc] init];
-    [self.refresh addHeardRefreshTo:self.tableView heardBlock:^{
-        [weakSelf loadNewDataAction];
-    } footBlok:^{
-        [weakSelf loadMoreDateAction];
-    }];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
     self.navigationController.navigationBarHidden = YES;
-    [self.tableView removeObserver:self.refresh forKeyPath:@"contentOffset"];
+    //[self.tableView removeObserver:self.refresh forKeyPath:@"contentOffset"];
 }
 
 - (void)initData
@@ -114,6 +105,15 @@
     self.tableView.dataSource = self;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:self.tableView];
+    
+    // 添加刷新
+    __weak SecondhandViewController *weakSelf = self;
+    self.refresh = [[WJRefresh alloc] init];
+    [self.refresh addHeardRefreshTo:self.tableView heardBlock:^{
+        [weakSelf loadNewDataAction];
+    } footBlok:^{
+        [weakSelf loadMoreDateAction];
+    }];
 }
 
 -(void)drawSection0:(CGRect)S0Frame{

@@ -1253,7 +1253,6 @@
 				E9621F171D8F74B6001CE5E9 /* PublishSecondhandVC */,
 				E9B3B9531D2BADE00085304D /* RXRotateButtonOverlayView */,
 				E9B3B9161D2BAC050085304D /* ChooseImage */,
-				E9B3B9071D2BAB470085304D /* ItemCategory */,
 				E9B3B9021D2BAAB80085304D /* UploadProgress */,
 				96B258531CBF87AB00D6DC43 /* publishVC.h */,
 				96B258541CBF87AB00D6DC43 /* publishVC.m */,
@@ -1552,6 +1551,7 @@
 		E9621F1B1D8F7DA1001CE5E9 /* view */ = {
 			isa = PBXGroup;
 			children = (
+				E9B3B9071D2BAB470085304D /* ItemCategory */,
 				E9621F1C1D8F7EDE001CE5E9 /* PublishPart1Cell.h */,
 				E9621F1D1D8F7EDE001CE5E9 /* PublishPart1Cell.m */,
 				E9621F1F1D8FDE85001CE5E9 /* NewPriceView.h */,

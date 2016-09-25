@@ -6,7 +6,6 @@
 //  Copyright © 2016 H-T. All rights reserved.
 //
 
-#import <AssetsLibrary/AssetsLibrary.h>
 #import <Photos/Photos.h>
 #import "publishVC.h"
 #import "RXRotateButtonOverlayView.h"
@@ -17,15 +16,8 @@
 #import "UploadImageModel.h"
 
 @interface publishVC () <RXRotateButtonOverlayViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
-
 @property (nonatomic, strong) RXRotateButtonOverlayView *overlayView;
-
-@property (nonatomic, strong) ALAssetsLibrary *assetsLibrary;
-
-@property (nonatomic , strong) ALAssetsGroup * group;
-
 @property (nonatomic, strong) NSMutableArray *tableData;
-
 @property (nonatomic, strong) NSMutableArray *collectionData;
 
 @end
@@ -34,6 +26,7 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    self.navigationController.navigationBarHidden = NO;
     [self.view addSubview:self.overlayView];
     [self.overlayView show];
 }
@@ -41,9 +34,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
-    self.view.backgroundColor = [UIColor grayColor];
-    
+    UINavigationItem *navigationItem = [self navigationItem];
+    navigationItem.title = @"发布";
     [self getPhotoAssetCollections];
 }
 
@@ -209,15 +201,6 @@
     }
     
     return _overlayView;
-}
-
-- (ALAssetsLibrary *)assetsLibrary
-{
-    if (!_assetsLibrary) {
-        _assetsLibrary = [[ALAssetsLibrary alloc] init];
-    }
-    
-    return _assetsLibrary;
 }
 
 - (NSMutableArray *)tableData

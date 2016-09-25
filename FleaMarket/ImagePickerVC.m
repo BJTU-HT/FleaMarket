@@ -90,9 +90,11 @@ const NSInteger photoCounts = 9;
 
 - (void)setupNavBar
 {
-    UIBarButtonItem *assetCollectionsBtn = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCamera target:self action:@selector(showTableView)];
+    UIBarButtonItem *assetCollectionsBtn = [[UIBarButtonItem alloc] initWithTitle:@"相册" style:UIBarButtonItemStylePlain target:self action:@selector(showTableView)];
+    //UIBarButtonItem *assetCollectionsBtn = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonItemS target:self action:@selector(showTableView)];
     UINavigationItem *item = self.navigationItem;
     item.rightBarButtonItem = assetCollectionsBtn;
+    item.rightBarButtonItem.title = @"相册";
     
 }
 
