@@ -102,6 +102,8 @@
     UINavigationItem *navigationItem = [self navigationItem];
     navigationItem.titleView = searchBar;
     self.searchBar = searchBar;
+    
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back_03.png"] style:UIBarButtonItemStylePlain target:self action:@selector(backToMain:)];
 }
 
 - (void)initViews
@@ -174,6 +176,12 @@
 }
 
 #pragma mark --- action ---
+
+- (void)backToMain:(id)sender
+{
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 - (void)OnFilterBtn:(UIButton *)sender
 {
     for (int i = 0; i < 3; i++) {
@@ -267,6 +275,7 @@
 - (void)searchByKey:(NSString *)keyString
 {
     // 先清空当前数据
+    [self.activityIndicatorView startAnimating];
     [self.bl resetOffset];
     [self.dataArray removeAllObjects];
     [self.frameArray removeAllObjects];
@@ -318,6 +327,7 @@
 - (void)refreshData
 {
     // 先清空当前数据
+    [self.activityIndicatorView startAnimating];
     [self.bl resetOffset];
     [self.dataArray removeAllObjects];
     [self.frameArray removeAllObjects];

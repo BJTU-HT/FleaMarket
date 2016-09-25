@@ -146,6 +146,11 @@
         
     } else {
         // 1 就是从相册中选择
+        
+        for (CollectionDataModel *model in _collectionData) {
+            model.selected = NO;
+        }
+        
         ImagePickerVC *imgPickVC = [[ImagePickerVC alloc] init];
         imgPickVC.assetCollection = _tableData[0];
         imgPickVC.tableData  = [[NSMutableArray alloc] initWithArray:_tableData];

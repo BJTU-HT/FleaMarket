@@ -43,7 +43,7 @@
         CGFloat pageControlW = spaceForOne * self.model.pictureArray.count;
         CGFloat pageControlH = spaceForOne;
         CGFloat pageControlX = screenWidthPCH / 2.0f - pageControlW / 2.0f;
-        CGFloat pageControlY = scrollViewH * 0.7f;
+        CGFloat pageControlY = scrollViewH * 0.85f;
         self.pageControlFrame = CGRectMake(pageControlX, pageControlY, pageControlW, pageControlH);
         
         self.currentImageViewFrame = CGRectMake(screenWidthPCH, 0, screenWidthPCH, scrollViewH);

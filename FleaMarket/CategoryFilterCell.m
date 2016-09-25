@@ -30,13 +30,9 @@
         //
         //        NSLog(@"self.frame.size.width:%f",self.frame.size.width);
         _numberBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        _numberBtn.frame = CGRectMake(self.frame.size.width-85, 12, 80, 15);
-        _numberBtn.font = [UIFont systemFontOfSize:11];
-        _numberBtn.layer.cornerRadius = 7;
-        _numberBtn.layer.masksToBounds = YES;
-        [_numberBtn setBackgroundImage:[UIImage imageNamed:@"film"] forState:UIControlStateNormal];
-        [_numberBtn setBackgroundImage:[UIImage imageNamed:@"film"] forState:UIControlStateHighlighted];
-        [_numberBtn setTitleColor:[UIColor greenColor] forState:UIControlStateNormal];
+        _numberBtn.frame = CGRectMake(self.frame.size.width-50, 21 - 12, 24, 24);
+       
+        [_numberBtn setTitleColor:orangColorPCH forState:UIControlStateNormal];
         [_numberBtn setTitleColor:[UIColor blueColor] forState:UIControlStateHighlighted];
         [self.contentView addSubview:_numberBtn];
         
@@ -52,19 +48,10 @@
     _groupM = groupM;
     _nameLabel.text = groupM.name;
     
-    if (groupM.list == nil) {
-        //[_numberBtn setTitle:[NSString stringWithFormat:@"%@",groupM.count] forState:UIControlStateNormal];
-    }else{
-        //[_numberBtn setTitle:[NSString stringWithFormat:@"%@>",groupM.count] forState:UIControlStateNormal];
-        [_numberBtn setTitle:@">" forState:UIControlStateNormal];
+    if (groupM.list != nil) {
+        [_numberBtn setBackgroundImage:[UIImage imageNamed:@"arrow_right.png"] forState:UIControlStateNormal];
+        [_numberBtn setBackgroundImage:[UIImage imageNamed:@"arrow_right.png"] forState:UIControlStateHighlighted];
     }
-    
-    //NSString *str = [NSString stringWithFormat:@"%@>",groupM.count];
-    NSString *str = [NSString stringWithFormat:@">"];
-    CGSize textSize = [str sizeWithFont:[UIFont systemFontOfSize:11] constrainedToSize:CGSizeMake(80, 15) lineBreakMode:NSLineBreakByWordWrapping];
-    
-    _numberBtn.frame = CGRectMake(self.frame.size.width-10-textSize.width-10, 12, textSize.width+10, 15);
-    
 }
 
 - (void)awakeFromNib {

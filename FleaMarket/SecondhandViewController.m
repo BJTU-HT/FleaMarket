@@ -236,6 +236,7 @@
 - (void)searchByKey:(NSString *)keyString
 {
     // 先清空当前数据
+    [self.activityIndicatorView startAnimating];
     [self.bl resetOffset];
     [self.dataArray removeAllObjects];
     [self.frameArray removeAllObjects];
@@ -271,6 +272,7 @@
 - (void)refreshData
 {
     // 先清空当前数据
+    [self.activityIndicatorView startAnimating];
     [self.bl resetOffset];
     [self.dataArray removeAllObjects];
     [self.frameArray removeAllObjects];

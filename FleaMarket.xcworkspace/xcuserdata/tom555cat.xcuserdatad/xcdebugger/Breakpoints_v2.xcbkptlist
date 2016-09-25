@@ -1654,11 +1654,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FleaMarket/ImagePickerVC.m"
-            timestampString = "496464500.676765"
+            timestampString = "496467577.946856"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "385"
-            endingLineNumber = "385"
+            startingLineNumber = "353"
+            endingLineNumber = "353"
             landmarkName = "-numberOfSectionsInCollectionView:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1670,11 +1670,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FleaMarket/ImagePickerVC.m"
-            timestampString = "496464500.676765"
+            timestampString = "496467577.946856"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "397"
-            endingLineNumber = "397"
+            startingLineNumber = "365"
+            endingLineNumber = "365"
             landmarkName = "-collectionView:numberOfItemsInSection:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1686,11 +1686,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FleaMarket/ImagePickerVC.m"
-            timestampString = "496464500.676765"
+            timestampString = "496467577.946856"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "412"
-            endingLineNumber = "412"
+            startingLineNumber = "380"
+            endingLineNumber = "380"
             landmarkName = "-collectionView:cellForItemAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1702,11 +1702,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FleaMarket/ImagePickerVC.m"
-            timestampString = "496464500.676765"
+            timestampString = "496467577.946856"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "411"
-            endingLineNumber = "411"
+            startingLineNumber = "379"
+            endingLineNumber = "379"
             landmarkName = "-collectionView:cellForItemAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1781,22 +1781,6 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "FleaMarket/ImagePickerVC.m"
-            timestampString = "496464500.676765"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "257"
-            endingLineNumber = "257"
-            landmarkName = "-showTableView"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "FleaMarket/CollectionViewController.m"
             timestampString = "492528117.785686"
             startingColumnNumber = "9223372036854775807"
@@ -1814,11 +1798,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FleaMarket/ImagePickerVC.m"
-            timestampString = "496464500.676765"
+            timestampString = "496467577.946856"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "595"
-            endingLineNumber = "595"
+            startingLineNumber = "563"
+            endingLineNumber = "563"
             landmarkName = "-reloadCollectionData:assetCollectionIndex:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1910,11 +1894,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FleaMarket/ImagePickerVC.m"
-            timestampString = "496464500.676765"
+            timestampString = "496467577.946856"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "299"
-            endingLineNumber = "299"
+            startingLineNumber = "267"
+            endingLineNumber = "267"
             landmarkName = "-toolBarRightBtnClick"
             landmarkType = "5">
          </BreakpointContent>
@@ -2470,11 +2454,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FleaMarket/MainInfoCell.m"
-            timestampString = "495774043.641199"
+            timestampString = "496483007.484884"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "199"
-            endingLineNumber = "199"
+            startingLineNumber = "200"
+            endingLineNumber = "200"
             landmarkName = "-setModel:"
             landmarkType = "5">
          </BreakpointContent>
@@ -2502,11 +2486,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FleaMarket/MainInfoCell.m"
-            timestampString = "495774043.641199"
+            timestampString = "496483007.484884"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "198"
-            endingLineNumber = "198"
+            startingLineNumber = "199"
+            endingLineNumber = "199"
             landmarkName = "-setModel:"
             landmarkType = "5">
          </BreakpointContent>
@@ -2598,11 +2582,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FleaMarket/MainInfoCell.m"
-            timestampString = "495774118.256926"
+            timestampString = "496483007.484884"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "219"
-            endingLineNumber = "219"
+            startingLineNumber = "220"
+            endingLineNumber = "220"
             landmarkName = "-setModel:"
             landmarkType = "5">
          </BreakpointContent>
@@ -2870,11 +2854,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FleaMarket/ImagePickerVC.m"
-            timestampString = "496464500.676765"
+            timestampString = "496467577.946856"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "614"
-            endingLineNumber = "614"
+            startingLineNumber = "582"
+            endingLineNumber = "582"
             landmarkName = "-imagePickerController:didFinishPickingMediaWithInfo:"
             landmarkType = "5">
          </BreakpointContent>
@@ -2886,11 +2870,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FleaMarket/ImagePickerVC.m"
-            timestampString = "496464500.676765"
+            timestampString = "496467577.946856"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "481"
-            endingLineNumber = "481"
+            startingLineNumber = "449"
+            endingLineNumber = "449"
             landmarkName = "-collectionView:cellForItemAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
@@ -2902,11 +2886,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FleaMarket/ImagePickerVC.m"
-            timestampString = "496464500.676765"
+            timestampString = "496467577.946856"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "631"
-            endingLineNumber = "631"
+            startingLineNumber = "599"
+            endingLineNumber = "599"
             landmarkName = "-imagePickerController:didFinishPickingMediaWithInfo:"
             landmarkType = "5">
          </BreakpointContent>
@@ -2918,11 +2902,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FleaMarket/PreViewController.m"
-            timestampString = "496049825.796416"
+            timestampString = "496481080.625774"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "163"
-            endingLineNumber = "163"
+            startingLineNumber = "168"
+            endingLineNumber = "168"
             landmarkName = "-toolBarRightBtnClick"
             landmarkType = "5">
          </BreakpointContent>
@@ -3045,22 +3029,6 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "FleaMarket/SecondhandFilterCell.m"
-            timestampString = "496335816.818299"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "64"
-            endingLineNumber = "64"
-            landmarkName = "-setGroupM:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "FleaMarket/SecondhandViewController.m"
             timestampString = "496461569.966799"
             startingColumnNumber = "9223372036854775807"
@@ -3126,11 +3094,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FleaMarket/SecondhandFilterCell.m"
-            timestampString = "496335816.818299"
+            timestampString = "496485733.360783"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "52"
-            endingLineNumber = "52"
+            startingLineNumber = "51"
+            endingLineNumber = "51"
             landmarkName = "-setGroupM:"
             landmarkType = "5">
          </BreakpointContent>
@@ -3206,11 +3174,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FleaMarket/SecondhandVC.m"
-            timestampString = "496419839.303771"
+            timestampString = "496482379.427446"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "267"
-            endingLineNumber = "267"
+            startingLineNumber = "275"
+            endingLineNumber = "275"
             landmarkName = "-searchByKey:"
             landmarkType = "5">
          </BreakpointContent>
@@ -3222,11 +3190,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FleaMarket/SecondhandVC.m"
-            timestampString = "496419839.303771"
+            timestampString = "496482622.988743"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "533"
-            endingLineNumber = "533"
+            startingLineNumber = "543"
+            endingLineNumber = "543"
             landmarkName = "-sortTableView:didSelectRowAtIndexPath:withId:withName:"
             landmarkType = "5">
          </BreakpointContent>
@@ -3238,11 +3206,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FleaMarket/SecondhandVC.m"
-            timestampString = "496419839.303771"
+            timestampString = "496482379.427446"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "264"
-            endingLineNumber = "264"
+            startingLineNumber = "272"
+            endingLineNumber = "272"
             landmarkName = "-getFirstPageData"
             landmarkType = "5">
          </BreakpointContent>
@@ -3286,11 +3254,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FleaMarket/SecondhandVC.m"
-            timestampString = "496419839.303771"
+            timestampString = "496482622.988743"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "471"
-            endingLineNumber = "471"
+            startingLineNumber = "481"
+            endingLineNumber = "481"
             landmarkName = "-tableView:cellForRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
@@ -3302,11 +3270,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FleaMarket/SecondhandVC.m"
-            timestampString = "496419839.303771"
+            timestampString = "496482622.988743"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "373"
-            endingLineNumber = "373"
+            startingLineNumber = "383"
+            endingLineNumber = "383"
             landmarkName = "-loadNewDataAction"
             landmarkType = "5">
          </BreakpointContent>
@@ -3318,11 +3286,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FleaMarket/SecondhandVC.m"
-            timestampString = "496419839.303771"
+            timestampString = "496482622.988743"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "320"
-            endingLineNumber = "320"
+            startingLineNumber = "329"
+            endingLineNumber = "329"
             landmarkName = "-refreshData"
             landmarkType = "5">
          </BreakpointContent>
@@ -3334,11 +3302,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FleaMarket/SecondhandVC.m"
-            timestampString = "496419839.303771"
+            timestampString = "496482379.427446"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "177"
-            endingLineNumber = "177"
+            startingLineNumber = "185"
+            endingLineNumber = "185"
             landmarkName = "-OnFilterBtn:"
             landmarkType = "5">
          </BreakpointContent>
@@ -3350,11 +3318,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FleaMarket/SecondhandVC.m"
-            timestampString = "496419839.303771"
+            timestampString = "496482379.427446"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "196"
-            endingLineNumber = "196"
+            startingLineNumber = "204"
+            endingLineNumber = "204"
             landmarkName = "-OnFilterBtn:"
             landmarkType = "5">
          </BreakpointContent>
@@ -3382,11 +3350,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FleaMarket/SecondhandViewController.m"
-            timestampString = "496461569.966799"
+            timestampString = "496482622.988743"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "519"
-            endingLineNumber = "519"
+            startingLineNumber = "521"
+            endingLineNumber = "521"
             landmarkName = "-tableView:didSelectRowAtIndexPath:withId:withName:"
             landmarkType = "5">
          </BreakpointContent>
@@ -3398,11 +3366,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FleaMarket/SecondhandViewController.m"
-            timestampString = "496461569.966799"
+            timestampString = "496482622.988743"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "481"
-            endingLineNumber = "481"
+            startingLineNumber = "483"
+            endingLineNumber = "483"
             landmarkName = "-findSecondhandFinished:"
             landmarkType = "5">
          </BreakpointContent>
@@ -3414,11 +3382,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FleaMarket/SecondhandViewController.m"
-            timestampString = "496461569.966799"
+            timestampString = "496482622.988743"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "503"
-            endingLineNumber = "503"
+            startingLineNumber = "505"
+            endingLineNumber = "505"
             landmarkName = "-findNewCommingSecondhandFinished:"
             landmarkType = "5">
          </BreakpointContent>
@@ -3430,11 +3398,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FleaMarket/SecondhandViewController.m"
-            timestampString = "496461569.966799"
+            timestampString = "496482622.988743"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "486"
-            endingLineNumber = "486"
+            startingLineNumber = "488"
+            endingLineNumber = "488"
             landmarkName = "-findSecondhandFinished:"
             landmarkType = "5">
          </BreakpointContent>
@@ -3462,11 +3430,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FleaMarket/SecondhandVC.m"
-            timestampString = "496419839.303771"
+            timestampString = "496482379.427446"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "233"
-            endingLineNumber = "233"
+            startingLineNumber = "241"
+            endingLineNumber = "241"
             landmarkName = "-searchBarShouldBeginEditing:"
             landmarkType = "5">
          </BreakpointContent>
@@ -3478,11 +3446,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FleaMarket/SecondhandVC.m"
-            timestampString = "496419839.303771"
+            timestampString = "496482379.427446"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "227"
-            endingLineNumber = "227"
+            startingLineNumber = "235"
+            endingLineNumber = "235"
             landmarkName = "-searchBarShouldBeginEditing:"
             landmarkType = "5">
          </BreakpointContent>
@@ -3494,11 +3462,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FleaMarket/SecondhandVC.m"
-            timestampString = "496419839.303771"
+            timestampString = "496482379.427446"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "220"
-            endingLineNumber = "220"
+            startingLineNumber = "228"
+            endingLineNumber = "228"
             landmarkName = "-searchSecondhandByKey:"
             landmarkType = "5">
          </BreakpointContent>
@@ -3510,11 +3478,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FleaMarket/SecondhandViewController.m"
-            timestampString = "496461569.966799"
+            timestampString = "496482622.988743"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "331"
-            endingLineNumber = "331"
+            startingLineNumber = "333"
+            endingLineNumber = "333"
             landmarkName = "-loadMoreDateAction"
             landmarkType = "5">
          </BreakpointContent>
@@ -3526,11 +3494,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FleaMarket/SecondhandViewController.m"
-            timestampString = "496461569.966799"
+            timestampString = "496482622.988743"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "333"
-            endingLineNumber = "333"
+            startingLineNumber = "335"
+            endingLineNumber = "335"
             landmarkName = "-loadMoreDateAction"
             landmarkType = "5">
             <Locations>

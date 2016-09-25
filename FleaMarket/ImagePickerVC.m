@@ -90,12 +90,14 @@ const NSInteger photoCounts = 9;
 
 - (void)setupNavBar
 {
+    // 右边相册按钮
     UIBarButtonItem *assetCollectionsBtn = [[UIBarButtonItem alloc] initWithTitle:@"相册" style:UIBarButtonItemStylePlain target:self action:@selector(showTableView)];
-    //UIBarButtonItem *assetCollectionsBtn = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonItemS target:self action:@selector(showTableView)];
     UINavigationItem *item = self.navigationItem;
     item.rightBarButtonItem = assetCollectionsBtn;
     item.rightBarButtonItem.title = @"相册";
     
+    // 左边返回按钮
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back_03.png"] style:UIBarButtonItemStylePlain target:self action:@selector(backToMain:)];
 }
 
 - (void)setupToolBar
@@ -244,54 +246,20 @@ const NSInteger photoCounts = 9;
 }
 
 #pragma mark --------------- action -----------------
+
+- (void)backToMain:(id)sender
+{
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 - (void)showTableView
 {
     CollectionViewController *collectionVC = [[CollectionViewController alloc] init];
     collectionVC.tableData = self.tableData;
     collectionVC.delegate = self;
     [self.navigationController pushViewController:collectionVC animated:YES];
-    
-    /*
-    if ([self.myCollectionView.collectionViewLayout isKindOfClass:[PhotoCollectionViewFlow class]]) {
-        self.collectionData = [self test];
-        [self.myCollectionView reloadData];    // 一定要加上reloadData
-        [self.myCollectionView setCollectionViewLayout:[[NormalCollectionViewFlow alloc] init] animated:YES];
-    } else {
-        PhotoCollectionViewFlow *layout1 = [[PhotoCollectionViewFlow alloc] init];
-        [self.myCollectionView setCollectionViewLayout:layout1 animated:YES];
-    }
-     */
 }
 
-/*
-- (NSMutableArray *)test
-{
-    // 传递回去的当前相册集的collectionData
-    NSMutableArray *collectionData1 = [[NSMutableArray alloc] init];
-    
-    PHAssetCollection *assetCollection = self.tableData[1];
-    PHFetchResult *result = [PHAsset fetchAssetsInAssetCollection:assetCollection options:nil];
-    NSMutableArray *assets = [[NSMutableArray alloc] init];
-    
-    [result enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        if ([obj isKindOfClass:[PHAsset class]]) {
-            [assets addObject:obj];
-        }
-    }];
-    
-    PHCachingImageManager *cachingManager = [[PHCachingImageManager alloc] init];
-    [cachingManager startCachingImagesForAssets:assets targetSize:PHImageManagerMaximumSize contentMode:PHImageContentModeAspectFit options:nil];
-    
-    for (PHAsset *asset in assets) {
-        CollectionDataModel *dataModel = [[CollectionDataModel alloc] init];
-        dataModel.asset = asset;
-        dataModel.selected = NO;
-        [collectionData1 addObject:dataModel];
-    }
-    
-    return collectionData1;
-}
- */
 
 // 提交选择的图片
 - (void)toolBarRightBtnClick
