@@ -43,6 +43,8 @@
 @property (nonatomic, assign) NSInteger schoolCategory;                          // 学校分类
 @property (nonatomic, strong) NSString *currentSchool;
 @property (nonatomic, strong) SecondhandTitleView *secondhandTitleView;
+
+//@property (nonatomic, strong) UITableView *testScrollView;
 @end
 
 @implementation SecondhandViewController
@@ -58,12 +60,32 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     self.navigationController.navigationBarHidden = NO;
+    
+    // 添加刷新
+    __weak SecondhandViewController *weakSelf = self;
+    self.refresh = [[WJRefresh alloc] init];
+    [self.refresh addHeardRefreshTo:self.tableView heardBlock:^{
+        [weakSelf loadNewDataAction];
+    } footBlok:^{
+        [weakSelf loadMoreDateAction];
+    }];
+    
+    /*
+    __weak SecondhandViewController *weakSelf = self;
+    self.refresh = [[WJRefresh alloc] init];
+    [self.refresh addHeardRefreshTo:self.testScrollView heardBlock:^{
+        [weakSelf loadNewDataAction];
+    } footBlok:^{
+        [weakSelf loadMoreDateAction];
+    }];
+     */
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
     self.navigationController.navigationBarHidden = YES;
     //[self.tableView removeObserver:self.refresh forKeyPath:@"contentOffset"];
+    [self.refresh removeFromSuperview];
 }
 
 - (void)initData
@@ -83,6 +105,10 @@
 
 - (void)setNav
 {
+    // trick, 不加这个的话会自动下拉刷新
+    UIView *backView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, screenWidthPCH, 64)];
+    [self.view addSubview:backView];
+    
     // 中间选择学校标题
     CGFloat titleViewW = screenWidthPCH * 0.6f;
     CGFloat titleViewH = 44 * 0.6f;
@@ -106,14 +132,7 @@
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:self.tableView];
     
-    // 添加刷新
-    __weak SecondhandViewController *weakSelf = self;
-    self.refresh = [[WJRefresh alloc] init];
-    [self.refresh addHeardRefreshTo:self.tableView heardBlock:^{
-        [weakSelf loadNewDataAction];
-    } footBlok:^{
-        [weakSelf loadMoreDateAction];
-    }];
+    self.view.backgroundColor = [UIColor redColor];
 }
 
 -(void)drawSection0:(CGRect)S0Frame{
@@ -296,7 +315,7 @@
         
         [filterDic setObject:schoolArray forKey:@"school"];
     }
-
+    
     [self.bl findSecondhand:filterDic];
 }
 
@@ -408,7 +427,6 @@
     }
 }
 
-
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     if (section == 1) {
         return 10;
@@ -417,14 +435,11 @@
     }
 }
 
-
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, screenWidthPCH, 10)];
     headerView.backgroundColor = lightGrayColorPCH;
     return headerView;
 }
-
-
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -497,7 +512,12 @@
 
 - (void)findSecondhandFailed:(NSError *)error
 {
-    NSLog(@"过滤查询失败!");
+    // 结束刷新
+    [self.activityIndicatorView stopAnimating];
+    [self.refresh endRefresh];
+    UIAlertController *ac = [UIAlertController alertControllerWithTitle:nil message:@"请求失败" preferredStyle:UIAlertControllerStyleAlert];
+    [self presentViewController:ac animated:YES completion:nil];
+    [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(createAlert:) userInfo:ac repeats:NO];
 }
 
 - (void)findNewCommingSecondhandFinished:(NSMutableArray *)list
@@ -514,6 +534,22 @@
     
     // 结束刷新
     [self.refresh endRefresh];
+}
+
+- (void)findNewCommingSecondhandFailed:(NSError *)error
+{
+    // 结束刷新
+    [self.activityIndicatorView stopAnimating];
+    [self.refresh endRefresh];
+    UIAlertController *ac = [UIAlertController alertControllerWithTitle:nil message:@"请求失败" preferredStyle:UIAlertControllerStyleAlert];
+    [self presentViewController:ac animated:NO completion:nil];
+    [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(createAlert:) userInfo:ac repeats:NO];
+}
+
+- (void)createAlert:(NSTimer *)timer{
+    UIAlertController *alert = [timer userInfo];
+    [alert dismissViewControllerAnimated:YES completion:nil];
+    alert = nil;
 }
 
 #pragma mark --- SecondhandFilterDelegate ---

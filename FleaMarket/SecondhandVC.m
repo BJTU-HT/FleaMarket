@@ -127,7 +127,8 @@
         UIButton *filterBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         filterBtn.frame = CGRectMake(i*screenWidthPCH/3, 0, screenWidthPCH/3-15, 40);
         filterBtn.tag = 100 + i;
-        filterBtn.font = FontSize12;
+        //filterBtn.font = FontSize12;
+        filterBtn.titleLabel.font = FontSize14;
         [filterBtn setTitle:filterName[i] forState:UIControlStateNormal];
         [filterBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         [filterBtn setTitleColor:[UIColor darkGrayColor] forState:UIControlStateSelected];
@@ -136,7 +137,7 @@
         
         // 指示三角
         UIButton *sanjiaoBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        sanjiaoBtn.frame = CGRectMake((i+1)*screenWidthPCH/3-15, 16, 8, 7);
+        sanjiaoBtn.frame = CGRectMake((i+1)*screenWidthPCH/3-15, 16, 10, 10);
         sanjiaoBtn.tag = 120+i;
         [sanjiaoBtn setImage:[UIImage imageNamed:@"icon_arrow_dropdown_normal"] forState:UIControlStateNormal];
         [sanjiaoBtn setImage:[UIImage imageNamed:@"icon_arrow_dropdown_selected"] forState:UIControlStateSelected];
@@ -564,7 +565,12 @@
 
 - (void)findSecondhandFailed:(NSError *)error
 {
-    NSLog(@"过滤查询失败!");
+    // 结束刷新
+    [self.activityIndicatorView stopAnimating];
+    [self.refresh endRefresh];
+    UIAlertController *ac = [UIAlertController alertControllerWithTitle:nil message:@"请求失败" preferredStyle:UIAlertControllerStyleAlert];
+    [self presentViewController:ac animated:YES completion:nil];
+    [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(createAlert:) userInfo:ac repeats:NO];
 }
 
 - (void)findNewCommingSecondhandFinished:(NSMutableArray *)list
@@ -581,6 +587,22 @@
     
     // 结束刷新
     [self.refresh endRefresh];
+}
+
+- (void)findNewCommingSecondhandFailed:(NSError *)error
+{
+    // 结束刷新
+    [self.activityIndicatorView stopAnimating];
+    [self.refresh endRefresh];
+    UIAlertController *ac = [UIAlertController alertControllerWithTitle:nil message:@"请求失败" preferredStyle:UIAlertControllerStyleAlert];
+    [self presentViewController:ac animated:NO completion:nil];
+    [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(createAlert:) userInfo:ac repeats:NO];
+}
+
+- (void)createAlert:(NSTimer *)timer{
+    UIAlertController *alert = [timer userInfo];
+    [alert dismissViewControllerAnimated:YES completion:nil];
+    alert = nil;
 }
 
 #pragma mark --- getter && setter ---

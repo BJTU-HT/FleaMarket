@@ -67,6 +67,8 @@ const NSInteger photoCounts = 9;
     [self setupCollectionView];
     [self setupNavBar];
     [self setupToolBar];
+    
+    self.navigationItem.title = @"选择照片";
 }
 
 #pragma mark --------------- private ---------------
