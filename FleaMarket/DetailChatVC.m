@@ -54,7 +54,6 @@ BmobUser *user1;
     tableViewChat = [[UITableView alloc] initWithFrame:tableViewframe style:UITableViewStylePlain];
     tableViewChat.delegate = self;
     tableViewChat.dataSource = self;
-    //[tableViewChat registerClass:[TextChatTableViewCell class] forCellReuseIdentifier:kTextCellID];
     [self.view addSubview:tableViewChat];
     _loginUser = [BmobUser getCurrentUser];
     
@@ -76,6 +75,8 @@ BmobUser *user1;
     self.sharedIM = [BmobIM sharedBmobIM];
     self.userInfo = [self.sharedIM userInfoWithUserId:conversation.conversationId];
     [self.conversation updateLocalCache];
+    //201609251541
+    [self addButtonToNav];
 }
 
 -(void)addBottomView{
@@ -83,8 +84,24 @@ BmobUser *user1;
     bottomView = [[ChatBottomView alloc ]initWithFrame: bottomInitialFrame];
     bottomView.textField.delegate = self;
     //[bottomView.addBtn addTarget:self action:@selector(showBottomContentView) forControlEvents:UIControlEventTouchDown];
+    [bottomView.sendBtn addTarget: self action:@selector(bottomViewSendBtnClicked:) forControlEvents:UIControlEventTouchDown];
     [self.view addSubview:bottomView];
 }
+
+#pragma ------------------201609251540 add begin------------------------------------------------
+//添加导航栏返回箭头图标
+-(void)addButtonToNav
+{
+    self.navigationController.navigationBar.tintColor = orangColorPCH;
+    UIBarButtonItem *leftBarItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"backArrow.png"] style:UIBarButtonItemStylePlain target: self action:@selector(returnButtonClicked:)];
+    leftBarItem.tintColor = orangColorPCH;
+    self.navigationItem.leftBarButtonItem = leftBarItem;
+}
+
+-(void)returnButtonClicked:(UIButton *)sender{
+    [self.navigationController popViewControllerAnimated:NO];
+}
+#pragma ------------------201609251540 add end--------------------------------------------------
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -95,6 +112,7 @@ BmobUser *user1;
     [self.sharedIM setupDeviceToken:self.token];
     [self.sharedIM connect];
 }
+
 //注册键盘弹出关闭监听通知
 -(void)viewWillAppear:(BOOL)animated{
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardWillShow:) name:UIKeyboardWillShowNotification object:nil];
@@ -103,19 +121,24 @@ BmobUser *user1;
     self.token = @"";
     self.userId = user1.objectId;
     if(user1){
-        if([self.sharedIM isConnected]) {
-        [self.sharedIM disconnect];
+//        if([self.sharedIM isConnected]) {
+//        [self.sharedIM disconnect];
+//        }
+//        [self connectToServer];
+        if([self.sharedIM isConnected]){
+            NSLog(@"Server is Connected");
+        }else{
+            [self connectToServer];
         }
-        [self connectToServer];
     }
 }
 
 -(void)viewWillDisappear:(BOOL)animated{
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     [self.conversation updateLocalCache];
-    if ([self.sharedIM isConnected]) {
-        [self.sharedIM disconnect];
-    }
+//    if ([self.sharedIM isConnected]) {
+//        [self.sharedIM disconnect];
+//    }
 }
 
 #pragma @slelctor
@@ -375,7 +398,7 @@ BmobUser *user1;
             NSLog(@"123");
            [weakSelf reloadLastRow];
         }];
-        
+        [self.conversation updateLocalCache];
     }
 }
 
@@ -384,6 +407,32 @@ BmobUser *user1;
     [tableViewChat reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
     
 }
+
+//发送按钮点击相应事件 和代理函数 sendTextWithTextField
+-(void)bottomViewSendBtnClicked:(UIButton *)sender{
+    UITextField *textFieldTemp = bottomView.textField;
+    if(textFieldTemp.text == nil){
+        NSLog(@"无内容输入");
+    }else{
+        BmobIMTextMessage *message = [BmobIMTextMessage messageWithText:textFieldTemp.text attributes:nil];
+        message.conversationType =  BmobIMConversationTypeSingle;
+        message.createdTime = (uint64_t)([[NSDate date] timeIntervalSince1970] * 1000);
+        message.updatedTime = message.createdTime;
+        BmobUser *userSend = [BmobUser getCurrentUser];
+        message.fromId = userSend.objectId;
+        [messageArr addObject:message];
+        [self scrollToBottom];
+        self.bottomView.textField.text = nil;
+        
+        __weak typeof(self)weakSelf = self;
+        [self.conversation sendMessage:message completion:^(BOOL isSuccessful, NSError *error) {
+            NSLog(@"123");
+            [weakSelf reloadLastRow];
+        }];
+        [self.conversation updateLocalCache];
+    }
+}
+
 /*
 #pragma mark - Navigation
 

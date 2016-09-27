@@ -49,7 +49,7 @@ UIButton *buttonGetShortMessage; //手机号登录获取验证码按钮
 -(void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    self.title = @"书香人家欢迎您";
+    self.title = @"FleaMarket欢迎您";
     screenFrameLogin = [UIScreen mainScreen].bounds;
     screenHeight = screenFrameLogin.size.height - 20;
     screenWidth = screenFrameLogin.size.width;
@@ -234,49 +234,49 @@ UIButton *buttonGetShortMessage; //手机号登录获取验证码按钮
     [buttonLogin addTarget:self action:@selector(buttonLoginClicked:) forControlEvents:UIControlEventTouchDown];
     [accountLoginView addSubview:buttonLogin];
     
-    UIView *middleLine1 = [[UIView alloc] init];
-    CGRect middleLine1Frame = CGRectMake(screenWidth * 0.02, viewHeight * 0.54, screenWidth * 0.32, viewHeight * 0.003);
-    middleLine1.frame = middleLine1Frame;
-    middleLine1.backgroundColor = [UIColor colorWithRed:245/255.0 green:245/255.0 blue:245/255.0 alpha:1];
-    [accountLoginView addSubview:middleLine1];
-    
-    UIView *middleLine2 = [[UIView alloc] init];
-    CGRect middleLine2Frame = CGRectMake(screenWidth * 0.66, viewHeight * 0.54, screenWidth * 0.32, viewHeight * 0.003);
-    middleLine2.frame = middleLine2Frame;
-    middleLine2.backgroundColor = [UIColor colorWithRed:245/255.0 green:245/255.0 blue:245/255.0 alpha:1];
-    [accountLoginView addSubview:middleLine2];
-    
-    UILabel *labelMiddle = [[UILabel alloc] init];
-    labelMiddle.text = @"第三方账号登录";
-    labelMiddle.font = FontSize12;
-    labelMiddle.textColor = [UIColor grayColor];
-    CGRect labelMiddleFrame = CGRectMake(screenWidth * 0.34, viewHeight * 0.48, screenWidth * 0.32, viewHeight * 0.12);
-    labelMiddle.frame = labelMiddleFrame;
-    [accountLoginView addSubview:labelMiddle];
-    
-    UIButton *buttonWechat = [[UIButton alloc] init];
-    CGRect buttonWeChatFrame = CGRectMake(screenWidth * 0.08, viewHeight * 0.6, screenWidth * 0.15, viewHeight * 0.12);
-    buttonWechat.frame = buttonWeChatFrame;
-    [buttonWechat setImage:[self circleImage:[UIImage imageNamed:@"wechat.PNG"] withParam:1] forState:UIControlStateNormal];
-    [accountLoginView addSubview:buttonWechat];
-    
-    UIButton *buttonWeibo = [[UIButton alloc] init];
-    CGRect buttonWeiboFrame = CGRectMake(screenWidth * (0.08 * 2 + 0.15), viewHeight * 0.6, screenWidth * 0.15, viewHeight * 0.12);
-    buttonWeibo.frame = buttonWeiboFrame;
-    [buttonWeibo setImage:[self circleImage:[UIImage imageNamed:@"weibo.JPG"] withParam:1] forState:UIControlStateNormal];
-    [accountLoginView addSubview:buttonWeibo];
-    
-    UIButton *buttonQQ = [[UIButton alloc] init];
-    CGRect buttonQQFrame = CGRectMake(screenWidth * (0.08 * 3 + 0.15 * 2), viewHeight * 0.6, screenWidth * 0.15, viewHeight * 0.12);
-    buttonQQ.frame = buttonQQFrame;
-    [buttonQQ setImage:[self circleImage:[UIImage imageNamed:@"QQ.JPG"] withParam:1] forState:UIControlStateNormal];
-    [accountLoginView addSubview:buttonQQ];
-    
-    UIButton *buttonRenren = [[UIButton alloc] init];
-    CGRect buttonRenrenFrame = CGRectMake(screenWidth * (0.08 * 4 + 0.15 * 3), viewHeight * 0.6, screenWidth * 0.15, viewHeight * 0.12);
-    buttonRenren.frame = buttonRenrenFrame;
-    [buttonRenren setImage:[self circleImage:[UIImage imageNamed:@"renren.JPG"] withParam:1] forState:UIControlStateNormal];
-    [accountLoginView addSubview:buttonRenren];
+//    UIView *middleLine1 = [[UIView alloc] init];
+//    CGRect middleLine1Frame = CGRectMake(screenWidth * 0.02, viewHeight * 0.54, screenWidth * 0.32, viewHeight * 0.003);
+//    middleLine1.frame = middleLine1Frame;
+//    middleLine1.backgroundColor = [UIColor colorWithRed:245/255.0 green:245/255.0 blue:245/255.0 alpha:1];
+//    [accountLoginView addSubview:middleLine1];
+//    
+//    UIView *middleLine2 = [[UIView alloc] init];
+//    CGRect middleLine2Frame = CGRectMake(screenWidth * 0.66, viewHeight * 0.54, screenWidth * 0.32, viewHeight * 0.003);
+//    middleLine2.frame = middleLine2Frame;
+//    middleLine2.backgroundColor = [UIColor colorWithRed:245/255.0 green:245/255.0 blue:245/255.0 alpha:1];
+//    [accountLoginView addSubview:middleLine2];
+//    
+//    UILabel *labelMiddle = [[UILabel alloc] init];
+//    labelMiddle.text = @"第三方账号登录";
+//    labelMiddle.font = FontSize12;
+//    labelMiddle.textColor = [UIColor grayColor];
+//    CGRect labelMiddleFrame = CGRectMake(screenWidth * 0.34, viewHeight * 0.48, screenWidth * 0.32, viewHeight * 0.12);
+//    labelMiddle.frame = labelMiddleFrame;
+//    [accountLoginView addSubview:labelMiddle];
+//    
+//    UIButton *buttonWechat = [[UIButton alloc] init];
+//    CGRect buttonWeChatFrame = CGRectMake(screenWidth * 0.08, viewHeight * 0.6, screenWidth * 0.15, viewHeight * 0.12);
+//    buttonWechat.frame = buttonWeChatFrame;
+//    [buttonWechat setImage:[self circleImage:[UIImage imageNamed:@"wechat.PNG"] withParam:1] forState:UIControlStateNormal];
+//    [accountLoginView addSubview:buttonWechat];
+//    
+//    UIButton *buttonWeibo = [[UIButton alloc] init];
+//    CGRect buttonWeiboFrame = CGRectMake(screenWidth * (0.08 * 2 + 0.15), viewHeight * 0.6, screenWidth * 0.15, viewHeight * 0.12);
+//    buttonWeibo.frame = buttonWeiboFrame;
+//    [buttonWeibo setImage:[self circleImage:[UIImage imageNamed:@"weibo.JPG"] withParam:1] forState:UIControlStateNormal];
+//    [accountLoginView addSubview:buttonWeibo];
+//    
+//    UIButton *buttonQQ = [[UIButton alloc] init];
+//    CGRect buttonQQFrame = CGRectMake(screenWidth * (0.08 * 3 + 0.15 * 2), viewHeight * 0.6, screenWidth * 0.15, viewHeight * 0.12);
+//    buttonQQ.frame = buttonQQFrame;
+//    [buttonQQ setImage:[self circleImage:[UIImage imageNamed:@"QQ.JPG"] withParam:1] forState:UIControlStateNormal];
+//    [accountLoginView addSubview:buttonQQ];
+//    
+//    UIButton *buttonRenren = [[UIButton alloc] init];
+//    CGRect buttonRenrenFrame = CGRectMake(screenWidth * (0.08 * 4 + 0.15 * 3), viewHeight * 0.6, screenWidth * 0.15, viewHeight * 0.12);
+//    buttonRenren.frame = buttonRenrenFrame;
+//    [buttonRenren setImage:[self circleImage:[UIImage imageNamed:@"renren.JPG"] withParam:1] forState:UIControlStateNormal];
+//    [accountLoginView addSubview:buttonRenren];
     
     UIButton *buttonRegist = [[UIButton alloc] init];
     CGRect buttonRegistFrame = CGRectMake(screenWidth * 0.02, viewHeight * 0.76, screenWidth * 0.96, viewHeight * 0.12);
@@ -484,8 +484,12 @@ UIButton *buttonGetShortMessage; //手机号登录获取验证码按钮
         [userDefaultLogIn synchronize];
         [self.navigationController pushViewController:myViewController animated:NO];
         self.hidesBottomBarWhenPushed = NO;
+        //添加通知，用于连接服务器 2016-09-21-16-04
+        BmobUser *curUser = [BmobUser getCurrentUser];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"Login" object:curUser.objectId];
     }
 }
+
 -(void)logInVerifyPhoneNumberAndVerifyCodeBLFailed:(NSString *)error
 {
     UIAlertController *alertCon = [UIAlertController alertControllerWithTitle:@"提示信息" message:@"验证码已失效，请重新获取！" preferredStyle:UIAlertControllerStyleAlert];
@@ -506,6 +510,9 @@ UIButton *buttonGetShortMessage; //手机号登录获取验证码按钮
     [userDefaultLogIn synchronize];
     //201607181108 modify by hou
     [self.navigationController popViewControllerAnimated:NO];
+    //添加通知，用于连接服务器 2016-09-21-16-04
+    BmobUser *curUser = [BmobUser getCurrentUser];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"Login" object:curUser.objectId];
 }
 -(void)logInPassDicInfoFailedBL:(NSString *)error
 {
@@ -554,6 +561,7 @@ UIButton *buttonGetShortMessage; //手机号登录获取验证码按钮
 //        [self popUPAnimination];
     }
 }
+
 -(void)logInByPhoneNumForGetVerifyCodeBLFailed:(NSString *)error
 {
     if([error isEqualToString:@"验证码获取失败"])

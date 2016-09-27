@@ -21,4 +21,7 @@
 
 //向服务器或缓存请求用户信息
 -(void)requestDataFromServerOrPlist:(NSString *)plistName;
+
+@property(nonatomic, strong) NSUserDefaults *curUserDefaults;
+
 @end

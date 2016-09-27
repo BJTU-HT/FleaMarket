@@ -12,6 +12,7 @@
 
 @implementation findBooKInfoDAO
 static findBooKInfoDAO *sharedManager;
+NSMutableArray *muArrURL;
 
 +(findBooKInfoDAO *)sharedManager
 {
@@ -26,7 +27,6 @@ static findBooKInfoDAO *sharedManager;
 
 #pragma uploadInfo begin
 -(void)updateVisitorDataDAO:(NSMutableDictionary *)dic{
-    NSMutableArray *muArrURL = [[NSMutableArray alloc] init];
     NSString *strExchangeCate = [dic objectForKey:@"exchangeCategory"];
     BmobQuery *query = [[BmobQuery alloc] initWithClassName:strExchangeCate];
     NSString *objectID = [dic objectForKey:@"objectId"];
@@ -39,10 +39,32 @@ static findBooKInfoDAO *sharedManager;
             
             }else{
                 BmobObject *obj = array[0];
-                if([obj objectForKey:@"visitorURLArr"])
-                    [muArrURL setArray:[obj objectForKey:@"visitorURLArr"]];
-                if([dic objectForKey:@"visitorURL"])
-                    [muArrURL addObject:[dic objectForKey:@"visitorURL"]];
+                if([obj objectForKey:@"visitorURLArr"]){
+                    if(!muArrURL){
+                        muArrURL = [[NSMutableArray alloc] init];
+                        [muArrURL setArray:[obj objectForKey:@"visitorURLArr"]];
+                    }
+                }
+                //将访客头像URL插入数组，如URL已经存在则将其位置移位到首位
+                NSString *newURL = [dic objectForKey:@"visitorURL"];
+                if(newURL){
+                    if(muArrURL){
+                        int i = 0;
+                        for(i = 0; i < muArrURL.count; i++){
+                            if([newURL isEqualToString:[muArrURL objectAtIndex:i]]){
+                                [muArrURL removeObjectAtIndex:i];
+                                [muArrURL addObject:newURL];
+                                break;
+                            }
+                        }
+                        if((i == muArrURL.count) && (![newURL isEqualToString:[muArrURL objectAtIndex:i]])){
+                            [muArrURL addObject:newURL];
+                        }
+                    }else{
+                        muArrURL = [[NSMutableArray alloc] init];
+                        [muArrURL addObject:newURL];
+                    }
+                }
                 NSMutableDictionary *mudic = [[NSMutableDictionary alloc] init];
                 [mudic setObject:muArrURL forKey: @"visitorURLArr"];
                 BmobObjectsBatch *bmobBatch = [[BmobObjectsBatch alloc] init];

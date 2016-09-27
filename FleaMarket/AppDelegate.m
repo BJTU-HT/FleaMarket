@@ -33,10 +33,6 @@
     NSManagedObjectContext *moc = [self managedObjectContext];
     NSAssert(moc != nil, @"Unable to Create Managed Object Context");
     
-    // By 仝磊鸣, 设置全局的BarItemButton颜色
-    [[UINavigationBar appearance] setBarTintColor:[UIColor whiteColor]];
-    [[UINavigationBar appearance] setTintColor:orangColorPCH];
-    
     // Override point for customization after application launch.
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     self.window.backgroundColor = [UIColor whiteColor];
@@ -54,6 +50,9 @@
     //2016/06/20 15:13 add
     if (self.userId && self.userId.length > 0){
         [self connectToServer];
+    }else{
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userLogin:) name:@"Login" object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userLogout:) name:@"Logout" object:nil];
     }
     #pragma 201607191329 add for tuisong
     //注册推送，iOS 8的推送机制与iOS 7有所不同，这里需要分别设置
@@ -138,11 +137,13 @@
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     
     NSLog(@"DeviceToken: %@", deviceToken);
+    BmobUser *user = [BmobUser getCurrentUser];
+    if (user) {
+        NSString *string = [[NSString alloc] initWithData:deviceToken encoding:NSUTF8StringEncoding];
+        self.token = [[[string stringByReplacingOccurrencesOfString:@" " withString:@""] stringByReplacingOccurrencesOfString:@"<" withString:@""] stringByReplacingOccurrencesOfString:@">" withString:@""];
+        [self connectToServer];
+    }
     
-    /// Required - 注册 DeviceToken
-    //[JPUSHService registerDeviceToken:deviceToken];
-    
-    // 注册bmob
     //注册成功后上传Token至服务器
     BmobInstallation  *currentIntallation = [BmobInstallation installation];
     [currentIntallation setDeviceTokenFromData:deviceToken];
@@ -231,6 +232,16 @@
     [self saveContext];
 }
 
+-(void)userLogin:(NSNotification *)noti{
+    NSString *userId = noti.object;
+    self.userId = userId;
+    [self connectToServer];
+}
+
+-(void)userLogout:(NSNotification *)noti{
+    [self.sharedIM disconnect];
+}
+
 -(void)connectToServer{
     [self.sharedIM setupBelongId:self.userId];
     [self.sharedIM setupDeviceToken:self.token];
@@ -266,7 +277,6 @@
             }
         }];
     }
-    
 }
 
 #pragma BmobIMDelegate 代理方法 end

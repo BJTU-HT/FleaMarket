@@ -75,8 +75,6 @@
 
 - (void)initViews
 {
-    self.navigationItem.title = @"发布";
-    
     self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, screenWidthPCH, screenHeightPCH) style:UITableViewStyleGrouped];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
@@ -98,13 +96,10 @@
 
 - (void)setLeftItemBtn
 {
-    /*
     UINavigationItem *navItem = self.navigationItem;
+    
     UIBarButtonItem *quitBtn = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(closePublish)];
     navItem.leftBarButtonItem = quitBtn;
-     */
-    
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back_03.png"] style:UIBarButtonItemStylePlain target:self action:@selector(closePublish)];
 }
 
 #pragma mark --- action ---
@@ -225,7 +220,6 @@
         UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:nil];
         [ac addAction:okAction];
         [self presentViewController:ac animated:YES completion:nil];
-        return;
     }
     
     SecondhandVO *model = [[SecondhandVO alloc] init];
@@ -431,7 +425,11 @@
     CGFloat margin = 10.0f;
     CGSize winSize = [UIScreen mainScreen].bounds.size;
     CGFloat itemW = (winSize.width - margin * 2.0f) / 4.0f;
-
+    CGFloat itemH = itemW;
+    
+    CGFloat collectionX = margin;
+    CGFloat collectionY = margin / 2.0f;
+    CGFloat collectionW = winSize.width - margin * 2.0f;
     
     /*
     if ((self.selectedImgArray.count + 1 >= 1) && (self.selectedImgArray.count + 1 <= 4) ) {
@@ -489,9 +487,7 @@
             weakCell.circleProgress.progressValue = progress;
         } resultBlock:^(NSArray *array, BOOL isSuccessful, NSError *error) {
             if (error) {
-                UIAlertController *ac = [UIAlertController alertControllerWithTitle:nil message:@"上传失败" preferredStyle:UIAlertControllerStyleAlert];
-                [self presentViewController:ac animated:NO completion:nil];
-                [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(createAlert:) userInfo:ac repeats:NO];
+                NSLog(@"上传失败！！！！！");
             } else {
                 // 上传成功
                 if (!weakSelf) {
@@ -512,12 +508,6 @@
     }
     
     return cell;
-}
-
-- (void)createAlert:(NSTimer *)timer{
-    UIAlertController *alert = [timer userInfo];
-    [alert dismissViewControllerAnimated:YES completion:nil];
-    alert = nil;
 }
 
 #pragma mark --- UITableViewDelegate ---

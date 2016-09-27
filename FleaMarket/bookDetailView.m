@@ -25,7 +25,7 @@ float widthDeatail;
             if(!_schoolS0){
                 _schoolS0 = [[UILabel alloc] init];
                 _schoolS0.font = FontSize12;
-                _schoolS0.textColor = grayColorPCH;
+                _schoolS0.textColor = [UIColor grayColor];
                 [self addSubview:_schoolS0];
             }
             if(!_headImageViewS0){
@@ -41,8 +41,9 @@ float widthDeatail;
                 _btnConcernS0 = [[UIButton alloc] init];
                 [self addSubview:_btnConcernS0];
                 _btnConcernS0.titleLabel.font = FontSize12;
-                _btnConcernS0.backgroundColor = orangColorPCH;
-                _btnConcernS0.titleLabel.textColor = [UIColor whiteColor];
+                //201609261124 modify
+                //_btnConcernS0.backgroundColor = orangColorPCH;
+                //_btnConcernS0.titleLabel.textColor = [UIColor whiteColor];
             }
         }else if(indexPath.section == 1){
             if(!_bookDisViewS1){
@@ -127,6 +128,7 @@ float widthDeatail;
     
     return titleSizeLabelS1.height;
 }
+
 -(CGFloat)layoutS3View:(NSIndexPath *)indexPath data:(NSMutableDictionary *)mudic{
     float marginS3 = 0;
     float marginVertialS3 = 10.0;
@@ -146,6 +148,7 @@ float widthDeatail;
     return 0;
 }
 
+//最近访客数据
 -(CGFloat)layoutS2View:(NSIndexPath *)indexPath data:(NSMutableDictionary *)mudic{
     float margin = 0.0;
     float marginVertial = 10.0;
@@ -212,11 +215,18 @@ float widthDeatail;
     [_btnConcernS0 setTitle:@"加关注" forState: UIControlStateNormal];
     _btnConcernS0.titleLabel.font =FontSize12;
     [_btnConcernS0 addTarget:self action:@selector(btnConcernClicked:) forControlEvents:UIControlEventTouchDown];
+    [_btnConcernS0 setTitleColor: orangColorPCH forState:UIControlStateNormal];
+    _btnConcernS0.layer.cornerRadius = 0.0f;
+    _btnConcernS0.layer.borderColor = orangColorPCH.CGColor;
+    _btnConcernS0.layer.borderWidth = 1.0f;
+    _btnConcernS0.layer.masksToBounds = YES;
     BmobUser *curUser = [BmobUser getCurrentUser];
     if([curUser.objectId isEqualToString:[mudic objectForKey:@"ownerObjectId"]]){
         [_btnConcernS0 setTitle:@"已关注" forState: UIControlStateNormal];
         [_btnConcernS0 setBackgroundColor:[UIColor clearColor]];
         [_btnConcernS0 setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+        _btnConcernS0.layer.borderColor = [UIColor whiteColor].CGColor;
+
     }else{
         [self requestConcernedDataFromServer:curUser.objectId];
     }
@@ -233,12 +243,17 @@ float widthDeatail;
 -(void)btnConcernClicked:(UIButton *)sender{
     BmobUser *curUser = [BmobUser getCurrentUser];
     NSMutableDictionary *mudic = [[NSMutableDictionary alloc] init];
-    NSMutableArray *muArr = [[NSMutableArray alloc] init];
-    if([_recMudicBD objectForKey:@"concernedArr"]){
-        muArr = [_recMudicBD objectForKey:@"concernedArr"];
-    }
     if([_recMudicBD objectForKey:@"ownerObjectId"]){
         [mudic setObject:[_recMudicBD objectForKey:@"ownerObjectId"] forKey:@"concernedObjectId"];
+    }
+    if([_recMudicBD objectForKey:@"userName"]){
+        [mudic setObject:[_recMudicBD objectForKey:@"userName"] forKey:@"concernedUserName"];
+    }
+    if([_recMudicBD objectForKey:@"userHeadImageURL"]){
+        [mudic setObject:[_recMudicBD objectForKey:@"userHeadImageURL"] forKey:@"concernedAvatar"];
+    }
+    if([_recMudicBD objectForKey:@"school"]){
+        [mudic setObject:[_recMudicBD objectForKey:@"school"] forKey:@"concernedSchool"];
     }
     if(curUser.objectId)
         [mudic setObject:curUser.objectId forKey:@"currentUserObjectId"];
@@ -261,6 +276,7 @@ float widthDeatail;
         [_btnConcernS0 setTitle:@"已关注" forState: UIControlStateNormal];
         [_btnConcernS0 setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
         [_btnConcernS0 setBackgroundColor:[UIColor clearColor]];
+        _btnConcernS0.layer.borderColor = [UIColor whiteColor].CGColor;
     }
 }
 
@@ -273,7 +289,7 @@ float widthDeatail;
         if(arr){
             for(int i = 0; i < arr.count; i++){
                 NSMutableDictionary *mudic = [arr objectAtIndex:i];
-                if([[mudic objectForKey:@"objectId"] isEqualToString:ownerObjectId]){
+                if([[mudic objectForKey:@"concernedObjectId"] isEqualToString:ownerObjectId]){
                     concernTag = 1;
                     break;
                 }
@@ -283,6 +299,7 @@ float widthDeatail;
             [_btnConcernS0 setTitle:@"已关注" forState: UIControlStateNormal];
             [_btnConcernS0 setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
             [_btnConcernS0 setBackgroundColor:[UIColor clearColor]];
+            _btnConcernS0.layer.borderColor = [UIColor whiteColor].CGColor;
         }
     }
 }

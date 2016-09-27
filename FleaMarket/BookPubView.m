@@ -21,9 +21,9 @@ NSMutableArray *mutableArrField;
     if(self){
         if(!self.bookName){
             self.bookName = [[UITextField alloc] init];
-            self.bookName.text = @"书名";
+            self.bookName.placeholder = @"书名";
             self.bookName.font = FontSize14;
-            self.bookName.textColor = grayColorPCH;
+            self.bookName.textColor = [UIColor grayColor];
             self.bookName.layer.borderWidth = labelBorderWidth;
             self.bookName.layer.borderColor = grayColorPCH.CGColor;
             self.bookName.textAlignment = NSTextAlignmentLeft;
@@ -34,10 +34,10 @@ NSMutableArray *mutableArrField;
         }
         if(!self.author){
             self.author = [[UITextField alloc] init];
-            self.author.text = @"作者";
+            self.author.placeholder = @"作者";
             self.author.layer.borderColor = grayColorPCH.CGColor;
             self.author.layer.borderWidth = labelBorderWidth;
-            self.author.textColor = grayColorPCH;
+            self.author.textColor = [UIColor grayColor];
             self.author.font = FontSize14;
             self.author.delegate = self;
             self.author.textAlignment = NSTextAlignmentLeft;
@@ -49,9 +49,9 @@ NSMutableArray *mutableArrField;
         if(!self.pressHouse){
             self.pressHouse = [[UITextField alloc] init];
             self.pressHouse.layer.borderWidth = labelBorderWidth;
-            self.pressHouse.text = @"出版社";
+            self.pressHouse.placeholder = @"出版社";
             self.pressHouse.font = FontSize14;
-            self.pressHouse.textColor = grayColorPCH;
+            self.pressHouse.textColor = [UIColor grayColor];
             self.pressHouse.layer.borderColor = grayColorPCH.CGColor;
             self.pressHouse.textAlignment = NSTextAlignmentLeft;
             self.pressHouse.delegate = self;
@@ -61,10 +61,10 @@ NSMutableArray *mutableArrField;
         }
         if(!self.sellPrice){
             self.sellPrice = [[UITextField alloc] init];
-            self.sellPrice.text = @"出售价";
+            self.sellPrice.placeholder = @"出售价";
             self.sellPrice.font = FontSize14;
             self.sellPrice.layer.borderWidth = labelBorderWidth;
-            self.sellPrice.textColor = grayColorPCH;
+            self.sellPrice.textColor = [UIColor grayColor];
             self.sellPrice.layer.borderColor = grayColorPCH.CGColor;
             self.sellPrice.textAlignment = NSTextAlignmentLeft;
             self.sellPrice.delegate = self;
@@ -139,7 +139,8 @@ NSMutableArray *mutableArrField;
         }
         if(!self.remarkField){
             self.remarkField = [[UITextField alloc] init];
-            self.remarkField.text = @"可为空";
+            //self.remarkField.text = @"可为空";
+            self.remarkField.placeholder = @"可为空";
             self.remarkField.textColor = grayColorPCH;
             self.remarkField.font =FontSize14;
             self.remarkField.textAlignment = NSTextAlignmentLeft;
@@ -162,19 +163,27 @@ NSMutableArray *mutableArrField;
         }
         if(!self.ISBN){
             self.ISBN = [[UILabel alloc] init];
-            self.ISBN.text = @"ISBN码:";
+            self.ISBN.text = @"所在学校:";
             self.ISBN.font =FontSize14;
             [self addSubview: self.ISBN];
         }
         if(!self.ISBNField){
             self.ISBNField = [[UITextField alloc] init];
-            self.ISBNField.text = @"请直接输入ISBN码";
+            self.ISBNField.text = @"点击选择所属学校";
             self.ISBNField.font = FontSize14;
             self.ISBNField.textColor = grayColorPCH;
-            [self addSubview:self.ISBNField];
+            //[self addSubview:self.ISBNField];
             self.ISBNField.delegate = self;
             self.ISBNField.tag = 7;
             [mutableArrField addObject:self.ISBNField.text];
+        }
+        //2016-09-21-18-14 add
+        if(!self.schoolBtn){
+            self.schoolBtn = [[UIButton alloc] init];
+            self.schoolBtn.titleLabel.font = FontSize14;
+            [self.schoolBtn setTitle:@"请点击选择学校" forState:UIControlStateNormal];
+            [self.schoolBtn setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+            [self addSubview: self.schoolBtn];
         }
         if(!self.viewLine1){
             self.viewLine1 = [[UIView alloc] init];
@@ -213,7 +222,7 @@ NSMutableArray *mutableArrField;
         }
         if(!self.ISBNClickBtn){
             self.ISBNClickBtn = [[UIButton alloc] init];
-            [self addSubview:self.ISBNClickBtn];
+            //[self addSubview:self.ISBNClickBtn];
             [self.ISBNClickBtn setTitle:@"扫码" forState:UIControlStateNormal];
             [self.ISBNClickBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         }
@@ -346,11 +355,13 @@ NSMutableArray *mutableArrField;
     
     self.ISBN.frame = CGRectMake(ISBN_x, ISBN_y, labelWidth + 10, labelFieldHeight);
     
-    float ISBNField_x = labelWidth;
+    float ISBNField_x = labelWidth + 15;
     float ISBNField_y = ISBN_y;
     float ISBNFieldWidth = width - 2 * labelWidth;
     
+    
     self.ISBNField.frame = CGRectMake(ISBNField_x, ISBNField_y, ISBNFieldWidth, labelFieldHeight);
+    self.schoolBtn.frame = CGRectMake(ISBNField_x, ISBNField_y, ISBNFieldWidth, labelFieldHeight);
     //分割线
     self.ISBNClickBtn.frame = CGRectMake(ISBNField_x + ISBNFieldWidth, ISBNField_y, labelWidth, labelFieldHeight);
     float viewline5_y = ISBNField_y + labelFieldHeight;
@@ -375,22 +386,22 @@ NSMutableArray *mutableArrField;
     [self endEditing:YES];
 }
 
--(BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
-    NSLog(@"beging--%ld", (long)textField.tag);
-    self.fieldStr = textField.text;
-    textField.text = @"";
-    textField.textColor = [UIColor blackColor];
-    return YES;
-}
-
--(BOOL)textFieldShouldEndEditing:(UITextField *)textField{
-    NSLog(@"end--%ld", (long)textField.tag);
-    if(!textField.text.length){
-        textField.text = [mutableArrField objectAtIndex:textField.tag];
-        textField.textColor = [UIColor lightGrayColor];
-    }
-    return YES;
-}
+//-(BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
+//    NSLog(@"beging--%ld", (long)textField.tag);
+//    self.fieldStr = textField.text;
+//    textField.text = @"";
+//    textField.textColor = [UIColor blackColor];
+//    return YES;
+//}
+//
+//-(BOOL)textFieldShouldEndEditing:(UITextField *)textField{
+//    NSLog(@"end--%ld", (long)textField.tag);
+//    if(!textField.text.length){
+//        textField.text = [mutableArrField objectAtIndex:textField.tag];
+//        textField.textColor = [UIColor lightGrayColor];
+//    }
+//    return YES;
+//}
 /*
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.

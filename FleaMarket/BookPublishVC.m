@@ -40,6 +40,7 @@ NSInteger fourBtnTag;
     [_pubView.depreciateBtn addTarget:self action:@selector(btnClicked:) forControlEvents:UIControlEventTouchDown];
     [_pubView.bookImageBtn addTarget:self action:@selector(bookImageBtnClicked:) forControlEvents:UIControlEventTouchDown];
     [_pubView.publishBtn addTarget:self action:@selector(publishBtnClicked:) forControlEvents:UIControlEventTouchDown];
+    [_pubView.schoolBtn addTarget:self action:@selector(schoolBtnClicked:) forControlEvents:UIControlEventTouchDown];
     //绘制视图顶端四个按钮
     [self initFourBtnAndViewLine];
     //键盘弹出调整视图
@@ -56,12 +57,21 @@ NSInteger fourBtnTag;
 
     // Do any additional setup after loading the view.
 }
+
 #pragma 点击发布按钮 begin
+//点击选择学校按钮点击事件
+-(void)schoolBtnClicked:(UIButton *)sender{
+    BookUniversityShowVC *bookUniversity = [[BookUniversityShowVC alloc] init];
+    bookUniversity.delegateUniversity = self;
+    self.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:bookUniversity animated:YES];
+}
+
 //点击发布按钮响应事件
 -(void)publishBtnClicked:(UIButton *)sender{
     switch (fourBtnTag) {
         case 0:
-            if([_pubView.bookName.text  isEqualToString: @"书名"] || [_pubView.author.text  isEqual: @"作者"] || [_pubView.pressHouse.text  isEqual: @"出版社"] || [_pubView.sellPrice.text  isEqual: @"出售价"] || _pubView.originalPriceField.text  == nil  || _pubView.amountField.text == nil || [_pubView.categoryBtn.titleLabel.text isEqual:@"点击选择分类"] || [_pubView.depreciateBtn.titleLabel.text isEqual:@"点击选择折旧率"]){
+            if([_pubView.bookName.text  isEqualToString: @"书名"] || [_pubView.author.text  isEqual: @"作者"] || [_pubView.pressHouse.text  isEqual: @"出版社"] || [_pubView.sellPrice.text  isEqual: @"出售价"] || _pubView.originalPriceField.text  == nil  || _pubView.amountField.text == nil || [_pubView.categoryBtn.titleLabel.text isEqual:@"点击选择分类"] || [_pubView.depreciateBtn.titleLabel.text isEqual:@"点击选择折旧率"] || [_pubView.schoolBtn.titleLabel.text isEqual:@"请点击选择学校"]){
                 [presentLayerPublicMethod new_notifyView:self.navigationController notifyContent:@"请完整填写出售相关发布信息"];
             }else{
                 [self collectDictionaryData:fourBtnTag];
@@ -71,7 +81,7 @@ NSInteger fourBtnTag;
             }
             break;
         case 1:
-            if([_pubView.bookName.text  isEqualToString: @"书名"] || [_pubView.author.text  isEqual: @"作者"] || [_pubView.pressHouse.text  isEqual: @"出版社"] || [_pubView.sellPrice.text  isEqual: @"求购价"] || _pubView.originalPriceField.text  == nil  || _pubView.amountField.text == nil || [_pubView.categoryBtn.titleLabel.text isEqual:@"点击选择分类"] || [_pubView.depreciateBtn.titleLabel.text isEqual:@"点击选择折旧率"]){
+            if([_pubView.bookName.text  isEqualToString: @"书名"] || [_pubView.author.text  isEqual: @"作者"] || [_pubView.pressHouse.text  isEqual: @"出版社"] || [_pubView.sellPrice.text  isEqual: @"求购价"] || _pubView.originalPriceField.text  == nil  || _pubView.amountField.text == nil || [_pubView.categoryBtn.titleLabel.text isEqual:@"点击选择分类"] || [_pubView.depreciateBtn.titleLabel.text isEqual:@"点击选择折旧率"] || [_pubView.schoolBtn.titleLabel.text isEqual:@"请点击选择学校"]){
                 [presentLayerPublicMethod new_notifyView:self.navigationController notifyContent:@"请完整填写求购相关发布信息"];
             }else{
                 [self collectDictionaryData:fourBtnTag];
@@ -81,7 +91,7 @@ NSInteger fourBtnTag;
             }
             break;
         case 2:
-            if([_pubView.bookName.text  isEqualToString: @"书名"] || [_pubView.author.text  isEqual: @"作者"] || [_pubView.pressHouse.text  isEqual: @"出版社"] || [_pubView.sellPrice.text  isEqual: @"丢失赔付"] || _pubView.originalPriceField.text  == nil  || _pubView.amountField.text == nil || [_pubView.categoryBtn.titleLabel.text isEqual:@"点击选择分类"] || [_pubView.depreciateBtn.titleLabel.text isEqual:@"点击选择折旧率"]){
+            if([_pubView.bookName.text  isEqualToString: @"书名"] || [_pubView.author.text  isEqual: @"作者"] || [_pubView.pressHouse.text  isEqual: @"出版社"] || [_pubView.sellPrice.text  isEqual: @"丢失赔付"] || _pubView.originalPriceField.text  == nil  || _pubView.amountField.text == nil || [_pubView.categoryBtn.titleLabel.text isEqual:@"点击选择分类"] || [_pubView.depreciateBtn.titleLabel.text isEqual:@"点击选择折旧率"] || [_pubView.schoolBtn.titleLabel.text isEqual:@"请点击选择学校"]){
                 [presentLayerPublicMethod new_notifyView:self.navigationController notifyContent:@"请完整填写借阅相关发布信息"];
             }else{
                 [self collectDictionaryData:fourBtnTag];
@@ -91,7 +101,7 @@ NSInteger fourBtnTag;
             }
             break;
         case 3:
-            if([_pubView.bookName.text  isEqualToString: @"书名"] || [_pubView.author.text  isEqual: @"作者"] || [_pubView.pressHouse.text  isEqual: @"出版社"]|| _pubView.originalPriceField.text  == nil  || _pubView.amountField.text == nil || [_pubView.categoryBtn.titleLabel.text isEqual:@"点击选择分类"] || [_pubView.depreciateBtn.titleLabel.text isEqual:@"点击选择折旧率"]){
+            if([_pubView.bookName.text  isEqualToString: @"书名"] || [_pubView.author.text  isEqual: @"作者"] || [_pubView.pressHouse.text  isEqual: @"出版社"]|| _pubView.originalPriceField.text  == nil  || _pubView.amountField.text == nil || [_pubView.categoryBtn.titleLabel.text isEqual:@"点击选择分类"] || [_pubView.depreciateBtn.titleLabel.text isEqual:@"点击选择折旧率"] || [_pubView.schoolBtn.titleLabel.text isEqual:@"请点击选择学校"]){
                 [presentLayerPublicMethod new_notifyView:self.navigationController notifyContent:@"请完整填写赠送相关发布信息"];
             }else{
                 [self collectDictionaryData:fourBtnTag];
@@ -115,43 +125,68 @@ NSInteger fourBtnTag;
         _muDicBuy = [self pubMutableDic];
         [_muDicBuy removeObjectForKey:@"sellPrice"];
         [_muDicBuy removeObjectForKey:@"lostPay"];
-        [_muDicBuy setObject:_pubView.sellPrice.text forKey:@"buyPrice"];
+        if(_pubView.sellPrice.text)
+            [_muDicBuy setObject:_pubView.sellPrice.text forKey:@"buyPrice"];
     }else if(tag == 2){
         _muDicBorrow = [self pubMutableDic];
         [_muDicBorrow removeObjectForKey:@"sellPrice"];
         [_muDicBorrow removeObjectForKey:@"buyPrice"];
-        [_muDicBorrow setObject:_pubView.sellPrice.text forKey:@"lostPay"];
+        if(_pubView.sellPrice.text)
+            [_muDicBorrow setObject:_pubView.sellPrice.text forKey:@"lostPay"];
     }else if(tag == 3){
         _muDicPresent = [self pubMutableDic];
         [_muDicPresent removeObjectForKey:@"sellPrice"];
         [_muDicPresent removeObjectForKey:@"buyPrice"];
         [_muDicPresent removeObjectForKey:@"lostPay"];
     }
-    [_muDicBigger setObject:str forKey:@"status"];
-    [_muDicBigger setObject:_muDicSell forKey:@"sell"];
-    [_muDicBigger setObject:_muDicBuy forKey:@"buy"];
-    [_muDicBigger setObject:_muDicBorrow forKey:@"borrow"];
-    [_muDicBigger setObject:_muDicPresent forKey:@"present"];
+    if(str)
+        [_muDicBigger setObject:str forKey:@"status"];
+    if(_muDicSell)
+        [_muDicBigger setObject:_muDicSell forKey:@"sell"];
+    if(_muDicBuy)
+        [_muDicBigger setObject:_muDicBuy forKey:@"buy"];
+    if(_muDicBorrow)
+        [_muDicBigger setObject:_muDicBorrow forKey:@"borrow"];
+    if(_muDicPresent)
+        [_muDicBigger setObject:_muDicPresent forKey:@"present"];
 }
 
-//对象非空判断在上一级函数
+//对象非空判断在上一级函数,防止程序崩溃最好做一下条件判断
 -(NSMutableDictionary *)pubMutableDic{
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
     BmobUser *curUser = [BmobUser getCurrentUser];
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    NSString *strURL = [userDefaults objectForKey:@"curUserHeadImageURL"];
     //添加上传用户的objectId
-    [dic setObject:curUser.objectId forKey:@"ownerObjectId"];
-    [dic setObject:curUser.username forKey:@"userName"];
-    [dic setObject:_pubView.bookName.text forKey:@"bookName"];
-    [dic setObject:_pubView.author.text forKey:@"author"];
-    [dic setObject:_pubView.pressHouse.text forKey:@"pressHouse"];
-    [dic setObject:_pubView.sellPrice.text forKey:@"sellPrice"];
-    [dic setObject:_pubView.originalPriceField.text forKey:@"originalPrice"];
-    [dic setObject:_pubView.categoryBtn.titleLabel.text forKey:@"category"];
-    [dic setObject:_pubView.amountField.text forKey:@"amount"];
-    [dic setObject:_pubView.depreciateBtn.titleLabel.text forKey:@"depreciate"];
-    [dic setObject:_pubView.remarkField.text forKey:@"remark"];
+    if(strURL)
+        [dic setObject:strURL forKey:@"userHeadImageURL"];
+    if(curUser.objectId)
+        [dic setObject:curUser.objectId forKey:@"ownerObjectId"];
+    if(curUser.username)
+        [dic setObject:curUser.username forKey:@"userName"];
+    if(_pubView.bookName.text)
+        [dic setObject:_pubView.bookName.text forKey:@"bookName"];
+    if(_pubView.author.text)
+        [dic setObject:_pubView.author.text forKey:@"author"];
+    if(_pubView.pressHouse.text)
+        [dic setObject:_pubView.pressHouse.text forKey:@"pressHouse"];
+    if(_pubView.sellPrice.text)
+        [dic setObject:_pubView.sellPrice.text forKey:@"sellPrice"];
+    if(_pubView.originalPriceField.text)
+        [dic setObject:_pubView.originalPriceField.text forKey:@"originalPrice"];
+    if(_pubView.categoryBtn.titleLabel.text)
+        [dic setObject:_pubView.categoryBtn.titleLabel.text forKey:@"category"];
+    if(_pubView.amountField.text)
+        [dic setObject:_pubView.amountField.text forKey:@"amount"];
+    if(_pubView.depreciateBtn.titleLabel.text)
+        [dic setObject:_pubView.depreciateBtn.titleLabel.text forKey:@"depreciate"];
+    if(_pubView.remarkField.text)
+        [dic setObject:_pubView.remarkField.text forKey:@"remark"];
     //[dic setObject: self.imageBtnURL forKey:@"picURL"];
-    [dic setObject:_pubView.bookImageBtn.imageView.image forKey:@"bookImage"];
+    if(_pubView.bookImageBtn.imageView.image)
+        [dic setObject:_pubView.bookImageBtn.imageView.image forKey:@"bookImage"];
+    if(_pubView.schoolBtn.titleLabel.text)
+        [dic setObject:_pubView.schoolBtn.titleLabel.text forKey:@"school"];
     return dic;
 }
 #pragma 点击发布按钮 end
@@ -159,6 +194,7 @@ NSInteger fourBtnTag;
 -(void)bookImageBtnClicked:(UIButton *)sender{
     [self bookImageClicked];
 }
+
 //分类和折旧这两个按钮的点击事件
 -(void)btnClicked:(UIButton *)sender{
     self.cateView1 = [[CategoryView alloc] initWithFrame:[self calculateCateViewFrame:sender.tag] tag:sender.tag];
@@ -179,6 +215,9 @@ NSInteger fourBtnTag;
     }else if(tag == 2){
         [_pubView.depreciateBtn setTitle:value forState:UIControlStateNormal];
         [_pubView.depreciateBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    }else if(tag == 9){
+        [_pubView.schoolBtn setTitle:value forState:UIControlStateNormal];
+        [_pubView.schoolBtn setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
     }
     self.scrollViewPub.userInteractionEnabled = YES;
     self.scrollViewPub.alpha = 1.0;

@@ -51,23 +51,23 @@ BmobUser *userObjID;
     //从服务器加载好友列表
     [self requestDataFromServer];
     //获取用户名用于和数据库建立连接
-    userObjID = [BmobUser getCurrentUser];
-    self.userId = userObjID.objectId;
-    self.token = @"";
-    self.sharedIM = [BmobIM sharedBmobIM];
-    if(userObjID){
-        if ([self.sharedIM isConnected]){
-        [self.sharedIM disconnect];
-    }
-        [self connectToServer];
-    }
+//    userObjID = [BmobUser getCurrentUser];
+//    self.userId = userObjID.objectId;
+//    self.token = @"";
+//    self.sharedIM = [BmobIM sharedBmobIM];
+//    if(userObjID){
+//        if ([self.sharedIM isConnected]){
+//        [self.sharedIM disconnect];
+//    }
+//        [self connectToServer];
+//    }
 }
 
--(void)connectToServer{
-    [self.sharedIM setupBelongId:self.userId];
-    [self.sharedIM setupDeviceToken:self.token];
-    [self.sharedIM connect];
-}
+//-(void)connectToServer{
+//    [self.sharedIM setupBelongId:self.userId];
+//    [self.sharedIM setupDeviceToken:self.token];
+//    [self.sharedIM connect];
+//}
 -(void)addSearchBar{
     UISearchBar *searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, screenWidthPCH, navgationBarHeightPCH)];
     searchBar.delegate = self;
@@ -77,16 +77,27 @@ BmobUser *userObjID;
     searchBar.autocapitalizationType = UITextAutocapitalizationTypeNone;
 }
 
+//201609251621 modify
 -(void)contactDrawNav{
-    UIBarButtonItem *rightBarItemContact = [[UIBarButtonItem alloc] initWithTitle:@"添加好友" style:UIBarButtonItemStylePlain target:self action:@selector(rightBarItemClicked:)];
-    self.navigationItem.rightBarButtonItem = rightBarItemContact;
-    rightBarItemContact.tintColor = orangColorPCH;
-    UIButton *leftBtn = [[UIButton alloc] init];
-    [leftBtn setBackgroundImage:[UIImage imageNamed:@"ic_nav_back@2x.png"] forState:UIControlStateNormal];
-    [leftBtn addTarget:self action:@selector(leftBarItemClicked:) forControlEvents:UIControlEventTouchDown];
-    leftBtn.frame = CGRectMake(0, 0, 55, 20);
-    UIBarButtonItem *leftBarItemContact = [[UIBarButtonItem alloc] initWithCustomView:leftBtn];
-    self.navigationItem.leftBarButtonItem = leftBarItemContact;
+    UIBarButtonItem *leftBarItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"backArrow.png"] style:UIBarButtonItemStylePlain target:self action:@selector(leftBarItemClicked:)];
+    self.navigationItem.leftBarButtonItem = leftBarItem;
+    leftBarItem.tintColor = orangColorPCH;
+    
+    UIBarButtonItem *rightBarItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"plusOrange32.png"] style:UIBarButtonItemStylePlain target:self action:@selector(rightBarItemClicked:)];
+    self.navigationItem.rightBarButtonItem = rightBarItem;
+    rightBarItem.tintColor = orangColorPCH;
+    
+   
+    
+//    UIBarButtonItem *rightBarItemContact = [[UIBarButtonItem alloc] initWithTitle:@"添加好友" style:UIBarButtonItemStylePlain target:self action:@selector(rightBarItemClicked:)];
+//    self.navigationItem.rightBarButtonItem = rightBarItemContact;
+//    rightBarItemContact.tintColor = orangColorPCH;
+//    UIButton *leftBtn = [[UIButton alloc] init];
+//    [leftBtn setBackgroundImage:[UIImage imageNamed:@"ic_nav_back@2x.png"] forState:UIControlStateNormal];
+//    [leftBtn addTarget:self action:@selector(leftBarItemClicked:) forControlEvents:UIControlEventTouchDown];
+//    leftBtn.frame = CGRectMake(0, 0, 55, 20);
+//    UIBarButtonItem *leftBarItemContact = [[UIBarButtonItem alloc] initWithCustomView:leftBtn];
+//    self.navigationItem.leftBarButtonItem = leftBarItemContact;
 }
 
 -(void)requestDataFromServer{

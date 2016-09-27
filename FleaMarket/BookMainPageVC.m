@@ -290,7 +290,6 @@ NSString *kTextCellID2 = @"cell2";
         _cateViewBookMain.frame = CGRectMake(0, 0, 0, 0);
     }
 }
-
 #pragma three button end
 
 -(NSMutableDictionary *)setRequestDictionary{

@@ -14,5 +14,5 @@
 @property (nonatomic, strong) UIButton *smileBtn;
 @property (nonatomic, strong) UIButton *addBtn;
 @property (nonatomic, strong) UITextField *textField;
-
+@property (nonatomic, strong) UIButton *sendBtn;
 @end

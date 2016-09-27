@@ -35,8 +35,8 @@
             _bookSchoolLabel = [[UILabel alloc] init];
             [self addSubview: _bookSchoolLabel];
             _bookSchoolLabel.textAlignment = NSTextAlignmentRight;
-            _bookSchoolLabel.font = FontSize12;
-            _bookSchoolLabel.textColor = [UIColor grayColor];
+            _bookSchoolLabel.font = FontSize14;
+            _bookSchoolLabel.textColor = [UIColor blackColor];
         }
     }
     return self;

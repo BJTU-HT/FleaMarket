@@ -24,11 +24,23 @@ NSString *toUserId;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    self.title = @"点击添加";
     self.view.backgroundColor = grayColorPCH;
     [self drawImageAndUsername];
-    
+    [self addImageToNav];
 }
+
+#pragma ---------201609251626 add begin --------------------------------
+-(void)addImageToNav{
+    UIBarButtonItem *leftBarItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"backArrow.png"] style:UIBarButtonItemStylePlain target:self action:@selector(leftBarItemClicked:)];
+    self.navigationItem.leftBarButtonItem = leftBarItem;
+    leftBarItem.tintColor = orangColorPCH;
+}
+
+-(void)leftBarItemClicked:(UIButton *)sender{
+    [self.navigationController popViewControllerAnimated:YES];
+}
+#pragma ---------201609251626 add end ----------------------------------
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -66,7 +78,8 @@ NSString *toUserId;
     float btnWidth = screenWidthPCH - 2 * btnXOffset;
     float btnHeight = 50.0;
     UIButton *buttonAddFriend = [[UIButton alloc] initWithFrame:CGRectMake(btnXOffset, btnYOffset, btnWidth, btnHeight)];
-    buttonAddFriend.backgroundColor = [UIColor colorWithRed:0/255.0 green:191/255.0 blue:255/255.0 alpha:1.0];
+    //buttonAddFriend.backgroundColor = [UIColor colorWithRed:0/255.0 green:191/255.0 blue:255/255.0 alpha:1.0];
+    buttonAddFriend.backgroundColor = orangColorPCH;
     [buttonAddFriend setTitle:@"加为好友" forState:UIControlStateNormal];
     [buttonAddFriend setTintColor:[UIColor whiteColor]];
     [buttonAddFriend addTarget:self action:@selector(buttonAddClicked:) forControlEvents:UIControlEventTouchDown];

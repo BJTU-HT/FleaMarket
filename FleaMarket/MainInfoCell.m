@@ -194,7 +194,6 @@
 {
     _model = model;
     
-    _pageControl.numberOfPages = model.pictureArray.count;
     _currentImageIndex = 0;
     _leftImageIndex = model.pictureArray.count - 1;
     if (model.pictureArray.count == 1) {

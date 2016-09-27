@@ -170,6 +170,11 @@ UIImageView *backgroundImageViewLogIn;
             }
             imageViewHeadTemp = [[UIImageView alloc] init];
             NSURL *url = [NSURL URLWithString:[obj objectForKey:@"avatar"]];
+            if(!_curUserDefaults){
+                _curUserDefaults = [NSUserDefaults standardUserDefaults];
+            }
+            NSString *strURL = [url absoluteString];
+            [_curUserDefaults setObject:strURL forKey:@"curUserHeadImageURL"];
             [imageViewHeadTemp sd_setImageWithURL:url completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
                 if(error){
                     NSLog(@"从服务其获取头像图片失败");

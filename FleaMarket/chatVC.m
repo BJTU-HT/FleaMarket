@@ -25,7 +25,7 @@ float cellHeight;
 -(void)viewDidLoad {
     [super viewDidLoad];
     [self checkLogInStatus];
-    //self.title = @"聊天";
+    self.title = @"聊天";
     _tableView = [[UITableView alloc] initWithFrame:self.view.frame style:UITableViewStylePlain];
     _tableView.delegate = self;
     _tableView.dataSource = self;
@@ -68,17 +68,17 @@ float cellHeight;
     }
 }
 
+#pragma ----------2016-09-25-16-02 modify begin ------------------------------------------
 -(void)ChatDrawNav{
-    UIBarButtonItem *leftBarItem = [[UIBarButtonItem alloc] initWithTitle:@"好友列表" style:UIBarButtonItemStylePlain target:self action:@selector(chatLeftBarItemClicked:)];
-    self.navigationItem.leftBarButtonItem = leftBarItem;
-    leftBarItem.tintColor = orangColorPCH;
-    UIBarButtonItem *rightBarItem = [[UIBarButtonItem alloc] initWithTitle:@"添加" style:UIBarButtonItemStylePlain target:self action:@selector(chatrightBarItemClicked:)];
+//    UIBarButtonItem *leftBarItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"friendBlack32.png"] style:UIBarButtonItemStylePlain target:self action:@selector(leftBarFriendButtonClicked:)];
+//    self.navigationItem.leftBarButtonItem = leftBarItem;
+//    leftBarItem.tintColor = orangColorPCH;
+    UIBarButtonItem *rightBarItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"friendBlack32.png"] style:UIBarButtonItemStylePlain target:self action:@selector(rightBarAddFriendButtonClicked:)];
     self.navigationItem.rightBarButtonItem = rightBarItem;
     rightBarItem.tintColor = orangColorPCH;
 }
 
-#pragma @selector方法实现-------------------
--(void)chatLeftBarItemClicked:(UIButton *)sender{
+-(void)rightBarAddFriendButtonClicked:(UIButton *)sender{
     self.hidesBottomBarWhenPushed = YES;
     contactsVC *contacts = [[contactsVC alloc] init];
     [self.navigationController pushViewController:contacts animated:NO];
@@ -88,8 +88,7 @@ float cellHeight;
 -(void)chatrightBarItemClicked:(UIButton *)sender{
 
 }
-
-#pragma @selector方法实现 end---------------
+#pragma ----------2016-09-25-16-02 modify end    ------------------------------------------
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return self.dataArray.count;

@@ -71,17 +71,32 @@ static bookPubUpLoadInfoDAO *sharedManager = nil;
     }else if([tableName isEqualToString:@"borrow"]){
         [obj setObject:[dic objectForKey:@"lostPay"] forKey:@"borrowPrice"];
     }
-    [obj setObject:[dic objectForKey:@"ownerObjectId"] forKey:@"ownerObjectId"];
-    [obj setObject:[dic objectForKey:@"userName"] forKey:@"userName"];
-    [obj setObject:[dic objectForKey:@"bookName"] forKey:@"bookName"];
-    [obj setObject:[dic objectForKey:@"author"] forKey:@"author"];
-    [obj setObject:[dic objectForKey:@"pressHouse"] forKey:@"pressHouse"];
-    [obj setObject:[dic objectForKey:@"originalPrice"] forKey:@"originalPrice"];
-    [obj setObject:[dic objectForKey:@"category"] forKey:@"category"];
-    [obj setObject:[dic objectForKey:@"amount"] forKey:@"amount"];
-    [obj setObject:[dic objectForKey:@"depreciate"] forKey:@"depreciate"];
-    [obj setObject:[dic objectForKey:@"remark"] forKey:@"remark"];
-    [obj setObject:self.pubBookImageURL forKey:@"bookImageURL"];
+    if([dic objectForKey:@"ownerObjectId"])
+        [obj setObject:[dic objectForKey:@"ownerObjectId"] forKey:@"ownerObjectId"];
+    if([dic objectForKey:@"userName"])
+        [obj setObject:[dic objectForKey:@"userName"] forKey:@"userName"];
+    if([dic objectForKey:@"bookName"])
+        [obj setObject:[dic objectForKey:@"bookName"] forKey:@"bookName"];
+    if([dic objectForKey:@"author"])
+        [obj setObject:[dic objectForKey:@"author"] forKey:@"author"];
+    if([dic objectForKey:@"pressHouse"])
+        [obj setObject:[dic objectForKey:@"pressHouse"] forKey:@"pressHouse"];
+    if([dic objectForKey:@"originalPrice"])
+        [obj setObject:[dic objectForKey:@"originalPrice"] forKey:@"originalPrice"];
+    if([dic objectForKey:@"category"])
+        [obj setObject:[dic objectForKey:@"category"] forKey:@"category"];
+    if([dic objectForKey:@"amount"])
+        [obj setObject:[dic objectForKey:@"amount"] forKey:@"amount"];
+    if([dic objectForKey:@"depreciate"])
+        [obj setObject:[dic objectForKey:@"depreciate"] forKey:@"depreciate"];
+    if([dic objectForKey:@"remark"])
+        [obj setObject:[dic objectForKey:@"remark"] forKey:@"remark"];
+    if(self.pubBookImageURL)
+        [obj setObject:self.pubBookImageURL forKey:@"bookImageURL"];
+    if([dic objectForKey:@"school"])
+        [obj setObject:[dic objectForKey:@"school"] forKey:@"school"];
+    if([dic objectForKey:@"userHeadImageURL"])
+        [obj setObject:[dic objectForKey:@"userHeadImageURL"] forKey: @"userHeadImageURL"];
     return obj;
 }
 @end

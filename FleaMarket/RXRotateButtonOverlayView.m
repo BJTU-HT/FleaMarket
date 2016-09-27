@@ -121,8 +121,7 @@ static CGFloat btnOffsetY = 80.0;
 
 - (void)clickedSelf:(id)sender
 {
-    // 仝磊鸣, 20160925注释掉
-    //[self dismiss];
+    [self dismiss];
 }
 - (void)btnClicked:(id)sender
 {

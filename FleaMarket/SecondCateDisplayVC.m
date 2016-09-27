@@ -58,6 +58,9 @@
 -(void)passValueForVC:(NSDictionary *)dic{
     [self.filterDic addEntriesFromDictionary:dic];
     self.title = [self.filterDic objectForKey:@"main_category"];
+    if(![self.filterDic objectForKey:@"main_category"]){
+        self.title = @"全部";
+    }
     self.currentSchool = [dic objectForKey:@"specifySchool"];
     self.currentCate = [dic objectForKey:@"main_category"];
 }

@@ -31,9 +31,23 @@
     _tableViewConcerned.dataSource = self;
     self.automaticallyAdjustsScrollViewInsets = NO;
     // Do any additional setup after loading the view.
+    //201609261108 add
+    [self drawNav];
 }
 
-//从数据库获取我的关注列表
+#pragma ----------2016-09-26-11-07 modify begin ------------------------------------------
+-(void)drawNav{
+    //201609251624 modify
+    UIBarButtonItem *leftBarItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"backArrow.png"] style:UIBarButtonItemStylePlain target:self action:@selector(leftBarItemClicked:)];
+    self.navigationItem.leftBarButtonItem = leftBarItem;
+    leftBarItem.tintColor = orangColorPCH;
+}
+
+-(void)leftBarItemClicked:(UIButton *)sender{
+    [self.navigationController popViewControllerAnimated:YES];
+}
+#pragma ----------2016-09-26-11-07 modify end ---------------------------------------------
+
 -(void)requestMyConcernedDataFromServer:(NSString *)objectId{
     myConcernedBL *myConBL = [myConcernedBL sharedManager];
     myConBL.delegate = self;

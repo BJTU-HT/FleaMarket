@@ -15,6 +15,7 @@
         _contentLabel = [[UILabel alloc] init];
         _contentLabel.numberOfLines = 0;
         _contentLabel.font = FontSize14;
+        _contentLabel.textAlignment = NSTextAlignmentCenter;
         [self.chatContentView addSubview:_contentLabel];
         _contentLabel.preferredMaxLayoutWidth = screenWidthPCH - 70 - 70;
     }

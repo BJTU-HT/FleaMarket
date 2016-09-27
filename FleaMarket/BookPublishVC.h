@@ -11,6 +11,7 @@
 #import "CategoryView.h"
 #import "BookPublishDelegate.h"
 #import "bookPubUpLoadInfoBL.h"
+#import "BookUniversityShowVC.h"
 
 @interface BookPublishVC : UIViewController<UIGestureRecognizerDelegate, BookPublishDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, bookPubUpLoadInfoBLDelegate>
 

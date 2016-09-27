@@ -14,9 +14,9 @@
 -(instancetype)initWithFrame:(CGRect)frame para: (NSMutableDictionary *)mudic{
     self = [super initWithFrame: frame];
     if(self){
-        self.labelSchoolMC.text = [mudic objectForKey:@"school"];
+        self.labelSchoolMC.text = [mudic objectForKey:@"concernedSchool"];
         self.labelSchoolMC.font = FontSize12;
-        self.labelNameMC.text = [mudic objectForKey:@"username"];
+        self.labelNameMC.text = [mudic objectForKey:@"concernedUserName"];
         self.labelNameMC.font = FontSize14;
         [self.btnSendMessageMC setTitle:@"发消息" forState: UIControlStateNormal];
         [self.btnSendMessageMC setTitleColor: orangColorPCH forState:UIControlStateNormal];
@@ -25,7 +25,7 @@
         self.btnSendMessageMC.layer.borderWidth = 1.0f;
         self.btnSendMessageMC.layer.masksToBounds = YES;
         self.btnSendMessageMC.titleLabel.font = FontSize12;
-        [self.headImageViewMC sd_setImageWithURL:[NSURL URLWithString:[mudic objectForKey:@"avatar"]] placeholderImage:[UIImage imageNamed:@"icon_default_face@2x"]];
+        [self.headImageViewMC sd_setImageWithURL:[NSURL URLWithString:[mudic objectForKey:@"concernedAvatar"]] placeholderImage:[UIImage imageNamed:@"icon_default_face@2x"]];
         
         [self addSubview:self.labelNameMC];
         [self addSubview:self.labelSchoolMC];

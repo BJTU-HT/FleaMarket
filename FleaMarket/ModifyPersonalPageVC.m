@@ -242,7 +242,7 @@ BOOL headImageOrBackgroundImageFlag; // 0代表设置头像 1代表设置背景
 -(void)initBasicTextField{
     if(!textFieldUserName){
         textFieldUserName = [[UITextField alloc] init];
-        textFieldUserName.text = @"书香人家用户";
+        textFieldUserName.text = @"FleaMarket用户";
     }
     if(!textFieldPersonalSign){
         textFieldPersonalSign = [[UITextField alloc] init];
@@ -317,7 +317,7 @@ BOOL headImageOrBackgroundImageFlag; // 0代表设置头像 1代表设置背景
         self.hidesBottomBarWhenPushed = YES;
         cityListVC *city = [[cityListVC alloc] init];
         [self.navigationController pushViewController:city animated:NO];
-        self.hidesBottomBarWhenPushed = NO;
+        //self.hidesBottomBarWhenPushed = NO;
     }
 }
 

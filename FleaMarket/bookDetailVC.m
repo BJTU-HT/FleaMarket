@@ -25,20 +25,18 @@ NSMutableDictionary *heightDic;
 NSInteger tagDelegate;
 float bottomViewHeightBD;
 
--(void)viewDidLoad {
+ -(void)viewDidLoad {
     [super viewDidLoad];
     //用于标记代理函数是否执行
     tagDelegate = 0;
     bottomViewHeightBD = 44.0f;
-    //BmobUser *curUser = [BmobUser getCurrentUser];
-    //从用户表获取关注的人
-    //[self requestConcernedDataFromServer:curUser.objectId];
     [self bookDetailRequestLeaveMessageFromServer:[mudic objectForKey:@"objectId"]];
     if(!_tableViewBookDetail){
         [self initTableView];
     }
     // Do any additional setup after loading the view.
     [self initBottomView];
+    [self addButtonToNavBookDetail];
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -64,8 +62,21 @@ float bottomViewHeightBD;
     tagDelegate = 1;
 }
 
+//导航栏返回按钮修改为箭头图标 2016-09-25-15-37
+-(void)addButtonToNavBookDetail
+{
+    self.navigationController.navigationBar.tintColor = orangColorPCH;
+    //UIBarButtonItem *leftBarItem = [[UIBarButtonItem alloc] initWithTitle:nil style:UIBarButtonItemStylePlain target:self action:@selector(returnButtonClicked:)];
+    UIBarButtonItem *leftBarItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"backArrow.png"] style:UIBarButtonItemStylePlain target: self action:@selector(returnButtonClicked:)];
+    leftBarItem.tintColor = orangColorPCH;
+    self.navigationItem.leftBarButtonItem = leftBarItem;
+}
+
+-(void)returnButtonClicked:(UIButton *)sender{
+    [self.navigationController popViewControllerAnimated:NO];
+}
+
 -(void)initBottomView{
-    
     CGRect bottomViewFrame = CGRectMake(0, screenHeightPCH - bottomViewHeightBD, screenWidthPCH, bottomViewHeightBD);
     if(!_bSPBView){
         _bSPBView = [[bookSecondPageBottomView alloc] initWithFrame:bottomViewFrame];
@@ -156,7 +167,6 @@ float bottomViewHeightBD;
         [psbl getUserTableInfoBL:curUser.username];
     }
 }
-
 #pragma record visit guys end
 
 #pragma 解决cell分割线右错15pt的问题
@@ -228,7 +238,7 @@ float bottomViewHeightBD;
 
 #pragma 从用户表获取关注的数据代理函数 end
 
-- (void)didReceiveMemoryWarning {
+-(void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
@@ -272,6 +282,7 @@ float bottomViewHeightBD;
     v.backgroundColor = grayColorPCH;
     return v;
 }
+
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
     return grayLineHeightPCH;
 }

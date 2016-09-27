@@ -53,33 +53,62 @@ static concernDAO *sharedManager;
                 BmobObject *obj = array[0];
                 if(![[obj objectForKey:@"concernedArr"] isEqual: @""])
                     [muArrURL setArray:[obj objectForKey:@"concernedArr"]];
+                NSMutableDictionary *mudic1 = [[NSMutableDictionary alloc] init];
                 if([dic objectForKey:@"concernedObjectId"]){
-                    NSMutableDictionary *mudic1 = [[NSMutableDictionary alloc] init];
-                    [mudic1 setObject:[obj objectForKey:@"objectId"] forKey:@"objectId"];
-                    [mudic1 setObject:[obj objectForKey:@"school"] forKey:@"school"];
-                    [mudic1 setObject:[obj objectForKey:@"username"] forKey:@"username"];
-                    [mudic1 setObject:[obj objectForKey:@"avatar"] forKey:@"avatar"];
-                    [muArrURL addObject:mudic1];
-                }
-                NSMutableDictionary *mudic = [[NSMutableDictionary alloc] init];
-                [mudic setObject:muArrURL forKey: @"concernedArr"];
-                BmobObjectsBatch *bmobBatch = [[BmobObjectsBatch alloc] init];
-                [bmobBatch updateBmobObjectWithClassName:@"_User" objectId:objectID parameters:mudic];
-                [bmobBatch batchObjectsInBackgroundWithResultBlock:^(BOOL isSuccessful, NSError *error) {
-                    if(isSuccessful)
-                    {       //访客数据添加成功与否不做数据返回处理
-                        [self.delegate concernedUserUploadFinishedDAO:isSuccessful];
-                        NSLog(@"更新数据成功");
-                    }else{
-                        [self.delegate concernedUserUploadFailedDAO:error];
-                        NSLog(@"%@", error.localizedDescription);
-                    }
-                }];
+                    [mudic1 setObject:[dic objectForKey:@"concernedObjectId"] forKey:@"concernedObjectId"];
+                if([dic objectForKey:@"concernedSchool"])
+                    [mudic1 setObject:[dic objectForKey:@"concernedSchool"] forKey:@"concernedSchool"];
+                if([dic objectForKey:@"concernedUserName"])
+                    [mudic1 setObject:[dic objectForKey:@"concernedUserName"] forKey:@"concernedUserName"];
+                if([dic objectForKey:@"concernedAvatar"])
+                    [mudic1 setObject:[dic objectForKey:@"concernedAvatar"] forKey:@"concernedAvatar"];
+                [muArrURL addObject:mudic1];
             }
+            NSMutableDictionary *mudic = [[NSMutableDictionary alloc] init];
+            [mudic setObject:muArrURL forKey: @"concernedArr"];
+                            BmobObjectsBatch *bmobBatch = [[BmobObjectsBatch alloc] init];
+                            [bmobBatch updateBmobObjectWithClassName:@"_User" objectId:objectID parameters:mudic];
+                            [bmobBatch batchObjectsInBackgroundWithResultBlock:^(BOOL isSuccessful, NSError *error) {
+                                if(isSuccessful)
+                                {   //访客数据添加成功与否不做数据返回处理
+                                    [self.delegate concernedUserUploadFinishedDAO:isSuccessful];
+                                    NSLog(@"更新数据成功");
+                                }else{
+                                    [self.delegate concernedUserUploadFailedDAO:error];
+                                    NSLog(@"%@", error.localizedDescription);
+                                }
+                            }];
+//            BmobObject *objUpdate = [BmobObject objectWithoutDatatWithClassName:@"_User" objectId:objectID];
+//            BmobUser *curUser = [BmobUser getCurrentUser];
+//            [objUpdate addObjectsFromArray:muArrURL forKey:@"concernedArr"];
+//            [objUpdate updateInBackgroundWithResultBlock:^(BOOL isSuccessful, NSError *error) {
+//                if(isSuccessful)
+//                {   //访客数据添加成功与否不做数据返回处理
+//                    [self.delegate concernedUserUploadFinishedDAO:isSuccessful];
+//                    NSLog(@"更新数据成功");
+//                }else{
+//                    [self.delegate concernedUserUploadFailedDAO:error];
+//                    NSLog(@"%@", error.localizedDescription);
+//                }
+//            }];
+
         }
-    }];
+    }
+  }];
 }
 
+//            BmobObjectsBatch *bmobBatch = [[BmobObjectsBatch alloc] init];
+//            [bmobBatch updateBmobObjectWithClassName:@"_User" objectId:objectID parameters:mudic];
+//            [bmobBatch batchObjectsInBackgroundWithResultBlock:^(BOOL isSuccessful, NSError *error) {
+//                if(isSuccessful)
+//                {   //访客数据添加成功与否不做数据返回处理
+//                    [self.delegate concernedUserUploadFinishedDAO:isSuccessful];
+//                    NSLog(@"更新数据成功");
+//                }else{
+//                    [self.delegate concernedUserUploadFailedDAO:error];
+//                    NSLog(@"%@", error.localizedDescription);
+//                }
+//            }];
 -(void)requestConcernedDataDAO:(NSString *)objectId{
     BmobQuery *query = [[BmobQuery alloc] initWithClassName:@"_User"];
     [query whereKey:@"objectId" equalTo:objectId];

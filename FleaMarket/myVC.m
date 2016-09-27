@@ -19,6 +19,7 @@
 #import "mySellVC.h"
 #import "SDImageCache.h"
 #import "AboutUsVC.h"
+#import "ModifyPersonalPageVC.h"
 
 #define loginPartOccupyScreenPercent 0.15
 //第一个section的header view 头像位置所需宏定义
@@ -58,9 +59,8 @@ UIImageView *headImage;
     [self drawMyViewPage];
     
     [self initializeArray];
-    [self addButtonToNavigationBar];
-//    if(userNameMy != nil)
-//        [self cacheAndDownloadPersonalInfo];
+    //暂时撤销这两个按钮，后续迭代 2016-09－20-17-38
+//    [self addButtonToNavigationBar];
 }
 
 -(void)cacheAndDownloadPersonalInfo
@@ -153,11 +153,7 @@ UIImageView *headImage;
 {
     cellMutableArray = [[NSMutableArray alloc] init];
     cellMutableArrayImage = [[NSMutableArray alloc] init];
-//    NSArray *arrayTemp = [[NSArray alloc] initWithObjects: @"我的出售",@"我的求购", nil];
-//    NSArray *arrayTemp1 = [[NSArray alloc] initWithObjects: @"我的关注",@"我的记事本", nil];
-//    NSArray *arrayTemp2 = [[NSArray alloc] initWithObjects: @"清空缓存", @"关于我们", nil];
-//    NSArray *arrayTemp3 = [[NSArray alloc] initWithObjects:@"退出登录", nil];
-
+    
     NSArray *arrayTemp = [[NSArray alloc] initWithObjects: @"我的出售",@"我的关注", nil];
     NSArray *arrayTemp1 = [[NSArray alloc] initWithObjects: @"清空缓存",@"关于我们", nil];
     NSArray *arrayTemp2 = [[NSArray alloc] initWithObjects: @"退出登录", nil];
@@ -424,7 +420,7 @@ UIImageView *headImage;
             label = [[UILabel alloc] init];
         }
         if(!label.text)
-            label.text = @"书香人家用户";
+            label.text = @"FleaMarket";
         label.textColor = [UIColor blackColor];
         label.font = FontSize14;
         CGRect labelFrame = CGRectMake(screenWidthPCH * 0.24, headViewHeight * 0.30, screenWidthPCH * 0.35, headViewHeight * 0.14);
@@ -448,24 +444,25 @@ UIImageView *headImage;
         CGRect labelFansFrame = CGRectMake(screenWidthPCH * (0.24 + 0.15 + 0.05), headViewHeight * 0.60, screenWidthPCH * 0.20, headViewHeight * 0.05);
         labelFans.frame = labelFansFrame;
         if(!labelFans.text)
-            labelFans.text = @"粉丝:0";
+            labelFans.text = @"出售:0";
         labelFans.textColor = [UIColor lightGrayColor];
         labelFans.font = [UIFont systemFontOfSize:14];
         [view1 addSubview:labelFans];
         
         UIButton *buttonPerson = [[UIButton alloc] init];
-        CGRect buttonPersonFrame = CGRectMake(screenWidthPCH *(0.28 + 0.35 + 0.05) , headViewHeight * 0.40, screenWidthPCH * 0.25, headViewHeight * 0.05);
+        CGRect buttonPersonFrame = CGRectMake(screenWidthPCH *(0.28 + 0.35 + 0.05) , headViewHeight * 0.40, screenWidthPCH * 0.30, 20);
         buttonPerson.frame = buttonPersonFrame;
         UILabel *labelPerson = [[UILabel alloc] init];
-        CGRect labelPersonFrame = CGRectMake(0, 0, screenWidthPCH * 0.20, headViewHeight * 0.05);
+        CGRect labelPersonFrame = CGRectMake(0, 0, screenWidthPCH * 0.25, 14);
         labelPerson.frame = labelPersonFrame;
-        labelPerson.text = @"个人主页";
-        labelPerson.font = [UIFont systemFontOfSize:18 * 3/4];
+        labelPerson.textAlignment = NSTextAlignmentRight;
+        labelPerson.text = @"修改个人资料";
+        labelPerson.font = [UIFont systemFontOfSize:12];
         labelPerson.textColor = [UIColor colorWithRed:235/255.0 green:147/255.0 blue:33/255 alpha:1.0];
         [buttonPerson addSubview: labelPerson];
         
-        UIImage *imageArrow = [UIImage imageNamed:@"arrow.png"];
-        CGRect imageArrowFrame = CGRectMake(screenWidthPCH * 0.18, 0, screenWidthPCH * 0.07, headViewHeight * 0.10);
+        UIImage *imageArrow = [UIImage imageNamed:@"ic_wweng_arrow_orange@2x.png"];
+        CGRect imageArrowFrame = CGRectMake(screenWidthPCH * 0.25, 0, 12, 12);
         
         UIImageView *imageArrowView = [[UIImageView alloc] init];
         imageArrowView.image = imageArrow;
@@ -473,7 +470,6 @@ UIImageView *headImage;
         [buttonPerson addSubview:imageArrowView];
         [buttonPerson addTarget:self action:@selector(personalPageClicked:) forControlEvents:UIControlEventTouchDown];
         [view1 addSubview: buttonPerson];
-        
     }
     UITapGestureRecognizer *tapGestureView1 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(view1Clicked:)];
     [view1 addGestureRecognizer:tapGestureView1];
@@ -483,20 +479,25 @@ UIImageView *headImage;
 -(void)view1Clicked:(UITapGestureRecognizer *)recognizer
 {
     self.hidesBottomBarWhenPushed = YES;
-    personalPageViewController *personalPage = [[personalPageViewController alloc] init];
-    [self.navigationController pushViewController:personalPage animated:NO];
-    UIBarButtonItem *barItem = [[UIBarButtonItem alloc] init];
-    barItem.title = @"";
-    self.navigationItem.backBarButtonItem = barItem;
-    //    [self.navigationController.navigationBar setTintColor:[UIColor yellowColor]];
-    self.navigationController.navigationBar.alpha = 0.0;
+    ModifyPersonalPageVC *modifyPersonalPage = [[ModifyPersonalPageVC alloc] init];
+    [self.navigationController pushViewController:modifyPersonalPage animated:NO];
+//    UIBarButtonItem *barItem = [[UIBarButtonItem alloc] init];
+//    barItem.title = @"";
+//    self.navigationItem.backBarButtonItem = barItem;
+//    //    [self.navigationController.navigationBar setTintColor:[UIColor yellowColor]];
+//    self.navigationController.navigationBar.alpha = 0.0;
     self.hidesBottomBarWhenPushed = NO;
 }
 -(void)personalPageClicked:(UIButton *)sender
 {
+//    self.hidesBottomBarWhenPushed = YES;
+//    personalPageViewController *personalPage = [[personalPageViewController alloc] init];
+//    [self.navigationController pushViewController:personalPage animated:NO];
+//    self.hidesBottomBarWhenPushed = NO;
+    //2016-09-20-17-52 modify
     self.hidesBottomBarWhenPushed = YES;
-    personalPageViewController *personalPage = [[personalPageViewController alloc] init];
-    [self.navigationController pushViewController:personalPage animated:NO];
+    ModifyPersonalPageVC *modifyPersonalPage = [[ModifyPersonalPageVC alloc] init];
+    [self.navigationController pushViewController:modifyPersonalPage animated:NO];
     self.hidesBottomBarWhenPushed = NO;
 }
 
