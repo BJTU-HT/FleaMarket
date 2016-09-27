@@ -73,7 +73,7 @@ float cellHeight;
 //    UIBarButtonItem *leftBarItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"friendBlack32.png"] style:UIBarButtonItemStylePlain target:self action:@selector(leftBarFriendButtonClicked:)];
 //    self.navigationItem.leftBarButtonItem = leftBarItem;
 //    leftBarItem.tintColor = orangColorPCH;
-    UIBarButtonItem *rightBarItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"friendBlack32.png"] style:UIBarButtonItemStylePlain target:self action:@selector(rightBarAddFriendButtonClicked:)];
+    UIBarButtonItem *rightBarItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"friendBlack32new.png"] style:UIBarButtonItemStylePlain target:self action:@selector(rightBarAddFriendButtonClicked:)];
     self.navigationItem.rightBarButtonItem = rightBarItem;
     rightBarItem.tintColor = orangColorPCH;
 }

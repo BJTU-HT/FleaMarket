@@ -83,7 +83,7 @@ BmobUser *userObjID;
     self.navigationItem.leftBarButtonItem = leftBarItem;
     leftBarItem.tintColor = orangColorPCH;
     
-    UIBarButtonItem *rightBarItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"plusOrange32.png"] style:UIBarButtonItemStylePlain target:self action:@selector(rightBarItemClicked:)];
+    UIBarButtonItem *rightBarItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"plusOrange32new.png"] style:UIBarButtonItemStylePlain target:self action:@selector(rightBarItemClicked:)];
     self.navigationItem.rightBarButtonItem = rightBarItem;
     rightBarItem.tintColor = orangColorPCH;
     
