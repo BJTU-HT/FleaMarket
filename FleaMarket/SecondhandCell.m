@@ -178,7 +178,7 @@
     _descriptionLabel.text = model.productName;
     
     _locationLabel.text = model.school;
-    _schoolLabel.text = model.school;
+    //_schoolLabel.text = model.school;
     _publishTimeLabel.text = model.publishTime;
     _sexImageView.image = [UIImage imageNamed:model.sex];
     

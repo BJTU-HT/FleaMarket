@@ -6,7 +6,6 @@
 //  Copyright © 2016 H-T. All rights reserved.
 //
 
-#import <AssetsLibrary/AssetsLibrary.h>
 #import <Photos/Photos.h>
 #import "publishVC.h"
 #import "RXRotateButtonOverlayView.h"
@@ -17,15 +16,8 @@
 #import "UploadImageModel.h"
 
 @interface publishVC () <RXRotateButtonOverlayViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
-
 @property (nonatomic, strong) RXRotateButtonOverlayView *overlayView;
-
-@property (nonatomic, strong) ALAssetsLibrary *assetsLibrary;
-
-@property (nonatomic , strong) ALAssetsGroup * group;
-
 @property (nonatomic, strong) NSMutableArray *tableData;
-
 @property (nonatomic, strong) NSMutableArray *collectionData;
 
 @end
@@ -34,21 +26,16 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    self.navigationController.navigationBarHidden = YES;
+    self.navigationController.navigationBarHidden = NO;
     [self.view addSubview:self.overlayView];
     [self.overlayView show];
-}
-
--(void)viewDidDisappear:(BOOL)animated{
-    self.navigationController.navigationBarHidden = NO;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
-    self.view.backgroundColor = [UIColor grayColor];
-    
+    UINavigationItem *navigationItem = [self navigationItem];
+    navigationItem.title = @"发布";
     [self getPhotoAssetCollections];
 }
 
@@ -74,10 +61,6 @@
 {
     // 获得相机胶卷
     PHAssetCollection *assetCollection = [PHAssetCollection fetchAssetCollectionsWithType:PHAssetCollectionTypeSmartAlbum subtype:PHAssetCollectionSubtypeSmartAlbumUserLibrary options:nil].lastObject;
-//    //2016-09-20-16-54 modify by hou for solve program crash when photos is unable
-//    if(!assetCollection){
-//        [self popAlertViewForPhotos];
-//    }
     [self.tableData addObject:assetCollection];
     
     // 遍历所有的自定义相簿
@@ -88,6 +71,7 @@
     }
 
     //[self enumerateAssetsInAssetCollection:assetCollection2 original:YES];
+    
     if ([self.tableData count]) {
         [self getCollectionData:0];
     }
@@ -99,7 +83,7 @@
     if (self.collectionData.count) {
         [self.collectionData removeAllObjects];
     }
-
+    
     // 将“拍照”照片添加入collectionData
     CollectionDataModel *dataModel = [[CollectionDataModel alloc] init];
     dataModel.img = [UIImage imageNamed:@"takePicture.png"];
@@ -140,28 +124,6 @@
     }
 }
 
-#pragma ----pop alert when privacy->photos->closed 2016-09-20-16-58 begin--------------
-//-(void)popAlertViewForPhotos{
-//    UIAlertController *alertConLogOut = [UIAlertController alertControllerWithTitle:@"提示" message:@"您需要在 [系统设置->隐私->照片] 里面允许FleaMarket访问照片才可以哦～" preferredStyle:UIAlertControllerStyleAlert];
-//    UIAlertAction *alertConfirm = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-//        //[self visitPhotoAlbum];
-//        
-//    }];
-//    UIAlertAction *alertCancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
-//    [alertConLogOut addAction:alertConfirm];
-//    [alertConLogOut addAction:alertCancel];
-//    [self.view.window.rootViewController presentViewController:alertConLogOut animated:NO completion:nil];
-//}
-//
-//-(void)visitPhotoAlbum{
-//    NSURL * url = [NSURL URLWithString: UIApplicationOpenSettingsURLString];
-//    
-//    if([[UIApplication sharedApplication] canOpenURL:url]) {
-//        NSURL *url =[NSURL URLWithString: UIApplicationOpenSettingsURLString];
-//        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"prefs:root=WIFI"]];
-//    }
-//}
-#pragma ----pop alert when privacy->photos->closed 2016-09-20-16-58 end----------------
 
 #pragma mark **************** RXRotateButtonOverlayViewDelegate *******************
 - (void)didSelected:(NSUInteger)index
@@ -184,6 +146,11 @@
         
     } else {
         // 1 就是从相册中选择
+        
+        for (CollectionDataModel *model in _collectionData) {
+            model.selected = NO;
+        }
+        
         ImagePickerVC *imgPickVC = [[ImagePickerVC alloc] init];
         imgPickVC.assetCollection = _tableData[0];
         imgPickVC.tableData  = [[NSMutableArray alloc] initWithArray:_tableData];
@@ -239,15 +206,6 @@
     }
     
     return _overlayView;
-}
-
-- (ALAssetsLibrary *)assetsLibrary
-{
-    if (!_assetsLibrary) {
-        _assetsLibrary = [[ALAssetsLibrary alloc] init];
-    }
-    
-    return _assetsLibrary;
 }
 
 - (NSMutableArray *)tableData

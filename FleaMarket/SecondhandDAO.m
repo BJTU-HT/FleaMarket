@@ -91,61 +91,70 @@ static SecondhandDAO *sharedManager = nil;
             [bquery whereKey:@"main_category" equalTo:value];
         }
         
+        if ([key isEqualToString:@"vice_category"]) {
+            NSArray *categoryArray = filterDic[key];
+            [bquery whereKey:@"vice_category" containedIn:[NSArray arrayWithArray:categoryArray]];
+        }
+        
+        
         // 按学校过滤
         if ([key isEqualToString:@"school"]) {
             NSArray *schoolArray = filterDic[key];
-            for (NSString *school in schoolArray) {
-                [bquery whereKey:@"school" equalTo:school];
-            }
+            [bquery whereKey:@"school" containedIn:[NSArray arrayWithArray:schoolArray]];
         }
     }
     
     [bquery findObjectsInBackgroundWithBlock:^(NSArray *array, NSError *error) {
-        for (BmobObject *obj in array) {
-            SecondhandVO *vo = [[SecondhandVO alloc] init];
-            vo.userID = [obj objectForKey:@"user_id"];
-            vo.userName = [obj objectForKey:@"user_name"];
-            vo.userIconImage = [obj objectForKey:@"user_icon_url"];
-            vo.sex = [obj objectForKey:@"sex"];
-            vo.productID = [obj objectForKey:@"objectId"];
-            vo.productName = [obj objectForKey:@"product_name"];
-            vo.productDescription = [obj objectForKey:@"product_description"];
-            vo.school = [obj objectForKey:@"school"];
-            vo.nowPrice = [[obj objectForKey:@"now_price"] intValue];
-            vo.originalPrice = [[obj objectForKey:@"original_price"] intValue];
-            vo.pictureArray = [obj objectForKey:@"picture_array"];
-            vo.skimTimes = [[obj objectForKey:@"skim_times"] intValue];
-            vo.praiseTimes = [[obj objectForKey:@"praise_times"] intValue];
-            vo.location = [obj objectForKey:@"location"];
-            vo.publishTime = [obj objectForKey:@"createdAt"];
-            vo.mainCategory = [obj objectForKey:@"main_category"];
-            vo.viceCategory = [obj objectForKey:@"vice_category"];
-            vo.buyerID = [obj objectForKey:@"buyer_id"];
-            vo.visitorURLArray = [obj objectForKey:@"visitor_url_array"];
-            vo.downLoadPicArray = [[NSMutableArray alloc] init];
-
-            [listData addObject:vo];
+        
+        if (error) {
+            [self.delegate findSecondhandFailed:error];
+        } else {
+            for (BmobObject *obj in array) {
+                SecondhandVO *vo = [[SecondhandVO alloc] init];
+                vo.userID = [obj objectForKey:@"user_id"];
+                vo.userName = [obj objectForKey:@"user_name"];
+                vo.userIconImage = [obj objectForKey:@"user_icon_url"];
+                vo.sex = [obj objectForKey:@"sex"];
+                vo.productID = [obj objectForKey:@"objectId"];
+                vo.productName = [obj objectForKey:@"product_name"];
+                vo.productDescription = [obj objectForKey:@"product_description"];
+                vo.school = [obj objectForKey:@"school"];
+                vo.nowPrice = [[obj objectForKey:@"now_price"] intValue];
+                vo.originalPrice = [[obj objectForKey:@"original_price"] intValue];
+                vo.pictureArray = [obj objectForKey:@"picture_array"];
+                vo.skimTimes = [[obj objectForKey:@"skim_times"] intValue];
+                vo.praiseTimes = [[obj objectForKey:@"praise_times"] intValue];
+                vo.location = [obj objectForKey:@"location"];
+                vo.publishTime = [obj objectForKey:@"createdAt"];
+                vo.mainCategory = [obj objectForKey:@"main_category"];
+                vo.viceCategory = [obj objectForKey:@"vice_category"];
+                vo.buyerID = [obj objectForKey:@"buyer_id"];
+                vo.visitorURLArray = [obj objectForKey:@"visitor_url_array"];
+                vo.downLoadPicArray = [[NSMutableArray alloc] init];
+                
+                [listData addObject:vo];
+            }
+            
+            // 查询结果按照发布时间排序
+            [listData sortUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
+                NSString *str1 = ((SecondhandVO *)obj1).publishTime;
+                NSString *str2 = ((SecondhandVO *)obj2).publishTime;
+                return [str2 compare:str1];
+            }];
+            
+            // 记录最新二手商品的创建时间
+            if (listData.count) {
+                NSString *dateStr = ((SecondhandVO *)listData[0]).publishTime;
+                NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+                [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+                self.lastestTime = [[NSDate date] initWithTimeInterval:1 sinceDate:[formatter dateFromString:dateStr]];
+            }
+            
+            [self.delegate findSecondhandFinished:listData];
+            
+            // 偏移量后移
+            _offset += CommentLimit;
         }
-        
-        // 查询结果按照发布时间排序
-        [listData sortUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
-            NSString *str1 = ((SecondhandVO *)obj1).publishTime;
-            NSString *str2 = ((SecondhandVO *)obj2).publishTime;
-            return [str2 compare:str1];
-        }];
-        
-        // 记录最新二手商品的创建时间
-        if (listData.count) {
-            NSString *dateStr = ((SecondhandVO *)listData[0]).publishTime;
-            NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-            [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-            self.lastestTime = [[NSDate date] initWithTimeInterval:1 sinceDate:[formatter dateFromString:dateStr]];
-        }
-        
-        [self.delegate findSecondhandFinished:listData];
-        
-        // 偏移量后移
-        _offset += CommentLimit;
     }];
     
 }
@@ -182,50 +191,53 @@ static SecondhandDAO *sharedManager = nil;
     }
     
     [bquery findObjectsInBackgroundWithBlock:^(NSArray *array, NSError *error) {
-        for (BmobObject *obj in array) {
-            SecondhandVO *vo = [[SecondhandVO alloc] init];
-            vo.userID = [obj objectForKey:@"user_id"];
-            vo.userName = [obj objectForKey:@"user_name"];
-            vo.userIconImage = [obj objectForKey:@"user_icon_url"];
-            vo.sex = [obj objectForKey:@"sex"];
-            vo.productID = [obj objectForKey:@"objectId"];
-            vo.productName = [obj objectForKey:@"product_name"];
-            vo.productDescription = [obj objectForKey:@"product_description"];
-            vo.school = [obj objectForKey:@"school"];
-            vo.nowPrice = [[obj objectForKey:@"now_price"] intValue];
-            vo.originalPrice = [[obj objectForKey:@"original_price"] intValue];
-            vo.pictureArray = [obj objectForKey:@"picture_array"];
-            vo.skimTimes = [[obj objectForKey:@"skim_times"] intValue];
-            vo.praiseTimes = [[obj objectForKey:@"praise_times"] intValue];
-            vo.location = [obj objectForKey:@"location"];
-            vo.publishTime = [obj objectForKey:@"createdAt"];
-            vo.mainCategory = [obj objectForKey:@"main_category"];
-            vo.viceCategory = [obj objectForKey:@"vice_category"];
-            vo.buyerID = [obj objectForKey:@"buyer_id"];
-            vo.visitorURLArray = [obj objectForKey:@"visitor_url_array"];
-            vo.downLoadPicArray = [[NSMutableArray alloc] init];
+        if (error) {
+            [self.delegate findNewCommingFailed:error];
+        } else {
+            for (BmobObject *obj in array) {
+                SecondhandVO *vo = [[SecondhandVO alloc] init];
+                vo.userID = [obj objectForKey:@"user_id"];
+                vo.userName = [obj objectForKey:@"user_name"];
+                vo.userIconImage = [obj objectForKey:@"user_icon_url"];
+                vo.sex = [obj objectForKey:@"sex"];
+                vo.productID = [obj objectForKey:@"objectId"];
+                vo.productName = [obj objectForKey:@"product_name"];
+                vo.productDescription = [obj objectForKey:@"product_description"];
+                vo.school = [obj objectForKey:@"school"];
+                vo.nowPrice = [[obj objectForKey:@"now_price"] intValue];
+                vo.originalPrice = [[obj objectForKey:@"original_price"] intValue];
+                vo.pictureArray = [obj objectForKey:@"picture_array"];
+                vo.skimTimes = [[obj objectForKey:@"skim_times"] intValue];
+                vo.praiseTimes = [[obj objectForKey:@"praise_times"] intValue];
+                vo.location = [obj objectForKey:@"location"];
+                vo.publishTime = [obj objectForKey:@"createdAt"];
+                vo.mainCategory = [obj objectForKey:@"main_category"];
+                vo.viceCategory = [obj objectForKey:@"vice_category"];
+                vo.buyerID = [obj objectForKey:@"buyer_id"];
+                vo.visitorURLArray = [obj objectForKey:@"visitor_url_array"];
+                vo.downLoadPicArray = [[NSMutableArray alloc] init];
+                
+                [listData addObject:vo];
+            }
             
-            [listData addObject:vo];
+            // 查询结果按照发布时间排序
+            [listData sortUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
+                NSString *str1 = ((SecondhandVO *)obj1).publishTime;
+                NSString *str2 = ((SecondhandVO *)obj2).publishTime;
+                return [str2 compare:str1];
+            }];
+            
+            // 调用delegate方法
+            [self.delegate findNewCommingFinished:listData];
+            
+            // 找出查询出的商品的最晚时间，更新最新二手商品加载时间
+            if ([listData count] > 0) {
+                NSString *dateStr = ((SecondhandVO *)listData[0]).publishTime;
+                NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+                [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+                self.lastestTime = [[NSDate date] initWithTimeInterval:1 sinceDate:[formatter dateFromString:dateStr]];
+            }
         }
-        
-        // 查询结果按照发布时间排序
-        [listData sortUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
-            NSString *str1 = ((SecondhandVO *)obj1).publishTime;
-            NSString *str2 = ((SecondhandVO *)obj2).publishTime;
-            return [str2 compare:str1];
-        }];
-        
-        // 调用delegate方法
-        [self.delegate findNewCommingFinished:listData];
-        
-        // 找出查询出的商品的最晚时间，更新最新二手商品加载时间
-        if ([listData count] > 0) {
-            NSString *dateStr = ((SecondhandVO *)listData[0]).publishTime;
-            NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-            [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-            self.lastestTime = [[NSDate date] initWithTimeInterval:1 sinceDate:[formatter dateFromString:dateStr]];
-        }
-        
     }];
 }
 

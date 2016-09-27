@@ -49,7 +49,7 @@ CGFloat margin = 10.0f;
         
         // 箭头图标
         UIImageView *arrowImageView = [[UIImageView alloc] init];
-        arrowImageView.image = [UIImage imageNamed:@"arrow.png"];
+        arrowImageView.image = [UIImage imageNamed:@"arrow"];
         [self addSubview:arrowImageView];
         self.arrowImageView = arrowImageView;
         

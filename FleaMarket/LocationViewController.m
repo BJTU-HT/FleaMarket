@@ -46,10 +46,12 @@
     self.tableView = tableView;
     [self.view addSubview:self.tableView.view];
     
-    /*
-     _tableView = [[ConditionDoubleTableView alloc] initWithFrame:self.view.bounds andLeftItems:leftArray andRightItems:rightArray];
-     _tableView.delegate = self;
-     */
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back_03.png"] style:UIBarButtonItemStylePlain target:self action:@selector(backToMain)];
+}
+
+- (void)backToMain
+{
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 //测试数据

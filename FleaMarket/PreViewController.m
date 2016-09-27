@@ -83,19 +83,24 @@
     self.title = [NSString stringWithFormat:@"%ld/%lu",self.pageNum,(unsigned long)self.collectionData.count];
     self.automaticallyAdjustsScrollViewInsets=NO;
     
+    /*
     UIButton *leftBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    leftBtn.frame = CGRectMake(0, 0, 40, 40);
-    [leftBtn setImage:[UIImage imageNamed:@"Tools_Back_Btn"] forState:UIControlStateNormal];
+    leftBtn.frame = CGRectMake(0, 0, 23, 23);
+    [leftBtn setImage:[UIImage imageNamed:@"back_03.png"] forState:UIControlStateNormal];
     [leftBtn addTarget:self action:@selector(backBtnClick) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:leftBtn];
     self.navigationItem.leftBarButtonItem.tintColor = [UIColor blackColor];
+    */
+    
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back_03.png"] style:UIBarButtonItemStylePlain target:self action:@selector(backBtnClick)];
     
     self.rightItemBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.rightItemBtn.frame = CGRectMake(0, 0, 40, 40);
+    self.rightItemBtn.frame = CGRectMake(0, 0, 23, 23);
     [self.rightItemBtn setImage:[UIImage imageNamed:@"PicNull"] forState:UIControlStateNormal];
-    [self.rightItemBtn setImage:[UIImage imageNamed:@"Selected"] forState:UIControlStateSelected];
+    [self.rightItemBtn setImage:[UIImage imageNamed:@"selected_orange"] forState:UIControlStateSelected];
     [self.rightItemBtn addTarget:self action:@selector(rightItemBtnClick) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:self.rightItemBtn];
+
     //NSLog(@"current Page num: %ld", self.pageNum);
     CollectionDataModel *model = self.collectionData[self.pageNum - 1];
     if (model.selected) {

@@ -11,18 +11,12 @@
 
 @protocol SearchProductDelegate <NSObject>
 
-- (void)getSearchResult:(NSMutableArray *)list;
+- (void)searchSecondhandByKey:(NSString *)keyString;
 
 @end
 
 @interface SearchViewController : UIViewController <SecondhandBLDelegate>
 
 @property (nonatomic, weak) id <SearchProductDelegate> delegate;
-
-@property (nonatomic, strong) SecondhandBL *bl;
-
-@property (nonatomic, assign) NSInteger currentCategory;
-
-@property (nonatomic, assign) NSString *currentSchool;
 
 @end

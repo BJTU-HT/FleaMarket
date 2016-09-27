@@ -118,7 +118,7 @@
                 }
                 NSDictionary *dic = [array objectAtIndex:indexPath.row];
                 cell.textLabel.text = [dic valueForKey:@"title"];
-                cell.textLabel.highlightedTextColor = [self colorWithRGB:0x90EE90];
+                //cell.textLabel.highlightedTextColor = [self colorWithRGB:0x90EE90];
                 break;
             }
             default:
