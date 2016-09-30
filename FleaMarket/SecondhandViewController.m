@@ -41,7 +41,8 @@
 @property (nonatomic, assign) NSInteger schoolCategory;                          // 学校分类
 @property (nonatomic, strong) NSString *currentSchool;
 @property (nonatomic, strong) SecondhandTitleView *secondhandTitleView;
-
+@property (nonatomic, strong) NSString *keyString;
+@property (nonatomic, assign) BOOL searchFlag;    // 是否是搜索返回的标记
 //@property (nonatomic, strong) UITableView *testScrollView;
 @end
 
@@ -80,6 +81,7 @@
 {
     self.schoolCategory = 0;
     self.currentSchool = @"全部大学";
+    self.searchFlag = NO;
     
     // 创建BL
     self.bl = [SecondhandBL new];
@@ -302,6 +304,11 @@
         [filterDic setObject:schoolArray forKey:@"school"];
     }
     
+    // ********************* 关键字搜索过滤 ***********************
+    if (self.keyString.length > 0) {
+        [filterDic setObject:self.keyString forKey:@"product_name"];
+    }
+    
     [self.bl findSecondhand:filterDic];
 }
 
@@ -327,6 +334,11 @@
             }
             
             [filterDic setObject:schoolArray forKey:@"school"];
+        }
+        
+        // ********************* 关键字搜索过滤 ***********************
+        if (self.keyString.length > 0) {
+            [filterDic setObject:self.keyString forKey:@"product_name"];
         }
         
         [weakSelf.bl findNewComming:filterDic];
@@ -357,6 +369,11 @@
             [filterDic setObject:schoolArray forKey:@"school"];
         }
         
+        // ********************* 关键字搜索过滤 ***********************
+        if (self.keyString.length > 0) {
+            [filterDic setObject:self.keyString forKey:@"product_name"];
+        }
+        
         [weakSelf.bl findSecondhand:filterDic];
     });
 }
@@ -384,6 +401,8 @@
 
 - (void)searchSecondhandByKey:(NSString *)keyString
 {
+    self.keyString = keyString;
+    self.searchFlag = YES;
     [self searchByKey:keyString];
 }
 
@@ -491,8 +510,13 @@
     
     [self.tableView reloadData];
     
-    // 结束刷新
-    [self.refresh endRefresh];
+    // 结束刷新, 搜索返回不需要结束刷新
+    if (!self.searchFlag) {
+        [self.refresh endRefresh];
+    } else {
+        self.searchFlag = NO;
+    }
+    
     [self.activityIndicatorView stopAnimating];
 }
 

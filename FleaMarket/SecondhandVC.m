@@ -33,6 +33,7 @@
 @property (nonatomic, strong) UIActivityIndicatorView *activityIndicatorView;
 @property (nonatomic, weak) UIButton *currentMenuBtn;
 @property (nonatomic, strong) UISearchBar *searchBar;
+@property (nonatomic, strong) NSString *keyString;      // 当前关键字过滤字符串
 @end
 
 @implementation SecondhandVC
@@ -54,6 +55,7 @@
 {
     self.navigationController.navigationBarHidden = NO;
     
+    [self.activityIndicatorView startAnimating];
     // 添加刷新
     __weak SecondhandVC *weakSelf = self;
     self.refresh = [[WJRefresh alloc] init];
@@ -86,7 +88,6 @@
     self.bl = [SecondhandBL new];
     self.bl.delegate = self;
     [self getFirstPageData];
-    [self.activityIndicatorView startAnimating];
 }
 
 - (void)setNav
@@ -222,9 +223,22 @@
     self.maskView.hidden = YES;
 }
 
+#pragma mark --- ScrollView Delegate ---
+
+/*
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    // 49是触发操作的的阈值
+    if (scrollView.contentOffset.y == fmaxf(.0f, scrollView.contentSize.height - scrollView.frame.size.height) + 49) {
+        [self moreData];
+    }
+}
+ */
+
 #pragma mark ------------- SearchProductDelegate ----------------
 - (void)searchSecondhandByKey:(NSString *)keyString
 {
+    self.keyString = keyString;
     self.searchBar.placeholder = keyString;
     [self searchByKey:keyString];
 }
@@ -369,6 +383,11 @@
         [filterDic setObject:categoryArray forKey:@"vice_category"];
     }
     
+    // ********************* 关键字搜索过滤 ***********************
+    if (self.keyString.length > 0) {
+        [filterDic setObject:self.keyString forKey:@"product_name"];
+    }
+    
     [self.bl findSecondhand:filterDic];
 }
 
@@ -377,6 +396,8 @@
 {
     __weak SecondhandVC *weakSelf = self;
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        /*
+        
         // 条件过滤字典
         NSMutableDictionary *filterDic = [[NSMutableDictionary alloc] init];
         
@@ -413,6 +434,9 @@
         }
         
         [weakSelf.bl findNewComming:filterDic];
+        */
+        
+        [weakSelf.refresh endRefresh];
     });
 }
 
@@ -456,9 +480,59 @@
             [filterDic setObject:categoryArray forKey:@"vice_category"];
         }
         
+        // ********************* 关键字搜索过滤 ***********************
+        if (self.keyString.length > 0) {
+            [filterDic setObject:self.keyString forKey:@"product_name"];
+        }
+        
         [weakSelf.bl findSecondhand:filterDic];
         
     });
+}
+
+- (void)moreData
+{
+    // 条件过滤字典
+    NSMutableDictionary *filterDic = [[NSMutableDictionary alloc] init];
+    
+    // ********************** 学校条件过滤 *************************
+    // 读取学校区域字典
+    NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"SchoolAreaDictionary" ofType:@"plist"];
+    NSMutableDictionary *schoolAreaDic = [[NSMutableDictionary alloc] initWithContentsOfFile:plistPath];
+    // 读取学校字典
+    NSString *plistPath1 = [[NSBundle mainBundle] pathForResource:@"SchoolDictionary" ofType:@"plist"];
+    NSMutableDictionary *schoolDic = [[NSMutableDictionary alloc] initWithContentsOfFile:plistPath1];
+    if (self.schoolCategory != 0) {
+        NSMutableArray *schoolArray = [[NSMutableArray alloc] initWithArray:[schoolAreaDic objectForKey:[NSString stringWithFormat:@"%ld", self.schoolCategory]]];
+        if (schoolArray.count == 0) {
+            [schoolArray addObject:[schoolDic objectForKey:[NSString stringWithFormat:@"%ld", self.schoolCategory]]];
+        }
+        
+        [filterDic setObject:schoolArray forKey:@"school"];
+    }
+    
+    // ******************** 商品类别条件过滤 ************************
+    // 读取商品大分类字典
+    NSString *plistPath2 = [[NSBundle mainBundle] pathForResource:@"CategoryClassDictionary" ofType:@"plist"];
+    NSMutableDictionary *categoryClassDic = [[NSMutableDictionary alloc] initWithContentsOfFile:plistPath2];
+    // 读取所有商品分类字典
+    NSString *plistPath3 = [[NSBundle mainBundle] pathForResource:@"CategoryDictionary" ofType:@"plist"];
+    NSMutableDictionary *categoryDic = [[NSMutableDictionary alloc] initWithContentsOfFile:plistPath3];
+    if (self.viceCategory != 0) {
+        NSMutableArray *categoryArray = [[NSMutableArray alloc] initWithArray:[categoryClassDic objectForKey:[NSString stringWithFormat:@"%ld", self.viceCategory]]];
+        if (categoryArray.count == 0) {
+            [categoryArray addObject:[categoryDic objectForKey:[NSString stringWithFormat:@"%ld", self.viceCategory]]];
+        }
+        
+        [filterDic setObject:categoryArray forKey:@"vice_category"];
+    }
+    
+    // ********************* 关键字搜索过滤 ***********************
+    if (self.keyString.length > 0) {
+        [filterDic setObject:self.keyString forKey:@"product_name"];
+    }
+    
+    [self.bl findSecondhand:filterDic];
 }
 
 #pragma mark --- UITableViewDelegate ---
@@ -566,11 +640,13 @@
 - (void)findSecondhandFailed:(NSError *)error
 {
     // 结束刷新
+    /*
     [self.activityIndicatorView stopAnimating];
     [self.refresh endRefresh];
     UIAlertController *ac = [UIAlertController alertControllerWithTitle:nil message:@"请求失败" preferredStyle:UIAlertControllerStyleAlert];
     [self presentViewController:ac animated:YES completion:nil];
     [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(createAlert:) userInfo:ac repeats:NO];
+     */
 }
 
 - (void)findNewCommingSecondhandFinished:(NSMutableArray *)list
@@ -592,11 +668,13 @@
 - (void)findNewCommingSecondhandFailed:(NSError *)error
 {
     // 结束刷新
+    /*
     [self.activityIndicatorView stopAnimating];
     [self.refresh endRefresh];
     UIAlertController *ac = [UIAlertController alertControllerWithTitle:nil message:@"请求失败" preferredStyle:UIAlertControllerStyleAlert];
     [self presentViewController:ac animated:NO completion:nil];
     [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(createAlert:) userInfo:ac repeats:NO];
+     */
 }
 
 - (void)createAlert:(NSTimer *)timer{

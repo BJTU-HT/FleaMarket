@@ -1585,6 +1585,7 @@
 		E9621F2C1D9119E9001CE5E9 /* util */ = {
 			isa = PBXGroup;
 			children = (
+				E9B3B95D1D2BAE420085304D /* RefreshView */,
 				E9B60AE41D92E8D2002D1229 /* UniversityJSON */,
 				E9B3B9861D2BB0E00085304D /* PlaceholderTextView */,
 				E9B3B90B1D2BABB90085304D /* NumberKeyboard */,
@@ -1991,7 +1992,6 @@
 				E9F32C991D8A367B00047B27 /* SecondhandDetailVC */,
 				E9B3B9601D2BAE5F0085304D /* LocationVC */,
 				E9B3B95E1D2BAE4A0085304D /* SearchVC */,
-				E9B3B95D1D2BAE420085304D /* RefreshView */,
 			);
 			name = Secondhand;
 			sourceTree = "<group>";

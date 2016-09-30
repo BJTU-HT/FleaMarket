@@ -26,7 +26,7 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         self.sortLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, screenWidthPCH, 42)];
-        self.sortLabel.font = FontSize12;
+        self.sortLabel.font = FontSize16;
         self.sortLabel.textAlignment = NSTextAlignmentCenter;
         [self.contentView addSubview:self.sortLabel];
     }
