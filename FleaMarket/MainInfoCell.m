@@ -49,6 +49,9 @@
         UIImageView *currentImageView = [[UIImageView alloc] init];
         UIImageView *leftImageView = [[UIImageView alloc] init];
         UIImageView *rightImageView = [[UIImageView alloc] init];
+        currentImageView.backgroundColor = [UIColor blackColor];
+        leftImageView.backgroundColor = [UIColor blackColor];
+        rightImageView.backgroundColor = [UIColor blackColor];
         self.currentImageView = currentImageView;
         self.leftImageView = leftImageView;
         self.rightImageView = rightImageView;
@@ -179,6 +182,9 @@
     _currentImageView.frame = _frameModel.currentImageViewFrame;
     _leftImageView.frame = _frameModel.leftImageViewFrame;
     _rightImageView.frame = _frameModel.rightImageViewFrame;
+    _currentImageView.contentMode = UIViewContentModeScaleAspectFit;
+    _leftImageView.contentMode = UIViewContentModeScaleAspectFit;
+    _rightImageView.contentMode = UIViewContentModeScaleAspectFit;
     _iconImageView.frame = _frameModel.iconImageViewFrame;
     _nameLabel.frame = _frameModel.nameLabelFrame;
     _sexImageView.frame = _frameModel.sexImageViewFrame;

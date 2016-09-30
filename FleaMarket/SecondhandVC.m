@@ -17,6 +17,7 @@
 #import "SearchViewController.h"
 #import "UserInfoSingleton.h"
 #import "SecondhandDetailVC.h"
+#import "presentLayerPublicMethod.h"
 
 @interface SecondhandVC () <UITableViewDelegate, UITableViewDataSource, UIGestureRecognizerDelegate, SecondhandFilterDelegate, SecondhandBLDelegate, CategoryFilterDelegate, SortDelegate, UISearchBarDelegate,SearchProductDelegate>
 
@@ -55,7 +56,10 @@
 {
     self.navigationController.navigationBarHidden = NO;
     
-    [self.activityIndicatorView startAnimating];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.activityIndicatorView startAnimating];
+    });
+    
     // 添加刷新
     __weak SecondhandVC *weakSelf = self;
     self.refresh = [[WJRefresh alloc] init];
@@ -639,7 +643,11 @@
 
 - (void)findSecondhandFailed:(NSError *)error
 {
-    // 结束刷新
+    /*
+    [presentLayerPublicMethod new_notifyView:self.navigationController notifyContent:@"服务器开小差了哦"];
+    [self.activityIndicatorView stopAnimating];
+    [self.refresh endRefresh];
+     */
     /*
     [self.activityIndicatorView stopAnimating];
     [self.refresh endRefresh];

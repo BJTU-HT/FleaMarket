@@ -27,6 +27,7 @@
 #import "SchoolFilterVC.h"
 #import "SecondhandFilterView.h"
 #import "CategoryFilterView.h"
+#import "presentLayerPublicMethod.h"
 
 @interface SecondhandViewController () <UITableViewDelegate, UITableViewDataSource, SecondhandBLDelegate, ChooseLocationDelegate, SearchProductDelegate, UIScrollViewDelegate, SecondhandFilterDelegate>
 
@@ -525,9 +526,12 @@
     // 结束刷新
     [self.activityIndicatorView stopAnimating];
     [self.refresh endRefresh];
+    [presentLayerPublicMethod new_notifyView:self.navigationController notifyContent:@"服务器开小差了哦"];
+    /*
     UIAlertController *ac = [UIAlertController alertControllerWithTitle:nil message:@"请求失败" preferredStyle:UIAlertControllerStyleAlert];
     [self presentViewController:ac animated:YES completion:nil];
     [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(createAlert:) userInfo:ac repeats:NO];
+    */
 }
 
 - (void)findNewCommingSecondhandFinished:(NSMutableArray *)list
@@ -551,9 +555,12 @@
     // 结束刷新
     [self.activityIndicatorView stopAnimating];
     [self.refresh endRefresh];
+    [presentLayerPublicMethod new_notifyView:self.navigationController notifyContent:@"服务器开小差了哦"];
+    /*
     UIAlertController *ac = [UIAlertController alertControllerWithTitle:nil message:@"请求失败" preferredStyle:UIAlertControllerStyleAlert];
     [self presentViewController:ac animated:NO completion:nil];
     [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(createAlert:) userInfo:ac repeats:NO];
+     */
 }
 
 - (void)createAlert:(NSTimer *)timer{

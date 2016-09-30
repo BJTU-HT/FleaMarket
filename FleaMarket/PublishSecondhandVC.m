@@ -267,7 +267,9 @@
         [alertController addAction:okAction];
         [self presentViewController:alertController animated:YES completion:nil];
     } else {
-        [self.activityIndicatorView startAnimating];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.activityIndicatorView startAnimating];
+        });
         [self.bl createSecondhand:model];
     }
 }
