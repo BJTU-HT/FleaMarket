@@ -246,7 +246,7 @@
         NSLog(@"current now num is %ld", self.nowNum);
         CollectionDataModel *model = self.collectionData[self.nowNum];
         //PHAsset *img = model.img;
-        PHAsset *asset = model.asset;
+        //PHAsset *asset = model.asset;
         //UIImage *img = self.collectionData[self.nowNum];
         //[self.selectedArray removeObject:asset];
         [self.selectedArray removeObject:model];
@@ -279,7 +279,7 @@
         //UIImage *img = self.collectionData[self.nowNum];
         CollectionDataModel *model = self.collectionData[self.nowNum];
         //UIImage *img = model.img;
-        PHAsset *asset = model.asset;
+        //PHAsset *asset = model.asset;
         //[self.selectedArray addObject:asset];
         [self.selectedArray addObject:model];
         // 设置collectionData对应的selected为YES
@@ -363,7 +363,7 @@
     } else if (collectionView == self.thumbnailCollectionView) {
         ThumbnailCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"thumbnailcollectioncell" forIndexPath:indexPath];
         __weak PreViewController *weakSelf = self;
-        __weak ThumbnailCollectionViewCell *weakCell = cell;
+        //__weak ThumbnailCollectionViewCell *weakCell = cell;
         //PHAsset *asset = [self.selectedArray objectAtIndex:indexPath.item];
         CollectionDataModel *model = [self.selectedArray objectAtIndex:indexPath.item];
         //cell.asset = asset;
@@ -388,7 +388,7 @@
             //[weakSelf.toolBarRightBtn setTitle:[NSString stringWithFormat:@"确定(%lu)",(unsigned long)weakSelf.selectedArray.count] forState:UIControlStateNormal];
             weakSelf.toolBarRightBtn.titleLabel.text = [NSString stringWithFormat:@"确定(%lu)",(unsigned long)weakSelf.selectedArray.count];
             // 如果是删除的这个cell与当前collectionView展示的cell是一样的，则将当前rightItemBtn设置为没有选中
-            CollectionDataModel *model = self.collectionData[self.nowNum];
+            //CollectionDataModel *model = self.collectionData[self.nowNum];
             //NSLog(@"nowNum is %@", model.img);
             //NSLog(@"cell tag is %@", weakCell.contentImg);
             /*************************************************************/

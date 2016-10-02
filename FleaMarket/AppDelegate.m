@@ -75,7 +75,6 @@
 #pragma 201607191329 add for tuisong end
     
     // 注册极光推送
-    NSString *advertisingId = [[[ASIdentifierManager sharedManager] advertisingIdentifier] UUIDString];
     
     //Required
     if ([[UIDevice currentDevice].systemVersion floatValue] >= 8.0) {

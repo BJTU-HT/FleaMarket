@@ -130,7 +130,7 @@
     moreBtn.backgroundColor = [UIColor darkGrayColor];
     moreBtn.alpha = 0.8;
     [moreBtn setImage:[UIImage imageNamed:@"more.png"] forState:UIControlStateNormal];
-    [self.view addSubview:moreBtn];
+    //[self.view addSubview:moreBtn];
     self.moreBtn = moreBtn;
 }
 
@@ -171,7 +171,7 @@
     // toolbar， 评论按钮
     CGFloat commentX = 0;
     CGFloat commentY = 0;
-    CGFloat commentBtnW = screenWidthPCH / 4.0f;
+    CGFloat commentBtnW = screenWidthPCH / 2.0f;
     CGFloat commentBtnH = toolBarH;
     UIButton *commentBtn = [[UIButton alloc] init];
     commentBtn.frame = CGRectMake(commentX, commentY, commentBtnW, commentBtnH);
@@ -182,15 +182,15 @@
     // toolbar,  分享按钮
     CGFloat shareX = commentBtnW;
     CGFloat shareY = 0;
-    CGFloat shareBtnW = screenWidthPCH / 4.0f;
+    //CGFloat shareBtnW = screenWidthPCH / 4.0f;
     CGFloat shareBtnH = toolBarH;
     UIButton *shareBtn = [[UIButton alloc] init];
     shareBtn.frame = CGRectMake(shareX, shareY, shareBtnH, shareBtnH);
     [shareBtn setTitle:@"分享" forState:UIControlStateNormal];
-    [toolBarView addSubview:shareBtn];
+    //[toolBarView addSubview:shareBtn];
     
     // toolbar， 我想要
-    CGFloat wantX = commentBtnW + shareBtnW;
+    CGFloat wantX = screenWidthPCH/2.0f;
     CGFloat wantY = 0;
     CGFloat wantBtnW = screenWidthPCH / 2.0f;
     CGFloat wantBtnH = toolBarH;

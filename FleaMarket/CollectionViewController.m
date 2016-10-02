@@ -37,7 +37,6 @@ static NSString *IDD_IMG = @"collectionTableViewCell";
 
 - (void)setup
 {
-    CGSize winSize = [UIScreen mainScreen].bounds.size;
     UITableView *myTableView = [[UITableView alloc] initWithFrame:self.view.frame style:UITableViewStylePlain];
     [myTableView registerNib:[UINib nibWithNibName:@"YBImgPickerTableViewCell" bundle:nil] forCellReuseIdentifier:IDD_IMG];
     //[myTableView registerClass:[AssetCollectionCell class] forCellReuseIdentifier:IDD_IMG];

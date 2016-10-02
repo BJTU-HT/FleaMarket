@@ -31,7 +31,7 @@
 {
     UICollectionViewLayoutAttributes *attr = [UICollectionViewLayoutAttributes layoutAttributesForCellWithIndexPath:indexPath];
     
-    CGFloat collectionViewW = self.collectionView.frame.size.width;
+    //CGFloat collectionViewW = self.collectionView.frame.size.width;
     CGFloat collectionViewH = self.collectionView.frame.size.height;
     CGFloat x = indexPath.item * collectionViewH;
     CGFloat y = 0;

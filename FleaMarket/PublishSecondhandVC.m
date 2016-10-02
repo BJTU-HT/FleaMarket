@@ -430,11 +430,6 @@
 #pragma mark --- CollectionViewDelegate ---
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    CGFloat margin = 10.0f;
-    CGSize winSize = [UIScreen mainScreen].bounds.size;
-    CGFloat itemW = (winSize.width - margin * 2.0f) / 4.0f;
-
-    
     /*
     if ((self.selectedImgArray.count + 1 >= 1) && (self.selectedImgArray.count + 1 <= 4) ) {
         self.uploadImagesCollectionView.frame = CGRectMake(collectionX, collectionY, collectionW, itemH);

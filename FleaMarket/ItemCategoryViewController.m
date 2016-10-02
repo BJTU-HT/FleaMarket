@@ -63,8 +63,8 @@
 
 //左边列表可为空，则为单下拉菜单，可以根据需要传参
 - (void)testLeftArray {
-    //NSArray *One_leftArray = @[@"附近", @"北京", @"山西", @"斗門區", @"金灣區"];
-    NSArray *One_leftArray = SecondhandCategory;
+    NSArray *One_leftArray = @[@"数码", @"电脑", @"服装", @"自行车", @"运动", @"其他"];
+    //NSArray *One_leftArray = SecondhandCategory;
     NSArray *Two_leftArray = [[NSArray alloc] init];
     //    NSArray *R_leftArray = @[@"Test1", @"Test2"];
     

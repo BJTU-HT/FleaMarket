@@ -84,4 +84,9 @@
     }
 }
 
+- (void)configWith:(PHAsset *)phasset
+{
+    // nothing
+}
+
 @end

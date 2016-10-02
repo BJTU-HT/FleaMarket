@@ -23,9 +23,13 @@ static CGFloat kTextTopPadding = 10;
     
     // Adjust the label size to fit the text, and move it below the image
     CGRect titleLabelFrame = self.titleLabel.frame;
+    /*
     CGSize labelSize = [self.titleLabel.text sizeWithFont:self.titleLabel.font
                                         constrainedToSize:CGSizeMake(self.frame.size.width, CGFLOAT_MAX)
                                             lineBreakMode:NSLineBreakByWordWrapping];
+     */
+    NSDictionary *attrs = @{NSFontAttributeName : self.titleLabel.font};
+    CGSize labelSize = [self.titleLabel.text sizeWithAttributes:attrs];
     titleLabelFrame.size.width = labelSize.width;
     titleLabelFrame.size.height = labelSize.height;
     titleLabelFrame.origin.x = (self.frame.size.width / 2) - (labelSize.width / 2);

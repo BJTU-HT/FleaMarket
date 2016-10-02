@@ -156,4 +156,22 @@
  }
  */
 
+#pragma mark - KeyInputDelegate
+
+- (BOOL)hasText
+{
+    return YES;
+}
+
+- (void)insertText:(NSString *)text
+{
+
+}
+
+- (void)deleteBackward
+{
+
+}
+
+
 @end

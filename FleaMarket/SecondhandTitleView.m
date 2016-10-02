@@ -68,10 +68,7 @@ CGFloat margin = 10.0f;
 }
 
 - (void)layoutSubviews
-{
-    CGFloat navigationBarH = 44;
-    CGFloat statusBarH = 20;
-    
+{    
     // 地理位置按钮
     CGFloat locationBtnX = 0;
     CGFloat locationBtnY = 0;

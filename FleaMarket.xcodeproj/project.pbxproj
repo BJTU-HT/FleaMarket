@@ -237,7 +237,6 @@
 		E9CAD9151CBE8C0F00253817 /* macpro1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E9CAD9141CBE8C0F00253817 /* macpro1.jpg */; };
 		E9CAD9171CBE8C1400253817 /* macpro2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E9CAD9161CBE8C1400253817 /* macpro2.jpg */; };
 		E9FA183B1D9AA71300366BCF /* publishVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E9FA18301D9AA71300366BCF /* publishVC.m */; };
-		E9FA183C1D9AA71300366BCF /* PublishDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E9FA18321D9AA71300366BCF /* PublishDetailVC.m */; };
 		E9FA183D1D9AA71300366BCF /* UploadImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E9FA18341D9AA71300366BCF /* UploadImageCell.m */; };
 		E9FA183E1D9AA71300366BCF /* PriceView.m in Sources */ = {isa = PBXBuildFile; fileRef = E9FA18361D9AA71300366BCF /* PriceView.m */; };
 		E9FA183F1D9AA71300366BCF /* ChooseLocationView.m in Sources */ = {isa = PBXBuildFile; fileRef = E9FA18381D9AA71300366BCF /* ChooseLocationView.m */; };
@@ -716,8 +715,6 @@
 		E9CAD9161CBE8C1400253817 /* macpro2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = macpro2.jpg; sourceTree = "<group>"; };
 		E9FA182F1D9AA71300366BCF /* publishVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = publishVC.h; sourceTree = "<group>"; };
 		E9FA18301D9AA71300366BCF /* publishVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = publishVC.m; sourceTree = "<group>"; };
-		E9FA18311D9AA71300366BCF /* PublishDetailVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PublishDetailVC.h; sourceTree = "<group>"; };
-		E9FA18321D9AA71300366BCF /* PublishDetailVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PublishDetailVC.m; sourceTree = "<group>"; };
 		E9FA18331D9AA71300366BCF /* UploadImageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UploadImageCell.h; sourceTree = "<group>"; };
 		E9FA18341D9AA71300366BCF /* UploadImageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UploadImageCell.m; sourceTree = "<group>"; };
 		E9FA18351D9AA71300366BCF /* PriceView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PriceView.h; sourceTree = "<group>"; };
@@ -1265,8 +1262,6 @@
 				E9B3B9021D2BAAB80085304D /* UploadProgress */,
 				E9FA182F1D9AA71300366BCF /* publishVC.h */,
 				E9FA18301D9AA71300366BCF /* publishVC.m */,
-				E9FA18311D9AA71300366BCF /* PublishDetailVC.h */,
-				E9FA18321D9AA71300366BCF /* PublishDetailVC.m */,
 				E9FA18331D9AA71300366BCF /* UploadImageCell.h */,
 				E9FA18341D9AA71300366BCF /* UploadImageCell.m */,
 				E9FA18351D9AA71300366BCF /* PriceView.h */,
@@ -2454,7 +2449,6 @@
 				E9FA18881D9AA89500366BCF /* ShowIMGModel.m in Sources */,
 				E9CAD9071CBE884700253817 /* UserDAO.m in Sources */,
 				96B258621CBF88B900D6DC43 /* pinyin.m in Sources */,
-				E9FA183C1D9AA71300366BCF /* PublishDetailVC.m in Sources */,
 				E9B3B95A1D2BADF90085304D /* ImageAndTitleVerticalButton.m in Sources */,
 				96D2647F1CEC2FA700A945FD /* SendAndReceiveMessageBL.m in Sources */,
 				E9FA183B1D9AA71300366BCF /* publishVC.m in Sources */,
@@ -2674,7 +2668,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				PROVISIONING_PROFILE = "9aa73ac8-01bc-49cf-bc7b-c767fb77ccfd";
@@ -2714,7 +2708,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PROVISIONING_PROFILE = "9aa73ac8-01bc-49cf-bc7b-c767fb77ccfd";
 				SDKROOT = iphoneos;
@@ -2736,11 +2730,43 @@
 				);
 				GCC_PREFIX_HEADER = FleaMarket/FleaMarket_PrefixHeader.pch;
 				INFOPLIST_FILE = FleaMarket/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					"$(SRCROOT)/{lib}",
-					"$(PROJECT_DIR)",
+				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-l\"AFNetworking\"",
+					"-l\"MJExtension\"",
+					"-l\"Masonry\"",
+					"-l\"SDWebImage\"",
+					"-l\"UITableView+FDTemplateLayoutCell\"",
+					"-l\"icucore\"",
+					"-l\"sqlite3\"",
+					"-l\"z.1.2.5\"",
+					"-framework",
+					"\"BmobSDK\"",
+					"-framework",
+					"\"CFNetwork\"",
+					"-framework",
+					"\"CoreGraphics\"",
+					"-framework",
+					"\"CoreLocation\"",
+					"-framework",
+					"\"CoreTelephony\"",
+					"-framework",
+					"\"Foundation\"",
+					"-framework",
+					"\"ImageIO\"",
+					"-framework",
+					"\"MobileCoreServices\"",
+					"-framework",
+					"\"Security\"",
+					"-framework",
+					"\"SystemConfiguration\"",
+					"-framework",
+					"\"UIKit\"",
+					"-w",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.ht.fleamarket;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2762,11 +2788,43 @@
 				);
 				GCC_PREFIX_HEADER = FleaMarket/FleaMarket_PrefixHeader.pch;
 				INFOPLIST_FILE = FleaMarket/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					"$(SRCROOT)/{lib}",
-					"$(PROJECT_DIR)",
+				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-l\"AFNetworking\"",
+					"-l\"MJExtension\"",
+					"-l\"Masonry\"",
+					"-l\"SDWebImage\"",
+					"-l\"UITableView+FDTemplateLayoutCell\"",
+					"-l\"icucore\"",
+					"-l\"sqlite3\"",
+					"-l\"z.1.2.5\"",
+					"-framework",
+					"\"BmobSDK\"",
+					"-framework",
+					"\"CFNetwork\"",
+					"-framework",
+					"\"CoreGraphics\"",
+					"-framework",
+					"\"CoreLocation\"",
+					"-framework",
+					"\"CoreTelephony\"",
+					"-framework",
+					"\"Foundation\"",
+					"-framework",
+					"\"ImageIO\"",
+					"-framework",
+					"\"MobileCoreServices\"",
+					"-framework",
+					"\"Security\"",
+					"-framework",
+					"\"SystemConfiguration\"",
+					"-framework",
+					"\"UIKit\"",
+					"-w",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.ht.fleamarket;
 				PRODUCT_NAME = "$(TARGET_NAME)";

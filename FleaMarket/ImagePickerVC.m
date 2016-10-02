@@ -15,7 +15,6 @@
 #import "ThumbnailCollectionViewCell.h"
 #import "SelectedPhotoCollectionViewLayout.h"
 #import "CollectionDataModel.h"
-#import "PublishDetailVC.h"
 #import "PublishSecondhandVC.h"
 #import "UploadImageModel.h"
 #import "NormalCollectionViewFlow.h"

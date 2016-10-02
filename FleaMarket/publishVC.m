@@ -9,7 +9,6 @@
 #import <Photos/Photos.h>
 #import "publishVC.h"
 #import "RXRotateButtonOverlayView.h"
-#import "PublishDetailVC.h"
 #import "CollectionDataModel.h"
 #import "ImagePickerVC.h"
 #import "PublishSecondhandVC.h"
