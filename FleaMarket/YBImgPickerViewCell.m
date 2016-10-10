@@ -16,6 +16,8 @@
 @implementation YBImgPickerViewCell
 
 - (void)awakeFromNib {
+    //20161009 1122 add for release warning
+    [super awakeFromNib];
     // Initialization code
     self.isChoosenImageView.hidden = YES;
 }

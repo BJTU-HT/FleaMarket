@@ -23,6 +23,8 @@
 @implementation MenuCell
 
 - (void)awakeFromNib {
+    //20161009 add super to release warning
+    [super awakeFromNib];
     // Initialization code
 }
 

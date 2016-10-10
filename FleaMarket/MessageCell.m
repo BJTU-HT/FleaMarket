@@ -27,6 +27,8 @@
 @implementation MessageCell
 
 - (void)awakeFromNib {
+    //201610091123 add for release warning
+    [super awakeFromNib];
     // Initialization code
 }
 

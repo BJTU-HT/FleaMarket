@@ -125,6 +125,8 @@
 
 #pragma mark 聊天历史 end
 - (void)awakeFromNib {
+    //201610091124 add for release warning
+    [super awakeFromNib];
     // Initialization code
 }
 

@@ -52,7 +52,7 @@
     [super layoutSubviews];
     
     float viewHeight = self.frame.size.height;
-    float viewWidth = self.frame.size.width;
+//    float viewWidth = self.frame.size.width;
 //    float gapPer = 0.05;
 //    float margin_x_per = 0.02;
 //    

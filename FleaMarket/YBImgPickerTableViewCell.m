@@ -15,6 +15,8 @@
 @implementation YBImgPickerTableViewCell
 
 - (void)awakeFromNib {
+    //201610091124 add for release warning
+    [super awakeFromNib];
     // Initialization code
 }
 - (void)layoutSubviews {

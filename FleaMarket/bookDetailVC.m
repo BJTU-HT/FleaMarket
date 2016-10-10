@@ -29,7 +29,7 @@ float bottomViewHeightBD;
     [super viewDidLoad];
     //用于标记代理函数是否执行
     tagDelegate = 0;
-    bottomViewHeightBD = 44.0f;
+    bottomViewHeightBD = 50.0f;
     [self bookDetailRequestLeaveMessageFromServer:[mudic objectForKey:@"objectId"]];
     if(!_tableViewBookDetail){
         [self initTableView];
