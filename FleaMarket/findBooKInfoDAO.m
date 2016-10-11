@@ -28,61 +28,18 @@ NSMutableArray *muArrURL;
 #pragma uploadInfo begin
 -(void)updateVisitorDataDAO:(NSMutableDictionary *)dic{
     NSString *strExchangeCate = [dic objectForKey:@"exchangeCategory"];
-    BmobQuery *query = [[BmobQuery alloc] initWithClassName:strExchangeCate];
+    //BmobQuery *query = [[BmobQuery alloc] initWithClassName:strExchangeCate];
     NSString *objectID = [dic objectForKey:@"objectId"];
-    [query whereKey:@"objectId" equalTo:objectID];
-    [query findObjectsInBackgroundWithBlock:^(NSArray *array, NSError *error) {
-        if(error){
-        
-        }else{
-            if(array.count == 0){
+    BmobObject *obj = [BmobObject objectWithoutDatatWithClassName:strExchangeCate objectId:objectID];
+    [obj setObject:[dic objectForKey:@"visitorURLArr"] forKey:@"visitorURLArr"];
+    [obj updateInBackgroundWithResultBlock:^(BOOL isSuccessful, NSError *error) {
+        if (isSuccessful) {
+            NSLog(@"更新成功");
             
-            }else{
-                BmobObject *obj = array[0];
-                if([obj objectForKey:@"visitorURLArr"]){
-                    if(!muArrURL){
-                        muArrURL = [[NSMutableArray alloc] init];
-                        [muArrURL setArray:[obj objectForKey:@"visitorURLArr"]];
-                    }
-                }
-                //将访客头像URL插入数组，如URL已经存在则将其位置移位到首位
-                NSString *newURL = [dic objectForKey:@"visitorURL"];
-                if(newURL){
-                    if(muArrURL){
-                        int i = 0;
-                        for(i = 0; i < muArrURL.count; i++){
-                            if([newURL isEqualToString:[muArrURL objectAtIndex:i]]){
-                                [muArrURL removeObjectAtIndex:i];
-                                [muArrURL addObject:newURL];
-                                break;
-                            }
-                        }
-                        if((i == muArrURL.count) && (![newURL isEqualToString:[muArrURL objectAtIndex:i]])){
-                            [muArrURL addObject:newURL];
-                        }
-                    }else{
-                        muArrURL = [[NSMutableArray alloc] init];
-                        [muArrURL addObject:newURL];
-                    }
-                }
-                NSMutableDictionary *mudic = [[NSMutableDictionary alloc] init];
-                [mudic setObject:muArrURL forKey: @"visitorURLArr"];
-                BmobObjectsBatch *bmobBatch = [[BmobObjectsBatch alloc] init];
-                [bmobBatch updateBmobObjectWithClassName:strExchangeCate objectId:objectID parameters:mudic];
-                [bmobBatch batchObjectsInBackgroundWithResultBlock:^(BOOL isSuccessful, NSError *error) {
-                if(isSuccessful)
-                {       //访客数据添加成功与否不做数据返回处理
-                       // [self.delegate modifyPersonalInfoFinishedDAO:isSuccessful];
-                        NSLog(@"更新数据成功");
-                }else{
-                       // [self.delegate modifyPersonalInfoFailedDAO:@"更新数据失败"];
-                        NSLog(@"%@", error.localizedDescription);
-                    }
-                }];
-            }
+        }else{
+            NSLog(@"更新失败");
         }
-    }];
-    
+    }];    
 }
 
 #pragma uploadInfo end

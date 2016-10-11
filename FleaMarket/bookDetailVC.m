@@ -158,7 +158,7 @@ float bottomViewHeightBD;
 }
 
 
-#pragma record visit guys begin
+#pragma record visit guys begin 获取最近访客头像URL
 -(void)getHeadImageURL{
     BmobUser *curUser = [BmobUser getCurrentUser];
     if(![[mudic objectForKey: @"userName"] isEqualToString:curUser.username]){
@@ -181,7 +181,7 @@ float bottomViewHeightBD;
 }
 #pragma 分割线右错15pt end
 
-#pragma publicSearchDelegate begin
+#pragma publicSearchDelegate begin 访客头像URL获取成功
 -(void)publicSearchFinishedBL:(NSMutableDictionary *)mudicPS{
     [mudic setObject:[mudicPS objectForKey:@"avatar"] forKey:@"visitorURL"];
     findBookInfoBL *fbl = [findBookInfoBL sharedManager];

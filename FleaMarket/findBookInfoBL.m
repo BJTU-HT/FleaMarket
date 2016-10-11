@@ -41,6 +41,27 @@ static findBookInfoBL *sharedManager;
 
 //add vistitor
 -(void)updateVisitorDataBL:(NSMutableDictionary *)dic{
+    NSMutableArray *urlArr = [dic objectForKey:@"visitorURLArr"];
+    NSString *newURL = [dic objectForKey:@"visitorURL"];
+    int i = 0;
+    if(urlArr){
+        for(i = 0; i < urlArr.count; i++){
+            if([newURL isEqualToString:[urlArr objectAtIndex:i]])
+            {
+                [urlArr removeObjectAtIndex:i];
+                [urlArr insertObject:newURL atIndex:0];
+                break;
+            }
+        }
+        if((i == urlArr.count) && (![newURL isEqualToString:[urlArr objectAtIndex:i]])){
+            [urlArr insertObject: newURL atIndex:0];
+        }
+    }else{
+        urlArr = [[NSMutableArray alloc] init];
+        [urlArr addObject:newURL];
+    }
+    [dic removeObjectForKey:@"visitorURLArr"];
+    [dic setObject:urlArr forKey:@"visitorURLArr"];
     findBooKInfoDAO *findDAO = [[findBooKInfoDAO alloc] init];
     [findDAO updateVisitorDataDAO:dic];
 }

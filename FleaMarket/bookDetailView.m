@@ -170,16 +170,16 @@ float widthDeatail;
         if(arrURL){
             dispatch_async(dispatch_get_main_queue(), ^{
                 for(int i = 0; i < arrURL.count; i++){
-                    UIImageView *headImageView = [[UIImageView alloc] init];
-                    float visitorImage_height = viewLineS2Height;
-                    float visitorImage_width = visitorImage_height;
-                    headImageView.frame = CGRectMake(5 * i + i * visitorImage_width, viewLineS2_y, visitorImage_width, visitorImage_height);
-                    NSURL *urlImage = [NSURL URLWithString:[arrURL objectAtIndex:i]];
-                    [headImageView sd_setImageWithURL:urlImage];
-                    [_scrollViewS2 addSubview: headImageView];
-                }
-            });
-        }
+                UIImageView *headImageView = [[UIImageView alloc] init];
+                float visitorImage_height = viewLineS2Height;
+                float visitorImage_width = visitorImage_height;
+                headImageView.frame = CGRectMake(5 * i + i * visitorImage_width, viewLineS2_y, visitorImage_width, visitorImage_height);
+                NSURL *urlImage = [NSURL URLWithString:[arrURL objectAtIndex:i]];
+                [headImageView sd_setImageWithURL:urlImage];
+                [_scrollViewS2 addSubview: headImageView];
+            }
+        });
+    }
     }
     return 0;
 }
