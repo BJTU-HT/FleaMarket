@@ -53,7 +53,7 @@ static findBookInfoBL *sharedManager;
                 break;
             }
         }
-        if((i == urlArr.count) && (![newURL isEqualToString:[urlArr objectAtIndex:i]])){
+        if((i == urlArr.count) && (![newURL isEqualToString:[urlArr objectAtIndex:(i - 1)]])){
             [urlArr insertObject: newURL atIndex:0];
         }
     }else{

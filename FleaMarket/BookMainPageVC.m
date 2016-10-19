@@ -271,7 +271,6 @@ NSString *kTextCellID2 = @"cell2";
         [_cateViewBookMain removeFromSuperview];
         _cateViewBookMain.frame = CGRectMake(0, 0, 0, 0);
     }
-    
 }
 
 // btnClicked case2

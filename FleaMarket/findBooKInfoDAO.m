@@ -39,7 +39,7 @@ NSMutableArray *muArrURL;
         }else{
             NSLog(@"更新失败");
         }
-    }];    
+    }];
 }
 
 #pragma uploadInfo end
