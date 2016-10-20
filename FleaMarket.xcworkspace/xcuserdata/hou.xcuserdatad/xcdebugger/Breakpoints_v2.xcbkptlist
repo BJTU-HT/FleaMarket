@@ -106,12 +106,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FleaMarket/bookDetailVC.m"
-            timestampString = "497801660.443634"
+            timestampString = "498568752.78008"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "214"
-            endingLineNumber = "214"
-            landmarkName = "-concernedDataRequestFinishedBL:"
+            startingLineNumber = "58"
+            endingLineNumber = "58"
+            landmarkName = "-passMudicValueLMToSecond:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
