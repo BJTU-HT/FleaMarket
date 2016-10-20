@@ -102,14 +102,20 @@
         self.pictureImageView = pictureImageView;
         
         UIImageView *picture1 = [[UIImageView alloc] init];
+        picture1.contentMode = UIViewContentModeScaleAspectFill;
+        picture1.clipsToBounds = YES;
         [self.contentView addSubview:picture1];
         self.picture1 = picture1;
         
         UIImageView *picture2 = [[UIImageView alloc] init];
+        picture2.contentMode = UIViewContentModeScaleAspectFill;
+        picture2.clipsToBounds = YES;
         [self.contentView addSubview:picture2];
         self.picture2 = picture2;
         
         UIImageView *picture3 = [[UIImageView alloc] init];
+        picture3.contentMode = UIViewContentModeScaleAspectFill;
+        picture3.clipsToBounds = YES;
         [self.contentView addSubview:picture3];
         self.picture3 = picture3;
         

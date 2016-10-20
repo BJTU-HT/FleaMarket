@@ -18,6 +18,7 @@
 #import "UserInfoSingleton.h"
 #import "SecondhandDetailVC.h"
 #import "presentLayerPublicMethod.h"
+#import "MJRefresh.h"
 
 @interface SecondhandVC () <UITableViewDelegate, UITableViewDataSource, UIGestureRecognizerDelegate, SecondhandFilterDelegate, SecondhandBLDelegate, CategoryFilterDelegate, SortDelegate, UISearchBarDelegate,SearchProductDelegate>
 
@@ -29,7 +30,7 @@
 @property (nonatomic, strong) SortView *sortView;
 @property (nonatomic, assign) NSInteger KindID;         // 分类查询ID，默认为-1
 @property (nonatomic, strong) SecondhandBL *bl;         // 业务调用
-@property (nonatomic, strong) WJRefresh *refresh;       // 上下拉刷新
+//@property (nonatomic, strong) WJRefresh *refresh;       // 上下拉刷新
 @property (nonatomic, assign) NSInteger mainCategory;   // 物品主分类
 @property (nonatomic, strong) UIActivityIndicatorView *activityIndicatorView;
 @property (nonatomic, weak) UIButton *currentMenuBtn;
@@ -59,20 +60,11 @@
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.activityIndicatorView startAnimating];
     });
-    
-    // 添加刷新
-    __weak SecondhandVC *weakSelf = self;
-    self.refresh = [[WJRefresh alloc] init];
-    [self.refresh addHeardRefreshTo:self.tableView heardBlock:^{
-        [weakSelf loadNewDataAction];
-    } footBlok:^{
-        [weakSelf loadMoreDateAction];
-    }];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
-    [self.refresh removeFromSuperview];
+    //[self.refresh removeFromSuperview];
     //[self.tableView removeObserver:self.refresh forKeyPath:@""];
 }
 
@@ -108,7 +100,7 @@
     navigationItem.titleView = searchBar;
     self.searchBar = searchBar;
     
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back_03.png"] style:UIBarButtonItemStylePlain target:self action:@selector(backToMain:)];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back_btn"] style:UIBarButtonItemStylePlain target:self action:@selector(backToMain:)];
 }
 
 - (void)initViews
@@ -159,6 +151,8 @@
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    //self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNewDataAction)];
+    self.tableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreDateAction)];
     [self.view addSubview:self.tableView];
 }
 
@@ -440,7 +434,7 @@
         [weakSelf.bl findNewComming:filterDic];
         */
         
-        [weakSelf.refresh endRefresh];
+        //[weakSelf.refresh endRefresh];
     });
 }
 
@@ -637,7 +631,12 @@
     [self.tableView reloadData];
     
     // 结束刷新
-    [self.refresh endRefresh];
+    if (list.count == 0) {
+        [self.tableView.mj_footer endRefreshingWithNoMoreData];
+    } else {
+        [self.tableView.mj_footer endRefreshing];
+    }
+    //[self.refresh endRefresh];
     [self.activityIndicatorView stopAnimating];
 }
 
@@ -659,6 +658,7 @@
 
 - (void)findNewCommingSecondhandFinished:(NSMutableArray *)list
 {
+    /*
     // 按时间排序从头插入
     for (long i = list.count - 1; i >= 0 ; i--) {
         [_dataArray insertObject:list[i] atIndex:0];
@@ -670,7 +670,8 @@
     }
     
     // 结束刷新
-    [self.refresh endRefresh];
+    //[self.refresh endRefresh];
+     */
 }
 
 - (void)findNewCommingSecondhandFailed:(NSError *)error

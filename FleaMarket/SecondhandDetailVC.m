@@ -14,11 +14,12 @@
 #import "CommentFrameModel.h"
 #import "MainInfoFrameModel.h"
 #import "SecondhandMessageBL.h"
-#import "WJRefresh.h"
 #import "UserInfoSingleton.h"
 #import <BmobSDK/BmobUser.h>
 #import "logInViewController.h"
 #import "DetailChatVC.h"
+#import "MJRefresh.h"
+#import "MBProgressHUD.h"
 
 @interface SecondhandDetailVC () <UITableViewDelegate, UITableViewDataSource, SecondhandMessageBLDelegate,UITextFieldDelegate, UITextViewDelegate>
 
@@ -26,7 +27,7 @@
 @property (nonatomic, strong) NSMutableArray *commentFrameArray;
 @property (nonatomic, strong) MainInfoFrameModel *mainInfoFrameModel;
 // 下拉刷新
-@property (nonatomic, strong) WJRefresh *refresh;
+//@property (nonatomic, strong) WJRefresh *refresh;
 // 业务逻辑层
 @property (nonatomic, strong) SecondhandMessageBL *bl;
 // 当前评论信息，用来保存当前要发表的评论
@@ -35,8 +36,6 @@
 @property (nonatomic, strong) UITextField *commentInputField;
 // 当前键盘是否是弹出的
 @property (nonatomic, assign) BOOL isKeyboardPopup;
-// activityIndicator
-@property (nonatomic, strong) UIActivityIndicatorView *activityIndicatorView;
 //201607181632 add by hou
 @property (nonatomic, strong) NSString *userObjectID;
 // 自定义navigationController
@@ -45,6 +44,8 @@
 @property (nonatomic, strong) UIButton *backBtn;
 // 更多功能按钮
 @property (nonatomic, strong) UIButton *moreBtn;
+// 菊花
+@property (nonatomic, strong) MBProgressHUD *hud;
 
 @end
 
@@ -79,7 +80,7 @@
     // 移除通知
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillChangeFrameNotification object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
-    [self.tableView removeObserver:self.refresh forKeyPath:@"contentOffset"];
+    //[self.tableView removeObserver:self.refresh forKeyPath:@"contentOffset"];
 }
 
 - (void)viewDidLoad
@@ -90,11 +91,15 @@
     [self setNav];
     [self initCommentInputField];
     [self initToolBar];
-    [self initRefresh];
+    
     // 重置偏移
     [self.bl reset];
     // 查询评论
     [self.bl findSecondhandMessage:self.model.productID];
+    
+    // 旋转菊花
+    self.hud = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+    self.hud.label.text = NSLocalizedString(@"加载中...", @"HUD loading title");
 }
 
 - (void)setNav
@@ -121,7 +126,6 @@
     [self.view addSubview:backBtn];
     self.backBtn = backBtn;
     
-    
     // 更多
     UIButton *moreBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     moreBtn.frame = CGRectMake(screenWidthPCH-30-10, 25, 30, 30);
@@ -137,13 +141,15 @@
 - (void)initViews
 {
     // tableView
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, screen_width, screen_height-50) style:UITableViewStyleGrouped];
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, -20, screen_width, screen_height-30) style:UITableViewStyleGrouped];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
-    [self.view addSubview:self.tableView];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+    self.tableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreCommentAction)];
+    [self.view addSubview:self.tableView];
 }
 
+/*
 - (void)initRefresh
 {
     // 上拉加载
@@ -155,6 +161,7 @@
         [weakSelf loadMoreCommentAction];
     }];
 }
+ */
 
 - (void)initToolBar
 {
@@ -270,7 +277,7 @@
 }
 
 
-
+/*
 - (void)loadNewDataAction
 {
     __weak SecondhandDetailVC *weakSelf = self;
@@ -278,6 +285,7 @@
         [weakSelf.refresh endRefresh];
     });
 }
+*/
 
 - (void)loadMoreCommentAction
 {
@@ -331,9 +339,10 @@
     //self.commentVO.content = textField.text;
     [textField resignFirstResponder];
     if ([textField.text length] > 0) {
-        [self.activityIndicatorView startAnimating];
         self.commentVO.content = textField.text;
         [self.bl createComment:self.commentVO];
+        // 旋转菊花
+        self.hud = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
     }
     return YES;
 }
@@ -409,8 +418,7 @@
     headerView.font = FontSize14;
     
     if (section == 0) {
-        //headerView.backgroundColor = RGB(239, 239, 244);
-        headerView.backgroundColor = [UIColor blueColor];
+        headerView.backgroundColor = [UIColor blackColor];
     } else if (section == 1) {
         NSString *content = [NSString stringWithFormat:@"  最近%ld人来访", _model.visitorURLArray.count];
         headerView.backgroundColor = [UIColor whiteColor];
@@ -587,14 +595,20 @@
     self.commentFrameArray = [CommentFrameModel frameModelWithArray:self.commentArray];
     
     [self.tableView reloadData];
-    [self.refresh endRefresh];
+    //[self.refresh endRefresh];
+    if (list.count == 0) {
+        [self.tableView.mj_footer endRefreshingWithNoMoreData];
+    } else {
+        [self.tableView.mj_footer endRefreshing];
+    }
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.hud hideAnimated:YES];
+    });
 }
 
 - (void)insertCommentFinished:(SecondhandMessageVO *)model
 {
-    // 因为最新评论是加在最上边，不是下边；所以新评论添加进来后，先将刷新隐藏起来
-    [self.refresh setHidden:YES];
-    
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"yyyy-mm-dd HH:mm:ss"];
     NSString *dateStr = [formatter stringFromDate:[NSDate date]];
@@ -602,10 +616,12 @@
     
     [self.commentArray insertObject:model atIndex:0];
     [self.commentFrameArray insertObject:[CommentFrameModel frameModelWithModel:model] atIndex:0];
-    
     [self.tableView reloadData];
-    [self.refresh setHidden:NO];
-    [self.activityIndicatorView stopAnimating];
+    
+    // 停止菊花
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.hud hideAnimated:YES];
+    });
 }
 
 
@@ -634,19 +650,6 @@
     }
     
     return _commentFrameArray;
-}
-
-- (UIActivityIndicatorView *)activityIndicatorView
-{
-    if (!_activityIndicatorView) {
-        _activityIndicatorView = [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(0, 0, 50, 50)];
-        [_activityIndicatorView setActivityIndicatorViewStyle:UIActivityIndicatorViewStyleWhite];
-        [_activityIndicatorView setBackgroundColor:[UIColor blackColor]];
-        _activityIndicatorView.center = self.view.center;
-        [self.view addSubview:_activityIndicatorView];
-    }
-    
-    return _activityIndicatorView;
 }
 
 @end
