@@ -17,7 +17,6 @@
 #import "SecondhandDetailViewController.h"
 #import "LocationViewController.h"
 #import "SearchViewController.h"
-#import "WJRefresh.h"
 #import "UserInfoSingleton.h"
 #import "SecondhandDetailVC.h"
 #import "BookMainPageVC.h"
@@ -28,22 +27,23 @@
 #import "SecondhandFilterView.h"
 #import "CategoryFilterView.h"
 #import "presentLayerPublicMethod.h"
+#import "MJRefresh.h"
+#import "MBProgressHUD.h"
 
-@interface SecondhandViewController () <UITableViewDelegate, UITableViewDataSource, SecondhandBLDelegate, ChooseLocationDelegate, SearchProductDelegate, UIScrollViewDelegate, SecondhandFilterDelegate>
+@interface SecondhandViewController () <UITableViewDelegate, UITableViewDataSource, SecondhandBLDelegate, ChooseLocationDelegate, SearchProductDelegate, UIScrollViewDelegate, SecondhandFilterDelegate, MBProgressHUDDelegate>
 
 @property (nonatomic, strong) NSMutableArray *dataArray;
 @property (nonatomic, strong) NSMutableArray *frameArray;
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) SecondhandBL *bl;
 @property (nonatomic, strong) SecondhandTitleView *titleView;
-@property (nonatomic, strong) WJRefresh *refresh;
-@property (nonatomic, strong) UIActivityIndicatorView *activityIndicatorView;
+//@property (nonatomic, strong) WJRefresh *refresh;
 @property (nonatomic, strong) SchoolFilterVC *schoolFilterVC;
 @property (nonatomic, assign) NSInteger schoolCategory;                          // 学校分类
 @property (nonatomic, strong) NSString *currentSchool;
 @property (nonatomic, strong) SecondhandTitleView *secondhandTitleView;
 @property (nonatomic, strong) NSString *keyString;
-@property (nonatomic, assign) BOOL searchFlag;    // 是否是搜索返回的标记
+@property (nonatomic, strong) MBProgressHUD *hud;
 //@property (nonatomic, strong) UITableView *testScrollView;
 @end
 
@@ -60,29 +60,17 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     self.navigationController.navigationBarHidden = NO;
-    
-    // 添加刷新
-    __weak SecondhandViewController *weakSelf = self;
-    self.refresh = [[WJRefresh alloc] init];
-    [self.refresh addHeardRefreshTo:self.tableView heardBlock:^{
-        [weakSelf loadNewDataAction];
-    } footBlok:^{
-        [weakSelf loadMoreDateAction];
-    }];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
     self.navigationController.navigationBarHidden = YES;
-    //[self.tableView removeObserver:self.refresh forKeyPath:@"contentOffset"];
-    [self.refresh removeFromSuperview];
 }
 
 - (void)initData
 {
     self.schoolCategory = 0;
     self.currentSchool = @"全部大学";
-    self.searchFlag = NO;
     
     // 创建BL
     self.bl = [SecondhandBL new];
@@ -91,7 +79,10 @@
     [self.dataArray removeAllObjects];
     [self.frameArray removeAllObjects];
     [self.bl findSecondhand:nil];
-    [self.activityIndicatorView startAnimating];
+    
+    // 旋转菊花
+    self.hud = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+    self.hud.label.text = NSLocalizedString(@"加载中...", @"HUD loading title");
 }
 
 - (void)setNav
@@ -121,6 +112,8 @@
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNewDataAction)];
+    self.tableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreDateAction)];
     [self.view addSubview:self.tableView];
 }
 
@@ -244,11 +237,9 @@
 - (void)searchByKey:(NSString *)keyString
 {
     // 先清空当前数据
-    [self.activityIndicatorView startAnimating];
     [self.bl resetOffset];
     [self.dataArray removeAllObjects];
     [self.frameArray removeAllObjects];
-    [self.activityIndicatorView startAnimating];
     
     // 条件过滤字典
     NSMutableDictionary *filterDic = [[NSMutableDictionary alloc] init];
@@ -280,11 +271,9 @@
 - (void)refreshData
 {
     // 先清空当前数据
-    [self.activityIndicatorView startAnimating];
     [self.bl resetOffset];
     [self.dataArray removeAllObjects];
     [self.frameArray removeAllObjects];
-    [self.activityIndicatorView startAnimating];
     
     // 条件过滤字典
     NSMutableDictionary *filterDic = [[NSMutableDictionary alloc] init];
@@ -311,6 +300,10 @@
     }
     
     [self.bl findSecondhand:filterDic];
+    
+    // 旋转菊花
+    self.hud = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+    //self.hud.label.text = NSLocalizedString(@"加载中...", @"HUD loading title");
 }
 
 // 根据商品分类查询时的下拉刷新
@@ -403,8 +396,11 @@
 - (void)searchSecondhandByKey:(NSString *)keyString
 {
     self.keyString = keyString;
-    self.searchFlag = YES;
     [self searchByKey:keyString];
+    
+    // 旋转菊花
+    self.hud = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+    self.hud.label.text = NSLocalizedString(@"搜索中...", @"HUD loading title");
 }
 
 #pragma mark --------------------tableViewDelegate--------------------------
@@ -511,27 +507,32 @@
     
     [self.tableView reloadData];
     
-    // 结束刷新, 搜索返回不需要结束刷新
-    if (!self.searchFlag) {
-        [self.refresh endRefresh];
+    if (list.count == 0) {
+        [self.tableView.mj_footer endRefreshingWithNoMoreData];
     } else {
-        self.searchFlag = NO;
+        [self.tableView.mj_footer endRefreshing];
     }
     
-    [self.activityIndicatorView stopAnimating];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.hud hideAnimated:YES];
+    });
 }
 
 - (void)findSecondhandFailed:(NSError *)error
 {
     // 结束刷新
-    [self.activityIndicatorView stopAnimating];
-    [self.refresh endRefresh];
+    //[self.refresh endRefresh];
+    [self.tableView.mj_footer endRefreshing];
     [presentLayerPublicMethod new_notifyView:self.navigationController notifyContent:@"服务器开小差了哦"];
     /*
     UIAlertController *ac = [UIAlertController alertControllerWithTitle:nil message:@"请求失败" preferredStyle:UIAlertControllerStyleAlert];
     [self presentViewController:ac animated:YES completion:nil];
     [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(createAlert:) userInfo:ac repeats:NO];
     */
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.hud hideAnimated:YES];
+    });
 }
 
 - (void)findNewCommingSecondhandFinished:(NSMutableArray *)list
@@ -547,14 +548,15 @@
     }
     
     // 结束刷新
-    [self.refresh endRefresh];
+    //[self.refresh endRefresh];
+    [self.tableView.mj_header endRefreshing];
 }
 
 - (void)findNewCommingSecondhandFailed:(NSError *)error
 {
     // 结束刷新
-    [self.activityIndicatorView stopAnimating];
-    [self.refresh endRefresh];
+    //[self.refresh endRefresh];
+    [self.tableView.mj_header endRefreshing];
     [presentLayerPublicMethod new_notifyView:self.navigationController notifyContent:@"服务器开小差了哦"];
     /*
     UIAlertController *ac = [UIAlertController alertControllerWithTitle:nil message:@"请求失败" preferredStyle:UIAlertControllerStyleAlert];
@@ -604,19 +606,6 @@
     }
     
     return _frameArray;
-}
-
-- (UIActivityIndicatorView *)activityIndicatorView
-{
-    if (!_activityIndicatorView) {
-        _activityIndicatorView = [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(0, 0, 50, 50)];
-        [_activityIndicatorView setActivityIndicatorViewStyle:UIActivityIndicatorViewStyleWhite];
-        [_activityIndicatorView setBackgroundColor:[UIColor blackColor]];
-        _activityIndicatorView.center = self.view.center;
-        [self.view addSubview:_activityIndicatorView];
-    }
-    
-    return _activityIndicatorView;
 }
 
 @end

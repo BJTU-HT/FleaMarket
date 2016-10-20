@@ -92,7 +92,7 @@
     self.navigationItem.leftBarButtonItem.tintColor = [UIColor blackColor];
     */
     
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back_03.png"] style:UIBarButtonItemStylePlain target:self action:@selector(backBtnClick)];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back_btn"] style:UIBarButtonItemStylePlain target:self action:@selector(backBtnClick)];
     
     self.rightItemBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     self.rightItemBtn.frame = CGRectMake(0, 0, 23, 23);

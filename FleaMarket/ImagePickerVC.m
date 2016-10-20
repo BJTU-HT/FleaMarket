@@ -98,7 +98,7 @@ const NSInteger photoCounts = 9;
     item.rightBarButtonItem.title = @"相册";
     
     // 左边返回按钮
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back_03.png"] style:UIBarButtonItemStylePlain target:self action:@selector(backToMain:)];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back_btn"] style:UIBarButtonItemStylePlain target:self action:@selector(backToMain:)];
 }
 
 - (void)setupToolBar

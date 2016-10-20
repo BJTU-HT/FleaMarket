@@ -24,6 +24,7 @@
 #import "SecondhandBLDelegate.h"
 #import "LocationViewController.h"
 #import "ItemCategoryViewController.h"
+#import "MBProgressHUD.h"
 
 
 @interface PublishSecondhandVC () <UITableViewDataSource, UITableViewDelegate,UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout, AddMoreImgDelegate, SecondhandBLDelegate, ChooseLocationDelegate, ChooseCategoryDelegate>
@@ -40,10 +41,10 @@
 @property (nonatomic, strong) NSString *viceCategory;
 // 当前学校
 @property (nonatomic, strong) NSString *school;
-// ActivityIndicator
-@property (nonatomic, strong) UIActivityIndicatorView *activityIndicatorView;
 // 业务
 @property (nonatomic, strong) SecondhandBL *bl;
+// 菊花
+@property (nonatomic, strong) MBProgressHUD *hud;
 @end
 
 @implementation PublishSecondhandVC
@@ -61,12 +62,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
     [self initViews];
-    
     [self initSubmitBtn];
-    
     [self setLeftItemBtn];
+    
     // 触摸其他位置，收回键盘
     UITapGestureRecognizer *tapGR = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(keyboardHide:)];
     tapGR.cancelsTouchesInView = NO;
@@ -104,7 +103,13 @@
     navItem.leftBarButtonItem = quitBtn;
      */
     
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back_03.png"] style:UIBarButtonItemStylePlain target:self action:@selector(closePublish)];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back_btn"] style:UIBarButtonItemStylePlain target:self action:@selector(closePublish)];
+}
+
+- (BOOL)navigationShouldPopOnBackButton
+{
+    [self closePublish];
+    return YES;
 }
 
 #pragma mark --- action ---
@@ -267,10 +272,11 @@
         [alertController addAction:okAction];
         [self presentViewController:alertController animated:YES completion:nil];
     } else {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self.activityIndicatorView startAnimating];
-        });
         [self.bl createSecondhand:model];
+        
+        // 旋转菊花
+        self.hud = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+        self.hud.label.text = NSLocalizedString(@"发布中", @"HUD loading title");
     }
 }
 
@@ -313,39 +319,46 @@
 
 - (void)publishSecondhandFinished
 {
-    NSLog(@"创建二手商品成功！！");
-    [self.activityIndicatorView stopAnimating];
-    // 重置当前collectionData的选中状态
-    // 如果能直接销毁发布页，则collectionData也销毁掉了
-    /*
-     for (int i = 0; i < self.collectionData.count; i++) {
-     CollectionDataModel *model = self.collectionData[i];
-     model.selected = NO;
-     }
-     */
-    UIAlertController *ac = [UIAlertController alertControllerWithTitle:@"发布成功" message:nil preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction *aa = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        self.tabBarController.selectedIndex = 0;
-        [self.navigationController popToRootViewControllerAnimated:YES];
-    }];
-    [ac addAction:aa];
-    
-    [self presentViewController:ac animated:YES completion:nil];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        // 发布时的菊花停止
+        [self.hud hideAnimated:YES];
+        
+        // 发布成功提示
+        self.hud = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+        self.hud.mode = MBProgressHUDModeCustomView;
+        UIImage *image = [[UIImage imageNamed:@"Checkmark"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+        self.hud.customView = [[UIImageView alloc] initWithImage:image];
+        // Looks a bit nicer if we make it square.
+        self.hud.square = YES;
+        self.hud.label.text = NSLocalizedString(@"发布成功", @"HUD done title");
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [self.hud hideAnimated:YES];
+            self.tabBarController.selectedIndex = 0;
+            [self.navigationController popToRootViewControllerAnimated:YES];
+        });
+    });
 }
 
 - (void)publishSecondhandFailed
 {
-    NSLog(@"创建二手商品失败！！");
-    [self.activityIndicatorView stopAnimating];
-    
-    UIAlertController *ac = [UIAlertController alertControllerWithTitle:@"发布失败" message:nil preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction *aa = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        self.tabBarController.selectedIndex = 0;
-        [self.navigationController popToRootViewControllerAnimated:YES];
-    }];
-    [ac addAction:aa];
-    
-    [self presentViewController:ac animated:YES completion:nil];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        // 发布时的菊花停止
+        [self.hud hideAnimated:YES];
+        
+        // 发布成功提示
+        self.hud = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+        self.hud.mode = MBProgressHUDModeCustomView;
+        UIImage *image = [[UIImage imageNamed:@"Checkmark"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+        //self.hud.customView = [[UIImageView alloc] initWithImage:image];
+        // Looks a bit nicer if we make it square.
+        self.hud.square = YES;
+        self.hud.label.text = NSLocalizedString(@"发布失败", @"HUD done title");
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [self.hud hideAnimated:YES];
+            self.tabBarController.selectedIndex = 0;
+            [self.navigationController popToRootViewControllerAnimated:YES];
+        });
+    });
 }
 
 #pragma mark ------------------- AddMoreImgDelegate --------------------

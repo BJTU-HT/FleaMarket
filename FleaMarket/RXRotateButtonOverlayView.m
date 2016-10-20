@@ -121,7 +121,7 @@ static CGFloat btnOffsetY = 80.0;
 
 - (void)clickedSelf:(id)sender
 {
-    [self dismiss];
+    //[self dismiss];
 }
 - (void)btnClicked:(id)sender
 {
