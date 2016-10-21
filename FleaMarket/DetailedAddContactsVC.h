@@ -13,4 +13,5 @@
 @interface DetailedAddContactsVC : UIViewController<AddContactsVCDelegate, AddContactsBLDelegate>
 
 @property (nonatomic, strong) id<AddContactsVCDelegate> delegate;
+@property (nonatomic, strong) UIButton *buttonAddFriend;
 @end

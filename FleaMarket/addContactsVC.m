@@ -48,16 +48,9 @@ NSMutableArray *userArr;
 
 -(void)contactDrawNav{
     //201609251624 modify
-    UIBarButtonItem *leftBarItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"backArrow.png"] style:UIBarButtonItemStylePlain target:self action:@selector(leftBarItemClicked:)];
+    UIBarButtonItem *leftBarItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back_btn"] style:UIBarButtonItemStylePlain target:self action:@selector(leftBarItemClicked:)];
     self.navigationItem.leftBarButtonItem = leftBarItem;
     leftBarItem.tintColor = orangColorPCH;
-
-//    UIButton *leftBtn = [[UIButton alloc] init];
-//    [leftBtn setBackgroundImage:[UIImage imageNamed:@"ic_nav_back@2x.png"] forState:UIControlStateNormal];
-//    [leftBtn addTarget:self action:@selector(leftBarItemClicked:) forControlEvents:UIControlEventTouchDown];
-//    leftBtn.frame = CGRectMake(0, 0, 50, 20);
-//    UIBarButtonItem *leftBarItemAddContact = [[UIBarButtonItem alloc] initWithCustomView:leftBtn];
-//    self.navigationItem.leftBarButtonItem = leftBarItemAddContact;
 }
 
 #pragma @selector 方法实现-------------------

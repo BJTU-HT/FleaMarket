@@ -15,6 +15,8 @@
 #import "BookPublishDelegate.h"
 #import "WJRefresh.h"
 #import "searchBookDelegate.h"
+#import "MJRefresh.h"
+#import "dataDic.h"
 
 @interface BookMainPageVC : UIViewController<UISearchBarDelegate, findBookInfoBLDelegate, UITableViewDelegate, UITableViewDataSource, BookPublishDelegate, searchBookDelegate>
 

@@ -74,13 +74,13 @@
         contentLabel.text = [NSString stringWithFormat:@"%@请求添加您为好友",userInfo.fromUser.username];
         [agreeBtn setTitle:@"同意" forState: UIControlStateNormal];
         [agreeBtn setTintColor:[UIColor whiteColor]];
-        [agreeBtn setBackgroundColor:[UIColor greenColor]];
+        [agreeBtn setBackgroundColor:orangColorPCH];
         agreeBtn.userInteractionEnabled = YES;
     }else{
-       contentLabel.text = [NSString stringWithFormat:@"%@已添加您为好友",userInfo.fromUser.username];
+        contentLabel.text = [NSString stringWithFormat:@"%@已添加您为好友",userInfo.fromUser.username];
         [agreeBtn setTitle:@"已同意" forState: UIControlStateNormal];
-        [agreeBtn setTintColor:[UIColor grayColor]];
-        [agreeBtn setBackgroundColor:[UIColor whiteColor]];
+        [agreeBtn setTintColor:[UIColor whiteColor]];
+        [agreeBtn setBackgroundColor:orangColorPCH];
         agreeBtn.userInteractionEnabled = NO;
     }
 }

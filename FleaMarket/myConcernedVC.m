@@ -38,7 +38,7 @@
 #pragma ----------2016-09-26-11-07 modify begin ------------------------------------------
 -(void)drawNav{
     //201609251624 modify
-    UIBarButtonItem *leftBarItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"backArrow.png"] style:UIBarButtonItemStylePlain target:self action:@selector(leftBarItemClicked:)];
+    UIBarButtonItem *leftBarItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back_btn"] style:UIBarButtonItemStylePlain target:self action:@selector(leftBarItemClicked:)];
     self.navigationItem.leftBarButtonItem = leftBarItem;
     leftBarItem.tintColor = orangColorPCH;
 }

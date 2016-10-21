@@ -48,12 +48,22 @@ NSString *kTextCellID2 = @"cell2";
     [self addSearchBar];
     [self drawThreeBtn];
     [self drawInitTableView];
+    //[self drawNav];
 }
 
 - (void)tongzhi:(NSNotification *)text{
     NSLog(@"－－－－－接收到通知------");
     [self.recSearchMudic addEntriesFromDictionary:text.userInfo];
 }
+
+//-(void)drawNav{
+//    UIBarButtonItem *leftBar = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back_btn"] style:UIBarButtonItemStylePlain target:self action:@selector(leftItemClicked:)];
+//    self.navigationItem.leftBarButtonItem = leftBar;
+//}
+//
+//-(void)leftItemClicked:(UIButton *)sender{
+//    [self.navigationController popViewControllerAnimated:NO];
+//}
 
 -(void)drawInitTableView{
     CGRect tableViewFrame = CGRectMake(0, 64 + btnHeight, screenWidthPCH, 0.94 * screenHeightPCH - 64);
@@ -69,18 +79,20 @@ NSString *kTextCellID2 = @"cell2";
     //set separatorColor
     _tableViewBook.separatorColor = lightGrayColorPCH;
     [self.view insertSubview:_tableViewBook atIndex:0];
+    _tableViewBook.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNewBookDataAction)];
+    _tableViewBook.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreBookDataAction)];
 }
 
 -(void)viewWillAppear:(BOOL)animated{
     self.navigationController.navigationBarHidden = NO;
     //添加刷新
-    __weak BookMainPageVC *weakSelf = self;
-    self.refresh = [[WJRefresh alloc] init];
-    [self.refresh addHeardRefreshTo:self.tableViewBook heardBlock:^{
-        [weakSelf loadNewBookDataAction];
-    } footBlok:^{
-        [weakSelf loadMoreBookDataAction];
-    }];
+//    __weak BookMainPageVC *weakSelf = self;
+//    self.refresh = [[WJRefresh alloc] init];
+//    [self.refresh addHeardRefreshTo:self.tableViewBook heardBlock:^{
+//        [weakSelf loadNewBookDataAction];
+//    } footBlok:^{
+//        [weakSelf loadMoreBookDataAction];
+//    }];
     NSString *str = [self.recSearchMudic objectForKey:@"tag"];
     if([str isEqualToString:@"1"]){
         findBookInfoBL *findBL = [findBookInfoBL sharedManager];
@@ -90,7 +102,9 @@ NSString *kTextCellID2 = @"cell2";
 }
 
 -(void)viewWillDisappear:(BOOL)animated{
-    [self.refresh removeFromSuperview];
+    //[self.refresh removeFromSuperview];
+    [self.tableViewBook.mj_footer endRefreshing];
+    [self.tableViewBook.mj_header endRefreshing];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"tongzhi" object:self];
 }
 
@@ -112,6 +126,7 @@ NSString *kTextCellID2 = @"cell2";
     //向服务器请求数据
     [self requestBookDataFromServer:[self setRequestDictionary]];
 }
+
 -(NSMutableDictionary *)recSearchMudic{
     if(!_recSearchMudic){
         _recSearchMudic = [[NSMutableDictionary alloc] init];
@@ -158,7 +173,9 @@ NSString *kTextCellID2 = @"cell2";
 
 //用于下拉刷新时请求数据
 -(void)requestBookDataFromServerForDownDrag:(NSMutableDictionary *)mudic{
-    [mudic setObject:[_recMuDic[0] objectForKey:@"createdAt"] forKey:@"time"];
+    if([_recMuDic count]){
+       [mudic setObject:[_recMuDic[0] objectForKey:@"createdAt"] forKey:@"time"];
+    }
     findBookInfoBL *findBookInfo = [findBookInfoBL sharedManager];
     findBookInfo.delegate = self;
     [findBookInfo getBookDataDownDragFromBmobBL: mudic];
@@ -297,8 +314,18 @@ NSString *kTextCellID2 = @"cell2";
     NSString *strSchool = self.btnSchool.titleLabel.text;
     NSString *strExchangeCate = self.btnExchangeCate.titleLabel.text;
     NSString *strBookCate = self.btnBookCate.titleLabel.text;
-    if(![strSchool isEqualToString: @"所有高校"]){
+    if([strSchool rangeOfString:@"所有高校"].location !=NSNotFound){
+        dataDic *data = [[dataDic alloc] init];
+        NSMutableDictionary *mudicTemp = [[NSMutableDictionary alloc] init];
+        mudicTemp = [data readDic];
+        NSInteger strLength = [strSchool length] - 4;
+        NSString *strCity = [strSchool substringToIndex:strLength];
+        NSArray *arr = [mudicTemp objectForKey:strCity];
+        [mudic setObject: arr forKey:@"university"];
+        [mudic setObject:@"schoolArr" forKey:@"schoolTag"];
+    }else{
         [mudic setObject: strSchool forKey:@"university"];
+        [mudic setObject:@"schoolAlone" forKey:@"schoolTag"];
     }
     if(![strBookCate isEqualToString:@"所有分类"]){
         [mudic setObject:strBookCate forKey:@"bookCategory"];
@@ -333,24 +360,34 @@ NSString *kTextCellID2 = @"cell2";
 }
 
 -(void)searchBookInfoFinishedBL:(NSMutableArray *)arr{
+    
     if([arr[arr.count - 1]  isEqual: @"downDrag"]){
         [arr removeObjectAtIndex:arr.count - 1];
         for(NSInteger i = arr.count - 1; i >= 0; i--){
             [_recMuDic insertObject: arr[i] atIndex:0];
         }
+        [self.tableViewBook.mj_header endRefreshing];
     }else{
         for(int i = 0; i < arr.count; i++){
             [_recMuDic addObject:arr[i]];
         }
+        [self.tableViewBook.mj_footer endRefreshing];
     }
     [_tableViewBook reloadData];
-    [self.refresh endRefresh];
     [self.activityIndicatorView stopAnimating];
 }
 
 -(void)searchBookInfoFinishedNODataBL:(NSString *)str{
-    [presentLayerPublicMethod new_notifyView:self.navigationController notifyContent:str];
-    [self.refresh endRefresh];
+    //2016-10-20 16:17 cut
+    //[presentLayerPublicMethod new_notifyView:self.navigationController notifyContent:str];
+    if([str isEqualToString:@"当前页面数据已是最新"]){
+        [self.tableViewBook.mj_header endRefreshing];
+    }else if([str isEqualToString:@"服务器无数据"]){
+        [_tableViewBook reloadData];
+        [self.tableViewBook.mj_footer endRefreshingWithNoMoreData];
+    }else{
+        [self.tableViewBook.mj_footer endRefreshingWithNoMoreData];
+    }
     [self.activityIndicatorView stopAnimating];
 }
 #pragma delegate findBookInfo end
@@ -430,6 +467,7 @@ NSString *kTextCellID2 = @"cell2";
     view1.backgroundColor = whiteSmokePCH;
     return view1;
 }
+
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     CGFloat height = 0;
     if(indexPath.row == 1){

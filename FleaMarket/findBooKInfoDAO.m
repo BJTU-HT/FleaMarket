@@ -71,7 +71,7 @@ NSMutableArray *muArrURL;
             [self.delegate searchBookInfoFailedDAO:error];
         }else{
             if(array.count == 0){
-                [self.delegate searchBookInfoFinishedNODataDAO:@"没有更多数据"];
+                [self.delegate searchBookInfoFinishedNODataDAO:@"当前页面数据已是最新"];
             }else{
                 for(int i = 0; i < array.count; i++){
                     BmobObject *obj = [array objectAtIndex:i];
@@ -85,13 +85,18 @@ NSMutableArray *muArrURL;
     _bookOffsetUp += pageOffset;
 }
 
+//上拉获取数据
 -(void)getBookDataFromBmobDAO:(NSDictionary *)dic{
     NSMutableArray *muArr = [[NSMutableArray alloc] init];
     NSString *strExchange = [dic objectForKey:@"exchangeCategory"];
     BmobQuery *query = [[BmobQuery alloc] initWithClassName:strExchange];
     for(NSString *key in [dic allKeys]){
         if([key isEqualToString:@"university"]){
-            [query whereKey:@"school" equalTo:dic[key]];
+            if([dic[key] isKindOfClass:[NSArray class]]){
+                [query whereKey:@"school" containedIn:dic[key]];
+            }else{
+                [query whereKey:@"school" equalTo:dic[key]];
+            }
         }
         if([key isEqualToString:@"bookCategory"]){
             [query whereKey:@"category" equalTo:dic[key]];
@@ -105,9 +110,12 @@ NSMutableArray *muArrURL;
             [self.delegate searchBookInfoFailedDAO:error];
         }else{
             if(array.count == 0){
-                [self.delegate searchBookInfoFinishedNODataDAO:@"没有更多数据"];
+                if(_bookOffset == 0){
+                   [self.delegate searchBookInfoFinishedNODataDAO:@"服务器无数据"];
+                }else{
+                    [self.delegate searchBookInfoFinishedNODataDAO:@"没有更多数据"];
+                }
             }else{
-                
                 for(int i = 0; i < array.count; i++){
                     BmobObject *obj = [array objectAtIndex:i];
                     [muArr addObject:[self objToDic:obj]];

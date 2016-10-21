@@ -11,6 +11,9 @@
 @interface dataDic : NSObject
 
 @property(strong, nonatomic) NSMutableDictionary *schoolMuDic;
+@property(strong, nonatomic) NSMutableArray *leftArray;
+@property(strong, nonatomic) NSMutableArray *rightArray;
 
-+(NSMutableDictionary *)readDic;
+-(NSMutableDictionary *)readDic;
+
 @end

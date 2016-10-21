@@ -82,11 +82,9 @@ float bottomViewHeightBD;
 //导航栏返回按钮修改为箭头图标 2016-09-25-15-37
 -(void)addButtonToNavBookDetail
 {
-    self.navigationController.navigationBar.tintColor = orangColorPCH;
-    //UIBarButtonItem *leftBarItem = [[UIBarButtonItem alloc] initWithTitle:nil style:UIBarButtonItemStylePlain target:self action:@selector(returnButtonClicked:)];
-    UIBarButtonItem *leftBarItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"backArrow.png"] style:UIBarButtonItemStylePlain target: self action:@selector(returnButtonClicked:)];
-    leftBarItem.tintColor = orangColorPCH;
+    UIBarButtonItem *leftBarItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back_btn"] style:UIBarButtonItemStylePlain target:self action:@selector(returnButtonClicked:)];
     self.navigationItem.leftBarButtonItem = leftBarItem;
+    leftBarItem.tintColor = orangColorPCH;
 }
 
 -(void)returnButtonClicked:(UIButton *)sender{

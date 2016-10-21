@@ -27,7 +27,8 @@
     if(!self.tableData){
         self.tableData = [[NSMutableDictionary alloc] init];
     }
-    self.tableData = [dataDic readDic];
+    dataDic *data = [[dataDic alloc] init];
+    self.tableData = [data readDic];
     _arrSchool = [self.tableData objectForKey:@"北京"];
 }
 
