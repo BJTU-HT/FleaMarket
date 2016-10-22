@@ -82,7 +82,8 @@ static SecondhandDAO *sharedManager = nil;
         // 检索
         if ([key isEqualToString:@"product_name"]) {
             NSString *value = filterDic[key];
-            [bquery whereKey:@"product_name" matchesWithRegex:[NSString stringWithFormat:@"/*%@/*", value]];
+            //[bquery whereKey:@"product_name" matchesWithRegex:[NSString stringWithFormat:@"/*%@/*", value]];
+            [bquery whereKey:@"product_name" equalTo:value];
         }
         
         // 按商品分类过滤
