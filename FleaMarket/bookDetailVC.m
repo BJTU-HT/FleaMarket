@@ -62,14 +62,29 @@ float bottomViewHeightBD;
     tagDelegate = 1;
 }
 
+-(void)initTableView{
+    CGRect tableViewFrame = CGRectMake(0, 0, screenWidthPCH, screenHeightPCH - bottomViewHeightBD);
+    _tableViewBookDetail = [[UITableView alloc] initWithFrame:tableViewFrame style:UITableViewStylePlain];
+    _tableViewBookDetail.delegate = self;
+    _tableViewBookDetail.dataSource = self;
+    [self.view addSubview:_tableViewBookDetail];
+    self.title = @"详细信息";
+#pragma 解决cell分割线右错15pt的问题
+    if ([_tableViewBookDetail respondsToSelector:@selector(setSeparatorInset:)]) {
+        [_tableViewBookDetail setSeparatorInset:UIEdgeInsetsZero];
+    }
+    if ([_tableViewBookDetail respondsToSelector:@selector(setLayoutMargins:)]) {
+        [_tableViewBookDetail setLayoutMargins:UIEdgeInsetsZero];
+    }
+#pragma 解决右错15pt end
+}
+
 //导航栏返回按钮修改为箭头图标 2016-09-25-15-37
 -(void)addButtonToNavBookDetail
 {
-    self.navigationController.navigationBar.tintColor = orangColorPCH;
-    //UIBarButtonItem *leftBarItem = [[UIBarButtonItem alloc] initWithTitle:nil style:UIBarButtonItemStylePlain target:self action:@selector(returnButtonClicked:)];
-    UIBarButtonItem *leftBarItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"backArrow.png"] style:UIBarButtonItemStylePlain target: self action:@selector(returnButtonClicked:)];
-    leftBarItem.tintColor = orangColorPCH;
+    UIBarButtonItem *leftBarItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back_btn"] style:UIBarButtonItemStylePlain target:self action:@selector(returnButtonClicked:)];
     self.navigationItem.leftBarButtonItem = leftBarItem;
+    leftBarItem.tintColor = orangColorPCH;
 }
 
 -(void)returnButtonClicked:(UIButton *)sender{
@@ -133,22 +148,7 @@ float bottomViewHeightBD;
     [self.navigationController pushViewController:messageVC animated:NO];
 }
 
--(void)initTableView{
-    CGRect tableViewFrame = CGRectMake(0, 0, screenWidthPCH, screenHeightPCH - bottomViewHeightBD);
-    _tableViewBookDetail = [[UITableView alloc] initWithFrame:tableViewFrame style:UITableViewStylePlain];
-    _tableViewBookDetail.delegate = self;
-    _tableViewBookDetail.dataSource = self;
-    [self.view addSubview:_tableViewBookDetail];
-    self.title = @"详细信息";
-#pragma 解决cell分割线右错15pt的问题
-    if ([_tableViewBookDetail respondsToSelector:@selector(setSeparatorInset:)]) {
-        [_tableViewBookDetail setSeparatorInset:UIEdgeInsetsZero];
-    }
-    if ([_tableViewBookDetail respondsToSelector:@selector(setLayoutMargins:)]) {
-        [_tableViewBookDetail setLayoutMargins:UIEdgeInsetsZero];
-    }
-#pragma 解决右错15pt end
-}
+
 
 
 -(void)bookDetailRequestLeaveMessageFromServer:(NSString *)objectId{
@@ -168,18 +168,6 @@ float bottomViewHeightBD;
     }
 }
 #pragma record visit guys end
-
-#pragma 解决cell分割线右错15pt的问题
-- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if ([cell respondsToSelector:@selector(setSeparatorInset:)]) {
-        [cell setSeparatorInset:UIEdgeInsetsZero];
-    }
-    if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
-        [cell setLayoutMargins:UIEdgeInsetsZero];
-    }
-}
-#pragma 分割线右错15pt end
 
 #pragma publicSearchDelegate begin 访客头像URL获取成功
 -(void)publicSearchFinishedBL:(NSMutableDictionary *)mudicPS{
@@ -343,6 +331,18 @@ float bottomViewHeightBD;
         [self.navigationController pushViewController:messageVC animated:NO];
     }
 }
+
+#pragma 解决cell分割线右错15pt的问题
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if ([cell respondsToSelector:@selector(setSeparatorInset:)]) {
+        [cell setSeparatorInset:UIEdgeInsetsZero];
+    }
+    if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
+        [cell setLayoutMargins:UIEdgeInsetsZero];
+    }
+}
+#pragma 分割线右错15pt end
 /*
 #pragma mark - Navigation
 

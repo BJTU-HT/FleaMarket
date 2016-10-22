@@ -11,10 +11,20 @@
 			<key>orderHint</key>
 			<integer>1</integer>
 		</dict>
+		<key>MBProgressHUD.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>7</integer>
+		</dict>
 		<key>MJExtension.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>6</integer>
+		</dict>
+		<key>MJRefresh.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>8</integer>
 		</dict>
 		<key>Masonry.xcscheme</key>
 		<dict>
@@ -47,6 +57,11 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>0DB08C7792D8CA0527D3DB14140073FE</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>1F6D5BC39900891D7C8C67CF47F4BFB0</key>
 		<dict>
 			<key>primary</key>
@@ -57,12 +72,27 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>3FD4DEC019FEC8E3DA45F14BEA6F5FCB</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>49D722AED0793E0D455B344985DCF6A1</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>53480ED0BE09FF49E34B1702D485CAAB</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>70BC44266C6FFE30D2C57129458E070B</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>7BBCDA489573AD727C6C13998889626F</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -83,6 +113,11 @@
 			<true/>
 		</dict>
 		<key>CFE122428A0408C97BCE88E9CDDE0367</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>D058B89EB3B3DF45457A2DCD3971AFFE</key>
 		<dict>
 			<key>primary</key>
 			<true/>

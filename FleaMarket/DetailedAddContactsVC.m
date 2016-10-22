@@ -21,6 +21,7 @@
 UIImageView *imageViewHeadDetail;
 UILabel *nickNameLabel;
 NSString *toUserId;
+@synthesize buttonAddFriend;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -32,9 +33,8 @@ NSString *toUserId;
 
 #pragma ---------201609251626 add begin --------------------------------
 -(void)addImageToNav{
-    UIBarButtonItem *leftBarItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"backArrow.png"] style:UIBarButtonItemStylePlain target:self action:@selector(leftBarItemClicked:)];
+    UIBarButtonItem *leftBarItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back_btn"] style:UIBarButtonItemStylePlain target:self action:@selector(leftBarItemClicked:)];
     self.navigationItem.leftBarButtonItem = leftBarItem;
-    leftBarItem.tintColor = orangColorPCH;
 }
 
 -(void)leftBarItemClicked:(UIButton *)sender{
@@ -77,7 +77,7 @@ NSString *toUserId;
     float btnYOffset = viewHeight + 0.05 * screenHeightPCH + navStatusBarHeightPCH;
     float btnWidth = screenWidthPCH - 2 * btnXOffset;
     float btnHeight = 50.0;
-    UIButton *buttonAddFriend = [[UIButton alloc] initWithFrame:CGRectMake(btnXOffset, btnYOffset, btnWidth, btnHeight)];
+    buttonAddFriend = [[UIButton alloc] initWithFrame:CGRectMake(btnXOffset, btnYOffset, btnWidth, btnHeight)];
     //buttonAddFriend.backgroundColor = [UIColor colorWithRed:0/255.0 green:191/255.0 blue:255/255.0 alpha:1.0];
     buttonAddFriend.backgroundColor = orangColorPCH;
     [buttonAddFriend setTitle:@"加为好友" forState:UIControlStateNormal];
@@ -117,6 +117,8 @@ NSString *toUserId;
     if(value){
         presentLayerPublicMethod *publicMethod = [[presentLayerPublicMethod alloc] init];
         [publicMethod notifyView:self.navigationController notifyContent:@"添加好友请求发送成功"];
+        [buttonAddFriend setTitle:@"好友请求已发送" forState: UIControlStateNormal];
+        buttonAddFriend.userInteractionEnabled = NO;
     }
 }
 -(void)requestAddFriendFailedBL:(NSString *)error{

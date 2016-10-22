@@ -36,7 +36,7 @@ NSString *userName;
 }
 
 -(void)drawNav{
-    UIBarButtonItem *leftBar = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"ic_nav_back@2x.png"] style:UIBarButtonItemStylePlain target:self action:@selector(leftItemClicked:)];
+    UIBarButtonItem *leftBar = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back_btn"] style:UIBarButtonItemStylePlain target:self action:@selector(leftItemClicked:)];
     self.navigationItem.leftBarButtonItem = leftBar;
 }
 -(void)initWithArray

@@ -72,9 +72,8 @@ UIButton *buttonGetShortMessage; //手机号登录获取验证码按钮
 
 //2016-07-15 add
 -(void)leftBtnNav{
-    UIBarButtonItem *leftBarItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"icon_back2@2x.png"] style:UIBarButtonItemStylePlain target: self action:@selector(leftBarItemClicked:)];
+    UIBarButtonItem *leftBarItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back_btn"] style:UIBarButtonItemStylePlain target:self action:@selector(leftBarItemClicked:)];
     self.navigationItem.leftBarButtonItem = leftBarItem;
-    leftBarItem.tintColor = orangColorPCH;
 }
 
 -(void)leftBarItemClicked:(UIButton *)sender{

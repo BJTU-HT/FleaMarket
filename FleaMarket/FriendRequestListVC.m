@@ -116,6 +116,16 @@ UIButton *buttonClickTemp;
     [cell.agreeBtn addTarget:self action:@selector(agreeBtnClicked:) forControlEvents:UIControlEventTouchDown];
     return cell;
 }
+
+//在此设置FooterView目的是，消除多余的cell格
+-(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
+    UIView *v = [[UIView alloc] initWithFrame:CGRectMake(0, 0, screenWidthPCH, screenHeightPCH * 0.04)];
+    v.backgroundColor = grayColorPCH;
+    return v;
+}
+-(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+    return grayLineHeightPCH;
+}
 #pragma tableView 代理方法，数据源方法 实现 end
 
 /*

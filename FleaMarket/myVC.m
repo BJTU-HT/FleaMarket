@@ -110,7 +110,7 @@ UIImageView *headImage;
 -(void)addButtonToNavigationBar
 {
     UIButton* leftBtn= [UIButton buttonWithType:UIButtonTypeCustom];
-    [leftBtn setImage:[UIImage imageNamed:@"ic_topbar_setting_orange@2x.png"] forState:UIControlStateNormal];
+    [leftBtn setImage:[UIImage imageNamed:@"back_btn"] forState:UIControlStateNormal];
     leftBtn.frame = CGRectMake(0, 0, 32, 32);
     UIBarButtonItem* leftBtnItem = [[UIBarButtonItem alloc]initWithCustomView:leftBtn];
     [leftBtn addTarget:self action:@selector(leftBtnClicked:) forControlEvents:UIControlEventTouchUpInside];

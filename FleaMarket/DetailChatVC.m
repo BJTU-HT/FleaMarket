@@ -92,10 +92,13 @@ BmobUser *user1;
 //添加导航栏返回箭头图标
 -(void)addButtonToNav
 {
-    self.navigationController.navigationBar.tintColor = orangColorPCH;
-    UIBarButtonItem *leftBarItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"backArrow.png"] style:UIBarButtonItemStylePlain target: self action:@selector(returnButtonClicked:)];
-    leftBarItem.tintColor = orangColorPCH;
+    UIBarButtonItem *leftBarItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back_btn"] style:UIBarButtonItemStylePlain target:self action:@selector(returnButtonClicked:)];
     self.navigationItem.leftBarButtonItem = leftBarItem;
+    
+//    self.navigationController.navigationBar.tintColor = orangColorPCH;
+//    UIBarButtonItem *leftBarItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"backArrow.png"] style:UIBarButtonItemStylePlain target: self action:@selector(:)];
+//    leftBarItem.tintColor = orangColorPCH;
+//    self.navigationItem.leftBarButtonItem = leftBarItem;
 }
 
 -(void)returnButtonClicked:(UIButton *)sender{

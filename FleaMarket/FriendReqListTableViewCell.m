@@ -55,6 +55,7 @@
     CGRect labelFrame = CGRectMake(label_x_offset, label_y_offset, label_width, label_height);
     nickNameLabel.frame = labelFrame;
     nickNameLabel.text = userInfo.fromUser.username;
+    nickNameLabel.font = [UIFont systemFontOfSize:12.0f];
     
     float contentLabel_x_offset = label_x_offset;
     float contentLabelHeight = 14.0; //默认采用12号字
@@ -72,15 +73,16 @@
 
     if (userInfo.type.intValue == SystemMessageContactAdd){
         contentLabel.text = [NSString stringWithFormat:@"%@请求添加您为好友",userInfo.fromUser.username];
+        contentLabel.font = [UIFont systemFontOfSize:12.0f];
         [agreeBtn setTitle:@"同意" forState: UIControlStateNormal];
         [agreeBtn setTintColor:[UIColor whiteColor]];
-        [agreeBtn setBackgroundColor:[UIColor greenColor]];
+        [agreeBtn setBackgroundColor:orangColorPCH];
         agreeBtn.userInteractionEnabled = YES;
     }else{
-       contentLabel.text = [NSString stringWithFormat:@"%@已添加您为好友",userInfo.fromUser.username];
+        contentLabel.text = [NSString stringWithFormat:@"%@已添加您为好友",userInfo.fromUser.username];
         [agreeBtn setTitle:@"已同意" forState: UIControlStateNormal];
-        [agreeBtn setTintColor:[UIColor grayColor]];
-        [agreeBtn setBackgroundColor:[UIColor whiteColor]];
+        [agreeBtn setTintColor:[UIColor whiteColor]];
+        [agreeBtn setBackgroundColor:orangColorPCH];
         agreeBtn.userInteractionEnabled = NO;
     }
 }
