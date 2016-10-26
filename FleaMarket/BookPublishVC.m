@@ -54,10 +54,21 @@ NSInteger fourBtnTag;
     _muDicBuy = [[NSMutableDictionary alloc] init];
     _muDicBorrow = [[NSMutableDictionary alloc] init];
     _muDicPresent = [[NSMutableDictionary alloc] init];
-
+    [self addButtonToNav];
     // Do any additional setup after loading the view.
 }
 
+//导航栏返回按钮修改为箭头图标 2016-09-25-15-37
+-(void)addButtonToNav
+{
+    UIBarButtonItem *leftBarItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back_btn"] style:UIBarButtonItemStylePlain target:self action:@selector(returnButtonClicked:)];
+    self.navigationItem.leftBarButtonItem = leftBarItem;
+    leftBarItem.tintColor = orangColorPCH;
+}
+
+-(void)returnButtonClicked:(UIButton *)sender{
+    [self.navigationController popViewControllerAnimated:NO];
+}
 #pragma 点击发布按钮 begin
 //点击选择学校按钮点击事件
 -(void)schoolBtnClicked:(UIButton *)sender{
@@ -113,6 +124,9 @@ NSInteger fourBtnTag;
         default:
             break;
     }
+    //20161025 10:53 add
+    [_pubView.publishBtn setTitle:@"正在上传信息..." forState: UIControlStateNormal];
+    _pubView.publishBtn.userInteractionEnabled = NO;
 }
 
 // 0 1 2 3 分别对应 出售，求购，借阅， 赠送
@@ -465,15 +479,20 @@ NSInteger fourBtnTag;
 -(void)uploadBookInfoFinishedBL:(BOOL)isSuccessful{
     if(isSuccessful){
         [presentLayerPublicMethod new_notifyView:self.navigationController notifyContent:@"发布成功"];
-        //[self.navigationController popViewControllerAnimated:YES];
     }
+    //20161025 10:58 add
+    [_pubView.publishBtn setTitle:@"已发布成功" forState:UIControlStateNormal];
 }
 
 -(void)uploadBookInfoFailedBL:(NSError *)error{
     if(error){
         [presentLayerPublicMethod new_notifyView:self.navigationController notifyContent:@"发布图书信息失败，请检查网络"];
     }
+    //20161025 10:58 add
+    [_pubView.publishBtn setTitle:@"发布失败" forState:UIControlStateNormal];
+    _pubView.publishBtn.userInteractionEnabled = YES;
 }
+
 #pragma 数据库回传代理函数 end
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

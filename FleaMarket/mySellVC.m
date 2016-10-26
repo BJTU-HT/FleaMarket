@@ -20,7 +20,7 @@ float cellHeightSell;
 
 -(void)viewDidLoad {
     [super viewDidLoad];
-    cellHeightSell = 150.0f;
+    cellHeightSell = 120.0f;
     BmobUser *curUser = [BmobUser getCurrentUser];
     [self getSellInfoData:curUser.username];
     self.title = @"我的在售商品";
@@ -89,6 +89,16 @@ float cellHeightSell;
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     return [self sellCellWithTableView:tableView cellForRowAtIndexPath:indexPath];
+}
+
+//在此设置FooterView目的是，消除多余的cell格
+-(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
+    UIView *v = [[UIView alloc] initWithFrame:CGRectMake(0, 0, screenWidthPCH, screenHeightPCH * 0.04)];
+    v.backgroundColor = grayColorPCH;
+    return v;
+}
+-(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+    return grayLineHeightPCH;
 }
 
 #pragma ------tableView Delegate and DataSource end----------------

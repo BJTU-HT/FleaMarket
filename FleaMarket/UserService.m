@@ -111,20 +111,16 @@
     [obj setObject:[NSNumber numberWithInt:SystemMessageContactAgree] forKey:@"type"];
     [obj setObject:@"同意加您为好友" forKey:@"content"];
     [obj updateInBackgroundWithResultBlock:^(BOOL isSuccessful, NSError *error) {
-        if (isSuccessful) {
-            
+        if (isSuccessful){
             [self addFriendNoticeWithUserId:userId
                                     content:@"已经是好友"
                                        type:SystemMessageContactAgree completion:block];
-            
-            
         }else{
             if(block) {
                 block(NO,error);
             }
         }
     }];
-    
 }
 
 +(void)addFriendNoticeWithUserId:(NSString *)userId
@@ -185,8 +181,6 @@
  *  @param block 好友
  */
 +(void)friendsWithCompletion:(BmobObjectArrayResultBlock)block{
-    
-    
     BmobUser *user = [BmobUser getCurrentUser];
     if (!user) {
         return;

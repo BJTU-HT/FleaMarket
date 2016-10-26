@@ -189,6 +189,14 @@ NSString *kTextCellID2 = @"cell2";
     UIBarButtonItem *rightBarItem = [[UIBarButtonItem alloc] initWithTitle:@"发布" style:UIBarButtonItemStylePlain target:self action:@selector(saveButtonClicked:)];
     rightBarItem.tintColor = orangColorPCH;
     self.navigationItem.rightBarButtonItem = rightBarItem;
+    
+    UIBarButtonItem *leftBarItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back_btn"] style:UIBarButtonItemStylePlain target:self action:@selector(returnButtonClicked:)];
+    self.navigationItem.leftBarButtonItem = leftBarItem;
+    leftBarItem.tintColor = orangColorPCH;
+}
+
+-(void)returnButtonClicked:(UIButton *)sender{
+    [self.navigationController popViewControllerAnimated:NO];
 }
 
 //navigationcontroller add searchBar
@@ -321,8 +329,8 @@ NSString *kTextCellID2 = @"cell2";
         NSInteger strLength = [strSchool length] - 4;
         NSString *strCity = [strSchool substringToIndex:strLength];
         NSArray *arr = [mudicTemp objectForKey:strCity];
-        [mudic setObject: arr forKey:@"university"];
-        [mudic setObject:@"schoolArr" forKey:@"schoolTag"];
+        //[mudic setObject: arr forKey:@"university"];
+        //[mudic setObject:@"schoolArr" forKey:@"schoolTag"];
     }else{
         [mudic setObject: strSchool forKey:@"university"];
         [mudic setObject:@"schoolAlone" forKey:@"schoolTag"];

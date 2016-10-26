@@ -34,7 +34,8 @@ static myConcernedDAO *sharedManager;
                 [self.delegate myCocnernedDataRequestNODataDAO: 1];
             }else{
                 BmobObject *obj = array[0];
-                if([[obj objectForKey:@"concernedArr"] isEqualToString:@""]){
+                //if([[obj objectForKey:@"concernedArr"] isEqualToString:@""]){
+                if(![obj objectForKey:@"concernedArr"]){
                     [self.delegate myCocnernedDataRequestNODataDAO: 1];
                 }else{
                     [self.delegate myConcernedDataRequestFinishedDAO:[obj objectForKey:@"concernedArr"]];

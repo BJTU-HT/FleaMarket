@@ -175,7 +175,7 @@ UIButton *buttonGetShortMessage; //手机号登录获取验证码按钮
     labelAccount.font =FontSize16;
     labelAccount.textColor = [UIColor blackColor];
     labelAccount.shadowColor = [UIColor whiteColor];
-    CGRect labelAccountFrame = CGRectMake(screenWidth * 0.05, 0, screenWidth * 0.1, viewHeight * 0.12);
+    CGRect labelAccountFrame = CGRectMake(screenWidth * 0.05, 0, screenWidth * 0.15, viewHeight * 0.12);
     labelAccount.frame = labelAccountFrame;
     [accountLoginView addSubview:labelAccount];
     
@@ -203,7 +203,7 @@ UIButton *buttonGetShortMessage; //手机号登录获取验证码按钮
     labelPassword.font = FontSize16;
     labelPassword.textColor = [UIColor blackColor];
     labelPassword.shadowColor = [UIColor whiteColor];
-    CGRect labelPasswordFrame = CGRectMake(screenWidth * 0.05, viewHeight * 0.12, screenWidth * 0.1, viewHeight * 0.12);
+    CGRect labelPasswordFrame = CGRectMake(screenWidth * 0.05, viewHeight * 0.12, screenWidth * 0.15, viewHeight * 0.12);
     labelPassword.frame = labelPasswordFrame;
     [accountLoginView addSubview:labelPassword];
     

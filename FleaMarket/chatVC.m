@@ -24,7 +24,6 @@ float cellHeight;
 
 -(void)viewDidLoad {
     [super viewDidLoad];
-    [self checkLogInStatus];
     self.title = @"聊天";
     _tableView = [[UITableView alloc] initWithFrame:self.view.frame style:UITableViewStylePlain];
     _tableView.delegate = self;
@@ -54,6 +53,7 @@ float cellHeight;
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    [self checkLogInStatus];
     if ([BmobUser getCurrentUser]) {
         [self loadRecentConversations];
     }

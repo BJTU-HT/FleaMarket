@@ -40,6 +40,8 @@ BmobUser *userObjID;
     self.title = @"联系人";
     //绘制导航栏
     [self contactDrawNav];
+    //从服务器加载好友列表
+    [self requestDataFromServer];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -49,7 +51,7 @@ BmobUser *userObjID;
 
 -(void)viewWillAppear:(BOOL)animated{
     //从服务器加载好友列表
-    [self requestDataFromServer];
+    //[self requestDataFromServer];
 }
 
 -(void)addSearchBar{

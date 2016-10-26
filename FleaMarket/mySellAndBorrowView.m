@@ -40,7 +40,7 @@
     
     float price_x = imageView_width + 2 * marginParallel;
     float price_y = imageView_y;
-    float price_w = width * 0.20;
+    float price_w = width * 0.30;
     float price_h = 16;
     
     self.labelPriceSell.frame = CGRectMake(price_x, price_y, price_w, price_h);

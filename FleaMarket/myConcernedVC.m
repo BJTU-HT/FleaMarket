@@ -19,7 +19,6 @@
 @implementation myConcernedVC
 
 -(void)viewDidLoad{
-    
     [super viewDidLoad];
     //向服务器请求数据
     _curUserMyConcerned = [BmobUser getCurrentUser];

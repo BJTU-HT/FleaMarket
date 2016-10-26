@@ -120,6 +120,7 @@ float widthDeatail;
     NSString *strDefault = @"备注: ";
     NSString *str = [strDefault stringByAppendingString: [mudic objectForKey:@"remark"]];
     _labelS1.text = str;
+    _labelS1.textColor = [UIColor blackColor];
     CGSize titleSizeLabelS1 = [_labelS1.text boundingRectWithSize:CGSizeMake(labelS1Width, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:12]} context:nil].size;
     if(titleSizeLabelS1.height < 45){
         titleSizeLabelS1.height = 45;
