@@ -35,7 +35,8 @@ BmobUser *userObjID;
     tableViewContacts = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, screenWidthPCH, screenHeightPCH) style:UITableViewStylePlain];
     tableViewContacts.delegate = self;
     tableViewContacts.dataSource = self;
-    [self addSearchBar];
+    //20161101 16:35 add
+    //[self addSearchBar];
     [self.view addSubview:tableViewContacts];
     self.title = @"联系人";
     //绘制导航栏
