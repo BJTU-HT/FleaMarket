@@ -226,7 +226,7 @@ UIButton *buttonGetShortMessage; //手机号登录获取验证码按钮
     [accountLoginView addSubview:viewTextField2];
     
     UIButton *buttonForget = [[UIButton alloc] init];
-    [buttonForget setTitle:@"忘记密码" forState:UIControlStateNormal];
+    //[buttonForget setTitle:@"忘记密码" forState:UIControlStateNormal];
     CGRect buttonForgetFrame = CGRectMake(screenWidth * 0.7, viewHeight * 0.24, screenWidth * 0.28, viewHeight * 0.12);
     buttonForget.frame = buttonForgetFrame;
     [buttonForget setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
