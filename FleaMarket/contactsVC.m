@@ -89,9 +89,10 @@ BmobUser *userObjID;
 
 -(void)leftBarItemClicked:(UIButton *)sender{
     [self.navigationController popViewControllerAnimated:YES];
-    if([self.sharedIM isConnected]) {
-        [self.sharedIM disconnect];
-    }
+    //20161101 cut
+//    if([self.sharedIM isConnected]) {
+//        [self.sharedIM disconnect];
+//    }
 }
 #pragma @selector 方法实现 end-------------------
 

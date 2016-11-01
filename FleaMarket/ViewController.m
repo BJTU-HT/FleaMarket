@@ -54,14 +54,6 @@
     // Do any additional setup after loading the view, typically from a nib.}
 }
 
-//- (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController{
-//    //获得选中的item
-//    NSUInteger tabIndex = [tabBarController indexOfObject:viewController];
-//    // 对应item 上面的子控制器（NavigationController）
-//    UINavigationController *navVc = self.childViewControllers[tabIndex] ;
-//    [navVc popToRootViewControllerAnimated:YES];
-//}
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

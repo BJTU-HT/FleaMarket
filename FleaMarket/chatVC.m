@@ -61,8 +61,12 @@ float cellHeight;
 
 //获取用户的聊天
 -(void)loadRecentConversations{
-    NSArray *array = [[BmobIM sharedBmobIM] queryRecentConversation];
+    BmobUser *curUser = [BmobUser getCurrentUser];
+    self.sharedIM = [BmobIM sharedBmobIM];
+    [self.sharedIM setupBelongId:curUser.objectId];
+    NSArray *array = [self.sharedIM queryRecentConversation];
     if (array && array.count > 0) {
+        [self.dataArray removeAllObjects];
         [self.dataArray setArray:array];
         [self.tableView reloadData];
     }
@@ -70,9 +74,6 @@ float cellHeight;
 
 #pragma ----------2016-09-25-16-02 modify begin ------------------------------------------
 -(void)ChatDrawNav{
-//    UIBarButtonItem *leftBarItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"friendBlack32.png"] style:UIBarButtonItemStylePlain target:self action:@selector(leftBarFriendButtonClicked:)];
-//    self.navigationItem.leftBarButtonItem = leftBarItem;
-//    leftBarItem.tintColor = orangColorPCH;
     UIBarButtonItem *rightBarItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"friendBlack32new.png"] style:UIBarButtonItemStylePlain target:self action:@selector(rightBarAddFriendButtonClicked:)];
     self.navigationItem.rightBarButtonItem = rightBarItem;
     rightBarItem.tintColor = orangColorPCH;
@@ -100,12 +101,12 @@ float cellHeight;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-   
     RecentTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier: RecentCellID];
     if(cell == nil){
         cell = [[RecentTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:RecentCellID];
     }
     BmobIMConversation *conversation = self.dataArray[indexPath.row];
+    NSLog(@"test----%@, %@", conversation.conversationTitle,conversation.conversationId);
     [cell setStatus: conversation cellHeight:cellHeight];
     return cell;
 }

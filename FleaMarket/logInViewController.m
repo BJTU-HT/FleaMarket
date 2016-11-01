@@ -13,6 +13,7 @@
 #import "myVC.h"
 #import "RegistBL.h"
 #import "presentLayerPublicMethod.h"
+#import <BmobSDK/BmobUser.h>
 
 #define ButtonViewHeightPercent 0.1
 
@@ -63,6 +64,14 @@ UIButton *buttonGetShortMessage; //手机号登录获取验证码按钮
     [self drawClickButton];
     [self drawLeftButtonView];
     [self leftBtnNav];
+}
+
+//20161026 14:11 add
+-(void)viewWillAppear:(BOOL)animated{
+    BmobUser *user = [BmobUser getCurrentUser];
+    if(user){
+        [self.navigationController popViewControllerAnimated:NO];
+    }
 }
 
 -(void)didReceiveMemoryWarning {
@@ -408,6 +417,7 @@ UIButton *buttonGetShortMessage; //手机号登录获取验证码按钮
     [phoneNumberLoginView addSubview:buttonRegist];
 }
 
+
 //手机号码登录获取验证码
 -(void)getVerifyCodeLogIn:(UIButton *)sender
 {
@@ -484,8 +494,9 @@ UIButton *buttonGetShortMessage; //手机号登录获取验证码按钮
         [self.navigationController pushViewController:myViewController animated:NO];
         self.hidesBottomBarWhenPushed = NO;
         //添加通知，用于连接服务器 2016-09-21-16-04
-        BmobUser *curUser = [BmobUser getCurrentUser];
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"Login" object:curUser.objectId];
+        //BmobUser *curUser = [BmobUser getCurrentUser];
+        //[[NSNotificationCenter defaultCenter] postNotificationName:@"Login" object:curUser.objectId];
+        [self connectToServer];
     }
 }
 
@@ -510,8 +521,8 @@ UIButton *buttonGetShortMessage; //手机号登录获取验证码按钮
     //201607181108 modify by hou
     [self.navigationController popViewControllerAnimated:NO];
     //添加通知，用于连接服务器 2016-09-21-16-04
-    BmobUser *curUser = [BmobUser getCurrentUser];
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"Login" object:curUser.objectId];
+    [self connectToServer];
+    //[[NSNotificationCenter defaultCenter] postNotificationName:@"Login" object:curUser.objectId];
 }
 -(void)logInPassDicInfoFailedBL:(NSString *)error
 {
@@ -590,6 +601,20 @@ UIButton *buttonGetShortMessage; //手机号登录获取验证码按钮
     [UIView commitAnimations];
 }
 #pragma 验证码发送后弹出动画end
+
+-(void)connectToServer{
+    BmobUser *curUser = [BmobUser getCurrentUser];
+    self.sharedIM = [BmobIM sharedBmobIM];
+    self.userId = curUser.objectId;
+    self.token = @"";
+    if([self.sharedIM isConnected]){
+        [self.sharedIM disconnect];
+    }else{
+        [self.sharedIM setupBelongId:self.userId];
+        [self.sharedIM setupDeviceToken:self.token];
+        [self.sharedIM connect];
+    }
+}
 /*
 #pragma mark - Navigation
 

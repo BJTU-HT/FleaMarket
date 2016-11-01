@@ -161,7 +161,7 @@
 
 -(BmobIMConversation *)findConversation:(NSInteger)indexPath{
     NSArray *array = [[BmobIM sharedBmobIM] queryRecentConversation];
-    NSString *objectId = [self.muArrMyConcerned[indexPath] objectForKey:@"objectId"];
+    NSString *objectId = [self.muArrMyConcerned[indexPath] objectForKey:@"ownerObjectId"];
     if(array && array.count > 0){
         for(int i = 0; i < array.count; i++){
             BmobIMConversation *conversation = array[i];

@@ -94,11 +94,6 @@ BmobUser *user1;
 {
     UIBarButtonItem *leftBarItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back_btn"] style:UIBarButtonItemStylePlain target:self action:@selector(returnButtonClicked:)];
     self.navigationItem.leftBarButtonItem = leftBarItem;
-    
-//    self.navigationController.navigationBar.tintColor = orangColorPCH;
-//    UIBarButtonItem *leftBarItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"backArrow.png"] style:UIBarButtonItemStylePlain target: self action:@selector(:)];
-//    leftBarItem.tintColor = orangColorPCH;
-//    self.navigationItem.leftBarButtonItem = leftBarItem;
 }
 
 -(void)returnButtonClicked:(UIButton *)sender{
@@ -110,51 +105,28 @@ BmobUser *user1;
     [super didReceiveMemoryWarning];
 }
 
--(void)connectToServer{
-    [self.sharedIM setupBelongId:self.userId];
-    [self.sharedIM setupDeviceToken:self.token];
-    [self.sharedIM connect];
-}
-
 //注册键盘弹出关闭监听通知
 -(void)viewWillAppear:(BOOL)animated{
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardWillHiden:) name:UIKeyboardWillHideNotification object:nil];
-    user1 = [BmobUser getCurrentUser];
-    self.token = @"";
-    self.userId = user1.objectId;
-    if(user1){
-//        if([self.sharedIM isConnected]) {
-//        [self.sharedIM disconnect];
-//        }
-//        [self connectToServer];
-        if([self.sharedIM isConnected]){
-            NSLog(@"Server is Connected");
-        }else{
-            [self connectToServer];
-        }
-    }
+    
 }
 
 -(void)viewWillDisappear:(BOOL)animated{
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     [self.conversation updateLocalCache];
-//    if ([self.sharedIM isConnected]) {
-//        [self.sharedIM disconnect];
-//    }
 }
 
-#pragma @slelctor
-//-(void)addBtnClicked:(UIButton *)sender{
-//    float chatConViewHeight = 200.0;
-//    CGRect chatConViewFrame = CGRectMake(0, self.view.frame.size.height - chatConViewHeight, screenWidthPCH, chatConViewHeight);
-//    chatConView = [[ChatBottomControlVIew alloc] initWithFrame:chatConViewFrame];
-//    CGRect bottomViewFrame = bottomInitialFrame;
-//    bottomViewFrame.origin.y -= chatConViewHeight;
-//    bottomView.frame = bottomViewFrame;
-//    [self.view insertSubview:chatConView atIndex:1];
-//    [self.view endEditing:YES];
+//获取用户的聊天  20161027 10:58 add
+//-(void)loadRecentConversations{
+//    NSArray *array = [[BmobIM sharedBmobIM] queryRecentConversation];
+//    if (array && array.count > 0) {
+//        self.conversation = array;
+//        [self.tableViewChat reloadData];
+//    }
 //}
+
+#pragma @slelctor
 //键盘弹出
 -(void)keyBoardWillShow:(NSNotification *)noti{
     CGRect bottomViewCurrentFrame = bottomInitialFrame;
@@ -220,14 +192,12 @@ BmobUser *user1;
                     return NSOrderedSame;
                 }
             }];
-            
             [messageArr setArray:result];
             [tableViewChat reloadData];
         }else{
             self.finished = YES;
             [presentLayerPublicMethod new_notifyView:self.navigationController notifyContent:NO_MORE_HISTORY_RECORDS];
         }
-        
     }else{
         [presentLayerPublicMethod new_notifyView:self.navigationController notifyContent:NO_MORE_HISTORY_RECORDS];
     }
@@ -359,9 +329,6 @@ BmobUser *user1;
     }
     if([msg.msgType isEqualToString:kMessageTypeText]) {
         height = [self configCell:cell message:msg];
-//        height =   [tableView fd_heightForCellWithIdentifier:kTextCellID  configuration:^(TextChatTableViewCell *cell) {
-//            [self configCell:cell message:msg];
-        //}];
     }
 
     if (height < 85) {
@@ -428,6 +395,9 @@ BmobUser *user1;
         self.bottomView.textField.text = nil;
         
         __weak typeof(self)weakSelf = self;
+        if([self.sharedIM isConnected]){
+            NSLog(@"connected");
+        }
         [self.conversation sendMessage:message completion:^(BOOL isSuccessful, NSError *error) {
             NSLog(@"123");
             [weakSelf reloadLastRow];

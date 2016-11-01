@@ -126,7 +126,7 @@ float bottomViewHeightBD;
 
 -(BmobIMConversation *)findConversation{
     NSArray *array = [[BmobIM sharedBmobIM] queryRecentConversation];
-    self.bookUserObjectId = [mudic objectForKey:@"objectId"];
+    self.bookUserObjectId = [mudic objectForKey:@"ownerObjectId"];
     if(array && array.count > 0){
         for(int i = 0; i < array.count; i++){
             BmobIMConversation *conversation = array[i];
