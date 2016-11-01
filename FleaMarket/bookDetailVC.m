@@ -117,10 +117,14 @@ float bottomViewHeightBD;
         [self.navigationController pushViewController:logIn animated:NO];
         //self.hidesBottomBarWhenPushed = NO;
     }else{
-        DetailChatVC *privacyChat = [[DetailChatVC alloc] init];
-        self.hidesBottomBarWhenPushed = YES;
-        privacyChat.conversation = [self findConversation];
-        [self.navigationController pushViewController: privacyChat animated:NO];
+        if([[mudic objectForKey:@"ownerObjectId"] isEqualToString: currentUser.objectId]){
+            [presentLayerPublicMethod new_notifyView:self.navigationController notifyContent:@"您在自己的商品页面哦"];
+        }else{
+            DetailChatVC *privacyChat = [[DetailChatVC alloc] init];
+            self.hidesBottomBarWhenPushed = YES;
+            privacyChat.conversation = [self findConversation];
+            [self.navigationController pushViewController: privacyChat animated:NO];
+        }
     }
 }
 
