@@ -400,7 +400,7 @@
             startingLineNumber = "79"
             endingLineNumber = "79"
             landmarkName = "-updateUserMO:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -2636,7 +2636,7 @@
             startingLineNumber = "635"
             endingLineNumber = "635"
             landmarkName = "-tableView:cellForRowAtIndexPath:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -2652,7 +2652,7 @@
             startingLineNumber = "312"
             endingLineNumber = "312"
             landmarkName = "-chooseLocation:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -2668,7 +2668,7 @@
             startingLineNumber = "227"
             endingLineNumber = "227"
             landmarkName = "-publishSecondhand"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -2684,7 +2684,7 @@
             startingLineNumber = "118"
             endingLineNumber = "118"
             landmarkName = "-closePublish"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -2780,7 +2780,7 @@
             startingLineNumber = "482"
             endingLineNumber = "482"
             landmarkName = "-collectionView:cellForItemAtIndexPath:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -2796,7 +2796,7 @@
             startingLineNumber = "252"
             endingLineNumber = "252"
             landmarkName = "-publishSecondhand"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -2956,7 +2956,7 @@
             startingLineNumber = "289"
             endingLineNumber = "289"
             landmarkName = "-searchByKey:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -2972,7 +2972,7 @@
             startingLineNumber = "617"
             endingLineNumber = "617"
             landmarkName = "-sortTableView:didSelectRowAtIndexPath:withId:withName:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -2988,7 +2988,7 @@
             startingLineNumber = "286"
             endingLineNumber = "286"
             landmarkName = "-getFirstPageData"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -3004,7 +3004,7 @@
             startingLineNumber = "555"
             endingLineNumber = "555"
             landmarkName = "-tableView:cellForRowAtIndexPath:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -3020,7 +3020,7 @@
             startingLineNumber = "404"
             endingLineNumber = "404"
             landmarkName = "-loadNewDataAction"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -3036,7 +3036,7 @@
             startingLineNumber = "343"
             endingLineNumber = "343"
             landmarkName = "-refreshData"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -3052,7 +3052,7 @@
             startingLineNumber = "186"
             endingLineNumber = "186"
             landmarkName = "-OnFilterBtn:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -3068,7 +3068,7 @@
             startingLineNumber = "205"
             endingLineNumber = "205"
             landmarkName = "-OnFilterBtn:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -3116,7 +3116,7 @@
             startingLineNumber = "255"
             endingLineNumber = "255"
             landmarkName = "-searchBarShouldBeginEditing:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -3132,7 +3132,7 @@
             startingLineNumber = "249"
             endingLineNumber = "249"
             landmarkName = "-searchBarShouldBeginEditing:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -3148,7 +3148,7 @@
             startingLineNumber = "242"
             endingLineNumber = "242"
             landmarkName = "-searchSecondhandByKey:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -3164,7 +3164,7 @@
             startingLineNumber = "680"
             endingLineNumber = "680"
             landmarkName = "-findNewCommingSecondhandFailed:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -3180,7 +3180,7 @@
             startingLineNumber = "398"
             endingLineNumber = "398"
             landmarkName = "-loadNewDataAction"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -3196,7 +3196,7 @@
             startingLineNumber = "396"
             endingLineNumber = "396"
             landmarkName = "-loadNewDataAction"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -3228,7 +3228,7 @@
             startingLineNumber = "62"
             endingLineNumber = "62"
             landmarkName = "-viewWillAppear:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -3244,7 +3244,7 @@
             startingLineNumber = "344"
             endingLineNumber = "344"
             landmarkName = "-refreshData"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -3260,7 +3260,7 @@
             startingLineNumber = "495"
             endingLineNumber = "495"
             landmarkName = "-moreData"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -3276,7 +3276,7 @@
             startingLineNumber = "624"
             endingLineNumber = "624"
             landmarkName = "-findSecondhandFinished:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -3452,7 +3452,7 @@
             startingLineNumber = "390"
             endingLineNumber = "390"
             landmarkName = "-refreshData"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -3484,7 +3484,7 @@
             startingLineNumber = "663"
             endingLineNumber = "663"
             landmarkName = "-findNewCommingSecondhandFinished:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -3500,7 +3500,7 @@
             startingLineNumber = "384"
             endingLineNumber = "384"
             landmarkName = "-refreshData"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -3516,7 +3516,7 @@
             startingLineNumber = "437"
             endingLineNumber = "437"
             landmarkName = "-loadNewDataAction"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -3548,7 +3548,7 @@
             startingLineNumber = "57"
             endingLineNumber = "57"
             landmarkName = "-viewWillAppear:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -3564,7 +3564,7 @@
             startingLineNumber = "58"
             endingLineNumber = "58"
             landmarkName = "-viewWillAppear:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -3580,7 +3580,7 @@
             startingLineNumber = "72"
             endingLineNumber = "72"
             landmarkName = "-viewDidLoad"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -3596,7 +3596,7 @@
             startingLineNumber = "76"
             endingLineNumber = "76"
             landmarkName = "-viewDidLoad"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -3612,7 +3612,7 @@
             startingLineNumber = "78"
             endingLineNumber = "78"
             landmarkName = "-viewDidLoad"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -3628,7 +3628,7 @@
             startingLineNumber = "118"
             endingLineNumber = "118"
             landmarkName = "-initViews"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -3708,7 +3708,7 @@
             startingLineNumber = "111"
             endingLineNumber = "111"
             landmarkName = "-navigationShouldPopOnBackButton"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
