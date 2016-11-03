@@ -19,6 +19,7 @@
 -(void)passStrValue:(NSString *)value;
 //传递会话
 -(void)passConversationValue:(BmobIMConversation *)value;
+
 @end
 
 #endif /* passValueForVCDelegate_h */

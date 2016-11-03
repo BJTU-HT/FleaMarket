@@ -348,7 +348,8 @@
         // 发布成功提示
         self.hud = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
         self.hud.mode = MBProgressHUDModeCustomView;
-        UIImage *image = [[UIImage imageNamed:@"Checkmark"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+//20161103 15:22 cut
+//        UIImage *image = [[UIImage imageNamed:@"Checkmark"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
         //self.hud.customView = [[UIImageView alloc] initWithImage:image];
         // Looks a bit nicer if we make it square.
         self.hud.square = YES;

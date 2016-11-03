@@ -393,7 +393,6 @@ BmobUser *user1;
         [messageArr addObject:message];
         [self scrollToBottom];
         self.bottomView.textField.text = nil;
-        
         __weak typeof(self)weakSelf = self;
         if([self.sharedIM isConnected]){
             NSLog(@"connected");

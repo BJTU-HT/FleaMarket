@@ -392,7 +392,7 @@
 // 根据商品分类查询时的下拉刷新
 - (void)loadNewDataAction
 {
-    __weak SecondhandVC *weakSelf = self;
+//    __weak SecondhandVC *weakSelf = self;
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         /*
         

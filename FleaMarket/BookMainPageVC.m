@@ -326,9 +326,8 @@ NSString *kTextCellID2 = @"cell2";
         dataDic *data = [[dataDic alloc] init];
         NSMutableDictionary *mudicTemp = [[NSMutableDictionary alloc] init];
         mudicTemp = [data readDic];
-        NSInteger strLength = [strSchool length] - 4;
-        NSString *strCity = [strSchool substringToIndex:strLength];
-        NSArray *arr = [mudicTemp objectForKey:strCity];
+//        NSInteger strLength = [strSchool length] - 4;
+//        NSString *strCity = [strSchool substringToIndex:strLength];
         //[mudic setObject: arr forKey:@"university"];
         //[mudic setObject:@"schoolArr" forKey:@"schoolTag"];
     }else{

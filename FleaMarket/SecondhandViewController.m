@@ -367,7 +367,6 @@
         if (self.keyString.length > 0) {
             [filterDic setObject:self.keyString forKey:@"product_name"];
         }
-        
         [weakSelf.bl findSecondhand:filterDic];
     });
 }
