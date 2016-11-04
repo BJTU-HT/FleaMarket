@@ -187,6 +187,7 @@
 		E90D38D51D5EB81600910833 /* PushConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = E90D38D41D5EB81600910833 /* PushConfig.plist */; };
 		E90D38DD1D60519100910833 /* RecentCommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E90D38DC1D60519100910833 /* RecentCommentViewController.m */; };
 		E912D89B1D4264220057453A /* UserInfoSingleton.m in Sources */ = {isa = PBXBuildFile; fileRef = E912D89A1D4264220057453A /* UserInfoSingleton.m */; };
+		E91514F81DCC1AD300F33F4F /* PublishTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E91514F71DCC1AD300F33F4F /* PublishTestViewController.m */; };
 		E92F4C9B1D41EE4600E1DD92 /* UserMO+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = E92F4C981D41EE4600E1DD92 /* UserMO+CoreDataProperties.m */; };
 		E92F4C9C1D41EE4600E1DD92 /* UserMO.m in Sources */ = {isa = PBXBuildFile; fileRef = E92F4C9A1D41EE4600E1DD92 /* UserMO.m */; };
 		E939B68E1DB9E64F0002EA95 /* JMessage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E939B68D1DB9E64F0002EA95 /* JMessage.framework */; };
@@ -678,6 +679,8 @@
 		E90D38DC1D60519100910833 /* RecentCommentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecentCommentViewController.m; sourceTree = "<group>"; };
 		E912D8991D4264220057453A /* UserInfoSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfoSingleton.h; sourceTree = "<group>"; };
 		E912D89A1D4264220057453A /* UserInfoSingleton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfoSingleton.m; sourceTree = "<group>"; };
+		E91514F61DCC1AD300F33F4F /* PublishTestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PublishTestViewController.h; sourceTree = "<group>"; };
+		E91514F71DCC1AD300F33F4F /* PublishTestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PublishTestViewController.m; sourceTree = "<group>"; };
 		E92F4C971D41EE4600E1DD92 /* UserMO+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UserMO+CoreDataProperties.h"; sourceTree = "<group>"; };
 		E92F4C981D41EE4600E1DD92 /* UserMO+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UserMO+CoreDataProperties.m"; sourceTree = "<group>"; };
 		E92F4C991D41EE4600E1DD92 /* UserMO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserMO.h; sourceTree = "<group>"; };
@@ -1401,6 +1404,8 @@
 				E9FA18381D9AA71300366BCF /* ChooseLocationView.m */,
 				E9FA18391D9AA71300366BCF /* UploadImageModel.h */,
 				E9FA183A1D9AA71300366BCF /* UploadImageModel.m */,
+				E91514F61DCC1AD300F33F4F /* PublishTestViewController.h */,
+				E91514F71DCC1AD300F33F4F /* PublishTestViewController.m */,
 			);
 			name = PublishVC;
 			sourceTree = "<group>";
@@ -2788,6 +2793,7 @@
 				962E813F1CE05E97006E567B /* ContactsDAO.m in Sources */,
 				962E81441CE06C23006E567B /* ContactsBL.m in Sources */,
 				9666EE0D1CE9DFBA00F9397E /* FriendRequestListVC.m in Sources */,
+				E91514F81DCC1AD300F33F4F /* PublishTestViewController.m in Sources */,
 				963D85D91CE0259500ED37B4 /* contactsVC.m in Sources */,
 				E9FA18431D9AA7E900366BCF /* ItemCategoryViewController.m in Sources */,
 				E972073C1CBE815900C3D5FC /* main.m in Sources */,

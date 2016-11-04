@@ -24,7 +24,7 @@ static UserInfoSingleton *sharedManager = nil;
     static dispatch_once_t once;
     dispatch_once(&once, ^{
         sharedManager = [[self alloc] init];
-        sharedManager.appDelegate = [[UIApplication sharedApplication] delegate];
+        sharedManager.appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
         [sharedManager searchUserInfo];
     });
     
@@ -46,6 +46,25 @@ static UserInfoSingleton *sharedManager = nil;
     if (results.count == 1) {
         self.userMO = results[0];
     }
+}
+
+- (void)logOutCurrentUser
+{
+    NSManagedObjectContext *moc = self.appDelegate.managedObjectContext;
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"User"];
+    NSError *error = nil;
+    NSArray *results = [moc executeFetchRequest:request error:&error];
+    if (!results) {
+        NSLog(@"Error fetching User object: %@\n%@", [error localizedDescription], [error userInfo]);
+        abort();
+    }
+    
+    // 删除已有数据
+    for (UserMO *userMO in results) {
+        [moc deleteObject:userMO];
+    }
+    
+    self.userMO = nil;
 }
 
 - (void)updateUserMO:(NSDictionary *)userInfo

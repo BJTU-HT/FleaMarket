@@ -7,12 +7,18 @@
 //
 
 #import <Photos/Photos.h>
+#import <AVFoundation/AVCaptureDevice.h>
+#import <AVFoundation/AVMediaFormat.h>
+#import <AssetsLibrary/AssetsLibrary.h>
+#import <CoreLocation/CoreLocation.h>
 #import "publishVC.h"
 #import "RXRotateButtonOverlayView.h"
 #import "CollectionDataModel.h"
 #import "ImagePickerVC.h"
 #import "PublishSecondhandVC.h"
 #import "UploadImageModel.h"
+#import "UserInfoSingleton.h"
+#import "logInViewController.h"
 
 @interface publishVC () <RXRotateButtonOverlayViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 @property (nonatomic, strong) RXRotateButtonOverlayView *overlayView;
@@ -30,12 +36,25 @@
     [self.overlayView show];
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    UserMO *userMO = [UserInfoSingleton sharedManager].userMO;
+    if (userMO == nil) {
+        logInViewController *loginVC = [[logInViewController alloc] init];
+        [self presentViewController:loginVC animated:YES completion:^{
+            //<#code#>
+        }];
+    }
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     UINavigationItem *navigationItem = [self navigationItem];
     navigationItem.title = @"发布";
-    [self getPhotoAssetCollections];
+    
+    [self callPhoto];
+    [self callCamera];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -43,36 +62,116 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
+#pragma mark ---------------- 检查相册和相机是否可用 ------------------
+/**
+ *  调用系统相机
  */
+- (void)callCamera
+{
+    //判断是否已授权
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0) {
+        AVAuthorizationStatus authStatus = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo];
+        if (authStatus == AVAuthorizationStatusDenied||authStatus == AVAuthorizationStatusRestricted) {
+            UIAlertController *ac = [UIAlertController alertControllerWithTitle:@"提示" message:@"请前往设置->隐私->相机授权应用拍照权限" preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction *aa = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil];
+            [ac addAction:aa];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self presentViewController:ac animated:YES completion:nil];
+            });
+        }
+    }
+    // 判断是否可以打开相机
+    /*
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+        UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+        picker.delegate = self;
+        picker.allowsEditing = YES;
+        picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+        [self presentViewController:picker animated:YES completion:nil];
+    } else {
+        UIAlertController *ac = [UIAlertController alertControllerWithTitle:@"提示" message:@"你没有相机" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *aa = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil];
+        [ac addAction:aa];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self presentViewController:ac animated:YES completion:nil];
+        });
+    }
+     */
+}
+/**
+ *  调用系统相册
+ */
+- (void)callPhoto
+{
+    //判断是否已授权
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0) {
+        PHAuthorizationStatus authStatus = [PHPhotoLibrary authorizationStatus];
+        if (authStatus == AVAuthorizationStatusDenied) {
+            UIAlertController *ac = [UIAlertController alertControllerWithTitle:@"提示" message:@"请前往设置->隐私->相册授权应用访问相册权限" preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction *aa = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil];
+            [ac addAction:aa];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self presentViewController:ac animated:YES completion:nil];
+            });
+        }
+        
+    }
+    
+    /*
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {
+        UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+        picker.delegate = self;
+        picker.allowsEditing = YES;
+        picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+        //self.isReload = NO;
+        [self presentViewController:picker animated:YES completion:nil];
+    } else {
+        UIAlertController *ac = [UIAlertController alertControllerWithTitle:@"提示" message:@"没有相册" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *aa = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil];
+        [ac addAction:aa];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self presentViewController:ac animated:YES completion:nil];
+        });
+    }
+     */
+}
+
+
 
 #pragma mark ---------------- private ----------------------
 
 // 获取所有的相册
 - (void)getPhotoAssetCollections
 {
-    // 获得相机胶卷
-    PHAssetCollection *assetCollection = [PHAssetCollection fetchAssetCollectionsWithType:PHAssetCollectionTypeSmartAlbum subtype:PHAssetCollectionSubtypeSmartAlbumUserLibrary options:nil].lastObject;
-    [self.tableData addObject:assetCollection];
-    
-    // 遍历所有的自定义相簿
-    PHFetchResult *assetCollections = [PHAssetCollection fetchAssetCollectionsWithType:PHAssetCollectionTypeAlbum subtype:PHAssetCollectionSubtypeAlbumRegular options:nil];
-    
-    for (PHAssetCollection *assetCollection in assetCollections) {
-        [self.tableData addObject:assetCollection];
+    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {
+        picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+        picker.mediaTypes = [UIImagePickerController availableMediaTypesForSourceType:picker.sourceType];
     }
-
-    //[self enumerateAssetsInAssetCollection:assetCollection2 original:YES];
     
-    if ([self.tableData count]) {
-        [self getCollectionData:0];
+    PHAuthorizationStatus authStatus = [PHPhotoLibrary authorizationStatus];
+    if (authStatus != PHAuthorizationStatusAuthorized) {
+        UIAlertController *ac = [UIAlertController alertControllerWithTitle:@"提示" message:@"请前往设置->隐私->相册授权应用访问相册权限" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *aa = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil];
+        [ac addAction:aa];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self presentViewController:ac animated:YES completion:nil];
+        });
+    } else {
+        // 获得相机胶卷
+        PHAssetCollection *assetCollection = [PHAssetCollection fetchAssetCollectionsWithType:PHAssetCollectionTypeSmartAlbum subtype:PHAssetCollectionSubtypeSmartAlbumUserLibrary options:nil].lastObject;
+        [self.tableData addObject:assetCollection];
+        
+        // 遍历所有的自定义相簿
+        PHFetchResult *assetCollections = [PHAssetCollection fetchAssetCollectionsWithType:PHAssetCollectionTypeAlbum subtype:PHAssetCollectionSubtypeAlbumRegular options:nil];
+        
+        for (PHAssetCollection *assetCollection in assetCollections) {
+            [self.tableData addObject:assetCollection];
+        }
+        
+        if ([self.tableData count]) {
+            [self getCollectionData:0];
+        }
     }
 }
 
@@ -110,11 +209,6 @@
         }
     }];
     
-    /*
-    PHCachingImageManager *cachingManager = [[PHCachingImageManager alloc] init];
-    [cachingManager startCachingImagesForAssets:assets targetSize:PHImageManagerMaximumSize contentMode:PHImageContentModeAspectFit options:nil];
-     */
-    
     for (PHAsset *asset in assets) {
         CollectionDataModel *dataModel = [[CollectionDataModel alloc] init];
         dataModel.asset = asset;
@@ -134,8 +228,6 @@
         // 0 就是选择相机拍照
         if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
             imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
-            //PublishDetailVC *publishDetailVC = [[PublishDetailVC alloc] init];
-            //PublishSecondhandVC *publishDetailVC = [[PublishSecondhandVC alloc] init];
             imagePicker.delegate = self;
             imagePicker.showsCameraControls = YES;
             
@@ -145,6 +237,7 @@
         
     } else {
         // 1 就是从相册中选择
+        [self getPhotoAssetCollections];
         
         for (CollectionDataModel *model in _collectionData) {
             model.selected = NO;
@@ -157,7 +250,6 @@
         imgPickVC.hidesBottomBarWhenPushed = YES;     // 隐藏Bottom的Bar
         [self.navigationController pushViewController:imgPickVC animated:YES];
     }
-    
 }
 
 #pragma mark --------------- UIImagePickerControllerDelegate ---------------
@@ -187,9 +279,6 @@
         }];
     }
 }
-
-
-#pragma mark ---------------- action ----------------
 
 #pragma mark ---------------- getter & setter -----------------------
 - (RXRotateButtonOverlayView *)overlayView
