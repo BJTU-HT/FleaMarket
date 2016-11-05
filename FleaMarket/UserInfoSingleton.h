@@ -21,7 +21,7 @@
 /**
  *  用户退出，删除用户信息
  **/
-- (void)logOutCurrentUser;
+- (void)logoutCurrentUser;
 
 + (UserInfoSingleton *)sharedManager;
 

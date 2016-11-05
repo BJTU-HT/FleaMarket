@@ -11,6 +11,7 @@
 #import <AVFoundation/AVMediaFormat.h>
 #import <AssetsLibrary/AssetsLibrary.h>
 #import <CoreLocation/CoreLocation.h>
+#import <BmobSDK/BmobUser.h>
 #import "publishVC.h"
 #import "RXRotateButtonOverlayView.h"
 #import "CollectionDataModel.h"
@@ -34,16 +35,17 @@
     self.navigationController.navigationBarHidden = NO;
     [self.view addSubview:self.overlayView];
     [self.overlayView show];
+    
+    // 首次打开相册，触发相册授权，trick
+    [PHAssetCollection fetchAssetCollectionsWithType:PHAssetCollectionTypeSmartAlbum subtype:PHAssetCollectionSubtypeSmartAlbumUserLibrary options:nil];
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
     UserMO *userMO = [UserInfoSingleton sharedManager].userMO;
-    if (userMO == nil) {
-        logInViewController *loginVC = [[logInViewController alloc] init];
-        [self presentViewController:loginVC animated:YES completion:^{
-            //<#code#>
-        }];
+    if(userMO == nil){
+        logInViewController *logIn = [[logInViewController alloc] init];
+        [self.navigationController pushViewController:logIn animated:NO];
     }
 }
 
@@ -52,9 +54,6 @@
     // Do any additional setup after loading the view.
     UINavigationItem *navigationItem = [self navigationItem];
     navigationItem.title = @"发布";
-    
-    [self callPhoto];
-    [self callCamera];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -80,24 +79,8 @@
             });
         }
     }
-    // 判断是否可以打开相机
-    /*
-    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
-        UIImagePickerController *picker = [[UIImagePickerController alloc] init];
-        picker.delegate = self;
-        picker.allowsEditing = YES;
-        picker.sourceType = UIImagePickerControllerSourceTypeCamera;
-        [self presentViewController:picker animated:YES completion:nil];
-    } else {
-        UIAlertController *ac = [UIAlertController alertControllerWithTitle:@"提示" message:@"你没有相机" preferredStyle:UIAlertControllerStyleAlert];
-        UIAlertAction *aa = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil];
-        [ac addAction:aa];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self presentViewController:ac animated:YES completion:nil];
-        });
-    }
-     */
 }
+
 /**
  *  调用系统相册
  */
@@ -116,39 +99,13 @@
         }
         
     }
-    
-    /*
-    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {
-        UIImagePickerController *picker = [[UIImagePickerController alloc] init];
-        picker.delegate = self;
-        picker.allowsEditing = YES;
-        picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-        //self.isReload = NO;
-        [self presentViewController:picker animated:YES completion:nil];
-    } else {
-        UIAlertController *ac = [UIAlertController alertControllerWithTitle:@"提示" message:@"没有相册" preferredStyle:UIAlertControllerStyleAlert];
-        UIAlertAction *aa = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil];
-        [ac addAction:aa];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self presentViewController:ac animated:YES completion:nil];
-        });
-    }
-     */
 }
-
-
 
 #pragma mark ---------------- private ----------------------
 
 // 获取所有的相册
 - (void)getPhotoAssetCollections
 {
-    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
-    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {
-        picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-        picker.mediaTypes = [UIImagePickerController availableMediaTypesForSourceType:picker.sourceType];
-    }
-    
     PHAuthorizationStatus authStatus = [PHPhotoLibrary authorizationStatus];
     if (authStatus != PHAuthorizationStatusAuthorized) {
         UIAlertController *ac = [UIAlertController alertControllerWithTitle:@"提示" message:@"请前往设置->隐私->相册授权应用访问相册权限" preferredStyle:UIAlertControllerStyleAlert];

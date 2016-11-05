@@ -303,7 +303,6 @@
 - (void)commentProduct:(id)selector
 {
     SecondhandMessageVO *commentVO = [[SecondhandMessageVO alloc] init];
-    
     UserMO *userMO = [UserInfoSingleton sharedManager].userMO;
     if (userMO == nil) {
         UIAlertController *ac = [UIAlertController alertControllerWithTitle:@"提示" message:@"评论必须登陆" preferredStyle:UIAlertControllerStyleAlert];
@@ -319,9 +318,7 @@
     commentVO.productID = self.model.productID;
     commentVO.toUserID = self.model.userID;
     commentVO.toUserName = self.model.userName;
-    
     self.commentVO = commentVO;
-    
     [self.commentInputField becomeFirstResponder];
 }
 

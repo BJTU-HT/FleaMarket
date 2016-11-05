@@ -48,7 +48,7 @@ static UserInfoSingleton *sharedManager = nil;
     }
 }
 
-- (void)logOutCurrentUser
+- (void)logoutCurrentUser
 {
     NSManagedObjectContext *moc = self.appDelegate.managedObjectContext;
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"User"];
