@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "passValueForVCDelegate.h"
 #import "LogInAndRegistLogicDelegate.h"
+#import <BmobIMSDK/BmobIMSDK.h>
 
 @interface logInViewController : UIViewController<UITextFieldDelegate, UIActionSheetDelegate, UIAlertViewDelegate, LogInAndRegistLogicDelegate, passValueForVCDelegate>
 
@@ -21,4 +22,7 @@
 @property (nonatomic, retain) UIButton *accountButton;
 @property (nonatomic, retain) UIButton *phoneNumberButton;
 @property (nonatomic, strong) NSString *currentUserName;
+@property (strong, nonatomic) BmobIM *sharedIM;
+@property (copy  , nonatomic) NSString *userId;
+@property (copy  , nonatomic) NSString *token;
 @end

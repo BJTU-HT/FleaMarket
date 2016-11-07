@@ -268,7 +268,6 @@
 
 
 -(void)didGetOfflineMessagesWithIM:(BmobIM *)im{
-    
     NSArray *objectIds = [self.sharedIM allConversationUsersIds];
     if (objectIds && objectIds.count > 0) {
         [UserService loadUsersWithUserIds:objectIds completion:^(NSArray *array, NSError *error) {
@@ -278,7 +277,6 @@
             }
         }];
     }
-    
 }
 
 #pragma BmobIMDelegate 代理方法 end

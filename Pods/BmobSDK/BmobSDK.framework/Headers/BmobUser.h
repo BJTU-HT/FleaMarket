@@ -35,6 +35,11 @@
  */
 @property (copy, nonatomic) NSString *mobilePhoneNumber;
 
+/**
+ *  头像 20161024 add
+ */
+@property(copy, nonatomic) NSString *avatar;
+
 #pragma mark 用户表查询
 /**
  *  查询用户表

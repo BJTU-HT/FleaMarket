@@ -85,6 +85,7 @@ NSString *kTextCellID2 = @"cell2";
 
 -(void)viewWillAppear:(BOOL)animated{
     self.navigationController.navigationBarHidden = NO;
+    self.hidesBottomBarWhenPushed = YES;
     //添加刷新
 //    __weak BookMainPageVC *weakSelf = self;
 //    self.refresh = [[WJRefresh alloc] init];
@@ -189,6 +190,14 @@ NSString *kTextCellID2 = @"cell2";
     UIBarButtonItem *rightBarItem = [[UIBarButtonItem alloc] initWithTitle:@"发布" style:UIBarButtonItemStylePlain target:self action:@selector(saveButtonClicked:)];
     rightBarItem.tintColor = orangColorPCH;
     self.navigationItem.rightBarButtonItem = rightBarItem;
+    
+    UIBarButtonItem *leftBarItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back_btn"] style:UIBarButtonItemStylePlain target:self action:@selector(returnButtonClicked:)];
+    self.navigationItem.leftBarButtonItem = leftBarItem;
+    leftBarItem.tintColor = orangColorPCH;
+}
+
+-(void)returnButtonClicked:(UIButton *)sender{
+    [self.navigationController popViewControllerAnimated:NO];
 }
 
 //navigationcontroller add searchBar
@@ -205,10 +214,18 @@ NSString *kTextCellID2 = @"cell2";
 
 //点击发布按钮页面跳转
 -(void)saveButtonClicked:(UIButton *)sender{
-    self.hidesBottomBarWhenPushed = YES;
-    BookPublishVC *bookPub = [[BookPublishVC alloc] init];
-    [self.navigationController pushViewController:bookPub animated:NO];
-    self.hidesBottomBarWhenPushed = NO;
+    BmobUser *curUser = [BmobUser getCurrentUser];
+    if(!curUser){
+        logInViewController *logIn = [[logInViewController alloc] init];
+        [self.navigationController pushViewController:logIn animated:NO];
+    }else{
+        self.hidesBottomBarWhenPushed = YES;
+        BookPublishVC *bookPub = [[BookPublishVC alloc] init];
+        [self.navigationController pushViewController:bookPub animated:NO];
+        self.hidesBottomBarWhenPushed = NO;
+    }
+
+    
 }
 
 //click return image
@@ -318,11 +335,10 @@ NSString *kTextCellID2 = @"cell2";
         dataDic *data = [[dataDic alloc] init];
         NSMutableDictionary *mudicTemp = [[NSMutableDictionary alloc] init];
         mudicTemp = [data readDic];
-        NSInteger strLength = [strSchool length] - 4;
-        NSString *strCity = [strSchool substringToIndex:strLength];
-        NSArray *arr = [mudicTemp objectForKey:strCity];
-        [mudic setObject: arr forKey:@"university"];
-        [mudic setObject:@"schoolArr" forKey:@"schoolTag"];
+//        NSInteger strLength = [strSchool length] - 4;
+//        NSString *strCity = [strSchool substringToIndex:strLength];
+        //[mudic setObject: arr forKey:@"university"];
+        //[mudic setObject:@"schoolArr" forKey:@"schoolTag"];
     }else{
         [mudic setObject: strSchool forKey:@"university"];
         [mudic setObject:@"schoolAlone" forKey:@"schoolTag"];

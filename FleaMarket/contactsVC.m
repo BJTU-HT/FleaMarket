@@ -35,11 +35,14 @@ BmobUser *userObjID;
     tableViewContacts = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, screenWidthPCH, screenHeightPCH) style:UITableViewStylePlain];
     tableViewContacts.delegate = self;
     tableViewContacts.dataSource = self;
-    [self addSearchBar];
+    //20161101 16:35 add
+    //[self addSearchBar];
     [self.view addSubview:tableViewContacts];
     self.title = @"联系人";
     //绘制导航栏
     [self contactDrawNav];
+    //从服务器加载好友列表
+    [self requestDataFromServer];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -49,7 +52,7 @@ BmobUser *userObjID;
 
 -(void)viewWillAppear:(BOOL)animated{
     //从服务器加载好友列表
-    [self requestDataFromServer];
+    //[self requestDataFromServer];
 }
 
 -(void)addSearchBar{
@@ -87,9 +90,10 @@ BmobUser *userObjID;
 
 -(void)leftBarItemClicked:(UIButton *)sender{
     [self.navigationController popViewControllerAnimated:YES];
-    if([self.sharedIM isConnected]) {
-        [self.sharedIM disconnect];
-    }
+    //20161101 cut
+//    if([self.sharedIM isConnected]) {
+//        [self.sharedIM disconnect];
+//    }
 }
 #pragma @selector 方法实现 end-------------------
 

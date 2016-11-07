@@ -19,7 +19,7 @@
 
 static UserInfoSingleton *sharedManager = nil;
 
-+ (UserInfoSingleton *)sharedManager
++(UserInfoSingleton *)sharedManager
 {
     static dispatch_once_t once;
     dispatch_once(&once, ^{
@@ -27,7 +27,6 @@ static UserInfoSingleton *sharedManager = nil;
         sharedManager.appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
         [sharedManager searchUserInfo];
     });
-    
     return sharedManager;
 }
 

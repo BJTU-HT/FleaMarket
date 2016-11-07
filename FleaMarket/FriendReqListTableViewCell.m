@@ -29,12 +29,15 @@
     
     nickNameLabel = [[UILabel alloc] init];
     [self.contentView addSubview: nickNameLabel];
+    nickNameLabel.font = [UIFont systemFontOfSize:12.0f];
     
     contentLabel = [[UILabel alloc] init];
     [self.contentView addSubview:contentLabel];
+    contentLabel.font = [UIFont systemFontOfSize:12.0f];
     
     agreeBtn = [[UIButton alloc] init];
     [self.contentView addSubview:agreeBtn];
+    agreeBtn.titleLabel.font = [UIFont systemFontOfSize:12.0f];
 }
 
 -(void)setStatus:(SysMessage *)userInfo{
@@ -46,7 +49,7 @@
     
     CGRect imageViewHeadFrame =  CGRectMake(image_x_offset, image_y_offset, image_width, image_Height);
     imageViewHead.frame = imageViewHeadFrame;
-    [imageViewHead sd_setImageWithURL:nil placeholderImage:[UIImage imageNamed:@"icon_default_face@2x"]];
+    [imageViewHead sd_setImageWithURL: nil placeholderImage:[UIImage imageNamed:@"icon_default_face@2x"]];
     
     float label_x_offset = 2 * image_x_offset + image_width;
     float label_width = 0.6 *screenWidthPCH;

@@ -79,7 +79,7 @@ UIButton *buttonClickTemp;
         dispatch_async(dispatch_get_main_queue(), ^{
             [buttonClickTemp setTitle:@"已同意" forState:UIControlStateNormal];
             [buttonClickTemp setTintColor:[UIColor grayColor]];
-            [buttonClickTemp setBackgroundColor:[UIColor greenColor]];
+            [buttonClickTemp setBackgroundColor:orangColorPCH];
             buttonClickTemp.userInteractionEnabled = NO;
         });
         

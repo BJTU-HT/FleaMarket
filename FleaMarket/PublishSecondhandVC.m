@@ -348,9 +348,6 @@
         // 发布成功提示
         self.hud = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
         self.hud.mode = MBProgressHUDModeCustomView;
-        //UIImage *image = [[UIImage imageNamed:@"Checkmark"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-        //self.hud.customView = [[UIImageView alloc] initWithImage:image];
-        // Looks a bit nicer if we make it square.
         self.hud.square = YES;
         self.hud.label.text = NSLocalizedString(@"发布失败", @"HUD done title");
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
