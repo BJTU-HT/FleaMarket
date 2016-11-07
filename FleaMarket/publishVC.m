@@ -13,6 +13,8 @@
 #import "ImagePickerVC.h"
 #import "PublishSecondhandVC.h"
 #import "UploadImageModel.h"
+#import "logInViewController.h" //20161107 10:01 add by hou
+#import <BmobSDK/BmobUser.h> //20161107 10:01 add by hou
 
 @interface publishVC () <RXRotateButtonOverlayViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 @property (nonatomic, strong) RXRotateButtonOverlayView *overlayView;
@@ -28,6 +30,12 @@
     self.navigationController.navigationBarHidden = NO;
     [self.view addSubview:self.overlayView];
     [self.overlayView show];
+    //2016 1107 10:02 add by hou
+    BmobUser *curUser = [BmobUser getCurrentUser];
+    if(!curUser){
+        logInViewController *logIn = [[logInViewController alloc] init];
+        [self.navigationController pushViewController:logIn animated:NO];
+    }
 }
 
 - (void)viewDidLoad {

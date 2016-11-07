@@ -85,6 +85,7 @@ NSString *kTextCellID2 = @"cell2";
 
 -(void)viewWillAppear:(BOOL)animated{
     self.navigationController.navigationBarHidden = NO;
+    self.hidesBottomBarWhenPushed = YES;
     //添加刷新
 //    __weak BookMainPageVC *weakSelf = self;
 //    self.refresh = [[WJRefresh alloc] init];
@@ -213,10 +214,18 @@ NSString *kTextCellID2 = @"cell2";
 
 //点击发布按钮页面跳转
 -(void)saveButtonClicked:(UIButton *)sender{
-    self.hidesBottomBarWhenPushed = YES;
-    BookPublishVC *bookPub = [[BookPublishVC alloc] init];
-    [self.navigationController pushViewController:bookPub animated:NO];
-    self.hidesBottomBarWhenPushed = NO;
+    BmobUser *curUser = [BmobUser getCurrentUser];
+    if(!curUser){
+        logInViewController *logIn = [[logInViewController alloc] init];
+        [self.navigationController pushViewController:logIn animated:NO];
+    }else{
+        self.hidesBottomBarWhenPushed = YES;
+        BookPublishVC *bookPub = [[BookPublishVC alloc] init];
+        [self.navigationController pushViewController:bookPub animated:NO];
+        self.hidesBottomBarWhenPushed = NO;
+    }
+
+    
 }
 
 //click return image
