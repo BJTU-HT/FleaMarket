@@ -36,7 +36,7 @@
     [self.view addSubview:self.overlayView];
     [self.overlayView show];
     
-    // 首次打开相册，触发相册授权，trick，111
+    // 首次打开相册，触发相册授权，trick，111123
     [PHAssetCollection fetchAssetCollectionsWithType:PHAssetCollectionTypeSmartAlbum subtype:PHAssetCollectionSubtypeSmartAlbumUserLibrary options:nil];
 }
 
