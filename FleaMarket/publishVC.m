@@ -42,22 +42,26 @@
 
 - (void)viewDidAppear:(BOOL)animated
 {
-    /*
     UserMO *userMO = [UserInfoSingleton sharedManager].userMO;
     if(userMO == nil){
+        logInViewController *logIn = [[logInViewController alloc] init];
+        [self.navigationController pushViewController:logIn animated:NO];
+        /*
         UIAlertController *ac = [UIAlertController alertControllerWithTitle:@"提示" message:@"评论必须登陆" preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:nil];
         [ac addAction:okAction];
         [self presentViewController:ac animated:YES completion:nil];
+         */
     }
-     */
 
     //2016 1107 10:02 add by hou
+    /*
     BmobUser *curUser = [BmobUser getCurrentUser];
     if(!curUser){
         logInViewController *logIn = [[logInViewController alloc] init];
         [self.navigationController pushViewController:logIn animated:NO];
     }
+     */
 }
 
 - (void)viewDidLoad {
