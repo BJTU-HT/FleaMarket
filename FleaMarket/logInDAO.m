@@ -113,10 +113,6 @@ UIImageView *backgroundImageViewLogIn;
  *************************************************************/
 -(void)requestDataFromServerOrPlist:(NSString *)plistName
 {
-//    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-//    NSString *curUser = [userDefaults objectForKey:@"userName"];
-//    CreateAndSearchPlist *readPlist = [[CreateAndSearchPlist alloc] init];
-//    NSString *userID = [readPlist findUserNameFromPlist:plistName curUser:curUser];
     NSMutableDictionary *userInfo = [[NSMutableDictionary alloc] init];
     BmobQuery *query = [BmobUser query];
     BmobUser *user = [BmobUser getCurrentUser];
@@ -156,14 +152,11 @@ UIImageView *backgroundImageViewLogIn;
             if(nil != [obj objectForKey:@"objectId"])
                 [userInfo setObject:[obj objectForKey:@"objectId"] forKey:@"userID"];
             
-            //                CreateAndSearchPlist *plistOperation = [[CreateAndSearchPlist alloc] init];
-            //                [plistOperation writeToPlist:@"userInfo.plist" writeContent:userInfo];
             //回传用户信息，除图片外的信息
             if(userInfo != nil){
                 // by 仝磊鸣，登陆成功后检查coreData中user是否有当前用户数据，如果没有，则插入。 2016-7-22
                 UserInfoSingleton *userInfoSingleton = [UserInfoSingleton sharedManager];
                 [userInfoSingleton updateUserMO:userInfo];
-                
                 [self.delegate userInfoTransmitBackFinishedDAO:userInfo];
             }else{
                 [self.delegate userInfoTransmitBackFailedDAO:@"用户信息无内容"];
