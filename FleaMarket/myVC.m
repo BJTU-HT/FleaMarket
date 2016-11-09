@@ -63,6 +63,21 @@ UIImageView *headImage;
 //    [self addButtonToNavigationBar];
 }
 
+-(void)passValue:(int)value
+{
+    NSString *temp = [NSString stringWithFormat:@"%d", value];
+    userNameReceiveDelegate = temp;
+    logInStatus = 1;
+}
+
+#pragma ------------实现passValueForVC 代理方法 接受从登录页面登录成功后传值-------------
+-(void)passValueForVC:(NSDictionary *)dic
+{
+    //用户信息字典
+    recDicFromLogIn = dic;
+}
+#pragma ------------实现passValueForVC 代理方法 接受从登录页面登录成功后传值 end-------------
+
 -(void)cacheAndDownloadPersonalInfo
 {
     LogInBL *logIn = [[LogInBL alloc]init];
@@ -135,13 +150,6 @@ UIImageView *headImage;
 -(void)rightBtnClicked:(UIButton *)sender
 {
     
-}
-
--(void)passValue:(int)value
-{
-    NSString *temp = [NSString stringWithFormat:@"%d", value];
-    userNameReceiveDelegate = temp;
-    logInStatus = 1;
 }
 
 -(void)didReceiveMemoryWarning {
@@ -481,19 +489,10 @@ UIImageView *headImage;
     self.hidesBottomBarWhenPushed = YES;
     ModifyPersonalPageVC *modifyPersonalPage = [[ModifyPersonalPageVC alloc] init];
     [self.navigationController pushViewController:modifyPersonalPage animated:NO];
-//    UIBarButtonItem *barItem = [[UIBarButtonItem alloc] init];
-//    barItem.title = @"";
-//    self.navigationItem.backBarButtonItem = barItem;
-//    //    [self.navigationController.navigationBar setTintColor:[UIColor yellowColor]];
-//    self.navigationController.navigationBar.alpha = 0.0;
     self.hidesBottomBarWhenPushed = NO;
 }
 -(void)personalPageClicked:(UIButton *)sender
 {
-//    self.hidesBottomBarWhenPushed = YES;
-//    personalPageViewController *personalPage = [[personalPageViewController alloc] init];
-//    [self.navigationController pushViewController:personalPage animated:NO];
-//    self.hidesBottomBarWhenPushed = NO;
     //2016-09-20-17-52 modify
     self.hidesBottomBarWhenPushed = YES;
     ModifyPersonalPageVC *modifyPersonalPage = [[ModifyPersonalPageVC alloc] init];
@@ -508,14 +507,6 @@ UIImageView *headImage;
     [self.navigationController pushViewController:logIn animated:NO];
     self.hidesBottomBarWhenPushed = NO;
 }
-
-#pragma ------------实现passValueForVC 代理方法 接受从登录页面登录成功后传值-------------
--(void)passValueForVC:(NSDictionary *)dic
-{
-    //用户信息字典
-    recDicFromLogIn = dic;
-}
-#pragma ------------实现passValueForVC 代理方法 接受从登录页面登录成功后传值 end-------------
 
 #pragma 实现获取头像的代理方法
 -(void)headImageDataTransmitBackFinishedBL:(UIImage *)image userTextInfo:(NSDictionary *)userInfo{
