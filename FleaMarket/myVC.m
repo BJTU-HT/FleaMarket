@@ -20,6 +20,7 @@
 #import "SDImageCache.h"
 #import "AboutUsVC.h"
 #import "ModifyPersonalPageVC.h"
+#import "UserInfoSingleton.h"     //201611091425 add
 
 #define loginPartOccupyScreenPercent 0.15
 //第一个section的header view 头像位置所需宏定义
@@ -218,6 +219,8 @@ UIImageView *headImage;
         [defaultLogOut setObject:nil forKey:@"userName"];
         [defaultLogOut synchronize];
         [BmobUser logout];
+        UserInfoSingleton *userInfoSingleton = [UserInfoSingleton sharedManager];
+        [userInfoSingleton logoutCurrentUser];
         myVC *myView = [[myVC alloc] init];
         [self.navigationController pushViewController:myView animated:NO];
     }];
