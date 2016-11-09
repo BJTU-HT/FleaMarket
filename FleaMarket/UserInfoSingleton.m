@@ -63,7 +63,8 @@ static UserInfoSingleton *sharedManager = nil;
         [moc deleteObject:userMO];
     }
     
-    self.userMO = nil;
+    _userMO = nil;
+    NSLog(@"123");
 }
 
 - (void)updateUserMO:(NSDictionary *)userInfo
