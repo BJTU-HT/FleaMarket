@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "UserInfoSingleton.h"
+#import "JPUSHService.h"
 
 @interface UserInfoSingleton ()
 
@@ -98,7 +99,7 @@ static UserInfoSingleton *sharedManager = nil;
     [self.appDelegate saveContext];
     
     // 登陆成功极光推送注册别名
-    //[JPUSHService setTags:nil alias:userInfo[@"userID"] callbackSelector:@selector(tagsAliasCallback:tags:alias:) object:self];
+    [JPUSHService setTags:nil alias:userInfo[@"userID"] callbackSelector:@selector(tagsAliasCallback:tags:alias:) object:self];
 }
 
 - (void)tagsAliasCallback:(int)iResCode

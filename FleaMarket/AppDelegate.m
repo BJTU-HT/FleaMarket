@@ -15,12 +15,16 @@
 #import <ShareSDKConnector/ShareSDKConnector.h>
 #import <TencentOpenAPI/TencentOAuth.h>
 #import <TencentOpenAPI/QQApiInterface.h>
+#import "JPUSHService.h"
 #import "WXApi.h"
 #import "WeiboSDK.h"
 #import "UserService.h"
+#ifdef NSFoundationVersionNumber_iOS_9_x_Max
+#import <UserNotifications/UserNotifications.h>
+#endif
 
 
-@interface AppDelegate ()<BmobIMDelegate>{
+@interface AppDelegate ()<BmobIMDelegate, JPUSHRegisterDelegate>{
     
 }
 @property (strong, nonatomic) BmobIM *sharedIM;
@@ -86,73 +90,42 @@
 #pragma 201607191329 add for tuisong end
     
     // 注册极光推送
-    
     //Required
-    if ([[UIDevice currentDevice].systemVersion floatValue] >= 8.0) {
-        //可以添加自定义categories
-        //        [JPUSHService registerForRemoteNotificationTypes:(UIUserNotificationTypeBadge |
-        //                                                          UIUserNotificationTypeSound |
-        //                                                          UIUserNotificationTypeAlert)
-        //                                              categories:nil];
-    } else {
-        //categories 必须为nil
-        //        [JPUSHService registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge |
-        //                                                          UIRemoteNotificationTypeSound |
-        //                                                          UIRemoteNotificationTypeAlert)
-        //                                              categories:nil];
+    if ([[UIDevice currentDevice].systemVersion floatValue] >= 10.0) {
+        JPUSHRegisterEntity * entity = [[JPUSHRegisterEntity alloc] init];
+        entity.types = UNAuthorizationOptionAlert|UNAuthorizationOptionBadge|UNAuthorizationOptionSound;
+        [JPUSHService registerForRemoteNotificationConfig:entity delegate:self];
     }
-    //Required
-    // 如需继续使用pushConfig.plist文件声明appKey等配置内容，请依旧使用[JPUSHService setupWithOption:launchOptions]方式初始化。
-    //    [JPUSHService setupWithOption:launchOptions
-    //                           appKey:appKey
-    //                          channel:channel
-    //                 apsForProduction:isProduction
-    //            advertisingIdentifier:advertisingId];
+    else if ([[UIDevice currentDevice].systemVersion floatValue] >= 8.0) {
+        //可以添加自定义categories
+        [JPUSHService registerForRemoteNotificationTypes:(UNAuthorizationOptionBadge |
+                                                          UNAuthorizationOptionSound |
+                                                          UNAuthorizationOptionAlert)
+                                              categories:nil];
+    }
+    else {
+        //categories 必须为nil
+        [JPUSHService registerForRemoteNotificationTypes:(UNAuthorizationOptionBadge |
+                                                          UNAuthorizationOptionSound |
+                                                          UNAuthorizationOptionAlert)
+                                              categories:nil];
+    }
     
-    // 设置当前用户的别名
-    //    [JPUSHService setAlias:@"tongleiming" callbackSelector:@selector(tagsAliasCallback:tags:alias:) object:self];
-    
+    NSString *advertisingId = [[[ASIdentifierManager sharedManager] advertisingIdentifier] UUIDString];
+    [JPUSHService setupWithOption:launchOptions appKey:appKey
+                          channel:channel
+                 apsForProduction:isProduction
+            advertisingIdentifier:advertisingId];
     
     return YES;
 }
-
-/*
-- (void)tagsAliasCallback:(int)iResCode
-                     tags:(NSSet *)tags
-                    alias:(NSString *)alias {
-    NSString *callbackString = [NSString stringWithFormat:@"%d, \ntags: %@, \nalias: %@\n", iResCode,[self logSet:tags], alias];
-    NSLog(@"TagsAlias回调:%@", callbackString);
-}
-
-// log NSSet with UTF8
-// if not ,log will be \Uxxx
-- (NSString *)logSet:(NSSet *)dic {
-    if (![dic count]) {
-        return nil;
-    }
-    NSString *tempStr1 =
-    [[dic description] stringByReplacingOccurrencesOfString:@"\\u"
-                                                 withString:@"\\U"];
-    NSString *tempStr2 =
-    [tempStr1 stringByReplacingOccurrencesOfString:@"\"" withString:@"\\\""];
-    NSString *tempStr3 =
-    [[@"\"" stringByAppendingString:tempStr2] stringByAppendingString:@"\""];
-    NSData *tempData = [tempStr3 dataUsingEncoding:NSUTF8StringEncoding];
-    NSString *str =
-    [NSPropertyListSerialization propertyListFromData:tempData
-                                     mutabilityOption:NSPropertyListImmutable
-                                               format:NULL
-                                     errorDescription:NULL];
-    return str;
-}
-*/
 
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     
     NSLog(@"DeviceToken: %@", deviceToken);
     
     /// Required - 注册 DeviceToken
-    //[JPUSHService registerDeviceToken:deviceToken];
+    [JPUSHService registerDeviceToken:deviceToken];
     
     // 注册bmob
     //注册成功后上传Token至服务器
@@ -169,9 +142,10 @@
     
 }
 
+// iOS6及以下收到通知
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo{
     // 处理推送消息
-    //[JPUSHService handleRemoteNotification:userInfo];
+    [JPUSHService handleRemoteNotification:userInfo];
     NSLog(@"didReceiveRemoteNotification fetchCompletionHandler:%@", userInfo);
     //NSString *content = [[userInfo objectForKey:@"aps"] objectForKey:@"alert"];
     UIAlertController *ac = [UIAlertController alertControllerWithTitle:@"收到留言" message:nil preferredStyle:UIAlertControllerStyleAlert];
@@ -184,10 +158,11 @@
     });
 }
 
+// iOS7及以上收到消息
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
     NSLog(@"didReceiveRemoteNotification fetchCompletionHandler:%@", userInfo);
     // IOS 7 Support Required
-    //[JPUSHService handleRemoteNotification:userInfo];
+    [JPUSHService handleRemoteNotification:userInfo];
     completionHandler(UIBackgroundFetchResultNewData);
     //NSString *content = [[userInfo objectForKey:@"aps"] objectForKey:@"alert"];
     UIAlertController *ac = [UIAlertController alertControllerWithTitle:@"收到留言" message:nil preferredStyle:UIAlertControllerStyleAlert];
@@ -359,5 +334,60 @@
         }
     }
 }
+
+#ifdef NSFoundationVersionNumber_iOS_9_x_Max
+#pragma mark- JPUSHRegisterDelegate
+- (void)jpushNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(NSInteger))completionHandler {
+    NSDictionary * userInfo = notification.request.content.userInfo;
+    
+    UNNotificationRequest *request = notification.request; // 收到推送的请求
+    UNNotificationContent *content = request.content; // 收到推送的消息内容
+    
+    NSNumber *badge = content.badge;  // 推送消息的角标
+    NSString *body = content.body;    // 推送消息体
+    UNNotificationSound *sound = content.sound;  // 推送消息的声音
+    NSString *subtitle = content.subtitle;  // 推送消息的副标题
+    NSString *title = content.title;  // 推送消息的标题
+    
+    if([notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
+        [JPUSHService handleRemoteNotification:userInfo];
+        //NSLog(@"iOS10 前台收到远程通知:%@", [self logDic:userInfo]);
+        
+        //[rootViewController addNotificationCount];
+        
+    }
+    else {
+        // 判断为本地通知
+        NSLog(@"iOS10 前台收到本地通知:{\nbody:%@，\ntitle:%@,\nsubtitle:%@,\nbadge：%@，\nsound：%@，\nuserInfo：%@\n}",body,title,subtitle,badge,sound,userInfo);
+    }
+    completionHandler(UNNotificationPresentationOptionBadge|UNNotificationPresentationOptionSound|UNNotificationPresentationOptionAlert); // 需要执行这个方法，选择是否提醒用户，有Badge、Sound、Alert三种类型可以设置
+}
+
+- (void)jpushNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void (^)())completionHandler {
+    
+    NSDictionary * userInfo = response.notification.request.content.userInfo;
+    UNNotificationRequest *request = response.notification.request; // 收到推送的请求
+    UNNotificationContent *content = request.content; // 收到推送的消息内容
+    
+    NSNumber *badge = content.badge;  // 推送消息的角标
+    NSString *body = content.body;    // 推送消息体
+    UNNotificationSound *sound = content.sound;  // 推送消息的声音
+    NSString *subtitle = content.subtitle;  // 推送消息的副标题
+    NSString *title = content.title;  // 推送消息的标题
+    
+    if([response.notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
+        [JPUSHService handleRemoteNotification:userInfo];
+        //NSLog(@"iOS10 收到远程通知:%@", [self logDic:userInfo]);
+        //[rootViewController addNotificationCount];
+        
+    }
+    else {
+        // 判断为本地通知
+        NSLog(@"iOS10 收到本地通知:{\nbody:%@，\ntitle:%@,\nsubtitle:%@,\nbadge：%@，\nsound：%@，\nuserInfo：%@\n}",body,title,subtitle,badge,sound,userInfo);
+    }
+    
+    completionHandler();  // 系统要求执行这个方法
+}
+#endif
 
 @end
