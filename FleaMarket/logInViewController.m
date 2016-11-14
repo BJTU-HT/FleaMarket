@@ -50,7 +50,7 @@ UIButton *buttonGetShortMessage; //手机号登录获取验证码按钮
 -(void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    self.title = @"FleaMarket欢迎您";
+    self.title = @"跳蚤市场欢迎您";
     screenFrameLogin = [UIScreen mainScreen].bounds;
     screenHeight = screenFrameLogin.size.height - 20;
     screenWidth = screenFrameLogin.size.width;

@@ -18,4 +18,5 @@
 @property (strong, nonatomic) BmobIM *sharedIM;
 @property (copy  , nonatomic) NSString *userId;
 @property (copy  , nonatomic) NSString *token;
+@property (strong, nonatomic) NSTimer *timer;
 @end

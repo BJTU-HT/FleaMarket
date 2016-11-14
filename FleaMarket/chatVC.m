@@ -57,6 +57,30 @@ float cellHeight;
     if ([BmobUser getCurrentUser]) {
         [self loadRecentConversations];
     }
+    NSTimer *timer = [NSTimer timerWithTimeInterval:30 target:self selector:@selector(timerAction) userInfo:nil repeats:YES];
+    [[NSRunLoop mainRunLoop] addTimer:timer forMode:NSDefaultRunLoopMode];
+    self.timer = timer;
+}
+
+-(void)viewWillDisappear:(BOOL)animated{
+    [self.timer setFireDate:[NSDate distantFuture]];
+}
+
+-(void)timerAction{
+    if(![self.sharedIM isConnected]){
+        [self connectToServer];
+    }
+}
+
+-(void)connectToServer{
+    if(!self.sharedIM){
+        self.sharedIM = [BmobIM sharedBmobIM];
+    }
+    self.token = @"";
+    BmobUser *curUser = [BmobUser getCurrentUser];
+    [self.sharedIM setupBelongId:curUser.objectId];
+    [self.sharedIM setupDeviceToken:self.token];
+    [self.sharedIM connect];
 }
 
 //获取用户的聊天

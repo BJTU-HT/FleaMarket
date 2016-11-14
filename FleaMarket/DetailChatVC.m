@@ -86,7 +86,6 @@ BmobUser *user1;
     bottomInitialFrame = CGRectMake(0, screenHeightPCH - bottomViewHeight, screenWidthPCH, bottomViewHeight);
     bottomView = [[ChatBottomView alloc ]initWithFrame: bottomInitialFrame];
     bottomView.textField.delegate = self;
-    //[bottomView.addBtn addTarget:self action:@selector(showBottomContentView) forControlEvents:UIControlEventTouchDown];
     [bottomView.sendBtn addTarget: self action:@selector(bottomViewSendBtnClicked:) forControlEvents:UIControlEventTouchDown];
     [self.view addSubview:bottomView];
 }
@@ -127,14 +126,6 @@ BmobUser *user1;
     [self.sharedIM setupDeviceToken:self.token];
     [self.sharedIM connect];
 }
-//获取用户的聊天  20161027 10:58 add
-//-(void)loadRecentConversations{
-//    NSArray *array = [[BmobIM sharedBmobIM] queryRecentConversation];
-//    if (array && array.count > 0) {
-//        self.conversation = array;
-//        [self.tableViewChat reloadData];
-//    }
-//}
 
 #pragma @slelctor
 //键盘弹出

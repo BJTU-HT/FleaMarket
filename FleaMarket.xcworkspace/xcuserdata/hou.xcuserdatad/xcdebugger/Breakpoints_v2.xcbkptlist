@@ -42,12 +42,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FleaMarket/DetailChatVC.m"
-            timestampString = "499680691.222904"
+            timestampString = "500798519.689567"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "238"
-            endingLineNumber = "238"
-            landmarkName = "-touchesBegan:withEvent:"
+            startingLineNumber = "239"
+            endingLineNumber = "239"
+            landmarkName = "-passConversationValue:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
