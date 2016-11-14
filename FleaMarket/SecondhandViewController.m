@@ -142,31 +142,31 @@
                     if(i == 0)
                     {
                         btn.labelS0.text = @"全部";
-                        btn.imageViewS0.image = [UIImage imageNamed:@"2@2x.png"];
+                        btn.imageViewS0.image = [UIImage imageNamed:@"22.png"];
                     }
                     else
                     {
                         btn.labelS0.text = @"衣服";
-                        btn.imageViewS0.image = [UIImage imageNamed:@"1@2x.png"];
+                        btn.imageViewS0.image = [UIImage imageNamed:@"23.png"];
                     }
                     break;
                 case 1:
                     if(i == 0)
                     {
                         btn.labelS0.text = @"书籍";
-                        btn.imageViewS0.image = [UIImage imageNamed:@"3@2x.png"];
+                        btn.imageViewS0.image = [UIImage imageNamed:@"20.png"];
                     }
                     else
                     {
                         btn.labelS0.text = @"自行车";
-                        btn.imageViewS0.image = [UIImage imageNamed:@"4@2x.png"];
+                        btn.imageViewS0.image = [UIImage imageNamed:@"16.png"];
                     }
                     break;
                 case 2:
                     if(i == 0)
                     {
                         btn.labelS0.text = @"数码";
-                        btn.imageViewS0.image = [UIImage imageNamed:@"5@2x.png"];
+                        btn.imageViewS0.image = [UIImage imageNamed:@"21.png"];
                     }
                     else
                     {
@@ -178,12 +178,12 @@
                     if(i == 0)
                     {
                         btn.labelS0.text = @"电脑";
-                        btn.imageViewS0.image = [UIImage imageNamed:@"7@2x.png"];
+                        btn.imageViewS0.image = [UIImage imageNamed:@"17.png"];
                     }
                     else
                     {
                         btn.labelS0.text = @"其他";
-                        btn.imageViewS0.image = [UIImage imageNamed:@"8@2x.png"];
+                        btn.imageViewS0.image = [UIImage imageNamed:@"5@2x.png"];
                     }
                     break;
                 default:

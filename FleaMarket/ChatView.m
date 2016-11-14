@@ -69,7 +69,7 @@
     self.msg = msg;
     
     self.avatarBackgroundImageView.image = [UIImage imageNamed:@"icon_default_face@2x.png"];
-    self.timeLabel.text = [[AppManager defaultManager].dateFormatter stringFromDate:[NSDate dateWithTimeIntervalSince1970:self.msg.updatedTime / 1000.0f] ];
+    self.timeLabel.text = [[AppManager defaultManager].dateFormatter stringFromDate:[NSDate dateWithTimeIntervalSince1970:self.msg.updatedTime / 1000.0f]];
     
     BmobUser *loginUser = [BmobUser getCurrentUser];
     if ([_msg.fromId isEqualToString:loginUser.objectId]) {
@@ -100,7 +100,7 @@
         make.height.equalTo(@40);
         make.width.equalTo(@40);
     }];
-    self.chatBackgroundImageView.image = [UIImage imageNamed:@"smile.jpg"];
+    self.chatBackgroundImageView.image = [UIImage imageNamed:@"bg_chat_right_nor@3x.png"];
     
 }
 

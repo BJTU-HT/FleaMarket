@@ -153,6 +153,13 @@ UIImageView *headImage;
     
 }
 
+//从modifyPage 回传数据到 MyVC 代理传值
+-(void)passValueModifyBackMyVC:(NSDictionary *)dic{
+    userNameReceiveDelegate = [dic objectForKey:@"value"];
+    logInStatus = 1;
+    labelGuanZhu.text = [dic objectForKey:@"signName"];
+}
+
 -(void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -442,23 +449,27 @@ UIImageView *headImage;
         if(labelGuanZhu == nil){
             labelGuanZhu = [[UILabel alloc] init];
         }
-        CGRect labelGuanZhuFrame = CGRectMake(screenWidthPCH * 0.24, headViewHeight * 0.60, screenWidthPCH * 0.20, headViewHeight * 0.05);
-        labelGuanZhu.frame = labelGuanZhuFrame;
         if(!labelGuanZhu.text)
-            labelGuanZhu.text = @"关注:0";
+            labelGuanZhu.text = @"未设置个性签名";
+        
+        CGSize titleSizeLabelGuanZhu = [labelGuanZhu.text boundingRectWithSize:CGSizeMake(screenWidthPCH * 0.6, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14]} context:nil].size;
+        CGRect labelGuanZhuFrame = CGRectMake(screenWidthPCH * 0.24, headViewHeight * 0.60, screenWidthPCH * 0.60, titleSizeLabelGuanZhu.height);
+        labelGuanZhu.frame = labelGuanZhuFrame;
+        
         labelGuanZhu.textColor = [UIColor lightGrayColor];
         labelGuanZhu.font = [UIFont systemFontOfSize:14];
+        labelGuanZhu.numberOfLines = 0;
         [view1 addSubview:labelGuanZhu];
         
-        if(labelFans == nil)
-            labelFans = [[UILabel alloc] init];
-        CGRect labelFansFrame = CGRectMake(screenWidthPCH * (0.24 + 0.15 + 0.05), headViewHeight * 0.60, screenWidthPCH * 0.20, headViewHeight * 0.05);
-        labelFans.frame = labelFansFrame;
-        if(!labelFans.text)
-            labelFans.text = @"出售:0";
-        labelFans.textColor = [UIColor lightGrayColor];
-        labelFans.font = [UIFont systemFontOfSize:14];
-        [view1 addSubview:labelFans];
+//        if(labelFans == nil)
+//            labelFans = [[UILabel alloc] init];
+//        CGRect labelFansFrame = CGRectMake(screenWidthPCH * (0.24 + 0.15 + 0.05), headViewHeight * 0.60, screenWidthPCH * 0.20, headViewHeight * 0.05);
+//        labelFans.frame = labelFansFrame;
+//        if(!labelFans.text)
+//            labelFans.text = @"出售:0";
+//        labelFans.textColor = [UIColor lightGrayColor];
+//        labelFans.font = [UIFont systemFontOfSize:14];
+//        [view1 addSubview:labelFans];
         
         UIButton *buttonPerson = [[UIButton alloc] init];
         CGRect buttonPersonFrame = CGRectMake(screenWidthPCH *(0.28 + 0.35 + 0.05) , headViewHeight * 0.40, screenWidthPCH * 0.30, 20);
@@ -489,8 +500,10 @@ UIImageView *headImage;
 
 -(void)view1Clicked:(UITapGestureRecognizer *)recognizer
 {
+    //2016 1112 13:45
     self.hidesBottomBarWhenPushed = YES;
     ModifyPersonalPageVC *modifyPersonalPage = [[ModifyPersonalPageVC alloc] init];
+    modifyPersonalPage.delegate = self;
     [self.navigationController pushViewController:modifyPersonalPage animated:NO];
     self.hidesBottomBarWhenPushed = NO;
 }

@@ -67,12 +67,15 @@ BmobUser *user1;
     [tableViewChat addSubview:self.freshControl];
     //隐藏分割线
     tableViewChat.separatorStyle = UITableViewCellSeparatorStyleNone;
-    tableViewChat.backgroundColor = defaultViewBackgroundColorPCH;
-    self.view.backgroundColor = defaultViewBackgroundColorPCH;
+//    tableViewChat.backgroundColor = defaultViewBackgroundColorPCH;
+//    self.view.backgroundColor = defaultViewBackgroundColorPCH;
+    tableViewChat.backgroundColor = whiteSmokePCH;
+    self.view.backgroundColor = whiteSmokePCH;
     [self.freshControl addTarget:self action:@selector(loadMoreRecords) forControlEvents:UIControlEventValueChanged];
 
     self.title = self.conversation.conversationTitle;
     self.sharedIM = [BmobIM sharedBmobIM];
+    self.userId = _loginUser.objectId;
     self.userInfo = [self.sharedIM userInfoWithUserId:conversation.conversationId];
     [self.conversation updateLocalCache];
     //201609251541
@@ -109,7 +112,9 @@ BmobUser *user1;
 -(void)viewWillAppear:(BOOL)animated{
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardWillHiden:) name:UIKeyboardWillHideNotification object:nil];
-    
+    if(![self.sharedIM isConnected]){
+        [self connectToServer];
+    }
 }
 
 -(void)viewWillDisappear:(BOOL)animated{
@@ -117,6 +122,11 @@ BmobUser *user1;
     [self.conversation updateLocalCache];
 }
 
+-(void)connectToServer{
+    [self.sharedIM setupBelongId:self.userId];
+    [self.sharedIM setupDeviceToken:self.token];
+    [self.sharedIM connect];
+}
 //获取用户的聊天  20161027 10:58 add
 //-(void)loadRecentConversations{
 //    NSArray *array = [[BmobIM sharedBmobIM] queryRecentConversation];

@@ -10,8 +10,9 @@
 #import "passValueForVCDelegate.h"
 #import "LogInAndRegistLogicDelegate.h"
 #import "myConcernedVC.h"
+#import "modifyBackMyVCDelegate.h"
 
-@interface myVC : UIViewController<UITableViewDelegate, UITableViewDataSource, passValueForVCDelegate,LogInAndRegistLogicDelegate>
+@interface myVC : UIViewController<UITableViewDelegate, UITableViewDataSource, passValueForVCDelegate,LogInAndRegistLogicDelegate, modifyBackMyVCDelegate>
 {
     UITableView *myTableView;
 }

@@ -540,9 +540,10 @@ BOOL headImageOrBackgroundImageFlag; // 0代表设置头像 1代表设置背景
     if(value)
     {
         [_superView removeFromSuperview];
-        personalPageViewController *perPage = [[personalPageViewController alloc] init];
-        self.delegateVC = perPage;
-        [self.delegateVC passValue:1];
+        NSMutableDictionary *mudic = [[NSMutableDictionary alloc] init];
+        [mudic setObject:@"1" forKey:@"value"];
+        [mudic setObject: textFieldPersonalSign.text forKey:@"signName"];
+        [self.delegate passValueModifyBackMyVC:mudic];
         [self.navigationController popViewControllerAnimated:YES];
     }
 }

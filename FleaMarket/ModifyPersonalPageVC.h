@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "LogInAndRegistLogicDelegate.h"
 #import "passValueForVCDelegate.h"
+#import "modifyBackMyVCDelegate.h"
 
 @interface ModifyPersonalPageVC : UIViewController <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, UITabBarControllerDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate, LogInAndRegistLogicDelegate, passValueForVCDelegate>
 
@@ -20,4 +21,5 @@
 @property (strong, nonatomic) UILabel *labelTagGender;
 @property (strong, nonatomic) UILabel *labelTagCity;
 @property (strong, nonatomic) UILabel *labelTagPersonalName;
+@property (weak, nonatomic) id<modifyBackMyVCDelegate> delegate;
 @end
