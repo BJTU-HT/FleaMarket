@@ -37,6 +37,7 @@
             _bookSchoolLabel.textAlignment = NSTextAlignmentRight;
             _bookSchoolLabel.font = FontSize14;
             _bookSchoolLabel.textColor = [UIColor blackColor];
+            _bookSchoolLabel.textAlignment = NSTextAlignmentRight;
         }
     }
     return self;
@@ -63,8 +64,8 @@
     float bookPubTimeHeight = bookUserNameHeight;
     _pubTimeLabel.frame =CGRectMake(bookUserName_x, bookPubTime_y, bookUserNameWidth, bookPubTimeHeight);
     
-    float schoolLabel_x = width/2 + bookUserName_x;
-    float schoolLabelWidth = width/2 - 15 - bookUserName_x;
+    float schoolLabel_x = width/2;
+    float schoolLabelWidth = width/2 - 15;
     float schoolLabelHeight = 0.4 * height;
     float schoolLabel_y = 0.3 * height;
     

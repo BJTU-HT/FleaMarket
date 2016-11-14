@@ -141,7 +141,7 @@ NSMutableArray *mutableArrField;
             self.remarkField = [[UITextField alloc] init];
             //self.remarkField.text = @"可为空";
             self.remarkField.placeholder = @"可为空";
-            self.remarkField.textColor = grayColorPCH;
+            self.remarkField.textColor = [UIColor blackColor];
             self.remarkField.font =FontSize14;
             self.remarkField.textAlignment = NSTextAlignmentLeft;
             self.remarkField.delegate = self;
