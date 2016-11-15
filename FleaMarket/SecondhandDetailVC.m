@@ -421,7 +421,7 @@
     if (section == 0) {
         headerView.backgroundColor = [UIColor blackColor];
     } else if (section == 1) {
-        NSString *content = [NSString stringWithFormat:@"  最近%ld人来访", _model.visitorURLArray.count];
+        NSString *content = [NSString stringWithFormat:@"  最近%ld人来访", (unsigned long)_model.visitorURLArray.count];
         headerView.backgroundColor = [UIColor whiteColor];
         headerView.frame = CGRectMake(0, 0, screen_width, 30);
         headerView.text = content;

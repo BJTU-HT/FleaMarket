@@ -238,7 +238,7 @@ float bottomViewHeightBD;
 -(BookDetailTableViewCell *)bookDetailCellWithTableView:(UITableView *)tableView
                                       cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     //解决cell重用问题，采用删除cell子视图
-    NSString *cellId = [NSString stringWithFormat:@"cell%ld%ld", indexPath.section,indexPath.row];
+    NSString *cellId = [NSString stringWithFormat:@"cell%ld%ld", (long)indexPath.section,(long)indexPath.row];
     _bookDetailCell = [tableView dequeueReusableCellWithIdentifier: cellId];
     if(_bookDetailCell == nil) {
         _bookDetailCell = [[BookDetailTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier: cellId];
@@ -252,7 +252,6 @@ float bottomViewHeightBD;
     _bookDetailCell.selectionStyle = UITableViewCellSelectionStyleNone;
     NSString *strRow = [NSString stringWithFormat:@"%ld%ld",(long)indexPath.section, (long)indexPath.row];
     CGRect cell1Frame = CGRectMake(0, 0, screenWidthPCH, [[heightDic objectForKey:strRow] integerValue]);
-    NSLog(@"row -- %ld", indexPath.row);
 
     [_bookDetailCell configCellBook:cell1Frame index:indexPath data:mudic];
     return _bookDetailCell;

@@ -363,7 +363,7 @@ const NSInteger photoCounts = 9;
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    NSLog(@"%ld", self.collectionData.count);
+    NSLog(@"%ld", (unsigned long)self.collectionData.count);
     //return self.collectionData.count;
     
     if (collectionView == self.myCollectionView) {
@@ -397,7 +397,7 @@ const NSInteger photoCounts = 9;
                     }
                 }
                 
-                NSLog(@"selected Array number is %ld", self.selectedArray.count);
+                NSLog(@"selected Array number is %ld", (unsigned long)self.selectedArray.count);
                 [weakSelf.thumbnailCollectionView reloadData];
                 [weakSelf.thumbnailCollectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForRow:weakSelf.selectedArray.count-1 inSection:0] atScrollPosition:UICollectionViewScrollPositionRight animated:NO];
             } else {

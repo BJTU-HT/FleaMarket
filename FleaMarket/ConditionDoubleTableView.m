@@ -212,7 +212,7 @@
 - (void)returnSelectedValue:(NSInteger)index {
     if (self.delegate && [self.delegate respondsToSelector:@selector(selectedFirstValue:SecondValue:)]) {
         NSInteger firstSelected = firstSelectedIndex > 0 ? firstSelectedIndex : 0;
-        NSString *firstIndex = [NSString stringWithFormat:@"%ld", firstSelected];
+        NSString *firstIndex = [NSString stringWithFormat:@"%ld", (long)firstSelected];
         NSString *indexObj = [NSString stringWithFormat:@"%ld", (long)index];
         [self.delegate performSelector:@selector(selectedFirstValue:SecondValue:) withObject:firstIndex withObject:indexObj];
         [self hideTableView];

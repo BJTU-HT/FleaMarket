@@ -80,7 +80,7 @@
 
 - (void)createNav
 {
-    self.title = [NSString stringWithFormat:@"%ld/%lu",self.pageNum,(unsigned long)self.collectionData.count];
+    self.title = [NSString stringWithFormat:@"%ld/%lu",(long)self.pageNum,(unsigned long)self.collectionData.count];
     self.automaticallyAdjustsScrollViewInsets=NO;
     
     /*
@@ -243,7 +243,6 @@
 {
     if (self.rightItemBtn.selected) {
         self.rightItemBtn.selected = NO;
-        NSLog(@"current now num is %ld", self.nowNum);
         CollectionDataModel *model = self.collectionData[self.nowNum];
         //PHAsset *img = model.img;
         //PHAsset *asset = model.asset;

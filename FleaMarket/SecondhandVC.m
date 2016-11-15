@@ -116,8 +116,8 @@
     // 读取分类字典
     NSString *plistPath2 = [[NSBundle mainBundle] pathForResource:@"CategoryDictionary" ofType:@"plist"];
     NSMutableDictionary *categoryDic = [[NSMutableDictionary alloc] initWithContentsOfFile:plistPath2];
-    NSString *schoolStr = [schoolDic objectForKey:[NSString stringWithFormat:@"%ld", self.schoolCategory]];
-    NSString *categoryStr = [categoryDic objectForKey:[NSString stringWithFormat:@"%ld", self.viceCategory]];
+    NSString *schoolStr = [schoolDic objectForKey:[NSString stringWithFormat:@"%ld", (long)self.schoolCategory]];
+    NSString *categoryStr = [categoryDic objectForKey:[NSString stringWithFormat:@"%ld", (long)self.viceCategory]];
     NSArray *filterName = @[schoolStr,categoryStr,@"智能排序"];
     for (int i = 0; i < 3; i++) {
         // 文字
@@ -305,9 +305,9 @@
     NSString *plistPath1 = [[NSBundle mainBundle] pathForResource:@"SchoolDictionary" ofType:@"plist"];
     NSMutableDictionary *schoolDic = [[NSMutableDictionary alloc] initWithContentsOfFile:plistPath1];
     if (self.schoolCategory != 0) {
-        NSMutableArray *schoolArray = [[NSMutableArray alloc] initWithArray:[schoolAreaDic objectForKey:[NSString stringWithFormat:@"%ld", self.schoolCategory]]];
+        NSMutableArray *schoolArray = [[NSMutableArray alloc] initWithArray:[schoolAreaDic objectForKey:[NSString stringWithFormat:@"%ld", (long)self.schoolCategory]]];
         if (schoolArray.count == 0) {
-            [schoolArray addObject:[schoolDic objectForKey:[NSString stringWithFormat:@"%ld", self.schoolCategory]]];
+            [schoolArray addObject:[schoolDic objectForKey:[NSString stringWithFormat:@"%ld", (long)self.schoolCategory]]];
         }
         
         [filterDic setObject:schoolArray forKey:@"school"];
@@ -321,9 +321,9 @@
     NSString *plistPath3 = [[NSBundle mainBundle] pathForResource:@"CategoryDictionary" ofType:@"plist"];
     NSMutableDictionary *categoryDic = [[NSMutableDictionary alloc] initWithContentsOfFile:plistPath3];
     if (self.viceCategory != 0) {
-        NSMutableArray *categoryArray = [[NSMutableArray alloc] initWithArray:[categoryClassDic objectForKey:[NSString stringWithFormat:@"%ld", self.viceCategory]]];
+        NSMutableArray *categoryArray = [[NSMutableArray alloc] initWithArray:[categoryClassDic objectForKey:[NSString stringWithFormat:@"%ld", (long)self.viceCategory]]];
         if (categoryArray.count == 0) {
-            [categoryArray addObject:[categoryDic objectForKey:[NSString stringWithFormat:@"%ld", self.viceCategory]]];
+            [categoryArray addObject:[categoryDic objectForKey:[NSString stringWithFormat:@"%ld", (long)self.viceCategory]]];
         }
         
         [filterDic setObject:categoryArray forKey:@"vice_category"];
@@ -357,9 +357,9 @@
     NSString *plistPath1 = [[NSBundle mainBundle] pathForResource:@"SchoolDictionary" ofType:@"plist"];
     NSMutableDictionary *schoolDic = [[NSMutableDictionary alloc] initWithContentsOfFile:plistPath1];
     if (self.schoolCategory != 0) {
-        NSMutableArray *schoolArray = [[NSMutableArray alloc] initWithArray:[schoolAreaDic objectForKey:[NSString stringWithFormat:@"%ld", self.schoolCategory]]];
+        NSMutableArray *schoolArray = [[NSMutableArray alloc] initWithArray:[schoolAreaDic objectForKey:[NSString stringWithFormat:@"%ld", (long)self.schoolCategory]]];
         if (schoolArray.count == 0) {
-            [schoolArray addObject:[schoolDic objectForKey:[NSString stringWithFormat:@"%ld", self.schoolCategory]]];
+            [schoolArray addObject:[schoolDic objectForKey:[NSString stringWithFormat:@"%ld", (long)self.schoolCategory]]];
         }
         
         [filterDic setObject:schoolArray forKey:@"school"];
@@ -373,9 +373,9 @@
     NSString *plistPath3 = [[NSBundle mainBundle] pathForResource:@"CategoryDictionary" ofType:@"plist"];
     NSMutableDictionary *categoryDic = [[NSMutableDictionary alloc] initWithContentsOfFile:plistPath3];
     if (self.viceCategory != 0) {
-        NSMutableArray *categoryArray = [[NSMutableArray alloc] initWithArray:[categoryClassDic objectForKey:[NSString stringWithFormat:@"%ld", self.viceCategory]]];
+        NSMutableArray *categoryArray = [[NSMutableArray alloc] initWithArray:[categoryClassDic objectForKey:[NSString stringWithFormat:@"%ld", (long)self.viceCategory]]];
         if (categoryArray.count == 0) {
-            [categoryArray addObject:[categoryDic objectForKey:[NSString stringWithFormat:@"%ld", self.viceCategory]]];
+            [categoryArray addObject:[categoryDic objectForKey:[NSString stringWithFormat:@"%ld", (long)self.viceCategory]]];
         }
         
         [filterDic setObject:categoryArray forKey:@"vice_category"];
@@ -453,9 +453,9 @@
         NSString *plistPath1 = [[NSBundle mainBundle] pathForResource:@"SchoolDictionary" ofType:@"plist"];
         NSMutableDictionary *schoolDic = [[NSMutableDictionary alloc] initWithContentsOfFile:plistPath1];
         if (weakSelf.schoolCategory != 0) {
-            NSMutableArray *schoolArray = [[NSMutableArray alloc] initWithArray:[schoolAreaDic objectForKey:[NSString stringWithFormat:@"%ld", weakSelf.schoolCategory]]];
+            NSMutableArray *schoolArray = [[NSMutableArray alloc] initWithArray:[schoolAreaDic objectForKey:[NSString stringWithFormat:@"%ld", (long)weakSelf.schoolCategory]]];
             if (schoolArray.count == 0) {
-                [schoolArray addObject:[schoolDic objectForKey:[NSString stringWithFormat:@"%ld", weakSelf.schoolCategory]]];
+                [schoolArray addObject:[schoolDic objectForKey:[NSString stringWithFormat:@"%ld", (long)weakSelf.schoolCategory]]];
             }
             
             [filterDic setObject:schoolArray forKey:@"school"];
@@ -469,9 +469,9 @@
         NSString *plistPath3 = [[NSBundle mainBundle] pathForResource:@"CategoryDictionary" ofType:@"plist"];
         NSMutableDictionary *categoryDic = [[NSMutableDictionary alloc] initWithContentsOfFile:plistPath3];
         if (self.viceCategory != 0) {
-            NSMutableArray *categoryArray = [[NSMutableArray alloc] initWithArray:[categoryClassDic objectForKey:[NSString stringWithFormat:@"%ld", self.viceCategory]]];
+            NSMutableArray *categoryArray = [[NSMutableArray alloc] initWithArray:[categoryClassDic objectForKey:[NSString stringWithFormat:@"%ld", (long)self.viceCategory]]];
             if (categoryArray.count == 0) {
-                [categoryArray addObject:[categoryDic objectForKey:[NSString stringWithFormat:@"%ld", self.viceCategory]]];
+                [categoryArray addObject:[categoryDic objectForKey:[NSString stringWithFormat:@"%ld", (long)self.viceCategory]]];
             }
             
             [filterDic setObject:categoryArray forKey:@"vice_category"];
@@ -500,9 +500,9 @@
     NSString *plistPath1 = [[NSBundle mainBundle] pathForResource:@"SchoolDictionary" ofType:@"plist"];
     NSMutableDictionary *schoolDic = [[NSMutableDictionary alloc] initWithContentsOfFile:plistPath1];
     if (self.schoolCategory != 0) {
-        NSMutableArray *schoolArray = [[NSMutableArray alloc] initWithArray:[schoolAreaDic objectForKey:[NSString stringWithFormat:@"%ld", self.schoolCategory]]];
+        NSMutableArray *schoolArray = [[NSMutableArray alloc] initWithArray:[schoolAreaDic objectForKey:[NSString stringWithFormat:@"%ld", (long)self.schoolCategory]]];
         if (schoolArray.count == 0) {
-            [schoolArray addObject:[schoolDic objectForKey:[NSString stringWithFormat:@"%ld", self.schoolCategory]]];
+            [schoolArray addObject:[schoolDic objectForKey:[NSString stringWithFormat:@"%ld", (long)self.schoolCategory]]];
         }
         
         [filterDic setObject:schoolArray forKey:@"school"];
@@ -516,9 +516,9 @@
     NSString *plistPath3 = [[NSBundle mainBundle] pathForResource:@"CategoryDictionary" ofType:@"plist"];
     NSMutableDictionary *categoryDic = [[NSMutableDictionary alloc] initWithContentsOfFile:plistPath3];
     if (self.viceCategory != 0) {
-        NSMutableArray *categoryArray = [[NSMutableArray alloc] initWithArray:[categoryClassDic objectForKey:[NSString stringWithFormat:@"%ld", self.viceCategory]]];
+        NSMutableArray *categoryArray = [[NSMutableArray alloc] initWithArray:[categoryClassDic objectForKey:[NSString stringWithFormat:@"%ld", (long)self.viceCategory]]];
         if (categoryArray.count == 0) {
-            [categoryArray addObject:[categoryDic objectForKey:[NSString stringWithFormat:@"%ld", self.viceCategory]]];
+            [categoryArray addObject:[categoryDic objectForKey:[NSString stringWithFormat:@"%ld", (long)self.viceCategory]]];
         }
         
         [filterDic setObject:categoryArray forKey:@"vice_category"];

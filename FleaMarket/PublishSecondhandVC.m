@@ -456,7 +456,6 @@
     UploadImageCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"uploadcollectioncell" forIndexPath:indexPath];
     
     // 最后一个, 是新添加相片的一个按钮
-    NSLog(@"indexPath item: %ld", indexPath.item);
     if (indexPath.item == self.selectedImgArray.count) {
         cell.contentImg = [UIImage imageNamed:@"square_add"];
         [cell.dropImageBtn setHidden:YES];

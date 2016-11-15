@@ -53,7 +53,7 @@
 
 - (NSArray<UICollectionViewLayoutAttributes *> *)layoutAttributesForElementsInRect:(CGRect)rect
 {
-    NSLog(@"array number is : %ld", _array.count);
+    NSLog(@"array number is : %ld", (unsigned long)_array.count);
     return _array;
 }
 

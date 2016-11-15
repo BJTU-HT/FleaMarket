@@ -45,7 +45,7 @@ static NSString *IDD_IMG = @"collectionTableViewCell";
     self.myTableView = myTableView;
     [self.view addSubview:self.myTableView];
     
-    NSLog(@"sssssss, %ld", self.tableData.count);
+    NSLog(@"sssssss, %ld", (unsigned long)self.tableData.count);
     
     self.navigationController.delegate = self;
     [self.myTableView reloadData];
@@ -71,7 +71,7 @@ static NSString *IDD_IMG = @"collectionTableViewCell";
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    NSLog(@"table number is %ld", self.tableData.count);
+    NSLog(@"table number is %ld", (unsigned long)self.tableData.count);
     return self.tableData.count;
 }
 
@@ -115,7 +115,7 @@ static NSString *IDD_IMG = @"collectionTableViewCell";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"indexPath row %ld", indexPath.row);
+    NSLog(@"indexPath row %ld", (long)indexPath.row);
     
     // 传递回去的当前相册集的collectionData
     NSMutableArray *collectionData = [[NSMutableArray alloc] init];
