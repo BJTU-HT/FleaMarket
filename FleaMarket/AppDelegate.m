@@ -43,8 +43,8 @@
     // By 仝磊鸣，设置CoreData相关变量
     [self managedObjectModel];
     [self persistentStoreCoordinator];
-    NSManagedObjectContext *moc = [self managedObjectContext];
-    NSAssert(moc != nil, @"Unable to Create Managed Object Context");
+    //NSManagedObjectContext *moc = [self managedObjectContext];
+    //NSAssert(moc != nil, @"Unable to Create Managed Object Context");
     
     // By 仝磊鸣, 设置全局的BarItemButton颜色
     [[UINavigationBar appearance] setBarTintColor:[UIColor whiteColor]];

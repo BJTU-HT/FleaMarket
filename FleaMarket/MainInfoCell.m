@@ -24,9 +24,11 @@
 @property (nonatomic, weak) UILabel *nowPriceLabel;
 @property (nonatomic, weak) UILabel *originalPriceLabel;
 @property (nonatomic, weak) UILabel *descriptionLabel;
+
 @property (nonatomic, assign) NSInteger currentImageIndex;
 @property (nonatomic, assign) NSInteger leftImageIndex;
 @property (nonatomic, assign) NSInteger rightImageIndex;
+@property (nonatomic, strong) UIActivityIndicatorView *activityIndicatorView;
 
 @end
 
@@ -124,6 +126,17 @@
         self.descriptionLabel = descriptionLabel;
         [self addSubview:descriptionLabel];
         
+        //举报 20161121 10:30 by hou
+        //UIButton *btn = [[UIButton alloc] init];
+        UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+        btn.titleLabel.font = FontSize14;
+        btn.titleLabel.textAlignment = NSTextAlignmentRight;
+        btn.titleLabel.lineBreakMode = NSLineBreakByWordWrapping;
+        [btn setTitle:@"举报" forState: UIControlStateNormal];
+        [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        self.reportBtn = btn;
+        [self addSubview: btn];
+        
         NSLog(@"%f", descriptionLabel.frame.origin.y + descriptionLabel.frame.size.height);
     }
     
@@ -199,6 +212,8 @@
     _nowPriceLabel.frame = _frameModel.nowPriceLabelFrame;
     _originalPriceLabel.frame = _frameModel.originalPriceLabelFrame;
     _descriptionLabel.frame = _frameModel.descriptionLabelFrame;
+    //20161121 10:43 add by hou
+    _reportBtn.frame = _frameModel.reportBtnFrame;
     NSLog(@"%f, %f", _frameModel.descriptionLabelFrame.size.width, _frameModel.descriptionLabelFrame.size.height);
 }
 
@@ -214,7 +229,6 @@
     } else {
         _rightImageIndex = 1;
     }
-
     [_currentImageView sd_setImageWithURL:model.pictureArray[_currentImageIndex]];
     [_leftImageView sd_setImageWithURL:model.pictureArray[_leftImageIndex]];
     [_rightImageView sd_setImageWithURL:model.pictureArray[_rightImageIndex]];
@@ -231,6 +245,7 @@
     [_originalPriceLabel setAttributedText:attri];
     _descriptionLabel.text = model.productDescription;
 }
+
 
 @end
 

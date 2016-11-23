@@ -14,5 +14,6 @@
 
 @property (nonatomic, strong) SecondhandVO *model;
 @property (nonatomic, strong) MainInfoFrameModel *frameModel;
-
+//20161121 add by hou add report
+@property (nonatomic, strong) UIButton *reportBtn;
 @end

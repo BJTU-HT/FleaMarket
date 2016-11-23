@@ -49,6 +49,9 @@
 // 二手实例vo
 @property (nonatomic, strong) SecondhandVO *model;
 
+//20161121 add by hou report function
+@property (nonatomic, assign) CGRect reportLabelFrame;
+
 + (NSMutableArray *)frameModelWithArray:(NSMutableArray *)arr;
 
 + (instancetype)frameModelWithModel:(SecondhandVO *)model;

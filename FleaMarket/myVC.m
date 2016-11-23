@@ -40,8 +40,6 @@ float headViewHeight;
 NSMutableArray *cellMutableArray;
 NSMutableArray *cellMutableArrayImage;
 NSString *userNameReceiveDelegate;
-NSUserDefaults *userDefaultMy;
-NSString *userNameMy;
 NSDictionary *recDicFromLogIn;
 NSMutableData *receiveData;
 NSDictionary *userInfoFromCacheOrServer;
@@ -55,8 +53,6 @@ UIImageView *headImage;
 
 -(void)viewDidLoad {
     [super viewDidLoad];
-    userDefaultMy  = [NSUserDefaults standardUserDefaults];
-    userNameMy = [userDefaultMy objectForKey:@"userName"];
     [self drawMyViewPage];
     
     [self initializeArray];
@@ -88,11 +84,11 @@ UIImageView *headImage;
 
 -(void)viewWillAppear:(BOOL)animated
 {
-    userDefaultMy  = [NSUserDefaults standardUserDefaults];
-    userNameMy = [userDefaultMy objectForKey:@"userName"];
+    BmobUser *curUser = [BmobUser getCurrentUser];
     self.navigationController.navigationBarHidden = NO;
-    if(userNameMy != nil)
+    if(curUser != nil)
         [self cacheAndDownloadPersonalInfo];
+    
     CGRect frame1 = CGRectMake(0, navStatusBarHeightPCH, screenWidthPCH, screenHeightPCH - navStatusBarHeightPCH);
     myTableView = [[ UITableView alloc ]initWithFrame: frame1 style:UITableViewStylePlain];
     myTableView.dataSource = self ;
@@ -222,9 +218,6 @@ UIImageView *headImage;
 {
     UIAlertController *alertConLogOut = [UIAlertController alertControllerWithTitle:nil message:@"确认退出登录吗" preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *alertConfirm = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        NSUserDefaults *defaultLogOut = [NSUserDefaults standardUserDefaults];
-        [defaultLogOut setObject:nil forKey:@"userName"];
-        [defaultLogOut synchronize];
         [BmobUser logout];
         UserInfoSingleton *userInfoSingleton = [UserInfoSingleton sharedManager];
         [userInfoSingleton logoutCurrentUser];
@@ -319,7 +312,8 @@ UIImageView *headImage;
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if(userNameMy == nil)
+    BmobUser *curUser = [BmobUser getCurrentUser];
+    if(curUser == nil)
     {
         self.hidesBottomBarWhenPushed = YES;
         logInViewController *logIn = [[logInViewController alloc] init];
@@ -395,7 +389,8 @@ UIImageView *headImage;
 -(UIView *)drawSection0
 {
     UIView *view1 = [[UIView alloc] init];
-    if(!userNameMy)
+    BmobUser *curUser = [BmobUser getCurrentUser];
+    if(!curUser)
     {
         UIButton *buttonView = [[UIButton alloc] init];
         CGRect buttonViewFrame = CGRectMake(0, 0, screenWidthPCH, headViewHeight);
@@ -438,7 +433,7 @@ UIImageView *headImage;
             label = [[UILabel alloc] init];
         }
         if(!label.text)
-            label.text = @"FleaMarket";
+            label.text = @"校园跳蚤";
         label.textColor = [UIColor blackColor];
         label.font = FontSize14;
         CGRect labelFrame = CGRectMake(screenWidthPCH * 0.24, headViewHeight * 0.30, screenWidthPCH * 0.35, headViewHeight * 0.14);
@@ -520,6 +515,7 @@ UIImageView *headImage;
 {
     self.hidesBottomBarWhenPushed = YES;
     logInViewController *logIn = [[logInViewController alloc] init];
+    logIn.delegate = self;
     [self.navigationController pushViewController:logIn animated:NO];
     self.hidesBottomBarWhenPushed = NO;
 }
@@ -545,11 +541,11 @@ UIImageView *headImage;
 }
 
 -(void)userInfoTransmitBackFinishedBL:(NSDictionary *)userInfo{
-    label.text = [userInfo objectForKey:@"userName"];
-    if([userInfo objectForKey:@"fans"])
-        labelFans.text = [NSString stringWithFormat:@"粉丝: %@", [userInfo objectForKey:@"fans"]];
-    if([userInfo objectForKey:@"concerned"])
-        labelGuanZhu.text = [NSString stringWithFormat:@"关注: %@", [userInfo objectForKey:@"concerned"]];
+    label.text = [userInfo objectForKey:@"username"];
+//    if([userInfo objectForKey:@"fans"])
+//        labelFans.text = [NSString stringWithFormat:@"粉丝: %@", [userInfo objectForKey:@"fans"]];
+//    if([userInfo objectForKey:@"concerned"])
+//        labelGuanZhu.text = [NSString stringWithFormat:@"关注: %@", [userInfo objectForKey:@"concerned"]];
 }
 -(void)userInfoTransmitBackFailedBL:(NSString *)error{
     //如服务器或缓存返回信息出错，则代码部分不做处理，VC端直接显示默认值0

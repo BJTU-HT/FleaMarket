@@ -27,7 +27,7 @@
 -(void)logInByPhoneNumForGetVerifyCodeFailed:(NSString *)error;
 
 // 手机号登录，校验手机号和验证码
--(void)logInVerifyPhoneNumberAndVerifyCodeFinished:(NSInteger)value;
+-(void)logInVerifyPhoneNumberAndVerifyCodeFinished:(NSMutableDictionary *)userInfo;
 -(void)logInVerifyPhoneNumberAndVerifyCodeFailed:(NSString *)error;
 
 //检测该手机号是否注册过

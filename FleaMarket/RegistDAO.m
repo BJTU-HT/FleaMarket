@@ -78,11 +78,11 @@ NSUserDefaults *userDefaults;
             NSLog(@"注册成功！");
             [self.delegate registFinished:1];
             //添加此条目用于在本机存储当前用户名
-            [userDefaults setObject:[registInfo objectForKey:@"userName"] forKey:@"userName"];
-            CreateAndSearchPlist *writeToPlistRegistInfo = [[CreateAndSearchPlist alloc] init];
-            NSMutableDictionary *dicInfo = [[NSMutableDictionary alloc] init];
-            [dicInfo addEntriesFromDictionary:registInfo];
-            [writeToPlistRegistInfo writeToPlist:@"userInfo.plist" writeContent:dicInfo];
+//            [userDefaults setObject:[registInfo objectForKey:@"userName"] forKey:@"userName"];
+//            CreateAndSearchPlist *writeToPlistRegistInfo = [[CreateAndSearchPlist alloc] init];
+//            NSMutableDictionary *dicInfo = [[NSMutableDictionary alloc] init];
+//            [dicInfo addEntriesFromDictionary:registInfo];
+//            [writeToPlistRegistInfo writeToPlist:@"userInfo.plist" writeContent:dicInfo];
         }
     }];
 }
@@ -91,11 +91,6 @@ NSUserDefaults *userDefaults;
 -(void)searchUserInfo:(NSString *)userName secret:(NSString *)passWord{
     [BmobUser loginInbackgroundWithAccount:userName andPassword:passWord block:^(BmobUser *user, NSError *error) {
         if (user) {
-            NSLog(@"%@",user);
-            NSDictionary *userDic = (NSDictionary *)user;
-            
-            NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
-            [userDefault setObject:userName forKey:@"userName"];
             NSMutableDictionary *userInfo = [[NSMutableDictionary alloc] init];
             BmobQuery *query = [BmobUser query];
             BmobUser *user = [BmobUser getCurrentUser];
@@ -129,11 +124,12 @@ NSUserDefaults *userDefaults;
                         [userInfo setObject:[obj objectForKey:@"phoneNumber"] forKey:@"phoneNumber"];
                     if(nil != [obj objectForKey:@"userName"])
                         [userInfo setObject:[obj objectForKey:@"username"] forKey:@"userName"];
-                    
+                    if(nil != [obj objectForKey:@"username"])
+                        [userInfo setObject:[obj objectForKey:@"username"] forKey:@"username"];
                     // by 仝磊鸣，设置userInfo的userId, 2016-7-22
                     if(nil != [obj objectForKey:@"objectId"])
                         [userInfo setObject:[obj objectForKey:@"objectId"] forKey:@"userID"];
-                    [self.delegate logInPassDicInfoFinishedDAO:userDic];
+                    [self.delegate logInPassDicInfoFinishedDAO:userInfo];
                     //回传用户信息，除图片外的信息
                     if(userInfo != nil){
                         // by 仝磊鸣，登陆成功后检查coreData中user是否有当前用户数据，如果没有，则插入。 2016-7-22
@@ -189,11 +185,16 @@ NSUserDefaults *userDefaults;
                         [userInfo setObject:[obj objectForKey:@"phoneNumber"] forKey:@"phoneNumber"];
                     if(nil != [obj objectForKey:@"userName"])
                         [userInfo setObject:[obj objectForKey:@"username"] forKey:@"userName"];
-                    
+                    if(nil != [obj objectForKey:@"username"])
+                        [userInfo setObject:[obj objectForKey:@"username"] forKey:@"username"];
+                    if(nil != [obj objectForKey:@"mobilePhoneNumber"])
+                        [userInfo setObject:[obj objectForKey:@"mobilePhoneNumber"] forKey:@"mobilePhoneNumber"];
+                    if(nil != [obj objectForKey:@"mobilePhoneNumberVerified"])
+                        [userInfo setObject:[obj objectForKey:@"mobilePhoneNumberVerified"] forKey:@"mobilePhoneNumberVerified"];
                     // by 仝磊鸣，设置userInfo的userId, 2016-7-22
                     if(nil != [obj objectForKey:@"objectId"])
                         [userInfo setObject:[obj objectForKey:@"objectId"] forKey:@"userID"];
-                    [self.delegate logInVerifyPhoneNumberAndVerifyCodeFinished: 1];
+                    [self.delegate logInVerifyPhoneNumberAndVerifyCodeFinished: userInfo];
                     //回传用户信息，除图片外的信息
                     if(userInfo != nil){
                         // by 仝磊鸣，登陆成功后检查coreData中user是否有当前用户数据，如果没有，则插入。 2016-7-22

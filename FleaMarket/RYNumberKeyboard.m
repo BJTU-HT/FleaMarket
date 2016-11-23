@@ -121,7 +121,8 @@
         default:
         {
             // 数字
-            NSString *text = [NSString stringWithFormat:@"%ld",sender.tag - 1000];
+            NSInteger count1 = sender.tag - 1000;
+            NSString *text = [NSString stringWithFormat:@"%ld",(long)count1];
             [self.textInput insertText:text];
         }
             break;

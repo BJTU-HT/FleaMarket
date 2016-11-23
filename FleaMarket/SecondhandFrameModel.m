@@ -55,6 +55,13 @@
         CGSize nameSize = [self.model.userName sizeWithAttributes:nameAttrs];
         self.nameFrame = (CGRect){{nameX, nameY}, nameSize};
         
+        //20161121 add by hou report function
+        CGFloat report_x = screenWidthPCH - margin - 80.0f;
+        CGFloat report_y = nameY;
+        CGFloat report_w = 80.0f;
+        CGFloat report_h = 20.0f;
+        self.reportLabelFrame = CGRectMake(report_x, report_y, report_w, report_h);
+        
         // 性别
         CGFloat sexY = iconY;
         CGFloat sexX = CGRectGetMaxX(self.nameFrame) + margin/2.0f;

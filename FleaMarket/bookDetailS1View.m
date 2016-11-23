@@ -1,15 +1,15 @@
 //
-//  bookDisplayCellView.m
+//  bookDetailS1View.m
 //  FleaMarket
 //
-//  Created by Hou on 7/28/16.
+//  Created by Hou on 22/11/2016.
 //  Copyright © 2016 H-T. All rights reserved.
 //
 
-#import "bookDisplayCellView.h"
+#import "bookDetailS1View.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 
-@implementation bookDisplayCellView
+@implementation bookDetailS1View
 
 -(instancetype)initWithFrame:(CGRect)frame{
     self = [super initWithFrame:frame];
@@ -66,15 +66,15 @@
             _viewLine1.backgroundColor = [UIColor grayColor];
         }
         if(!_bookReportBtn){
-        
+            
             UIButton *bookReportBtn = [[UIButton alloc] init];
-            [self addSubview:bookReportBtn];
+            //[self addSubview:bookReportBtn];
             [bookReportBtn setTitle:@"举报" forState:UIControlStateNormal];
             bookReportBtn.titleLabel.textAlignment = NSTextAlignmentRight;
             bookReportBtn.titleLabel.font = FontSize14;
             bookReportBtn.titleLabel.userInteractionEnabled = YES;
             [bookReportBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-            //[bookReportBtn addTarget:self action:@selector(bookReportBtnClicked:) forControlEvents:UIControlEventTouchDown];
+            [bookReportBtn addTarget:self action:@selector(bookReportBtnClicked:) forControlEvents:UIControlEventTouchDown];
             self.bookReportBtn = bookReportBtn;
         }
     }
@@ -169,23 +169,23 @@
     _bookImageView.frame = CGRectMake(bookImage_x, margin, bookImageWidth, 105);
     dispatch_async(dispatch_get_main_queue(), ^{
         [_bookImageView sd_setImageWithURL:[NSURL URLWithString:[mudic objectForKey:@"bookImageURL"]] placeholderImage:[UIImage imageNamed:@"icon_default_face@2x"]];
-
+        
     });
     float viewHeight = imageHeight + 2 * margin;
     return viewHeight;
 }
 
 
-//-(void)bookReportBtnClicked:(UIButton *)sender{
-//    [self.delegate bookDisplayViewCellPassValue:1];
-//    sender.tag = self.tag;
-//}
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
+-(void)bookReportBtnClicked:(UIButton *)sender{
+    [self.delegate bookDisplayViewCellPassValue:1];
+    sender.tag = self.tag;
 }
-*/
+/*
+ // Only override drawRect: if you perform custom drawing.
+ // An empty implementation adversely affects performance during animation.
+ - (void)drawRect:(CGRect)rect {
+ // Drawing code
+ }
+ */
 
 @end

@@ -40,6 +40,7 @@
 // cell间隔
 @property (nonatomic, weak) UIView *cellPart;
 
+@property (nonatomic, weak) UILabel *reportLabel;
 @end
 
 @implementation SecondhandCell
@@ -145,6 +146,13 @@
         cellPart.backgroundColor = grayColorPCH;
         [self.contentView addSubview:cellPart];
         self.cellPart = cellPart;
+        
+        UILabel *reportLabel = [[UILabel alloc] init];
+        reportLabel.font = FontSize14;
+        reportLabel.textAlignment = NSTextAlignmentRight;
+        reportLabel.text = @"举报";
+        self.reportLabel = reportLabel;
+        [self.contentView addSubview:reportLabel];
     }
     
     return self;
@@ -165,9 +173,13 @@
     _partLine.frame = _frameModel.partLineFrame;
     _cellPart.frame = _frameModel.cellPartFrame;
     
+    //20161121 add by hou report function
+    _reportLabel.frame = _frameModel.reportLabelFrame;
+    
     _picture1.frame = _frameModel.picture1Frame;
     _picture2.frame = _frameModel.picture2Frame;
     _picture3.frame = _frameModel.picture3Frame;
+    
 }
 
 - (void)setModel:(SecondhandVO *)model

@@ -7,11 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "bookDisplayCellView.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "concernBLDelegate.h"
 #import "concernBL.h"
 #import <BmobSDK/BmobUser.h>
+#import "bookDetailS1View.h"
 
 @interface bookDetailView : UIView<UIScrollViewDelegate, concernBLDelegate>
 
@@ -26,7 +26,7 @@
 #pragma section 0 property end
 
 #pragma section 1 property begin
-@property(nonatomic, strong) bookDisplayCellView *bookDisViewS1;
+@property(nonatomic, strong) bookDetailS1View *bookDisViewS1;
 @property(nonatomic, strong) UILabel *labelS1;
 #pragma section 1 property end
 

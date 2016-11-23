@@ -25,7 +25,8 @@
 @property (nonatomic, assign) CGRect nowPriceLabelFrame;
 @property (nonatomic, assign) CGRect originalPriceLabelFrame;
 @property (nonatomic, assign) CGRect descriptionLabelFrame;
-
+//20161121 10:31 add by hou
+@property (nonatomic, assign) CGRect reportBtnFrame;
 @property (nonatomic, assign) CGFloat cellHeight;
 
 @property (nonatomic, strong) SecondhandVO *model;

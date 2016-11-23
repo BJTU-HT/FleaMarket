@@ -45,12 +45,11 @@ UITextField *field2;
 UILabel *labelAccount;
 UILabel *labelPassword;
 NSDictionary *recDicFromBmob;
-NSUserDefaults *userDefaultLogIn;
 UIButton *buttonGetShortMessage; //手机号登录获取验证码按钮
 -(void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    self.title = @"跳蚤市场欢迎您";
+    self.title = @"校园跳蚤欢迎您";
     screenFrameLogin = [UIScreen mainScreen].bounds;
     screenHeight = screenFrameLogin.size.height - 20;
     screenWidth = screenFrameLogin.size.width;
@@ -60,7 +59,6 @@ UIButton *buttonGetShortMessage; //手机号登录获取验证码按钮
     //flag用于标记代理传值，flag = 0 代表未传值
     flagDelegate = 0;
     flagLogInMethod = 0;
-    userDefaultLogIn  = [NSUserDefaults standardUserDefaults];
     [self drawClickButton];
     [self drawLeftButtonView];
     [self leftBtnNav];
@@ -181,7 +179,7 @@ UIButton *buttonGetShortMessage; //手机号登录获取验证码按钮
     //账号标签
     labelAccount = [[UILabel alloc] init];
     labelAccount.text = @"账号";
-    labelAccount.font =FontSize16;
+    labelAccount.font =FontSize14;
     labelAccount.textColor = [UIColor blackColor];
     labelAccount.shadowColor = [UIColor whiteColor];
     CGRect labelAccountFrame = CGRectMake(screenWidth * 0.05, 0, screenWidth * 0.15, viewHeight * 0.12);
@@ -209,7 +207,7 @@ UIButton *buttonGetShortMessage; //手机号登录获取验证码按钮
     //账号标签
     labelPassword = [[UILabel alloc] init];
     labelPassword.text = @"密码";
-    labelPassword.font = FontSize16;
+    labelPassword.font = FontSize14;
     labelPassword.textColor = [UIColor blackColor];
     labelPassword.shadowColor = [UIColor whiteColor];
     CGRect labelPasswordFrame = CGRectMake(screenWidth * 0.05, viewHeight * 0.12, screenWidth * 0.15, viewHeight * 0.12);
@@ -345,10 +343,9 @@ UIButton *buttonGetShortMessage; //手机号登录获取验证码按钮
     //账号标签
     UILabel *labelAccount = [[UILabel alloc] init];
     labelAccount.text = @"手机号";
-    labelAccount.font = FontSize16;
+    labelAccount.font = FontSize14;
     labelAccount.textColor = [UIColor blackColor];
     labelAccount.shadowColor = [UIColor whiteColor];
-    labelAccount.font = FontSize16;
     CGRect labelAccountFrame = CGRectMake(screenWidth * 0.05, 0, screenWidth * 0.15, viewHeight * 0.12);
     labelAccount.frame = labelAccountFrame;
     [phoneNumberLoginView addSubview:labelAccount];
@@ -369,7 +366,7 @@ UIButton *buttonGetShortMessage; //手机号登录获取验证码按钮
     //账号标签
     UILabel *labelPassword = [[UILabel alloc] init];
     labelPassword.text = @"短信验证码";
-    labelPassword.font = FontSize16;
+    labelPassword.font = FontSize14;
     labelPassword.textColor = [UIColor blackColor];
     labelPassword.shadowColor = [UIColor whiteColor];
     CGRect labelPasswordFrame = CGRectMake(screenWidth * 0.05, viewHeight * 0.12, screenWidth * 0.3, viewHeight * 0.12);
@@ -400,7 +397,7 @@ UIButton *buttonGetShortMessage; //手机号登录获取验证码按钮
     [buttonLogin setTitle:@"登录" forState:UIControlStateNormal];
     CGRect buttonLoginFrame = CGRectMake(screenWidth * 0.02, viewHeight * 0.26, screenWidth * 0.96, viewHeight * 0.12);
     buttonLogin.frame = buttonLoginFrame;
-    [buttonLogin addTarget:self action:@selector(buttonPhoneNumberLoginClicked:) forControlEvents:UIControlEventTouchDown];
+    [buttonLogin addTarget:self action:@selector(buttonLoginClicked:) forControlEvents:UIControlEventTouchDown];
     buttonLogin.backgroundColor = grayColorPCH;
     buttonLogin.titleLabel.font = FontSize16;
     [buttonLogin setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
@@ -483,19 +480,15 @@ UIButton *buttonGetShortMessage; //手机号登录获取验证码按钮
 }
 #pragma 手机号码登录点击按钮事件end----------------
 #pragma ----------RegistBL 手机号登录校验手机号验证码代理方法实现----------------
--(void)logInVerifyPhoneNumberAndVerifyCodeBLFinished:(NSInteger)value
+-(void)logInVerifyPhoneNumberAndVerifyCodeBLFinished:(NSMutableDictionary *)userInfo
 {
-    if(value)
+    if(userInfo)
     {
         self.hidesBottomBarWhenPushed = YES;
-        myVC *myViewController = [[myVC alloc] init];
-        [userDefaultLogIn setObject:@"1" forKey:@"username"];
-        [userDefaultLogIn synchronize];
-        [self.navigationController pushViewController:myViewController animated:NO];
-        self.hidesBottomBarWhenPushed = NO;
+        [self.delegateForVC passValueForVC:userInfo];
+        //201607181108 modify by hou
+        [self.navigationController popViewControllerAnimated:NO];
         //添加通知，用于连接服务器 2016-09-21-16-04
-        //BmobUser *curUser = [BmobUser getCurrentUser];
-        //[[NSNotificationCenter defaultCenter] postNotificationName:@"Login" object:curUser.objectId];
         [self connectToServer];
     }
 }
@@ -513,11 +506,7 @@ UIButton *buttonGetShortMessage; //手机号登录获取验证码按钮
 -(void)logInPassDicInfoFinishedBL:(NSDictionary *)userInfo
 {
     self.hidesBottomBarWhenPushed = YES;
-    myVC *myViewController = [[myVC alloc] init];
-    self.delegateForVC = myViewController;
     [self.delegateForVC passValueForVC:userInfo];
-    [userDefaultLogIn setObject:field1.text forKey:@"userName"];
-    [userDefaultLogIn synchronize];
     //201607181108 modify by hou
     [self.navigationController popViewControllerAnimated:NO];
     //添加通知，用于连接服务器 2016-09-21-16-04

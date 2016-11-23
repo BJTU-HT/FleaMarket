@@ -24,8 +24,12 @@
 #import "DetailChatVC.h"
 #import "MJRefresh.h"
 #import "MBProgressHUD.h"
+#import "reprotBLDelegate.h"
+#import "reportBL.h"
+#import <BmobSDK/BmobUser.h>
+#import "presentLayerPublicMethod.h"
 
-@interface SecondhandDetailVC () <UITableViewDelegate, UITableViewDataSource, SecondhandMessageBLDelegate,UITextFieldDelegate, UITextViewDelegate>
+@interface SecondhandDetailVC () <UITableViewDelegate, UITableViewDataSource, SecondhandMessageBLDelegate,UITextFieldDelegate, UITextViewDelegate, reprotBLDelegate>
 
 @property (nonatomic, strong) NSMutableArray *commentArray;
 @property (nonatomic, strong) NSMutableArray *commentFrameArray;
@@ -50,6 +54,9 @@
 @property (nonatomic, strong) UIButton *moreBtn;
 // 菊花
 @property (nonatomic, strong) MBProgressHUD *hud;
+
+@property(nonatomic, strong) UIButton *reportBtnTemp;
+
 
 @end
 
@@ -266,6 +273,42 @@
     }
 }
 
+#pragma 20161121 add by hou begin-----------------------------------------------------
+//举报点击事件
+-(void)reportBtnClicked:(UIButton *)sender{
+    NSLog(@"点击举报...");
+    BmobUser *curUser = [BmobUser getCurrentUser];
+    if(!curUser){
+        UIAlertController *ac = [UIAlertController alertControllerWithTitle:@"提示" message:@"举报必须先登陆" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:nil];
+        [ac addAction:okAction];
+        [self presentViewController:ac animated:YES completion:nil];
+        return;
+    }else{
+        UIAlertController *ac = [UIAlertController alertControllerWithTitle:@"提示" message:@"您确认举报该内容" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            NSMutableDictionary *mudic = [[NSMutableDictionary alloc] init];
+            if(curUser.objectId){
+                [mudic setObject:curUser.objectId forKey:@"reporterId"];
+            }
+            if(_model.productID){
+                [mudic setObject:_model.productID forKey:@"productId"];
+            }
+            reportBL *report = [reportBL sharedManager];
+            report.delegate = self;
+            [report uploadReportInfoBL: mudic];
+            [self.reportBtnTemp setTitle:@"已举报" forState:UIControlStateNormal];
+            self.reportBtnTemp.userInteractionEnabled = NO;
+        }];
+        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
+        [ac addAction:okAction];
+        [ac addAction:cancelAction];
+        [self presentViewController:ac animated:YES completion:nil];
+    }
+}
+
+#pragma 20161121 add by hou end--------------------------------------------------------
+
 -(BmobIMConversation *)findConversation{
     NSArray *array = [[BmobIM sharedBmobIM] queryRecentConversation];
     if(array && array.count > 0){
@@ -472,6 +515,8 @@
         }
         cell.model = self.model;
         cell.frameModel = self.mainInfoFrameModel;
+        [cell.reportBtn addTarget:self action:@selector(reportBtnClicked:) forControlEvents:UIControlEventTouchDown];
+        self.reportBtnTemp = cell.reportBtn;
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
     } else if (indexPath.section == 1) {
@@ -625,6 +670,19 @@
     });
 }
 
+#pragma reportDelegate begin --------------------------------------------------
+-(void)reportBLFinished:(BOOL)isSuccessful{
+    [self.reportBtnTemp setTitle:@"审核中" forState:UIControlStateNormal];
+    self.reportBtnTemp.userInteractionEnabled = NO;
+    [presentLayerPublicMethod new_notifyView:self.navigationController notifyContent:@"我们正在审核相应内容是否违规"];
+}
+
+-(void)reportBLFailed:(NSError *)error{
+    [self.reportBtnTemp setTitle:@"再次提交" forState:UIControlStateNormal];
+    self.reportBtnTemp.userInteractionEnabled = YES;
+}
+#pragma reportDelegate end -----------------------------------------------------
+
 
 #pragma mark --- getter & setter ---
 
@@ -651,6 +709,15 @@
     }
     
     return _commentFrameArray;
+}
+
+
+
+-(UIButton *)reportBtnTemp{
+    if(!_reportBtnTemp){
+        _reportBtnTemp = [[UIButton alloc] init];
+    }
+    return _reportBtnTemp;
 }
 
 @end

@@ -12,6 +12,7 @@
 #import <BmobSDK/BmobSMS.h>
 #import "RegistBL.h"
 #import "presentLayerPublicMethod.h"
+#import "agreeMentVC.h"
 
 @interface registViewController ()
 
@@ -77,7 +78,7 @@ NSUserDefaults *registDefault;
     //手机号
     UILabel *labelPhoneNumber = [[UILabel alloc] init];
     labelPhoneNumber.text = @"手机号";
-    labelPhoneNumber.font = FontSize16;
+    labelPhoneNumber.font = FontSize14;
     labelPhoneNumber.textColor = [UIColor blackColor];
     CGRect labelPN = CGRectMake(screenWidthRegist * 0.02, 64, screenWidthRegist * 0.15, screenHeightRegist * 0.10);
     labelPhoneNumber.frame = labelPN;
@@ -100,7 +101,7 @@ NSUserDefaults *registDefault;
     //短信验证码
     UILabel *shortMessage = [[UILabel alloc] init];
     shortMessage.text = @"短信验证码";
-    shortMessage.font = FontSize16;
+    shortMessage.font = FontSize14;
     shortMessage.textColor = [UIColor blackColor];
     CGRect shortMessageFrame = CGRectMake(screenWidthRegist * 0.02, 64 + screenHeightRegist * 0.12, screenWidthRegist * 0.3, screenHeightRegist * 0.10);
     shortMessage.frame = shortMessageFrame;
@@ -117,7 +118,7 @@ NSUserDefaults *registDefault;
     buttonSM = [[UIButton alloc] init];
     [buttonSM setBackgroundColor:[UIColor colorWithRed:235/255.0 green:147/255.0 blue:33/255 alpha:1.0]];
     [buttonSM setTitle:@"获取验证码" forState: UIControlStateNormal];
-    buttonSM.titleLabel.font = FontSize16;
+    buttonSM.titleLabel.font = FontSize14;
     CGRect buttonGetSMFrame = CGRectMake(screenWidthRegist * 0.67, 64 + screenHeightRegist * 0.13, screenWidthRegist * 0.3, screenHeightRegist * 0.09);
     [buttonSM addTarget:self action:@selector(getVerifyCode:) forControlEvents:UIControlEventTouchDown];
     buttonSM.frame = buttonGetSMFrame;
@@ -134,7 +135,7 @@ NSUserDefaults *registDefault;
     //昵称
     labelName = [[UILabel alloc] init];
     labelName.text = @"用户名";
-    labelName.font = FontSize16;
+    labelName.font = FontSize14;
     labelName.textColor = [UIColor blackColor];
     CGRect labelNameFrame = CGRectMake(screenWidthRegist * 0.02, 64 + screenHeightRegist * 0.24, screenWidthRegist * 0.15, screenHeightRegist * 0.10);
     labelName.frame = labelNameFrame;
@@ -159,7 +160,7 @@ NSUserDefaults *registDefault;
     //密码
     labelPassword1 = [[UILabel alloc] init];
     labelPassword1.text = @"密码";
-    labelPassword1.font = FontSize16;
+    labelPassword1.font = FontSize14;
     labelPassword1.textColor = [UIColor blackColor];
     CGRect labelPasswordFrame = CGRectMake(screenWidthRegist * 0.02, 64 + screenHeightRegist * 0.36, screenWidthRegist * 0.15, screenHeightRegist * 0.10);
     labelPassword1.frame = labelPasswordFrame;
@@ -187,24 +188,25 @@ NSUserDefaults *registDefault;
     labelClick.font = FontSize12;
     labelClick.textColor = [UIColor blackColor];
     labelClick.font = [UIFont systemFontOfSize:12];
-    CGRect labelclickFrame = CGRectMake(screenWidthRegist * 0.02, 64 + screenHeightRegist * 0.48, screenWidthRegist * 0.24, screenHeightRegist * 0.10);
+    CGRect labelclickFrame = CGRectMake(screenWidthRegist * 0.02, 64 + screenHeightRegist * 0.48, screenWidthRegist * 0.28, screenHeightRegist * 0.10);
     labelClick.frame = labelclickFrame;
     [self.view addSubview:labelClick];
     
     UIButton *buttonLabel = [[UIButton alloc] init];
     buttonLabel.titleLabel.font = FontSize12;
-    CGRect buttonLabelFrame = CGRectMake(screenWidthRegist * 0.26, 64 + screenHeightRegist * 0.48, screenWidthRegist * 0.44, screenHeightRegist * 0.10);
-    [buttonLabel setTitle:@"《书香人家用户注册协议》" forState:UIControlStateNormal];
+    CGRect buttonLabelFrame = CGRectMake(screenWidthRegist * 0.30, 64 + screenHeightRegist * 0.48, screenWidthRegist * 0.55, screenHeightRegist * 0.10);
+    [buttonLabel setTitle:@"《校园跳蚤用户注册协议》" forState:UIControlStateNormal];
     [buttonLabel setTitleColor:[UIColor colorWithRed:235/255.0 green:147/255.0 blue:33/255 alpha:1.0] forState:UIControlStateNormal];
     buttonLabel.frame = buttonLabelFrame;
     buttonLabel.titleLabel.font = [UIFont systemFontOfSize:12];
+    [buttonLabel addTarget:self action:@selector(buttonAgreementClicked:) forControlEvents:UIControlEventTouchDown];
     [self.view addSubview:buttonLabel];
     
     buttonFinishRegist = [[UIButton alloc] init];
     CGRect buttonFRFrame = CGRectMake(screenWidthRegist * 0.02, 64 + screenHeightRegist * 0.60, screenWidthRegist * 0.96, screenHeightRegist * 0.10);
     buttonFinishRegist.frame = buttonFRFrame;
     buttonFinishRegist.titleLabel.font = FontSize16;
-    [buttonFinishRegist setTitle:@"完成注册，进入书香人家界面" forState:UIControlStateNormal];
+    [buttonFinishRegist setTitle:@"完成注册，进入校园跳蚤界面" forState:UIControlStateNormal];
     buttonFinishRegist.backgroundColor = grayColorPCH;
     [buttonFinishRegist addTarget:self action:@selector(buttonRegistClicked:) forControlEvents:UIControlEventTouchDown];
     buttonFinishRegist.userInteractionEnabled = NO;
@@ -272,12 +274,22 @@ NSUserDefaults *registDefault;
     dispatch_resume(_timer);
 }
 
+//点击注册按钮
 -(void)buttonRegistClicked:(UIButton *)sender
 {
+    [buttonFinishRegist setTitle:@"正在上传注册信息..." forState:UIControlStateNormal];
+    buttonFinishRegist.userInteractionEnabled = NO;
     NSDictionary *dicToBmob = @{@"phoneNumber":textFieldPN.text, @"verifyCode": textFieldSM.text, @"userName":textFieldName.text, @"passWord": textFieldPassword.text, @"nickName":@"暂未设置", @"userLevel":@"0", @"fans": @"0", @"concerned": @"0", @"avatar": @"0", @"backgroundImageURL": @"0"};
     RegistBL *registReq = [[RegistBL alloc] init];
     registReq.delegate = self;
     [registReq registLogicDeal:dicToBmob];
+}
+//点击用户协议
+-(void)buttonAgreementClicked:(UIButton *)sender{
+    self.hidesBottomBarWhenPushed = YES;
+    agreementVC *agree = [[agreementVC alloc] init];
+    [self.navigationController pushViewController:agree animated:NO];
+    self.hidesBottomBarWhenPushed = NO;
 }
 // 注册成功跳转到登录页面
 -(void)registSuccess:(UIButton *)sender
@@ -358,13 +370,13 @@ NSUserDefaults *registDefault;
 {
     if(value)
     {
-        registDefault = [NSUserDefaults standardUserDefaults];
-        [registDefault setObject:@"1" forKey:@"username"];
-        [registDefault synchronize];
+        [buttonFinishRegist setTitle:@"完成注册，进入校园跳蚤界面" forState:UIControlStateNormal];
+        buttonFinishRegist.userInteractionEnabled = YES;
+        [presentLayerPublicMethod new_notifyView:self.navigationController notifyContent:@"注册成功,请登陆"];
         self.hidesBottomBarWhenPushed = YES;
-        logInViewController *logIn = [[logInViewController alloc] init];
-        [self.navigationController pushViewController:logIn animated:NO];
+        [self.navigationController popViewControllerAnimated:NO];
         self.hidesBottomBarWhenPushed = NO;
+        
     }
 }
 

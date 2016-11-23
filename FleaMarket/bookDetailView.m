@@ -11,6 +11,7 @@
 #import <BmobSDK/BmobUser.h>
 #import "presentLayerPublicMethod.h"
 
+
 @implementation bookDetailView
 NSIndexPath *indexPathGlobal;
 float heightDetail;
@@ -47,7 +48,7 @@ float widthDeatail;
             }
         }else if(indexPath.section == 1){
             if(!_bookDisViewS1){
-                _bookDisViewS1 = [[bookDisplayCellView alloc] init];
+                _bookDisViewS1 = [[bookDetailS1View alloc] initWithFrame:self.frame];
                 [self addSubview:_bookDisViewS1];
             }
             if(!_labelS1){
@@ -227,7 +228,6 @@ float widthDeatail;
         [_btnConcernS0 setBackgroundColor:[UIColor clearColor]];
         [_btnConcernS0 setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
         _btnConcernS0.layer.borderColor = [UIColor whiteColor].CGColor;
-
     }else{
         [self requestConcernedDataFromServer:curUser.objectId];
     }

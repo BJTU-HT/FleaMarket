@@ -147,7 +147,8 @@ UIImageView *backgroundImageViewLogIn;
                 [userInfo setObject:[obj objectForKey:@"phoneNumber"] forKey:@"phoneNumber"];
             if(nil != [obj objectForKey:@"userName"])
                 [userInfo setObject:[obj objectForKey:@"username"] forKey:@"userName"];
-            
+            if(nil != [obj objectForKey:@"username"])
+                [userInfo setObject:[obj objectForKey:@"username"] forKey:@"username"];
             // by 仝磊鸣，设置userInfo的userId, 2016-7-22
             if(nil != [obj objectForKey:@"objectId"])
                 [userInfo setObject:[obj objectForKey:@"objectId"] forKey:@"userID"];

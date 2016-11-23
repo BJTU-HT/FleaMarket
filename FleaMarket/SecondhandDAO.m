@@ -260,9 +260,13 @@ static SecondhandDAO *sharedManager = nil;
     
     if ([visitorURLArray count] == MaxVisitorURLsKeep) {
         [visitorURLArray removeLastObject];
-        [visitorURLArray insertObject:visitorURL atIndex:0];
+        //20161117 modify by hou
+        if(!visitorURL)
+            [visitorURLArray insertObject:visitorURL atIndex:0];
     } else {
-        [visitorURLArray insertObject:visitorURL atIndex:0];
+        //20161117 modify by hou
+        if(visitorURL)
+            [visitorURLArray insertObject:visitorURL atIndex:0];
     }
     
     BmobQuery *bquery = [BmobQuery queryWithClassName:@"Secondhand"];

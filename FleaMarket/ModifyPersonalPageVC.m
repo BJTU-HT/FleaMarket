@@ -242,15 +242,15 @@ BOOL headImageOrBackgroundImageFlag; // 0代表设置头像 1代表设置背景
 -(void)initBasicTextField{
     if(!textFieldUserName){
         textFieldUserName = [[UITextField alloc] init];
-        textFieldUserName.text = @"FleaMarket用户";
+        textFieldUserName.text = @"校园跳蚤用户";
     }
     if(!textFieldPersonalSign){
         textFieldPersonalSign = [[UITextField alloc] init];
-        textFieldPersonalSign.text = @"未设置1";
+        textFieldPersonalSign.text = @"未设置";
     }
     if(!labelCity){
         labelCity = [[UILabel alloc] init];
-        labelCity.text = @"未设置1";
+        labelCity.text = @"未设置";
     }
     if(!labelGender){
         labelGender = [[UILabel alloc] init];

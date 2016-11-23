@@ -36,7 +36,7 @@
 
 
 //手机号登录 校验手机号和验证码 逻辑层
--(void)logInVerifyPhoneNumberAndVerifyCodeBLFinished:(NSInteger)value;
+-(void)logInVerifyPhoneNumberAndVerifyCodeBLFinished:(NSMutableDictionary *)userInfo;
 -(void)logInVerifyPhoneNumberAndVerifyCodeBLFailed:(NSString *)error;
 
 

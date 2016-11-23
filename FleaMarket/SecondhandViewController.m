@@ -359,7 +359,6 @@
             if (schoolArray.count == 0) {
                 [schoolArray addObject:[schoolDic objectForKey:[NSString stringWithFormat:@"%ld", (long)weakSelf.schoolCategory]]];
             }
-            
             [filterDic setObject:schoolArray forKey:@"school"];
         }
         

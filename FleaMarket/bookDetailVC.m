@@ -12,8 +12,13 @@
 #import "LeaveMessageVC.h"
 #import "SearchBookVC.h"
 #import "presentLayerPublicMethod.h"
+#import <BmobSDK/BmobUser.h>
+#import "reportBL.h"
+#import "reprotBLDelegate.h"
 
-@interface bookDetailVC ()
+@interface bookDetailVC ()<UIGestureRecognizerDelegate, reprotBLDelegate>
+@property (nonatomic, strong) UIButton *reportBtnTemp;
+@property(nonatomic, strong) UIBarButtonItem *rightBarItem;
 
 @end
 
@@ -85,10 +90,46 @@ float bottomViewHeightBD;
     UIBarButtonItem *leftBarItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back_btn"] style:UIBarButtonItemStylePlain target:self action:@selector(returnButtonClicked:)];
     self.navigationItem.leftBarButtonItem = leftBarItem;
     leftBarItem.tintColor = orangColorPCH;
+    
+    UIBarButtonItem *rightBarItem = [[UIBarButtonItem alloc] initWithTitle:@"举报" style:UIBarButtonItemStylePlain target:self action:@selector(rightBarBtnClicked:)];
+    self.navigationItem.rightBarButtonItem = rightBarItem;
+    self.rightBarItem = rightBarItem;
+    rightBarItem.tintColor = orangColorPCH;
 }
 
 -(void)returnButtonClicked:(UIButton *)sender{
     [self.navigationController popViewControllerAnimated:NO];
+}
+
+-(void)rightBarBtnClicked:(UIButton *)sender{
+    NSLog(@"点击举报...");
+    BmobUser *curUser = [BmobUser getCurrentUser];
+    if(!curUser){
+        UIAlertController *ac = [UIAlertController alertControllerWithTitle:@"提示" message:@"举报必须先登陆" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:nil];
+        [ac addAction:okAction];
+        [self presentViewController:ac animated:YES completion:nil];
+        return;
+    }else{
+        UIAlertController *ac = [UIAlertController alertControllerWithTitle:@"提示" message:@"您确认举报该内容" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            NSMutableDictionary *mudicTemp = [[NSMutableDictionary alloc] init];
+            if(curUser.objectId){
+                [mudicTemp setObject:curUser.objectId forKey:@"reporterId"];
+            }
+            if([mudic objectForKey:@"objectId"]){
+                [mudicTemp setObject:[mudic objectForKey:@"objectId"] forKey:@"productId"];
+            }
+            reportBL *report = [reportBL sharedManager];
+            report.delegate = self;
+            [report uploadReportInfoBL: mudicTemp];
+            self.rightBarItem.title = @"已举报";
+        }];
+        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
+        [ac addAction:okAction];
+        [ac addAction:cancelAction];
+        [self presentViewController:ac animated:YES completion:nil];
+    }
 }
 
 -(void)initBottomView{
@@ -215,8 +256,6 @@ float bottomViewHeightBD;
     if(concernTag){
         dispatch_async(dispatch_get_main_queue(), ^{
             [_bookDetailCell.bookDetail.btnConcernS0 setTitle:@"已关注" forState: UIControlStateNormal];
-//            [detailView.btnConcernS0 setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
-//            [detailView.btnConcernS0 setBackgroundColor:[UIColor clearColor]];
         });
     }
 }
@@ -229,6 +268,18 @@ float bottomViewHeightBD;
 }
 
 #pragma 从用户表获取关注的数据代理函数 end
+
+#pragma reportDelegate begin --------------------------------------------------
+-(void)reportBLFinished:(BOOL)isSuccessful{
+    self.navigationItem.rightBarButtonItem.enabled = NO;
+    [presentLayerPublicMethod new_notifyView:self.navigationController notifyContent:@"我们正在审核相应内容是否违规"];
+}
+
+-(void)reportBLFailed:(NSError *)error{
+    self.rightBarItem.title = @"再次提交";
+    self.navigationItem.rightBarButtonItem.enabled = YES;
+}
+#pragma reportDelegate end -----------------------------------------------------
 
 -(void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

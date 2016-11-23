@@ -1,19 +1,16 @@
 //
-//  bookDisplayCellView.h
+//  bookDetailS1View.h
 //  FleaMarket
 //
-//  Created by Hou on 7/28/16.
+//  Created by Hou on 22/11/2016.
 //  Copyright © 2016 H-T. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 #import "bookDisplayCellViewDelegate.h"
 
-@interface bookDisplayCellView : UIView
+@interface bookDetailS1View : UIView
 
-//@property(nonatomic, strong) UIImageView *headImageViewBook;
-//@property(nonatomic, strong) UILabel *bookUserNameLabel;
-//@property(nonatomic, strong) UILabel *bookSchoolLabel;
 @property(nonatomic, strong) UIImageView *bookImageView;
 @property(nonatomic, strong) UILabel *bookNameLabel;
 @property(nonatomic, strong) UILabel *bookAuthorLabel;
@@ -30,5 +27,4 @@
 -(instancetype)initWithFrame:(CGRect)frame;
 -(CGFloat)layoutViewSelf:(NSMutableDictionary *)mudic;
 
-//@property(nonatomic, weak) id<bookDisplayCellViewDelegate> delegate;
-@end
+@property(nonatomic, weak) id<bookDisplayCellViewDelegate> delegate;@end

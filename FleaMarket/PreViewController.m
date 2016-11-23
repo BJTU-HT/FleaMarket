@@ -318,7 +318,8 @@
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
     self.nowNum = scrollView.contentOffset.x / self.view.bounds.size.width;
-    self.title = [NSString stringWithFormat:@"%ld/%lu",self.nowNum + 1,(unsigned long)self.collectionData.count];
+    NSInteger numPlus = self.nowNum + 1;
+    self.title = [NSString stringWithFormat:@"%ld/%lu",(long)numPlus,(unsigned long)self.collectionData.count];
     
     CollectionDataModel *model = self.collectionData[self.nowNum];
     if (model.selected) {

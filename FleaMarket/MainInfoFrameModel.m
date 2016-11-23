@@ -101,6 +101,13 @@
         NSLog(@"%f", txtFrame.size.height);
         //self.descriptionLabelFrame = CGRectMake(descriptionX, descriptionY, descriptionW, txtFrame.size.height);
         
+        //举报
+        CGFloat report_x = screenWidthPCH - margin - 60.0f;
+        CGFloat report_y = descriptionY;
+        CGFloat report_w = 60.0f;
+        CGFloat report_h = txtFrame.size.height;
+        self.reportBtnFrame = CGRectMake(report_x, report_y, report_w, report_h);
+        
         _cellHeight = CGRectGetMaxY(self.descriptionLabelFrame) + margin/2.0f;
     }
     

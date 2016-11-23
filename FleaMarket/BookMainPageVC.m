@@ -154,6 +154,7 @@ NSString *kTextCellID2 = @"cell2";
 -(void)loadMoreBookDataAction{
     [self requestBookDataFromServerForUpDrag:[self setRequestDictionary]];
 }
+
 //用于刚进入页面时请求数据
 -(void)requestBookDataFromServer:(NSMutableDictionary *)mudic{
     findBookInfoBL *findBookInfo = [findBookInfoBL sharedManager];

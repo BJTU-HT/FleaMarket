@@ -67,9 +67,9 @@
 }
 #pragma 注册时检验该手机号是否注册过，代理方法 end
 #pragma ----------RegistDAO代理方法 手机号登录校验手机号和验证码--------------
--(void)logInVerifyPhoneNumberAndVerifyCodeFinished:(NSInteger)value
+-(void)logInVerifyPhoneNumberAndVerifyCodeFinished:(NSMutableDictionary *)userInfo
 {
-    [self.delegate logInVerifyPhoneNumberAndVerifyCodeBLFinished:value];
+    [self.delegate logInVerifyPhoneNumberAndVerifyCodeBLFinished:userInfo];
 }
 -(void)logInVerifyPhoneNumberAndVerifyCodeFailed:(NSString *)error
 {
